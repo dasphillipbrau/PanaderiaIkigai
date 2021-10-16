@@ -17,7 +17,7 @@ namespace PanaderiaIkigai.Models
         /// <summary>
         /// Ingredient Name
         /// </summary>
-        public int Name { get; set; }
+        public string Name { get; set; }
         public string UnitMeasure { get; set; }
         public int IndividualUnits { get; set; }
         public int TotalUnits { get; set; }
