@@ -15,16 +15,34 @@ namespace PanaderiaIkigai.Data
         private static string GetConnectionString(string id = "Default")
         {
             return ConfigurationManager.ConnectionStrings[id].ConnectionString;
-        } 
+        }
+        /// <summary>
+        /// Accesses the database and retrieves every base ingredient.
+        /// </summary>
+        /// <returns>List containing every Base Ingredient</returns>
+        public IEnumerable<BaseIngredient> GetAllBaseIngredients()
+        {
+            using (var conn = new SqliteConnection(GetConnectionString()))
+            {
+                List<BaseIngredient> ingredientList = new List<BaseIngredient>();
+                var getIngredientsCommand = new SqliteCommand("SELECT CODE, NAME, UNIT_OF_MEASURE, TOTAL_UNITS_AVAILABLE FROM INGREDIENT", conn);
+                var reader = getIngredientsCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    ingredientList.Add(new BaseIngredient(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3)));
+                }
+                return ingredientList;
+            }
+        }
 
-        public void SaveBaseIngredient(Ingredient ingredient)
+        public void SaveBaseIngredient(BaseIngredient ingredient)
         {
             try {
                 using (var conn = new SqliteConnection(GetConnectionString()))
                 {
                     var ingredientCommand = new SqliteCommand("INSERT INTO Ingredient (NAME, UNIT_OF_MEASURE) values (?, ?)", conn);
                     ingredientCommand.Parameters.Add(ingredient.Name, SqliteType.Text);
-                    ingredientCommand.Parameters.Add(ingredient.UnitMeasure, SqliteType.Text);
+                    ingredientCommand.Parameters.Add(ingredient.MeasuringUnit, SqliteType.Text);
                     ingredientCommand.ExecuteNonQuery();
 
                     var detailedIngredientCommand = new SqliteCommand("INSERT INTO Ingredient_Detailed " +
@@ -43,6 +61,5 @@ namespace PanaderiaIkigai.Data
             }
         }
 
-        public void SaveDetailedIngredient(Ingredient ingredient)
     }
 }

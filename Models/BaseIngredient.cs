@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PanaderiaIkigai.Models
 {
-    class Ingredient
+    public class BaseIngredient
     {
         /// <summary>
         /// Unique Ingredient Code
@@ -18,13 +18,17 @@ namespace PanaderiaIkigai.Models
         /// Ingredient Name
         /// </summary>
         public string Name { get; set; }
-        public string UnitMeasure { get; set; }
-        public int IndividualUnits { get; set; }
-        public int TotalUnits { get; set; }
-        public decimal UnitPrice { get; set; }
-        public decimal PricePerGram { get; set; }
-        public decimal AmountInUnit { get; set; }
-        public string IngredientSource { get; set; }
-        public int Quality { get; set; }
+        public string MeasuringUnit { get; set; }
+
+        public int UnitsAvailable { get; set; }
+
+        public BaseIngredient() { }
+        public BaseIngredient(int pCode, string pName, string pUnit, int pUnitsAvaialble)
+        {
+            Code = pCode;
+            Name = pName;
+            MeasuringUnit = pUnit;
+            UnitsAvailable = pUnitsAvaialble;
+        }
     }
 }

@@ -98,7 +98,8 @@
     <Compile Include="Menus\MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Ingredient.cs" />
+    <Compile Include="Models\DetailedIngredient.cs" />
+    <Compile Include="Models\BaseIngredient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
