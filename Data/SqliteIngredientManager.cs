@@ -22,16 +22,60 @@ namespace PanaderiaIkigai.Data
         /// <returns>List containing every Base Ingredient</returns>
         public IEnumerable<BaseIngredient> GetAllBaseIngredients()
         {
-            using (var conn = new SqliteConnection(GetConnectionString()))
-            {
-                List<BaseIngredient> ingredientList = new List<BaseIngredient>();
-                var getIngredientsCommand = new SqliteCommand("SELECT CODE, NAME, UNIT_OF_MEASURE, TOTAL_UNITS_AVAILABLE FROM INGREDIENT", conn);
-                var reader = getIngredientsCommand.ExecuteReader();
-                while (reader.Read())
+            try { 
+                using (var conn = new SqliteConnection(GetConnectionString()))
                 {
-                    ingredientList.Add(new BaseIngredient(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3)));
+                    List<BaseIngredient> ingredientList = new List<BaseIngredient>();
+                    var getIngredientsCommand = new SqliteCommand("SELECT CODE, NAME, UNIT_OF_MEASURE, TOTAL_UNITS_AVAILABLE FROM INGREDIENT", conn);
+                    var reader = getIngredientsCommand.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        ingredientList.Add(new BaseIngredient(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3)));
+                    }
+                    return ingredientList;
                 }
-                return ingredientList;
+            } catch(SqliteException sqlEx)
+            {
+                Console.WriteLine(sqlEx.Message);
+                Console.WriteLine(sqlEx.ErrorCode);
+                throw sqlEx;
+            } catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+        }
+
+        public IEnumerable<DetailedIngredient> GetDetailedIngredients(BaseIngredient pBaseIngredient)
+        {
+            try
+            {
+                using(var conn = new SqliteConnection(GetConnectionString()))
+                {
+                    List<DetailedIngredient> detailedIngredientsList = new List<DetailedIngredient>();
+                    var getDetailedIngredientsCommand = new SqliteCommand("SELECT INGREDIENT_CODE, INGREDIENT_SOURCE, " +
+                        "UNIT_PRICE, AMOUNT_IN_UNIT, MINIMUM_PRICE_PER_UNIT, QUALITY, UNITS_AVAILABLE FROM INGREDIENT_DETAILED WHERE INGREDIENT_CODE = $code", conn);
+                    getDetailedIngredientsCommand.Parameters.AddWithValue("$code", pBaseIngredient.Code);
+                    var reader = getDetailedIngredientsCommand.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        var detailedIngredient = new DetailedIngredient(pBaseIngredient, reader.GetString(1), reader.GetDecimal(2),
+                            reader.GetDecimal(3), reader.GetDecimal(4), reader.GetInt32(5));
+                        var unitsAvailable = reader.GetInt32(6);
+                        detailedIngredient.UnitsAvailable = unitsAvailable;
+                        detailedIngredientsList.Add(detailedIngredient);
+                    }
+                    return detailedIngredientsList;
+                }
+            } catch(SqliteException sqlEx)
+            {
+                Console.WriteLine(sqlEx.Message);
+                Console.WriteLine(sqlEx.ErrorCode);
+                throw sqlEx;
+            } catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw ex;
             }
         }
 

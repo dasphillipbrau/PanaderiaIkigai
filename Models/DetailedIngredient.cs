@@ -16,8 +16,19 @@ namespace PanaderiaIkigai.Models
 
         public DetailedIngredient() { }
 
-        public DetailedIngredient(int pCode, string pName, string pUnit, int pUnitsAvaialble, string pIngredientSource, 
-            decimal pUnitPrice, decimal pAmountInUnit, decimal pMinimumUnitPrice, int pQuality) : base(pCode, pName, pUnit, pUnitsAvaialble)
+        public DetailedIngredient(int pCode, string pName, string pUnit, int pUnitsAvailable, string pIngredientSource, 
+            decimal pUnitPrice, decimal pAmountInUnit, decimal pMinimumUnitPrice, int pQuality) : base(pCode, pName, pUnit, pUnitsAvailable)
+        {
+            IngredientSource = pIngredientSource;
+            UnitPrice = pUnitPrice;
+            AmountInUnit = pAmountInUnit;
+            MinimumUnitPrice = pMinimumUnitPrice;
+            Quality = pQuality;
+        }
+
+        public DetailedIngredient(BaseIngredient pBaseIngredient, string pIngredientSource,
+            decimal pUnitPrice, decimal pAmountInUnit, decimal pMinimumUnitPrice, int pQuality) : base(pBaseIngredient.Code, pBaseIngredient.Name, 
+                pBaseIngredient.MeasuringUnit, pBaseIngredient.UnitsAvailable)
         {
             IngredientSource = pIngredientSource;
             UnitPrice = pUnitPrice;
