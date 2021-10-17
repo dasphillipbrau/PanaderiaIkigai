@@ -1,5 +1,4 @@
-﻿using Microsoft.Data.Sqlite;
-using PanaderiaIkigai.Models;
+﻿using PanaderiaIkigai.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -7,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SQLite;
 
 namespace PanaderiaIkigai.Data
 {
@@ -23,10 +23,10 @@ namespace PanaderiaIkigai.Data
         public IEnumerable<BaseIngredient> GetAllBaseIngredients()
         {
             try { 
-                using (var conn = new SqliteConnection(GetConnectionString()))
+                using (var conn = new SQLiteConnection(GetConnectionString()))
                 {
                     List<BaseIngredient> ingredientList = new List<BaseIngredient>();
-                    var getIngredientsCommand = new SqliteCommand("SELECT CODE, NAME, UNIT_OF_MEASURE, TOTAL_UNITS_AVAILABLE FROM INGREDIENT", conn);
+                    var getIngredientsCommand = new SQLiteCommand("SELECT CODE, NAME, UNIT_OF_MEASURE, TOTAL_UNITS_AVAILABLE FROM INGREDIENT", conn);
                     var reader = getIngredientsCommand.ExecuteReader();
                     while (reader.Read())
                     {
@@ -34,7 +34,7 @@ namespace PanaderiaIkigai.Data
                     }
                     return ingredientList;
                 }
-            } catch(SqliteException sqlEx)
+            } catch(SQLiteException sqlEx)
             {
                 Console.WriteLine(sqlEx.Message);
                 Console.WriteLine(sqlEx.ErrorCode);
@@ -54,10 +54,10 @@ namespace PanaderiaIkigai.Data
         {
             try
             {
-                using(var conn = new SqliteConnection(GetConnectionString()))
+                using(var conn = new SQLiteConnection(GetConnectionString()))
                 {
                     List<DetailedIngredient> detailedIngredientsList = new List<DetailedIngredient>();
-                    var getDetailedIngredientsCommand = new SqliteCommand("SELECT INGREDIENT_CODE, DETAILED_INGREDIENT_ID, BRAND, INGREDIENT_SOURCE, " +
+                    var getDetailedIngredientsCommand = new SQLiteCommand("SELECT INGREDIENT_CODE, DETAILED_INGREDIENT_ID, BRAND, INGREDIENT_SOURCE, " +
                         "UNIT_PRICE, AMOUNT_IN_UNIT, MINIMUM_PRICE_PER_UNIT, QUALITY, UNITS_AVAILABLE FROM INGREDIENT_DETAILED WHERE INGREDIENT_CODE = $code", conn);
                     getDetailedIngredientsCommand.Parameters.AddWithValue("$code", pBaseIngredient.Code);
                     var reader = getDetailedIngredientsCommand.ExecuteReader();
@@ -71,7 +71,7 @@ namespace PanaderiaIkigai.Data
                     }
                     return detailedIngredientsList;
                 }
-            } catch(SqliteException sqlEx)
+            } catch(SQLiteException sqlEx)
             {
                 Console.WriteLine(sqlEx.Message);
                 Console.WriteLine(sqlEx.ErrorCode);
@@ -90,15 +90,11 @@ namespace PanaderiaIkigai.Data
         {
             try
             {
-                using (var conn = new SqliteConnection(GetConnectionString()))
+                using (var conn = new SQLiteConnection(GetConnectionString()))
                 {
                     List<DetailedIngredient> detailedIngredientsList = new List<DetailedIngredient>();
-                    var getDetailedIngredientsCommand = new SqliteCommand("SELECT A.INGREDIENT_CODE, A.DETAILED_INGREDIENT_ID, A.BRAND, A.INGREDIENT_SOURCE, A.UNIT_PRICE, A.AMOUNT_IN_UNIT, " +
-                        "A.MINIMUM_PRICE_PER_UNIT, A.QUALITY, A.UNITS_AVAILABLE, B.NAME, B.UNIT_OF_MEASURE, B.TOTAL_UNITS_AVAILABLE " +
-                        "FROM INGREDIENT_DETAILED A " +
-                        "INNER JOIN INGREDIENT B" +
-                        "ON A.INGREDIENT_CODE = B.CODE" +
-                        "ORDER BY A.INGREDIENT_CODE ASC", conn);
+                    var getDetailedIngredientsCommand = new SQLiteCommand("SELECT A.INGREDIENT_CODE, A.DETAILED_INGREDIENT_ID, A.BRAND, A.INGREDIENT_SOURCE, A.UNIT_PRICE, A.AMOUNT_IN_UNIT, A.MINIMUM_PRICE_PER_UNIT, A.QUALITY, A.UNITS_AVAILABLE, B.NAME, B.UNIT_OF_MEASURE, B.TOTAL_UNITS_AVAILABLE FROM INGREDIENT_DETAILED A INNER JOIN INGREDIENT B ON A.INGREDIENT_CODE = B.CODE ORDER BY A.INGREDIENT_CODE ASC", conn);
+                    conn.Open();
                     var reader = getDetailedIngredientsCommand.ExecuteReader();
                     while (reader.Read())
                     {
@@ -112,7 +108,7 @@ namespace PanaderiaIkigai.Data
                     return detailedIngredientsList;
                 }
             }
-            catch (SqliteException sqlEx)
+            catch (SQLiteException sqlEx)
             {
                 Console.WriteLine(sqlEx.Message);
                 Console.WriteLine(sqlEx.ErrorCode);
@@ -120,6 +116,8 @@ namespace PanaderiaIkigai.Data
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine("ERROR OCCURRED");
                 Console.WriteLine(ex.Message);
                 throw ex;
             }
@@ -128,19 +126,19 @@ namespace PanaderiaIkigai.Data
         public void SaveBaseIngredient(BaseIngredient ingredient)
         {
             try {
-                using (var conn = new SqliteConnection(GetConnectionString()))
+                using (var conn = new SQLiteConnection(GetConnectionString()))
                 {
-                    var ingredientCommand = new SqliteCommand("INSERT INTO Ingredient (NAME, UNIT_OF_MEASURE) values (?, ?)", conn);
-                    ingredientCommand.Parameters.Add(ingredient.Name, SqliteType.Text);
-                    ingredientCommand.Parameters.Add(ingredient.MeasuringUnit, SqliteType.Text);
+                    var ingredientCommand = new SQLiteCommand("INSERT INTO Ingredient (NAME, UNIT_OF_MEASURE) values (?, ?)", conn);
+                    ingredientCommand.Parameters.Add(ingredient.Name);
+                    ingredientCommand.Parameters.Add(ingredient.MeasuringUnit);
                     ingredientCommand.ExecuteNonQuery();
 
-                    var detailedIngredientCommand = new SqliteCommand("INSERT INTO Ingredient_Detailed " +
+                    var detailedIngredientCommand = new SQLiteCommand("INSERT INTO Ingredient_Detailed " +
                         "(INGREDIENT_CODE, INGREDIENT_SOURCE, UNIT_PRICE, AMOUNT_IN_UNIT, MINIMUM_PRICE_PER_UNIT, QUALITY, UNITS_AVAILABLE) " +
                         "VALUES(?, ?, ?, ?, ?, ?, ?)");
                     detailedIngredientCommand.Parameters.Add(ingredient);
                 }
-            } catch (SqliteException sqlEx)
+            } catch (SQLiteException sqlEx)
             {
                 Console.WriteLine(sqlEx.ErrorCode);
                 throw sqlEx;
