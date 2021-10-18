@@ -89,11 +89,11 @@
   <ItemGroup>
     <Compile Include="BusinessLogic\IngredientContext.cs" />
     <Compile Include="Data\SqliteIngredientManager.cs" />
-    <Compile Include="Menus\IngredientsMenu.cs">
+    <Compile Include="Menus\IngredientMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Menus\IngredientsMenu.Designer.cs">
-      <DependentUpon>IngredientsMenu.cs</DependentUpon>
+    <Compile Include="Menus\IngredientMenu.Designer.cs">
+      <DependentUpon>IngredientMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Menus\MainMenu.cs">
       <SubType>Form</SubType>
@@ -105,6 +105,9 @@
     <Compile Include="Models\BaseIngredient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Menus\IngredientMenu.resx">
+      <DependentUpon>IngredientMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Menus\MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </EmbeddedResource>

@@ -29,48 +29,68 @@ namespace PanaderiaIkigai
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.dataGridView = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            this.btnGoToIngredientMenu = new System.Windows.Forms.Button();
+            this.IkigaiTitle = new System.Windows.Forms.Label();
+            this.mainMenuControlsPanel = new System.Windows.Forms.Panel();
+            this.mainMenuControlsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
+            // btnGoToIngredientMenu
             // 
-            this.button1.Location = new System.Drawing.Point(339, 30);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnGoToIngredientMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnGoToIngredientMenu.FlatAppearance.BorderSize = 0;
+            this.btnGoToIngredientMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGoToIngredientMenu.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnGoToIngredientMenu.Location = new System.Drawing.Point(21, 3);
+            this.btnGoToIngredientMenu.Name = "btnGoToIngredientMenu";
+            this.btnGoToIngredientMenu.Size = new System.Drawing.Size(193, 54);
+            this.btnGoToIngredientMenu.TabIndex = 0;
+            this.btnGoToIngredientMenu.Text = "Menú de Ingredientes";
+            this.btnGoToIngredientMenu.UseVisualStyleBackColor = false;
+            this.btnGoToIngredientMenu.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // dataGridView
+            // IkigaiTitle
             // 
-            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(265, 209);
-            this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(240, 150);
-            this.dataGridView.TabIndex = 1;
+            this.IkigaiTitle.AutoSize = true;
+            this.IkigaiTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IkigaiTitle.Location = new System.Drawing.Point(102, 39);
+            this.IkigaiTitle.Name = "IkigaiTitle";
+            this.IkigaiTitle.Size = new System.Drawing.Size(617, 31);
+            this.IkigaiTitle.TabIndex = 1;
+            this.IkigaiTitle.Text = "Sistema de Administración de Panadería Ikigai";
+            // 
+            // mainMenuControlsPanel
+            // 
+            this.mainMenuControlsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.mainMenuControlsPanel.Controls.Add(this.btnGoToIngredientMenu);
+            this.mainMenuControlsPanel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.mainMenuControlsPanel.Location = new System.Drawing.Point(12, 83);
+            this.mainMenuControlsPanel.Name = "mainMenuControlsPanel";
+            this.mainMenuControlsPanel.Size = new System.Drawing.Size(776, 299);
+            this.mainMenuControlsPanel.TabIndex = 2;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.dataGridView);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.IkigaiTitle);
+            this.Controls.Add(this.mainMenuControlsPanel);
             this.Name = "Form1";
             this.Text = "Panadería Ikigai";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            this.mainMenuControlsPanel.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.Button btnGoToIngredientMenu;
+        private System.Windows.Forms.Label IkigaiTitle;
+        private System.Windows.Forms.Panel mainMenuControlsPanel;
     }
 }
 

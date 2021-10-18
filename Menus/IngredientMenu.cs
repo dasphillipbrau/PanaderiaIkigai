@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace PanaderiaIkigai.Menus
 {
-    public partial class IngredientsMenu : Form
+    public partial class IngredientMenu : Form
     {
-        public IngredientsMenu()
+        public IngredientMenu()
         {
             InitializeComponent();
         }
