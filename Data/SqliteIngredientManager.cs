@@ -31,7 +31,9 @@ namespace PanaderiaIkigai.Data
                     saveIngredientCommand.Parameters.AddWithValue("pName", pBaseIngredient.Name.ToUpper());
                     saveIngredientCommand.Parameters.AddWithValue("pUnit", pBaseIngredient.MeasuringUnit.ToUpper());
                     conn.Open();
-                    saveIngredientCommand.ExecuteNonQuery();
+                    
+                    var x = saveIngredientCommand.ExecuteNonQuery();
+                    
                 }
             } catch (SQLiteException sqlEx)
             {
