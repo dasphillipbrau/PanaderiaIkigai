@@ -47,7 +47,7 @@ namespace PanaderiaIkigai
             this.btnGoToIngredientMenu.TabIndex = 0;
             this.btnGoToIngredientMenu.Text = "Menú de Ingredientes";
             this.btnGoToIngredientMenu.UseVisualStyleBackColor = false;
-            this.btnGoToIngredientMenu.Click += new System.EventHandler(this.button1_Click_1);
+            this.btnGoToIngredientMenu.Click += new System.EventHandler(this.btnGoToIngredientMenu_Click);
             // 
             // IkigaiTitle
             // 
@@ -79,7 +79,6 @@ namespace PanaderiaIkigai
             this.Controls.Add(this.mainMenuControlsPanel);
             this.Name = "Form1";
             this.Text = "Panadería Ikigai";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.mainMenuControlsPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

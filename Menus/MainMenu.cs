@@ -1,4 +1,5 @@
 ﻿using PanaderiaIkigai.BusinessLogic;
+using PanaderiaIkigai.Menus;
 using PanaderiaIkigai.Models;
 using System;
 using System.Collections.Generic;
@@ -20,20 +21,11 @@ namespace PanaderiaIkigai
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void btnGoToIngredientMenu_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            var lel = context.GetDetailedIngredients() as List<DetailedIngredient>;
-            dataGridView.DataSource = lel;
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-
+            IngredientMenu ingredientMenu = new IngredientMenu();
+            ingredientMenu.Show();
+            ingredientMenu.BringToFront();
         }
     }
 }

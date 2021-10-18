@@ -88,7 +88,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLogic\IngredientContext.cs" />
+    <Compile Include="Controls\Ingredients\BaseIngredientPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Ingredients\BaseIngredientPanel.Designer.cs">
+      <DependentUpon>BaseIngredientPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Ingredients\DisplayBaseIngredientPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Ingredients\DisplayBaseIngredientPanel.Designer.cs">
+      <DependentUpon>DisplayBaseIngredientPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Data\SqliteIngredientManager.cs" />
+    <Compile Include="InformationCapture\IngredientInformationCapturer.cs" />
     <Compile Include="Menus\IngredientMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,6 +118,12 @@
     <Compile Include="Models\BaseIngredient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\Ingredients\BaseIngredientPanel.resx">
+      <DependentUpon>BaseIngredientPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Ingredients\DisplayBaseIngredientPanel.resx">
+      <DependentUpon>DisplayBaseIngredientPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Menus\IngredientMenu.resx">
       <DependentUpon>IngredientMenu.cs</DependentUpon>
     </EmbeddedResource>
