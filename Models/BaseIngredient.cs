@@ -10,24 +10,25 @@ namespace PanaderiaIkigai.Models
 {
     public class BaseIngredient
     {
-        /// <summary>
-        /// Unique Ingredient Code
-        /// </summary>
+        
+        [DisplayName("Código")]
         public int Code { get; set; }
-        /// <summary>
-        /// Ingredient Name
-        /// </summary>
+        [DisplayName("Nombre")]
         public string Name { get; set; }
+        [DisplayName("Unidad de Medida")]
         public string MeasuringUnit { get; set; }
-
+        [DisplayName("Precio Promedio")]
+        public decimal AveragePrice { get; set; }
+        [DisplayName("Unidades Disponibles")]
         public int UnitsAvailable { get; set; }
 
         public BaseIngredient() { }
-        public BaseIngredient(int pCode, string pName, string pUnit, int pUnitsAvaialble)
+        public BaseIngredient(int pCode, string pName, string pUnit, decimal pAveragePrice, int pUnitsAvaialble)
         {
             Code = pCode;
             Name = pName;
             MeasuringUnit = pUnit;
+            AveragePrice = pAveragePrice;
             UnitsAvailable = pUnitsAvaialble;
         }
     }

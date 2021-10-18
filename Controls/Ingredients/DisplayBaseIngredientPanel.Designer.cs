@@ -42,14 +42,14 @@ namespace PanaderiaIkigai.Controls.Ingredients
             this.dgvBaseIngredients.Location = new System.Drawing.Point(18, 66);
             this.dgvBaseIngredients.Name = "dgvBaseIngredients";
             this.dgvBaseIngredients.ReadOnly = true;
-            this.dgvBaseIngredients.Size = new System.Drawing.Size(451, 242);
+            this.dgvBaseIngredients.Size = new System.Drawing.Size(674, 242);
             this.dgvBaseIngredients.TabIndex = 0;
             // 
             // lblBaseIngredientQuery
             // 
             this.lblBaseIngredientQuery.AutoSize = true;
             this.lblBaseIngredientQuery.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBaseIngredientQuery.Location = new System.Drawing.Point(84, 19);
+            this.lblBaseIngredientQuery.Location = new System.Drawing.Point(190, 20);
             this.lblBaseIngredientQuery.Name = "lblBaseIngredientQuery";
             this.lblBaseIngredientQuery.Size = new System.Drawing.Size(317, 24);
             this.lblBaseIngredientQuery.TabIndex = 1;
@@ -63,7 +63,7 @@ namespace PanaderiaIkigai.Controls.Ingredients
             this.Controls.Add(this.lblBaseIngredientQuery);
             this.Controls.Add(this.dgvBaseIngredients);
             this.Name = "DisplayBaseIngredientPanel";
-            this.Size = new System.Drawing.Size(489, 442);
+            this.Size = new System.Drawing.Size(707, 442);
             this.Load += new System.EventHandler(this.DisplayBaseIngredientPanel_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBaseIngredients)).EndInit();
             this.ResumeLayout(false);

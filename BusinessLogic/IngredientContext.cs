@@ -14,7 +14,7 @@ namespace PanaderiaIkigai.BusinessLogic
     public class IngredientContext
     {
         static SqliteIngredientManager dataAccess = new SqliteIngredientManager();
-        public bool RegisterIngredient(TextBox pNameBox, TextBox pUnitBox, Label pNameError, Label pUnitError)
+        public bool RegisterIngredient(TextBox pNameBox, ComboBox pUnitBox, Label pNameError, Label pUnitError)
         {
             try { 
                 IngredientInformationCapturer ingredientInformation = new IngredientInformationCapturer();
@@ -26,7 +26,10 @@ namespace PanaderiaIkigai.BusinessLogic
                 return true;
             } catch (SQLiteException sqlEx)
             {
-                
+                if(sqlEx.ErrorCode == 19)
+                {
+                    pNameError.Text = "El nombre de este ingrediente\nya existe en la base de datos.";
+                }
                 throw sqlEx;
             } catch (Exception ex)
             {
@@ -45,6 +48,37 @@ namespace PanaderiaIkigai.BusinessLogic
         {
             var result = dataAccess.GetBaseIngredients() as List<BaseIngredient>;
             return result;
+        }
+
+        public bool RegisterUnit(TextBox pUnitName, Label pUnitError)
+        {
+            try
+            {
+                IngredientInformationCapturer ingredientInformation = new IngredientInformationCapturer();
+                var unitToRegister = ingredientInformation.CaptureMeasuringUnit(pUnitName, pUnitError);
+                if (unitToRegister == null)
+                    return false;
+                else
+                    dataAccess.SaveMeasuringUnit(unitToRegister);
+                return true;
+            }
+            catch (SQLiteException sqlEx)
+            {
+                if(sqlEx.ErrorCode == 19)
+                {
+                    pUnitError.Text = "El nombre de esta medida \nya existe en la base de datos.";
+                }
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<string> GetUnits()
+        {
+            return dataAccess.GetMeasuringUnits();
         }
     }
 }

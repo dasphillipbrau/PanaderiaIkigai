@@ -32,18 +32,23 @@ namespace PanaderiaIkigai.Controls
             this.lblIngredientRegistration = new System.Windows.Forms.Label();
             this.lblIngredientName = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
-            this.txtUnit = new System.Windows.Forms.TextBox();
             this.lblMeasuringUnit = new System.Windows.Forms.Label();
             this.btnRegisterBaseIngredient = new System.Windows.Forms.Button();
             this.lblBaseIngredientNameValidation = new System.Windows.Forms.Label();
             this.lblBaseIngredientUnitValidation = new System.Windows.Forms.Label();
+            this.lblUnitName = new System.Windows.Forms.Label();
+            this.lblMeasuringUnitTitle = new System.Windows.Forms.Label();
+            this.txtUnitName = new System.Windows.Forms.TextBox();
+            this.btnRegisterUnit = new System.Windows.Forms.Button();
+            this.comboBoxUnits = new System.Windows.Forms.ComboBox();
+            this.lblUnitRegisterValidation = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblIngredientRegistration
             // 
             this.lblIngredientRegistration.AutoSize = true;
             this.lblIngredientRegistration.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIngredientRegistration.Location = new System.Drawing.Point(84, 22);
+            this.lblIngredientRegistration.Location = new System.Drawing.Point(194, 24);
             this.lblIngredientRegistration.Name = "lblIngredientRegistration";
             this.lblIngredientRegistration.Size = new System.Drawing.Size(314, 24);
             this.lblIngredientRegistration.TabIndex = 0;
@@ -64,13 +69,6 @@ namespace PanaderiaIkigai.Controls
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(188, 20);
             this.txtName.TabIndex = 2;
-            // 
-            // txtUnit
-            // 
-            this.txtUnit.Location = new System.Drawing.Point(38, 144);
-            this.txtUnit.Name = "txtUnit";
-            this.txtUnit.Size = new System.Drawing.Size(188, 20);
-            this.txtUnit.TabIndex = 4;
             // 
             // lblMeasuringUnit
             // 
@@ -117,21 +115,82 @@ namespace PanaderiaIkigai.Controls
             this.lblBaseIngredientUnitValidation.UseMnemonic = false;
             this.lblBaseIngredientUnitValidation.Visible = false;
             // 
+            // lblUnitName
+            // 
+            this.lblUnitName.AutoSize = true;
+            this.lblUnitName.Location = new System.Drawing.Point(35, 314);
+            this.lblUnitName.Name = "lblUnitName";
+            this.lblUnitName.Size = new System.Drawing.Size(160, 13);
+            this.lblUnitName.TabIndex = 8;
+            this.lblUnitName.Text = "Nombre de la Unidad de Medida";
+            // 
+            // lblMeasuringUnitTitle
+            // 
+            this.lblMeasuringUnitTitle.AutoSize = true;
+            this.lblMeasuringUnitTitle.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMeasuringUnitTitle.Location = new System.Drawing.Point(194, 272);
+            this.lblMeasuringUnitTitle.Name = "lblMeasuringUnitTitle";
+            this.lblMeasuringUnitTitle.Size = new System.Drawing.Size(335, 24);
+            this.lblMeasuringUnitTitle.TabIndex = 9;
+            this.lblMeasuringUnitTitle.Text = "Registro de Unidades de Medida";
+            // 
+            // txtUnitName
+            // 
+            this.txtUnitName.Location = new System.Drawing.Point(38, 340);
+            this.txtUnitName.Name = "txtUnitName";
+            this.txtUnitName.Size = new System.Drawing.Size(188, 20);
+            this.txtUnitName.TabIndex = 10;
+            // 
+            // btnRegisterUnit
+            // 
+            this.btnRegisterUnit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            this.btnRegisterUnit.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegisterUnit.ForeColor = System.Drawing.Color.White;
+            this.btnRegisterUnit.Location = new System.Drawing.Point(72, 379);
+            this.btnRegisterUnit.Name = "btnRegisterUnit";
+            this.btnRegisterUnit.Size = new System.Drawing.Size(115, 51);
+            this.btnRegisterUnit.TabIndex = 11;
+            this.btnRegisterUnit.Text = "Registrar";
+            this.btnRegisterUnit.UseVisualStyleBackColor = false;
+            this.btnRegisterUnit.Click += new System.EventHandler(this.btnRegisterUnit_Click);
+            // 
+            // comboBoxUnits
+            // 
+            this.comboBoxUnits.FormattingEnabled = true;
+            this.comboBoxUnits.Location = new System.Drawing.Point(38, 156);
+            this.comboBoxUnits.Name = "comboBoxUnits";
+            this.comboBoxUnits.Size = new System.Drawing.Size(188, 21);
+            this.comboBoxUnits.TabIndex = 12;
+            // 
+            // lblUnitRegisterValidation
+            // 
+            this.lblUnitRegisterValidation.AutoSize = true;
+            this.lblUnitRegisterValidation.ForeColor = System.Drawing.Color.Red;
+            this.lblUnitRegisterValidation.Location = new System.Drawing.Point(236, 340);
+            this.lblUnitRegisterValidation.Name = "lblUnitRegisterValidation";
+            this.lblUnitRegisterValidation.Size = new System.Drawing.Size(0, 13);
+            this.lblUnitRegisterValidation.TabIndex = 13;
+            // 
             // BaseIngredientPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.Controls.Add(this.lblUnitRegisterValidation);
+            this.Controls.Add(this.comboBoxUnits);
+            this.Controls.Add(this.btnRegisterUnit);
+            this.Controls.Add(this.txtUnitName);
+            this.Controls.Add(this.lblMeasuringUnitTitle);
+            this.Controls.Add(this.lblUnitName);
             this.Controls.Add(this.lblBaseIngredientUnitValidation);
             this.Controls.Add(this.lblBaseIngredientNameValidation);
             this.Controls.Add(this.btnRegisterBaseIngredient);
-            this.Controls.Add(this.txtUnit);
             this.Controls.Add(this.lblMeasuringUnit);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblIngredientName);
             this.Controls.Add(this.lblIngredientRegistration);
             this.Name = "BaseIngredientPanel";
-            this.Size = new System.Drawing.Size(489, 442);
+            this.Size = new System.Drawing.Size(707, 442);
             this.Load += new System.EventHandler(this.BaseIngredientPanel_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -143,10 +202,15 @@ namespace PanaderiaIkigai.Controls
         private System.Windows.Forms.Label lblIngredientRegistration;
         private System.Windows.Forms.Label lblIngredientName;
         private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.TextBox txtUnit;
         private System.Windows.Forms.Label lblMeasuringUnit;
         private System.Windows.Forms.Button btnRegisterBaseIngredient;
         private System.Windows.Forms.Label lblBaseIngredientNameValidation;
         private System.Windows.Forms.Label lblBaseIngredientUnitValidation;
+        private System.Windows.Forms.Label lblUnitName;
+        private System.Windows.Forms.Label lblMeasuringUnitTitle;
+        private System.Windows.Forms.TextBox txtUnitName;
+        private System.Windows.Forms.Button btnRegisterUnit;
+        private System.Windows.Forms.ComboBox comboBoxUnits;
+        private System.Windows.Forms.Label lblUnitRegisterValidation;
     }
 }

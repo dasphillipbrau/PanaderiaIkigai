@@ -41,7 +41,7 @@ namespace PanaderiaIkigai.Menus
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(254, 33);
+            this.label1.Location = new System.Drawing.Point(30, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(165, 19);
             this.label1.TabIndex = 0;
@@ -94,7 +94,7 @@ namespace PanaderiaIkigai.Menus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(758, 540);
+            this.ClientSize = new System.Drawing.Size(974, 540);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Name = "IngredientMenu";

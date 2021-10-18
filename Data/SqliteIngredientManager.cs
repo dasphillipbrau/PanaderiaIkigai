@@ -243,13 +243,13 @@ namespace PanaderiaIkigai.Data
                 {
                     List<BaseIngredient> ingredientList = new List<BaseIngredient>();
 
-                    var getIngredientsCommand = new SQLiteCommand("SELECT CODE, NAME, UNIT_OF_MEASURE, TOTAL_UNITS_AVAILABLE FROM INGREDIENT", conn);
+                    var getIngredientsCommand = new SQLiteCommand("SELECT CODE, NAME, UNIT_OF_MEASURE, AVERAGE_PRICE, TOTAL_UNITS_AVAILABLE FROM INGREDIENT", conn);
                     conn.Open();
                     var reader = getIngredientsCommand.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        ingredientList.Add(new BaseIngredient(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3)));
+                        ingredientList.Add(new BaseIngredient(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetDecimal(3), reader.GetInt32(4)));
                     }
                     return ingredientList;
                 }
@@ -279,7 +279,7 @@ namespace PanaderiaIkigai.Data
                 {
                     List<BaseIngredient> ingredientList = new List<BaseIngredient>();
 
-                    var getIngredientsCommand = new SQLiteCommand("SELECT CODE, NAME, UNIT_OF_MEASURE, TOTAL_UNITS_AVAILABLE FROM INGREDIENT WHERE CODE = $pCode", conn);
+                    var getIngredientsCommand = new SQLiteCommand("SELECT CODE, NAME, UNIT_OF_MEASURE, AVERAGE_PRICE, TOTAL_UNITS_AVAILABLE FROM INGREDIENT WHERE CODE = $pCode", conn);
                     getIngredientsCommand.Parameters.AddWithValue("pCode", pCode);
 
                     conn.Open();
@@ -288,7 +288,7 @@ namespace PanaderiaIkigai.Data
 
                     while (reader.Read())
                     {
-                        ingredientList.Add(new BaseIngredient(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3)));
+                        ingredientList.Add(new BaseIngredient(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetDecimal(3), reader.GetInt32(3)));
                     }
 
                     return ingredientList;
@@ -365,7 +365,7 @@ namespace PanaderiaIkigai.Data
                     List<DetailedIngredient> detailedIngredientsList = new List<DetailedIngredient>();
                     var getDetailedIngredientsCommand = new SQLiteCommand("SELECT A.INGREDIENT_CODE, A.DETAILED_INGREDIENT_ID, A.BRAND, " +
                         "A.INGREDIENT_SOURCE, A.UNIT_PRICE, A.AMOUNT_IN_UNIT, A.MINIMUM_PRICE_PER_UNIT, A.QUALITY, A.UNITS_AVAILABLE, " +
-                        "B.NAME, B.UNIT_OF_MEASURE, B.TOTAL_UNITS_AVAILABLE " +
+                        "B.NAME, B.UNIT_OF_MEASURE, B.TOTAL_UNITS_AVAILABLE, B.AVERAGE_PRICE " +
                         "FROM INGREDIENT_DETAILED A " +
                         "INNER JOIN INGREDIENT B " +
                         "ON A.INGREDIENT_CODE = B.CODE ORDER BY A.INGREDIENT_CODE ASC", conn);
@@ -373,7 +373,7 @@ namespace PanaderiaIkigai.Data
                     var reader = getDetailedIngredientsCommand.ExecuteReader();
                     while (reader.Read())
                     {
-                        var baseIngredient = new BaseIngredient(reader.GetInt32(0), reader.GetString(9), reader.GetString(10), reader.GetInt32(11));
+                        var baseIngredient = new BaseIngredient(reader.GetInt32(0), reader.GetString(9), reader.GetString(10), reader.GetDecimal(12), reader.GetInt32(11));
                         var detailedIngredient = new DetailedIngredient(baseIngredient, reader.GetString(1),
                             reader.GetString(2), reader.GetString(3), reader.GetDecimal(4), reader.GetDecimal(5), reader.GetDecimal(6), reader.GetInt32(7));
                         var unitsAvailable = reader.GetInt32(8);
@@ -397,6 +397,128 @@ namespace PanaderiaIkigai.Data
                 throw ex;
             }
         }
-
+        /// <summary>
+        /// Saves a measuring unit to be used within the app.
+        /// </summary>
+        /// <param name="pUnit">Name of the unit to register</param>
+        public void SaveMeasuringUnit(string pUnit)
+        {
+            try
+            {
+                using(var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    var saveUnitCommand = new SQLiteCommand("INSERT INTO MEASUREMENT_UNIT (NAME) VALUES ($pUnit)", conn);
+                    saveUnitCommand.Parameters.AddWithValue("pUnit",pUnit.ToUpper());
+                    conn.Open();
+                    saveUnitCommand.ExecuteNonQuery();
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                Console.WriteLine(sqlEx.Message);
+                Console.WriteLine(sqlEx.ErrorCode);
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine("ERROR OCCURRED");
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+        }
+        /// <summary>
+        /// Retrieves all the measuring units in the database.
+        /// </summary>
+        /// <returns>List with Measuring units</returns>
+        public List<string> GetMeasuringUnits()
+        {
+            try
+            {
+                using (var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    var unitList = new List<String>();
+                    var getUnitCommand = new SQLiteCommand("SELECT NAME FROM MEASUREMENT_UNIT ORDER BY NAME ASC", conn);
+                    conn.Open();
+                    var reader = getUnitCommand.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        unitList.Add(reader.GetString(0));
+                    }
+                    return unitList;
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                Console.WriteLine(sqlEx.Message);
+                Console.WriteLine(sqlEx.ErrorCode);
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine("ERROR OCCURRED");
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+        }
+        /// <summary>
+        /// Deletes ALL the units of measurement from the units table.
+        /// </summary>
+        public void DeleteMeasuringUnits()
+        {
+            try
+            {
+                using (var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    var deleteUnit = new SQLiteCommand("DELETE FROM MEASUREMENT_UNIT WHERE 1=1", conn);
+                    conn.Open();
+                    deleteUnit.ExecuteNonQuery();
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                Console.WriteLine(sqlEx.Message);
+                Console.WriteLine(sqlEx.ErrorCode);
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine("ERROR OCCURRED");
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+        }
+        /// <summary>
+        /// Deletes a specific measuring unit from the units table.
+        /// </summary>
+        /// <param name="pName">Name of the unit to delete</param>
+        public void DeleteMeasuringUnits(string pName)
+        {
+            try
+            {
+                using (var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    var deleteUnit = new SQLiteCommand("DELETE FROM MEASUREMENT_UNIT WHERE NAME = $pUnitName", conn);
+                    deleteUnit.Parameters.AddWithValue("pUnitName", pName.ToUpper());
+                    conn.Open();
+                    deleteUnit.ExecuteNonQuery();
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                Console.WriteLine(sqlEx.Message);
+                Console.WriteLine(sqlEx.ErrorCode);
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine("ERROR OCCURRED");
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+        }
     }
 }

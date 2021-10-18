@@ -10,7 +10,7 @@ namespace PanaderiaIkigai.InformationCapture
 {
     public class IngredientInformationCapturer
     {
-        public BaseIngredient CaptureBaseIngredient(TextBox pNameBox, TextBox pUnitBox, Label pNameError, Label pUnitError)
+        public BaseIngredient CaptureBaseIngredient(TextBox pNameBox, ComboBox pUnitBox, Label pNameError, Label pUnitError)
         {
             BaseIngredient ingredientToInsert = new BaseIngredient();
             bool problemDetected = false;
@@ -30,26 +30,45 @@ namespace PanaderiaIkigai.InformationCapture
                 pNameError.Text = "El nombre del ingrediente\n no puede pasar de 50 caracteres";
                 pNameError.Visible = true;
                 problemDetected = true;
+            } else
+            {
+                pNameError.Text = "";
             }
 
-            if (pUnitBox.Text.Trim().Length == 0)
+            if (pUnitBox.SelectedItem.ToString().ToUpper().Equals("NINGÚN INGREDIENTE DETECTADO"))
+            {
+                pUnitError.Text = "Primero debe de registrar \nalguna unidad de medida.";
+                pUnitError.Visible = true;
+                problemDetected = true;
+            } else
+            {
+                pUnitError.Text = "";
+            }
+
+            if (pUnitBox.SelectedItem.ToString().Trim().Length == 0)
             {
                 pUnitError.Text = "El nombre de la unidad\n de medida no puede estar vacío";
                 pUnitError.Visible = true;
                 problemDetected = true;
+            } else
+            {
+                pUnitError.Text = "";
             }
 
-            if (pUnitBox.Text.Trim().Length > 20)
+            if (pUnitBox.SelectedItem.ToString().Trim().Length > 20)
             {
-                pUnitError.Text = "El nombre de la unidad\n de medida no puede pasar de 50 caracteres";
+                pUnitError.Text = "El nombre de la unidad\n de medida no puede pasar de 20 caracteres";
                 pUnitError.Visible = true;
                 problemDetected = true;
+            } else
+            {
+                pUnitError.Text = "";
             }
 
             if (!problemDetected)
             {
                 ingredientToInsert.Name = pNameBox.Text.Trim().ToUpper();
-                ingredientToInsert.MeasuringUnit = pUnitBox.Text.Trim().ToUpper();
+                ingredientToInsert.MeasuringUnit = pUnitBox.SelectedItem.ToString().Trim().ToUpper();
                 return ingredientToInsert;
             }
             else
@@ -57,6 +76,33 @@ namespace PanaderiaIkigai.InformationCapture
                 return null;
             }
 
+        }
+
+        public string CaptureMeasuringUnit(TextBox unitBox, Label unitError)
+        {
+            bool problemDetected = false;
+
+            if (unitBox.Text.Trim().Length == 0)
+            {
+                problemDetected = true;
+                unitError.Text = "El nombre de la unidad \nno puede estar vacío.";
+            }
+
+            if (unitBox.Text.Trim().Length > 20)
+            {
+                problemDetected = true;
+                unitError.Text = "El nombre de la unidad \nno puede pasar de 20 caracteres.";
+            }
+
+            if (!problemDetected)
+            {
+                unitError.Text = "";
+                return unitBox.Text.ToString().ToUpper();
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

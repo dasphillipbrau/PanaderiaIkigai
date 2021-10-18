@@ -18,8 +18,8 @@ namespace PanaderiaIkigai.Models
 
         public DetailedIngredient() { }
 
-        public DetailedIngredient(int pCode, string pName, string pUnit, int pUnitsAvailable, string pBrand, string pDetailedIngredientCode, string pIngredientSource, 
-            decimal pUnitPrice, decimal pAmountInUnit, decimal pMinimumUnitPrice, int pQuality) : base(pCode, pName, pUnit, pUnitsAvailable)
+        public DetailedIngredient(int pCode, string pName, string pUnit, decimal pAveragePrice, int pUnitsAvailable, string pBrand, string pDetailedIngredientCode, string pIngredientSource, 
+            decimal pUnitPrice, decimal pAmountInUnit, decimal pMinimumUnitPrice, int pQuality) : base(pCode, pName, pUnit, pAveragePrice, pUnitsAvailable)
         {
             DetailedIngredientCode = pDetailedIngredientCode;
             Brand = pBrand;
@@ -32,7 +32,7 @@ namespace PanaderiaIkigai.Models
 
         public DetailedIngredient(BaseIngredient pBaseIngredient, string pDetailedIngredientCode, string pBrand, string pIngredientSource,
             decimal pUnitPrice, decimal pAmountInUnit, decimal pMinimumUnitPrice, int pQuality) : base(pBaseIngredient.Code, pBaseIngredient.Name, 
-                pBaseIngredient.MeasuringUnit, pBaseIngredient.UnitsAvailable)
+                pBaseIngredient.MeasuringUnit, pBaseIngredient.AveragePrice, pBaseIngredient.UnitsAvailable)
         {
             DetailedIngredientCode = pDetailedIngredientCode;
             Brand = pBrand;

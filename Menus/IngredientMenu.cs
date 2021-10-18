@@ -18,13 +18,12 @@ namespace PanaderiaIkigai.Menus
         {
             InitializeComponent();
         }
-
         private void btnOpenRegisterBasePanel_Click(object sender, EventArgs e)
         {
             try { 
                 BaseIngredientPanel baseIngredientPanel = new BaseIngredientPanel();
+                baseIngredientPanel.Location = new Point(255, 63);
                 this.Controls.Add(baseIngredientPanel);
-                baseIngredientPanel.Location = new Point(257, 63);
                 baseIngredientPanel.Show();
                 baseIngredientPanel.BringToFront();
             } catch (Exception ex)
@@ -38,8 +37,8 @@ namespace PanaderiaIkigai.Menus
         private void btnQueryBaseIngredients_Click(object sender, EventArgs e)
         {
             DisplayBaseIngredientPanel queryPanel = new DisplayBaseIngredientPanel();
+            queryPanel.Location = new Point(255, 63);
             this.Controls.Add(queryPanel);
-            queryPanel.Location = new Point(257, 63);
             queryPanel.Show();
             queryPanel.BringToFront();
         }
