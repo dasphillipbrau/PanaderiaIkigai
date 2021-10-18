@@ -29,13 +29,67 @@ namespace PanaderiaIkigai
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.btnGoToIngredientMenu = new System.Windows.Forms.Button();
+            this.IkigaiTitle = new System.Windows.Forms.Label();
+            this.mainMenuControlsPanel = new System.Windows.Forms.Panel();
+            this.mainMenuControlsPanel.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // btnGoToIngredientMenu
+            // 
+            this.btnGoToIngredientMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnGoToIngredientMenu.FlatAppearance.BorderSize = 0;
+            this.btnGoToIngredientMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGoToIngredientMenu.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnGoToIngredientMenu.Location = new System.Drawing.Point(21, 3);
+            this.btnGoToIngredientMenu.Name = "btnGoToIngredientMenu";
+            this.btnGoToIngredientMenu.Size = new System.Drawing.Size(193, 54);
+            this.btnGoToIngredientMenu.TabIndex = 0;
+            this.btnGoToIngredientMenu.Text = "Menú de Ingredientes";
+            this.btnGoToIngredientMenu.UseVisualStyleBackColor = false;
+            this.btnGoToIngredientMenu.Click += new System.EventHandler(this.btnGoToIngredientMenu_Click);
+            // 
+            // IkigaiTitle
+            // 
+            this.IkigaiTitle.AutoSize = true;
+            this.IkigaiTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IkigaiTitle.Location = new System.Drawing.Point(102, 39);
+            this.IkigaiTitle.Name = "IkigaiTitle";
+            this.IkigaiTitle.Size = new System.Drawing.Size(617, 31);
+            this.IkigaiTitle.TabIndex = 1;
+            this.IkigaiTitle.Text = "Sistema de Administración de Panadería Ikigai";
+            // 
+            // mainMenuControlsPanel
+            // 
+            this.mainMenuControlsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.mainMenuControlsPanel.Controls.Add(this.btnGoToIngredientMenu);
+            this.mainMenuControlsPanel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.mainMenuControlsPanel.Location = new System.Drawing.Point(12, 83);
+            this.mainMenuControlsPanel.Name = "mainMenuControlsPanel";
+            this.mainMenuControlsPanel.Size = new System.Drawing.Size(776, 299);
+            this.mainMenuControlsPanel.TabIndex = 2;
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.Controls.Add(this.IkigaiTitle);
+            this.Controls.Add(this.mainMenuControlsPanel);
+            this.Name = "Form1";
+            this.Text = "Panadería Ikigai";
+            this.mainMenuControlsPanel.ResumeLayout(false);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Button btnGoToIngredientMenu;
+        private System.Windows.Forms.Label IkigaiTitle;
+        private System.Windows.Forms.Panel mainMenuControlsPanel;
     }
 }
 
