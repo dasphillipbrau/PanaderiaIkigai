@@ -50,6 +50,22 @@ namespace PanaderiaIkigai.BusinessLogic
             return result;
         }
 
+        public List<BaseIngredient> GetBaseIngredients(TextBox searchBox)
+        {
+            try
+            {
+                var results = dataAccess.GetBaseIngredients(searchBox.Text.Trim().ToUpper());
+                return results as List<BaseIngredient>;
+
+            } catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            } catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public bool RegisterUnit(TextBox pUnitName, Label pUnitError)
         {
             try

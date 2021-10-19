@@ -288,7 +288,7 @@ namespace PanaderiaIkigai.Data
 
                     while (reader.Read())
                     {
-                        ingredientList.Add(new BaseIngredient(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetDecimal(3), reader.GetInt32(3)));
+                        ingredientList.Add(new BaseIngredient(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetDecimal(3), reader.GetInt32(4)));
                     }
 
                     return ingredientList;
@@ -308,6 +308,51 @@ namespace PanaderiaIkigai.Data
                 throw ex;
             }
         }
+        /// <summary>
+        /// Returns a specific instance of BaseIngredient based on a code.
+        /// </summary>
+        /// <param name="pCode">Code to filter by.</param>
+        /// <returns>The ingredient with the corresponding code.</returns>
+        public IEnumerable<BaseIngredient> GetBaseIngredients(string pIngredientName)
+        {
+            try
+            {
+                using(var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    List<BaseIngredient> ingredientList = new List<BaseIngredient>();
+
+                    var getIngredientsCommand = new SQLiteCommand("SELECT CODE, NAME, UNIT_OF_MEASURE, AVERAGE_PRICE, TOTAL_UNITS_AVAILABLE FROM INGREDIENT " +
+                        "WHERE NAME LIKE $pName || '%'", conn);
+                    getIngredientsCommand.Parameters.AddWithValue("pName", pIngredientName);
+
+                    conn.Open();
+
+                    var reader = getIngredientsCommand.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        ingredientList.Add(new BaseIngredient(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetDecimal(3), reader.GetInt32(4)));
+                    }
+
+                    return ingredientList;
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+
+                Console.WriteLine(sqlEx.Message);
+                Console.WriteLine(sqlEx.ErrorCode);
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+        }
+
+
         /// <summary>
         /// Accesses the database and retrieves every detailed ingredient based on a specific base ingredient code.
         /// </summary>

@@ -156,6 +156,7 @@ namespace PanaderiaIkigai.Controls
             // 
             // comboBoxUnits
             // 
+            this.comboBoxUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxUnits.FormattingEnabled = true;
             this.comboBoxUnits.Location = new System.Drawing.Point(38, 156);
             this.comboBoxUnits.Name = "comboBoxUnits";

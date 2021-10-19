@@ -62,7 +62,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -123,6 +123,12 @@
     <Compile Include="Controls\Ingredients\BaseIngredientPanel.Designer.cs">
       <DependentUpon>BaseIngredientPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Ingredients\DeleteBaseIngredientPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Ingredients\DeleteBaseIngredientPanel.Designer.cs">
+      <DependentUpon>DeleteBaseIngredientPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Ingredients\DisplayBaseIngredientPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -155,6 +161,9 @@
     </Content>
     <EmbeddedResource Include="Controls\Ingredients\BaseIngredientPanel.resx">
       <DependentUpon>BaseIngredientPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Ingredients\DeleteBaseIngredientPanel.resx">
+      <DependentUpon>DeleteBaseIngredientPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Ingredients\DisplayBaseIngredientPanel.resx">
       <DependentUpon>DisplayBaseIngredientPanel.cs</DependentUpon>
