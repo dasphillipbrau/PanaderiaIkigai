@@ -30,7 +30,7 @@ namespace PanaderiaIkigai.Controls.Ingredients
         {
             try { 
                 IngredientContext ingredientContext = new IngredientContext();
-                var ingredientsList = ingredientContext.GetBaseIngredients(txtSearchBaseIngredient);
+                var ingredientsList = ingredientContext.GetBaseIngredients(txtSearchBaseIngredient.Text);
                 dgvBaseIngredients.DataSource = ingredientsList;
             }
             catch (SQLiteException sqlEx)

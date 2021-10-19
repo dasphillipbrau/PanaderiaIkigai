@@ -57,6 +57,7 @@ namespace PanaderiaIkigai.Controls
             // lblIngredientName
             // 
             this.lblIngredientName.AutoSize = true;
+            this.lblIngredientName.ForeColor = System.Drawing.Color.Beige;
             this.lblIngredientName.Location = new System.Drawing.Point(35, 73);
             this.lblIngredientName.Name = "lblIngredientName";
             this.lblIngredientName.Size = new System.Drawing.Size(115, 13);
@@ -73,6 +74,7 @@ namespace PanaderiaIkigai.Controls
             // lblMeasuringUnit
             // 
             this.lblMeasuringUnit.AutoSize = true;
+            this.lblMeasuringUnit.ForeColor = System.Drawing.Color.Beige;
             this.lblMeasuringUnit.Location = new System.Drawing.Point(35, 127);
             this.lblMeasuringUnit.Name = "lblMeasuringUnit";
             this.lblMeasuringUnit.Size = new System.Drawing.Size(94, 13);
@@ -81,7 +83,7 @@ namespace PanaderiaIkigai.Controls
             // 
             // btnRegisterBaseIngredient
             // 
-            this.btnRegisterBaseIngredient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            this.btnRegisterBaseIngredient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
             this.btnRegisterBaseIngredient.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRegisterBaseIngredient.ForeColor = System.Drawing.Color.White;
             this.btnRegisterBaseIngredient.Location = new System.Drawing.Point(72, 187);
@@ -118,6 +120,7 @@ namespace PanaderiaIkigai.Controls
             // lblUnitName
             // 
             this.lblUnitName.AutoSize = true;
+            this.lblUnitName.ForeColor = System.Drawing.Color.Beige;
             this.lblUnitName.Location = new System.Drawing.Point(35, 314);
             this.lblUnitName.Name = "lblUnitName";
             this.lblUnitName.Size = new System.Drawing.Size(160, 13);
@@ -143,7 +146,7 @@ namespace PanaderiaIkigai.Controls
             // 
             // btnRegisterUnit
             // 
-            this.btnRegisterUnit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            this.btnRegisterUnit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
             this.btnRegisterUnit.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRegisterUnit.ForeColor = System.Drawing.Color.White;
             this.btnRegisterUnit.Location = new System.Drawing.Point(72, 379);
@@ -176,7 +179,7 @@ namespace PanaderiaIkigai.Controls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
             this.Controls.Add(this.lblUnitRegisterValidation);
             this.Controls.Add(this.comboBoxUnits);
             this.Controls.Add(this.btnRegisterUnit);

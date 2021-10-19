@@ -42,5 +42,14 @@ namespace PanaderiaIkigai.Menus
             queryPanel.Show();
             queryPanel.BringToFront();
         }
+
+        private void btnOpenEditBaseIngredient_Click(object sender, EventArgs e)
+        {
+            EditBaseIngredientPanel editPanel = new EditBaseIngredientPanel();
+            editPanel.Location = new Point(255, 63);
+            this.Controls.Add(editPanel);
+            editPanel.Show();
+            editPanel.BringToFront();
+        }
     }
 }

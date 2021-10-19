@@ -35,7 +35,7 @@ namespace PanaderiaIkigai.InformationCapture
                 pNameError.Text = "";
             }
 
-            if (pUnitBox.SelectedItem.ToString().ToUpper().Equals("NINGÚN INGREDIENTE DETECTADO"))
+            if (pUnitBox.SelectedItem.ToString().ToUpper().Equals("NINGUNA UNIDAD DETECTADA"))
             {
                 pUnitError.Text = "Primero debe de registrar \nalguna unidad de medida.";
                 pUnitError.Visible = true;

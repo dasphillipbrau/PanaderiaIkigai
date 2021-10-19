@@ -14,6 +14,7 @@ namespace PanaderiaIkigai.BusinessLogic
     public class IngredientContext
     {
         static SqliteIngredientManager dataAccess = new SqliteIngredientManager();
+        static IngredientInformationCapturer informationCapturer = new IngredientInformationCapturer();
         public bool RegisterIngredient(TextBox pNameBox, ComboBox pUnitBox, Label pNameError, Label pUnitError)
         {
             try { 
@@ -50,11 +51,11 @@ namespace PanaderiaIkigai.BusinessLogic
             return result;
         }
 
-        public List<BaseIngredient> GetBaseIngredients(TextBox searchBox)
+        public List<BaseIngredient> GetBaseIngredients(string pSearchBoxText)
         {
             try
             {
-                var results = dataAccess.GetBaseIngredients(searchBox.Text.Trim().ToUpper());
+                var results = dataAccess.GetBaseIngredients(pSearchBoxText.Trim().ToUpper());
                 return results as List<BaseIngredient>;
 
             } catch (SQLiteException sqlEx)
@@ -95,6 +96,25 @@ namespace PanaderiaIkigai.BusinessLogic
         public List<string> GetUnits()
         {
             return dataAccess.GetMeasuringUnits();
+        }
+
+        public bool EditUnit(TextBox txtUnitName, Label lblUnitNameError, string oldUnitName)
+        {
+            try
+            {
+                var newUnitName = informationCapturer.CaptureMeasuringUnit(txtUnitName, lblUnitNameError);
+                if (newUnitName == null)
+                    return false;
+                else
+                    dataAccess.UpdateMeasuringUnits(txtUnitName.Text, oldUnitName);
+                return true;
+            } catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            } catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

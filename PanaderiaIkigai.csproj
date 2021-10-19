@@ -123,11 +123,11 @@
     <Compile Include="Controls\Ingredients\BaseIngredientPanel.Designer.cs">
       <DependentUpon>BaseIngredientPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Ingredients\DeleteBaseIngredientPanel.cs">
+    <Compile Include="Controls\Ingredients\EditBaseIngredientPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Ingredients\DeleteBaseIngredientPanel.Designer.cs">
-      <DependentUpon>DeleteBaseIngredientPanel.cs</DependentUpon>
+    <Compile Include="Controls\Ingredients\EditBaseIngredientPanel.Designer.cs">
+      <DependentUpon>EditBaseIngredientPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Ingredients\DisplayBaseIngredientPanel.cs">
       <SubType>UserControl</SubType>
@@ -162,8 +162,8 @@
     <EmbeddedResource Include="Controls\Ingredients\BaseIngredientPanel.resx">
       <DependentUpon>BaseIngredientPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Ingredients\DeleteBaseIngredientPanel.resx">
-      <DependentUpon>DeleteBaseIngredientPanel.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Ingredients\EditBaseIngredientPanel.resx">
+      <DependentUpon>EditBaseIngredientPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Ingredients\DisplayBaseIngredientPanel.resx">
       <DependentUpon>DisplayBaseIngredientPanel.cs</DependentUpon>

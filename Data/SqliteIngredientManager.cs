@@ -565,5 +565,37 @@ namespace PanaderiaIkigai.Data
                 throw ex;
             }
         }
+        /// <summary>
+        /// Updates an instance of Measuring Unit.
+        /// </summary>
+        /// <param name="pNewName">The new name for the unit.</param>
+        /// <param name="pOldName">Unit old name. Used to identify record to change.</param>
+        public void UpdateMeasuringUnits(string pNewName, string pOldName)
+        {
+            try
+            {
+                using (var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    var updateUnit = new SQLiteCommand("UPDATE MEASUREMENT_UNIT SET NAME = $pNewName WHERE NAME = $pOldName", conn);
+                    updateUnit.Parameters.AddWithValue("pNewName", pNewName.ToUpper());
+                    updateUnit.Parameters.AddWithValue("pOldName", pOldName.ToUpper());
+                    conn.Open();
+                    updateUnit.ExecuteNonQuery();
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                Console.WriteLine(sqlEx.Message);
+                Console.WriteLine(sqlEx.ErrorCode);
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine("ERROR OCCURRED");
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+        }
     }
 }

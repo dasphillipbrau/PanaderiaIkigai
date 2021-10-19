@@ -58,7 +58,7 @@ namespace PanaderiaIkigai.Controls
             var unitsList = ingredientContext.GetUnits();
             if(unitsList.Count == 0)
             {
-                comboBoxUnits.Items.Add("Ningún Ingrediente Detectado");
+                comboBoxUnits.Items.Add("Ninguna Unidad Detectada");
             } else
                 comboBoxUnits.DataSource = unitsList;
         }
