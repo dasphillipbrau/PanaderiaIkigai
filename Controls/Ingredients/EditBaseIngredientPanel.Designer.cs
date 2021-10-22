@@ -30,6 +30,7 @@ namespace PanaderiaIkigai.Controls.Ingredients
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblEditIngredientValidation = new System.Windows.Forms.Label();
             this.lblEditUnitTitle = new System.Windows.Forms.Label();
             this.btnDeleteUnit = new System.Windows.Forms.Button();
             this.btnEditUnit = new System.Windows.Forms.Button();
@@ -43,7 +44,6 @@ namespace PanaderiaIkigai.Controls.Ingredients
             this.lblFilterByNameTitle = new System.Windows.Forms.Label();
             this.comboBoxSelectIngredient = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.lblEditIngredientValidation = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEditBaseIngredients)).BeginInit();
             this.SuspendLayout();
@@ -61,6 +61,15 @@ namespace PanaderiaIkigai.Controls.Ingredients
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(315, 143);
             this.panel1.TabIndex = 1;
+            // 
+            // lblEditIngredientValidation
+            // 
+            this.lblEditIngredientValidation.AutoSize = true;
+            this.lblEditIngredientValidation.ForeColor = System.Drawing.Color.Red;
+            this.lblEditIngredientValidation.Location = new System.Drawing.Point(3, 99);
+            this.lblEditIngredientValidation.Name = "lblEditIngredientValidation";
+            this.lblEditIngredientValidation.Size = new System.Drawing.Size(0, 13);
+            this.lblEditIngredientValidation.TabIndex = 5;
             // 
             // lblEditUnitTitle
             // 
@@ -125,6 +134,7 @@ namespace PanaderiaIkigai.Controls.Ingredients
             this.dgvEditBaseIngredients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEditBaseIngredients.Location = new System.Drawing.Point(24, 53);
             this.dgvEditBaseIngredients.Name = "dgvEditBaseIngredients";
+            this.dgvEditBaseIngredients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvEditBaseIngredients.Size = new System.Drawing.Size(659, 226);
             this.dgvEditBaseIngredients.TabIndex = 3;
             // 
@@ -139,6 +149,7 @@ namespace PanaderiaIkigai.Controls.Ingredients
             this.btnEditBaseIngredient.TabIndex = 4;
             this.btnEditBaseIngredient.Text = "Editar Ingrediente";
             this.btnEditBaseIngredient.UseVisualStyleBackColor = false;
+            this.btnEditBaseIngredient.Click += new System.EventHandler(this.btnEditBaseIngredient_Click);
             // 
             // btnDeleteBaseIngredient
             // 
@@ -151,6 +162,7 @@ namespace PanaderiaIkigai.Controls.Ingredients
             this.btnDeleteBaseIngredient.TabIndex = 5;
             this.btnDeleteBaseIngredient.Text = "Eliminar Ingrediente";
             this.btnDeleteBaseIngredient.UseVisualStyleBackColor = false;
+            this.btnDeleteBaseIngredient.Click += new System.EventHandler(this.btnDeleteBaseIngredient_Click);
             // 
             // txtFilterIngredientByName
             // 
@@ -189,15 +201,6 @@ namespace PanaderiaIkigai.Controls.Ingredients
             this.label2.Size = new System.Drawing.Size(119, 13);
             this.label2.TabIndex = 9;
             this.label2.Text = "Seleccionar Ingrediente";
-            // 
-            // lblEditIngredientValidation
-            // 
-            this.lblEditIngredientValidation.AutoSize = true;
-            this.lblEditIngredientValidation.ForeColor = System.Drawing.Color.Red;
-            this.lblEditIngredientValidation.Location = new System.Drawing.Point(3, 99);
-            this.lblEditIngredientValidation.Name = "lblEditIngredientValidation";
-            this.lblEditIngredientValidation.Size = new System.Drawing.Size(0, 13);
-            this.lblEditIngredientValidation.TabIndex = 5;
             // 
             // EditBaseIngredientPanel
             // 

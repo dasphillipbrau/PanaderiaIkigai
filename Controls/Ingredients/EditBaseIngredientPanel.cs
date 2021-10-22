@@ -97,5 +97,91 @@ namespace PanaderiaIkigai.Controls.Ingredients
                             , "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void btnDeleteBaseIngredient_Click(object sender, EventArgs e)
+        {
+            try {
+                var rowsToDelete = dgvEditBaseIngredients.SelectedRows.Count;
+                if(rowsToDelete == 0)
+                {
+                    MessageBox.Show("Debe Seleccionar al menos una fila para borrar."
+                                    , "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } else {
+
+                    string deleteMessage = rowsToDelete > 1 ? String.Format("¿Está seguro que desea borrar {0} registros?", rowsToDelete) 
+                        : String.Format("¿Está seguro que desea borrar {0} registro?", rowsToDelete);
+                    DialogResult confirmationPositive = MessageBox.Show(deleteMessage,
+                        "Confirme Operación", MessageBoxButtons.YesNo);
+                    if(confirmationPositive == DialogResult.Yes) { 
+                        switch(rowsToDelete)
+                            {
+                                case int x when x == 1:
+                                    var selectedCode = int.Parse(dgvEditBaseIngredients.SelectedRows[0].Cells[0].Value.ToString());
+                                    ingredientsContext.DeleteBaseIngredient(selectedCode);
+                                    dgvEditBaseIngredients.DataSource = ingredientsContext.GetBaseIngredients();
+                                    break;
+                                case int x when x > 1:
+                                    foreach(DataGridViewRow row in dgvEditBaseIngredients.SelectedRows)
+                                    {
+                                        var selectedMultiCode = int.Parse(row.Cells[0].Value.ToString());
+                                        ingredientsContext.DeleteBaseIngredient(selectedMultiCode);
+                                    }
+                                    dgvEditBaseIngredients.DataSource = ingredientsContext.GetBaseIngredients();
+                                    break;
+                                default:
+                                    MessageBox.Show("Debe Seleccionar al menos una fila para borrar."
+                                        , "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    break;
+                            }
+                    } else
+                    {
+                        dgvEditBaseIngredients.ClearSelection();
+                    }
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                MessageBox.Show(sqlEx.Message
+                            , "ERROR " + sqlEx.ErrorCode.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message
+                            , "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnEditBaseIngredient_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var rowsToUpdate = dgvEditBaseIngredients.SelectedRows.Count;
+                if(rowsToUpdate == 0)
+                {
+                    MessageBox.Show("Debe Seleccionar al menos una fila para editar."
+                                    , "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } else
+                {
+                    string updateMessage = rowsToUpdate > 1 ? String.Format("¿Está seguro que desea editar {0} registros?", rowsToUpdate)
+                       : String.Format("¿Está seguro que desea borrar {0} registro?", rowsToUpdate);
+                    DialogResult confirmationPositive = MessageBox.Show(updateMessage,
+                        "Confirme Operación", MessageBoxButtons.YesNo);
+                    if (confirmationPositive == DialogResult.Yes)
+                    {
+                        switch (rowsToUpdate)
+                        {
+                            case int x when x == 1:
+
+                                var selectedCode = int.Parse(dgvEditBaseIngredients.SelectedRows[0].Cells[0].Value.ToString());
+                                ingredientsContext.DeleteBaseIngredient(selectedCode);
+                                dgvEditBaseIngredients.DataSource = ingredientsContext.GetBaseIngredients();
+                                break;
+
+
+                        }
+                    }
+                }
+            }
+        }
     }
 }

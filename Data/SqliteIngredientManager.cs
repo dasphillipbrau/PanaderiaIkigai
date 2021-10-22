@@ -90,6 +90,41 @@ namespace PanaderiaIkigai.Data
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// Updates the NAME and MEASURING_UNIT of the specified ingredient.
+        /// </summary>
+        /// <param name="pIngredientToUpdate">Ingredient to Update</param>
+        public int UpdateBaseIngredient(BaseIngredient pIngredientToUpdate)
+        {
+            try
+            {
+                using(var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    var updateIngredientCommand = new SQLiteCommand("UPDATE Ingredient SET NAME = $pName, UNIT_OF_MEASURE = $pUnit WHERE CODE = $pCode", conn);
+
+                    updateIngredientCommand.Parameters.AddWithValue("pName", pIngredientToUpdate.Name);
+                    updateIngredientCommand.Parameters.AddWithValue("pUnit", pIngredientToUpdate.MeasuringUnit);
+                    updateIngredientCommand.Parameters.AddWithValue("pCode", pIngredientToUpdate.Code);
+
+                    conn.Open();
+                    return updateIngredientCommand.ExecuteNonQuery();
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+
+                Console.WriteLine(sqlEx.Message);
+                Console.WriteLine(sqlEx.ErrorCode);
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+        }
+
         /// <summary>
         /// Deletes an instance of BaseIngredient based on a code.
         /// </summary>

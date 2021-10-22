@@ -31,5 +31,15 @@ namespace PanaderiaIkigai.Models
             AveragePrice = pAveragePrice;
             UnitsAvailable = pUnitsAvaialble;
         }
+
+        public bool CompareIngredients(BaseIngredient pIngredientToCompare)
+        {
+            if (Code == pIngredientToCompare.Code && Name.ToUpperInvariant().Equals(pIngredientToCompare.Name.ToUpper())
+                && MeasuringUnit.ToUpper().Equals(pIngredientToCompare.MeasuringUnit.ToUpper()) && AveragePrice == pIngredientToCompare.AveragePrice
+                && UnitsAvailable == pIngredientToCompare.UnitsAvailable)
+                return true;
+            else
+                return false;
+        }
     }
 }

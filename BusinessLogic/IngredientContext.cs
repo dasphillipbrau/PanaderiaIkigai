@@ -116,5 +116,44 @@ namespace PanaderiaIkigai.BusinessLogic
                 throw ex;
             }
         }
+
+        public bool DeleteBaseIngredient(int pCode)
+        {
+            try
+            {
+                dataAccess.DeleteBaseIngredients(pCode);
+                if (!dataAccess.GetBaseIngredients(pCode).Any())
+                    return true;
+                else
+                    return false;
+            }
+            catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool UpdateBaseIngredient(BaseIngredient pIngredientToUpdate)
+        {
+            try
+            {
+                if (dataAccess.UpdateBaseIngredient(pIngredientToUpdate) != 0)
+                    return true;
+                else
+                    return false;
+            }
+            catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
