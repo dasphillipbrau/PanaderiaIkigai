@@ -44,7 +44,7 @@ namespace PanaderiaIkigai.Controls.Ingredients
             this.dgvBaseIngredients.Location = new System.Drawing.Point(15, 109);
             this.dgvBaseIngredients.Name = "dgvBaseIngredients";
             this.dgvBaseIngredients.ReadOnly = true;
-            this.dgvBaseIngredients.Size = new System.Drawing.Size(674, 242);
+            this.dgvBaseIngredients.Size = new System.Drawing.Size(674, 200);
             this.dgvBaseIngredients.TabIndex = 0;
             // 
             // lblBaseIngredientQuery

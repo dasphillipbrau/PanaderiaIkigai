@@ -15,6 +15,14 @@ namespace PanaderiaIkigai.BusinessLogic
     {
         static SqliteIngredientManager dataAccess = new SqliteIngredientManager();
         static IngredientInformationCapturer informationCapturer = new IngredientInformationCapturer();
+        /// <summary>
+        /// Validates a BaseIngredient entry and registers it to the database if validation succeeds
+        /// </summary>
+        /// <param name="pNameBox">Textbox containing the name of the ingredient</param>
+        /// <param name="pUnitBox">Combobox containing the name of the measuring unit</param>
+        /// <param name="pNameError">Label that will display the validation messages for the ingredient name</param>
+        /// <param name="pUnitError">Label taht will display the validation messages for the measuring unit</param>
+        /// <returns>True if validation succeeded and record was inserted. False if validation did not succeed</returns>
         public bool RegisterIngredient(TextBox pNameBox, ComboBox pUnitBox, Label pNameError, Label pUnitError)
         {
             try { 
@@ -37,20 +45,30 @@ namespace PanaderiaIkigai.BusinessLogic
                 throw ex;
             }
         }
-
+        /// <summary>
+        /// Retrieves all the detailed ingredients in the database
+        /// </summary>
+        /// <returns>List containing all the registered detailed ingredients</returns>
         public List<DetailedIngredient> GetDetailedIngredients()
         {
             var result = dataAccess.GetDetailedIngredients() as List<DetailedIngredient>;
             Console.WriteLine(result);
             return result;
         }
-
+        /// <summary>
+        /// Retrieves all the base ingredients in the database
+        /// </summary>
+        /// <returns>List containing all the registered base ingredients</returns>
         public List<BaseIngredient> GetBaseIngredients()
         {
             var result = dataAccess.GetBaseIngredients() as List<BaseIngredient>;
             return result;
         }
-
+        /// <summary>
+        /// Retrieves instances of base ingredients based on approximations to a name
+        /// </summary>
+        /// <param name="pSearchBoxText">Name to filter by</param>
+        /// <returns>List containing the resulting ingredients </returns>
         public List<BaseIngredient> GetBaseIngredients(string pSearchBoxText)
         {
             try
@@ -62,6 +80,22 @@ namespace PanaderiaIkigai.BusinessLogic
             {
                 throw sqlEx;
             } catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public BaseIngredient GetBaseIngredient(int pCode)
+        {
+            try
+            {
+                return dataAccess.GetBaseIngredients(pCode);
+            }
+            catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -122,7 +156,7 @@ namespace PanaderiaIkigai.BusinessLogic
             try
             {
                 dataAccess.DeleteBaseIngredients(pCode);
-                if (!dataAccess.GetBaseIngredients(pCode).Any())
+                if (dataAccess.GetBaseIngredients(pCode) == null)
                     return true;
                 else
                     return false;

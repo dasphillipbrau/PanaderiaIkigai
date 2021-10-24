@@ -44,6 +44,10 @@ namespace PanaderiaIkigai.Controls.Ingredients
             else
                 comboBoxSelectIngredient.Items.Add("Ningún Ingrediente Detectado");
             dgvEditBaseIngredients.DataSource = ingredientList;
+            dgvEditBaseIngredients.Columns[0].ReadOnly = true;
+            dgvEditBaseIngredients.Columns[3].ReadOnly = true;
+            dgvEditBaseIngredients.Columns[4].ReadOnly = true;
+            dgvEditBaseIngredients.Columns[5].ReadOnly = true;
         }
 
         private void txtFilterIngredientByName_TextChanged(object sender, EventArgs e)
@@ -58,6 +62,7 @@ namespace PanaderiaIkigai.Controls.Ingredients
             if (!comboBoxSelectIngredient.SelectedItem.ToString().Equals("Seleccione")) { 
                 var ingredientsList = ingredientsContext.GetBaseIngredients(comboBoxSelectIngredient.SelectedItem.ToString());
                 dgvEditBaseIngredients.DataSource = ingredientsList;
+                dgvEditBaseIngredients.Rows[0].Selected = true;
             }
         }
 
@@ -163,7 +168,7 @@ namespace PanaderiaIkigai.Controls.Ingredients
                 } else
                 {
                     string updateMessage = rowsToUpdate > 1 ? String.Format("¿Está seguro que desea editar {0} registros?", rowsToUpdate)
-                       : String.Format("¿Está seguro que desea borrar {0} registro?", rowsToUpdate);
+                       : String.Format("¿Está seguro que desea editar {0} registro?", rowsToUpdate);
                     DialogResult confirmationPositive = MessageBox.Show(updateMessage,
                         "Confirme Operación", MessageBoxButtons.YesNo);
                     if (confirmationPositive == DialogResult.Yes)
@@ -172,16 +177,48 @@ namespace PanaderiaIkigai.Controls.Ingredients
                         {
                             case int x when x == 1:
 
-                                var selectedCode = int.Parse(dgvEditBaseIngredients.SelectedRows[0].Cells[0].Value.ToString());
-                                ingredientsContext.DeleteBaseIngredient(selectedCode);
+                                var oldIngredient = ingredientsContext.GetBaseIngredient(int.Parse(dgvEditBaseIngredients.SelectedRows[0].Cells[0].Value.ToString()));
+                                var newIngredient = new BaseIngredient(dgvEditBaseIngredients);
+                                if(oldIngredient.CompareIngredients(newIngredient))
+                                    MessageBox.Show("No ha realizado ningún cambio a este ingrediente."
+                                        , "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                else
+                                {
+                                    if (ingredientsContext.UpdateBaseIngredient(newIngredient))
+                                        MessageBox.Show("Ingrediente Actualizado."
+                                        , "Operación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
                                 dgvEditBaseIngredients.DataSource = ingredientsContext.GetBaseIngredients();
                                 break;
-
-
+                            case int x when x > 1:
+                                var oldIngredientList = new List<BaseIngredient>();
+                                for(int i = 0; i < rowsToUpdate; i++)
+                                {
+                                    var multipleNewIngredient = new BaseIngredient(dgvEditBaseIngredients, i);
+                                    oldIngredientList.Add(multipleNewIngredient);
+                                }
+                                foreach(var ingredient in oldIngredientList)
+                                {
+                                    ingredientsContext.UpdateBaseIngredient(ingredient);
+                                }
+                                MessageBox.Show("Ingrediente Actualizado."
+                                        , "Operación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                break;
                         }
                     }
                 }
             }
+            catch (SQLiteException sqlEx)
+            {
+                MessageBox.Show(sqlEx.Message
+                            , "ERROR " + sqlEx.ErrorCode.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message
+                            , "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
     }
 }

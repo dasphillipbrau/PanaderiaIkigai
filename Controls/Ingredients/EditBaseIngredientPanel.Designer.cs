@@ -38,7 +38,6 @@ namespace PanaderiaIkigai.Controls.Ingredients
             this.comboBoxSelectUnit = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvEditBaseIngredients = new System.Windows.Forms.DataGridView();
-            this.btnEditBaseIngredient = new System.Windows.Forms.Button();
             this.btnDeleteBaseIngredient = new System.Windows.Forms.Button();
             this.txtFilterIngredientByName = new System.Windows.Forms.TextBox();
             this.lblFilterByNameTitle = new System.Windows.Forms.Label();
@@ -124,9 +123,9 @@ namespace PanaderiaIkigai.Controls.Ingredients
             this.label1.ForeColor = System.Drawing.Color.Beige;
             this.label1.Location = new System.Drawing.Point(20, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(219, 19);
+            this.label1.Size = new System.Drawing.Size(230, 19);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Edición de Ingredientes Base";
+            this.label1.Text = "Consulta de Ingredientes Base";
             // 
             // dgvEditBaseIngredients
             // 
@@ -138,25 +137,12 @@ namespace PanaderiaIkigai.Controls.Ingredients
             this.dgvEditBaseIngredients.Size = new System.Drawing.Size(659, 226);
             this.dgvEditBaseIngredients.TabIndex = 3;
             // 
-            // btnEditBaseIngredient
-            // 
-            this.btnEditBaseIngredient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(59)))), ((int)(((byte)(59)))));
-            this.btnEditBaseIngredient.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditBaseIngredient.ForeColor = System.Drawing.Color.Beige;
-            this.btnEditBaseIngredient.Location = new System.Drawing.Point(528, 296);
-            this.btnEditBaseIngredient.Name = "btnEditBaseIngredient";
-            this.btnEditBaseIngredient.Size = new System.Drawing.Size(155, 51);
-            this.btnEditBaseIngredient.TabIndex = 4;
-            this.btnEditBaseIngredient.Text = "Editar Ingrediente";
-            this.btnEditBaseIngredient.UseVisualStyleBackColor = false;
-            this.btnEditBaseIngredient.Click += new System.EventHandler(this.btnEditBaseIngredient_Click);
-            // 
             // btnDeleteBaseIngredient
             // 
             this.btnDeleteBaseIngredient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(59)))), ((int)(((byte)(59)))));
             this.btnDeleteBaseIngredient.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteBaseIngredient.ForeColor = System.Drawing.Color.Red;
-            this.btnDeleteBaseIngredient.Location = new System.Drawing.Point(528, 368);
+            this.btnDeleteBaseIngredient.Location = new System.Drawing.Point(528, 296);
             this.btnDeleteBaseIngredient.Name = "btnDeleteBaseIngredient";
             this.btnDeleteBaseIngredient.Size = new System.Drawing.Size(155, 51);
             this.btnDeleteBaseIngredient.TabIndex = 5;
@@ -212,7 +198,6 @@ namespace PanaderiaIkigai.Controls.Ingredients
             this.Controls.Add(this.lblFilterByNameTitle);
             this.Controls.Add(this.txtFilterIngredientByName);
             this.Controls.Add(this.btnDeleteBaseIngredient);
-            this.Controls.Add(this.btnEditBaseIngredient);
             this.Controls.Add(this.dgvEditBaseIngredients);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
@@ -237,7 +222,6 @@ namespace PanaderiaIkigai.Controls.Ingredients
         private System.Windows.Forms.ComboBox comboBoxSelectUnit;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvEditBaseIngredients;
-        private System.Windows.Forms.Button btnEditBaseIngredient;
         private System.Windows.Forms.Button btnDeleteBaseIngredient;
         private System.Windows.Forms.TextBox txtFilterIngredientByName;
         private System.Windows.Forms.Label lblFilterByNameTitle;

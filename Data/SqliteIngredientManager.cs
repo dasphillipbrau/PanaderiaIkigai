@@ -278,13 +278,13 @@ namespace PanaderiaIkigai.Data
                 {
                     List<BaseIngredient> ingredientList = new List<BaseIngredient>();
 
-                    var getIngredientsCommand = new SQLiteCommand("SELECT CODE, NAME, UNIT_OF_MEASURE, AVERAGE_PRICE, TOTAL_UNITS_AVAILABLE FROM INGREDIENT", conn);
+                    var getIngredientsCommand = new SQLiteCommand("SELECT CODE, NAME, UNIT_OF_MEASURE, AVERAGE_PRICE, AVERAGE_MINIMUM_PRICE, TOTAL_UNITS_AVAILABLE FROM INGREDIENT", conn);
                     conn.Open();
                     var reader = getIngredientsCommand.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        ingredientList.Add(new BaseIngredient(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetDecimal(3), reader.GetInt32(4)));
+                        ingredientList.Add(new BaseIngredient(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetDecimal(3), reader.GetDecimal(4), reader.GetInt32(5)));
                     }
                     return ingredientList;
                 }
@@ -302,19 +302,20 @@ namespace PanaderiaIkigai.Data
             }
         }
         /// <summary>
-        /// Returns a specific instance of BaseIngredient based on a code.
+        /// Returns a specific instance of BaseIngredient based on its code
         /// </summary>
-        /// <param name="pCode">Code to filter by.</param>
-        /// <returns>The ingredient with the corresponding code.</returns>
-        public IEnumerable<BaseIngredient> GetBaseIngredients(int pCode)
+        /// <param name="pCode">Code to filter by</param>
+        /// <returns>The ingredient with the corresponding code</returns>
+        public BaseIngredient GetBaseIngredients(int pCode)
         {
             try
             {
                 using (var conn = new SQLiteConnection(GetConnectionString()))
                 {
-                    List<BaseIngredient> ingredientList = new List<BaseIngredient>();
+                    BaseIngredient ingredientFound = null;
 
-                    var getIngredientsCommand = new SQLiteCommand("SELECT CODE, NAME, UNIT_OF_MEASURE, AVERAGE_PRICE, TOTAL_UNITS_AVAILABLE FROM INGREDIENT WHERE CODE = $pCode", conn);
+                    var getIngredientsCommand = new SQLiteCommand("SELECT CODE, NAME, UNIT_OF_MEASURE, AVERAGE_PRICE, AVERAGE_MINIMUM_PRICE, " +
+                        "TOTAL_UNITS_AVAILABLE FROM INGREDIENT WHERE CODE = $pCode", conn);
                     getIngredientsCommand.Parameters.AddWithValue("pCode", pCode);
 
                     conn.Open();
@@ -323,10 +324,10 @@ namespace PanaderiaIkigai.Data
 
                     while (reader.Read())
                     {
-                        ingredientList.Add(new BaseIngredient(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetDecimal(3), reader.GetInt32(4)));
+                        ingredientFound = new BaseIngredient(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetDecimal(3), reader.GetDecimal(4), reader.GetInt32(5));
                     }
 
-                    return ingredientList;
+                    return ingredientFound;
                 }
             }
             catch (SQLiteException sqlEx)
@@ -344,10 +345,10 @@ namespace PanaderiaIkigai.Data
             }
         }
         /// <summary>
-        /// Returns a specific instance of BaseIngredient based on a code.
+        /// Returns a specific instance of BaseIngredient based on its name.
         /// </summary>
-        /// <param name="pCode">Code to filter by.</param>
-        /// <returns>The ingredient with the corresponding code.</returns>
+        /// <param name="pCode">Name to filter by.</param>
+        /// <returns>The ingredient with the corresponding name.</returns>
         public IEnumerable<BaseIngredient> GetBaseIngredients(string pIngredientName)
         {
             try
@@ -356,7 +357,7 @@ namespace PanaderiaIkigai.Data
                 {
                     List<BaseIngredient> ingredientList = new List<BaseIngredient>();
 
-                    var getIngredientsCommand = new SQLiteCommand("SELECT CODE, NAME, UNIT_OF_MEASURE, AVERAGE_PRICE, TOTAL_UNITS_AVAILABLE FROM INGREDIENT " +
+                    var getIngredientsCommand = new SQLiteCommand("SELECT CODE, NAME, UNIT_OF_MEASURE, AVERAGE_PRICE, AVERAGE_MINIMUM_PRICE, TOTAL_UNITS_AVAILABLE FROM INGREDIENT " +
                         "WHERE NAME LIKE $pName || '%'", conn);
                     getIngredientsCommand.Parameters.AddWithValue("pName", pIngredientName);
 
@@ -366,7 +367,7 @@ namespace PanaderiaIkigai.Data
 
                     while (reader.Read())
                     {
-                        ingredientList.Add(new BaseIngredient(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetDecimal(3), reader.GetInt32(4)));
+                        ingredientList.Add(new BaseIngredient(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetDecimal(3), reader.GetDecimal(4), reader.GetInt32(5)));
                     }
 
                     return ingredientList;
@@ -445,7 +446,7 @@ namespace PanaderiaIkigai.Data
                     List<DetailedIngredient> detailedIngredientsList = new List<DetailedIngredient>();
                     var getDetailedIngredientsCommand = new SQLiteCommand("SELECT A.INGREDIENT_CODE, A.DETAILED_INGREDIENT_ID, A.BRAND, " +
                         "A.INGREDIENT_SOURCE, A.UNIT_PRICE, A.AMOUNT_IN_UNIT, A.MINIMUM_PRICE_PER_UNIT, A.QUALITY, A.UNITS_AVAILABLE, " +
-                        "B.NAME, B.UNIT_OF_MEASURE, B.TOTAL_UNITS_AVAILABLE, B.AVERAGE_PRICE " +
+                        "B.NAME, B.UNIT_OF_MEASURE, B.TOTAL_UNITS_AVAILABLE, B.AVERAGE_PRICE, B.MINIMUM_AVERAGE_PRICE " +
                         "FROM INGREDIENT_DETAILED A " +
                         "INNER JOIN INGREDIENT B " +
                         "ON A.INGREDIENT_CODE = B.CODE ORDER BY A.INGREDIENT_CODE ASC", conn);
@@ -453,7 +454,7 @@ namespace PanaderiaIkigai.Data
                     var reader = getDetailedIngredientsCommand.ExecuteReader();
                     while (reader.Read())
                     {
-                        var baseIngredient = new BaseIngredient(reader.GetInt32(0), reader.GetString(9), reader.GetString(10), reader.GetDecimal(12), reader.GetInt32(11));
+                        var baseIngredient = new BaseIngredient(reader.GetInt32(0), reader.GetString(9), reader.GetString(10), reader.GetDecimal(12), reader.GetDecimal(13), reader.GetInt32(11));
                         var detailedIngredient = new DetailedIngredient(baseIngredient, reader.GetString(1),
                             reader.GetString(2), reader.GetString(3), reader.GetDecimal(4), reader.GetDecimal(5), reader.GetDecimal(6), reader.GetInt32(7));
                         var unitsAvailable = reader.GetInt32(8);

@@ -78,6 +78,12 @@ namespace PanaderiaIkigai.InformationCapture
 
         }
 
+        public List<BaseIngredient> CaptureBaseIngredient(DataGridView pIngredientDgv)
+        {
+            throw new NotImplementedException();
+            
+        }
+
         public string CaptureMeasuringUnit(TextBox unitBox, Label unitError)
         {
             bool problemDetected = false;
