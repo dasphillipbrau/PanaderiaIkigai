@@ -95,6 +95,7 @@ namespace PanaderiaIkigai.Data
         /// Updates the NAME and MEASURING_UNIT of the specified ingredient.
         /// </summary>
         /// <param name="pIngredientToUpdate">Ingredient to Update</param>
+        /// <returns>Amount of rows affected by the operation</returns>
         public int UpdateBaseIngredient(BaseIngredient pIngredientToUpdate)
         {
             try
@@ -278,7 +279,7 @@ namespace PanaderiaIkigai.Data
                 {
                     List<BaseIngredient> ingredientList = new List<BaseIngredient>();
 
-                    var getIngredientsCommand = new SQLiteCommand("SELECT CODE, NAME, UNIT_OF_MEASURE, AVERAGE_PRICE, AVERAGE_MINIMUM_PRICE, TOTAL_UNITS_AVAILABLE FROM INGREDIENT", conn);
+                    var getIngredientsCommand = new SQLiteCommand("SELECT CODE, NAME, UNIT_OF_MEASURE, AVERAGE_PRICE, AVERAGE_MINIMUM_PRICE, TOTAL_UNITS_AVAILABLE FROM INGREDIENT ORDER BY NAME ASC", conn);
                     conn.Open();
                     var reader = getIngredientsCommand.ExecuteReader();
 
@@ -575,7 +576,7 @@ namespace PanaderiaIkigai.Data
         /// Deletes a specific measuring unit from the units table.
         /// </summary>
         /// <param name="pName">Name of the unit to delete</param>
-        public void DeleteMeasuringUnits(string pName)
+        public int DeleteMeasuringUnits(string pName)
         {
             try
             {
@@ -584,7 +585,7 @@ namespace PanaderiaIkigai.Data
                     var deleteUnit = new SQLiteCommand("DELETE FROM MEASUREMENT_UNIT WHERE NAME = $pUnitName", conn);
                     deleteUnit.Parameters.AddWithValue("pUnitName", pName.ToUpper());
                     conn.Open();
-                    deleteUnit.ExecuteNonQuery();
+                    return deleteUnit.ExecuteNonQuery();
                 }
             }
             catch (SQLiteException sqlEx)

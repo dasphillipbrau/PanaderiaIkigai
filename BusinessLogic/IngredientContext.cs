@@ -150,7 +150,35 @@ namespace PanaderiaIkigai.BusinessLogic
                 throw ex;
             }
         }
-
+        /// <summary>
+        /// Deletes an instance of measuring unit based on its name.
+        /// </summary>
+        /// <param name="pUnitName">Name to Filter by</param>
+        /// <returns>bool indicating success of the deletion operation</returns>
+        public bool DeleteUnit(string pUnitName)
+        {
+            try
+            {
+                var rowsAffected = dataAccess.DeleteMeasuringUnits(pUnitName.ToUpper());
+                if (rowsAffected != 0)
+                    return true;
+                else
+                    return false;
+            }
+            catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        /// <summary>
+        /// Deletes an instance of Base Ingredient based on its unique code
+        /// </summary>
+        /// <param name="pCode">Code of the ingredient to delete</param>
+        /// <returns>bool indicating success of the deletion operation</returns>
         public bool DeleteBaseIngredient(int pCode)
         {
             try

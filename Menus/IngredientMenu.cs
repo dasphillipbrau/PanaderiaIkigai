@@ -36,7 +36,7 @@ namespace PanaderiaIkigai.Menus
 
         private void btnQueryBaseIngredients_Click(object sender, EventArgs e)
         {
-            DisplayBaseIngredientPanel queryPanel = new DisplayBaseIngredientPanel();
+            EditBaseIngredientPanel queryPanel = new EditBaseIngredientPanel();
             queryPanel.Location = new Point(255, 63);
             this.Controls.Add(queryPanel);
             queryPanel.Show();
@@ -45,7 +45,7 @@ namespace PanaderiaIkigai.Menus
 
         private void btnOpenEditBaseIngredient_Click(object sender, EventArgs e)
         {
-            EditBaseIngredientPanel editPanel = new EditBaseIngredientPanel();
+            ViewAndDeleteBaseIngredientPanel editPanel = new ViewAndDeleteBaseIngredientPanel();
             editPanel.Location = new Point(255, 63);
             this.Controls.Add(editPanel);
             editPanel.Show();

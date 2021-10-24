@@ -117,23 +117,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLogic\IngredientContext.cs" />
-    <Compile Include="Controls\Ingredients\BaseIngredientPanel.cs">
+    <Compile Include="Controls\Ingredients\RegisterAndEditBaseIngredientPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Ingredients\BaseIngredientPanel.Designer.cs">
-      <DependentUpon>BaseIngredientPanel.cs</DependentUpon>
+    <Compile Include="Controls\Ingredients\RegisterAndEditBaseIngredientPanel.Designer.cs">
+      <DependentUpon>RegisterAndEditBaseIngredientPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Ingredients\ViewAndDeleteBaseIngredientPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Ingredients\ViewAndDeleteBaseIngredientPanel.Designer.cs">
+      <DependentUpon>ViewAndDeleteBaseIngredientPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Ingredients\EditBaseIngredientPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\Ingredients\EditBaseIngredientPanel.Designer.cs">
       <DependentUpon>EditBaseIngredientPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Ingredients\DisplayBaseIngredientPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Ingredients\DisplayBaseIngredientPanel.Designer.cs">
-      <DependentUpon>DisplayBaseIngredientPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Data\SqliteIngredientManager.cs" />
     <Compile Include="InformationCapture\IngredientInformationCapturer.cs" />
@@ -161,14 +161,14 @@
     <Content Include="x86\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="Controls\Ingredients\BaseIngredientPanel.resx">
-      <DependentUpon>BaseIngredientPanel.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Ingredients\RegisterAndEditBaseIngredientPanel.resx">
+      <DependentUpon>RegisterAndEditBaseIngredientPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Ingredients\ViewAndDeleteBaseIngredientPanel.resx">
+      <DependentUpon>ViewAndDeleteBaseIngredientPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Ingredients\EditBaseIngredientPanel.resx">
       <DependentUpon>EditBaseIngredientPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Ingredients\DisplayBaseIngredientPanel.resx">
-      <DependentUpon>DisplayBaseIngredientPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menus\IngredientMenu.resx">
       <DependentUpon>IngredientMenu.cs</DependentUpon>
