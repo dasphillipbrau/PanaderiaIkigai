@@ -117,36 +117,36 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLogic\IngredientContext.cs" />
-    <Compile Include="Controls\Ingredients\RegisterAndEditBaseIngredientPanel.cs">
+    <Compile Include="UI\Controls\Ingredients\RegisterBaseIngredientPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Ingredients\RegisterAndEditBaseIngredientPanel.Designer.cs">
-      <DependentUpon>RegisterAndEditBaseIngredientPanel.cs</DependentUpon>
+    <Compile Include="UI\Controls\Ingredients\RegisterBaseIngredientPanel.Designer.cs">
+      <DependentUpon>RegisterBaseIngredientPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Ingredients\ViewAndDeleteBaseIngredientPanel.cs">
+    <Compile Include="UI\Controls\Ingredients\ViewAndDeleteBaseIngredientPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Ingredients\ViewAndDeleteBaseIngredientPanel.Designer.cs">
+    <Compile Include="UI\Controls\Ingredients\ViewAndDeleteBaseIngredientPanel.Designer.cs">
       <DependentUpon>ViewAndDeleteBaseIngredientPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Ingredients\EditBaseIngredientPanel.cs">
+    <Compile Include="UI\Controls\Ingredients\EditBaseIngredientPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Ingredients\EditBaseIngredientPanel.Designer.cs">
+    <Compile Include="UI\Controls\Ingredients\EditBaseIngredientPanel.Designer.cs">
       <DependentUpon>EditBaseIngredientPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Data\SqliteIngredientManager.cs" />
-    <Compile Include="InformationCapture\IngredientInformationCapturer.cs" />
-    <Compile Include="Menus\IngredientMenu.cs">
+    <Compile Include="BusinessLogic\InformationCapture\IngredientInformationCapturer.cs" />
+    <Compile Include="UI\Menus\IngredientMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Menus\IngredientMenu.Designer.cs">
+    <Compile Include="UI\Menus\IngredientMenu.Designer.cs">
       <DependentUpon>IngredientMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Menus\MainMenu.cs">
+    <Compile Include="UI\Menus\MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Menus\MainMenu.Designer.cs">
+    <Compile Include="UI\Menus\MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DetailedIngredient.cs" />
@@ -161,19 +161,19 @@
     <Content Include="x86\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="Controls\Ingredients\RegisterAndEditBaseIngredientPanel.resx">
-      <DependentUpon>RegisterAndEditBaseIngredientPanel.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Controls\Ingredients\RegisterBaseIngredientPanel.resx">
+      <DependentUpon>RegisterBaseIngredientPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Ingredients\ViewAndDeleteBaseIngredientPanel.resx">
+    <EmbeddedResource Include="UI\Controls\Ingredients\ViewAndDeleteBaseIngredientPanel.resx">
       <DependentUpon>ViewAndDeleteBaseIngredientPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Ingredients\EditBaseIngredientPanel.resx">
+    <EmbeddedResource Include="UI\Controls\Ingredients\EditBaseIngredientPanel.resx">
       <DependentUpon>EditBaseIngredientPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Menus\IngredientMenu.resx">
+    <EmbeddedResource Include="UI\Menus\IngredientMenu.resx">
       <DependentUpon>IngredientMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Menus\MainMenu.resx">
+    <EmbeddedResource Include="UI\Menus\MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

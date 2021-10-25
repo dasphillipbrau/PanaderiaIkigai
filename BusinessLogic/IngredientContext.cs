@@ -199,12 +199,20 @@ namespace PanaderiaIkigai.BusinessLogic
             }
         }
 
-        public bool UpdateBaseIngredient(BaseIngredient pIngredientToUpdate)
+        public bool UpdateBaseIngredient(TextBox pNameBox, ComboBox pUnitBox, Label pNameError, Label pUnitError, int pIngredientCode)
         {
             try
             {
-                if (dataAccess.UpdateBaseIngredient(pIngredientToUpdate) != 0)
-                    return true;
+                IngredientInformationCapturer ingredientCapturer = new IngredientInformationCapturer();
+                var ingredientToUpdate = ingredientCapturer.CaptureBaseIngredient(pNameBox, pUnitBox, pNameError, pUnitError);
+                if (ingredientToUpdate != null)
+                {
+                    ingredientToUpdate.Code = pIngredientCode;
+                    if (dataAccess.UpdateBaseIngredient(ingredientToUpdate) != 0)
+                        return true;
+                    else
+                        return false;
+                }
                 else
                     return false;
             }

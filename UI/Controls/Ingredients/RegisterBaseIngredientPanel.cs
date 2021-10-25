@@ -56,24 +56,8 @@ namespace PanaderiaIkigai.Controls
 
         private void BaseIngredientPanel_Load(object sender, EventArgs e)
         {
-            IngredientContext ingredientContext = new IngredientContext();
             var unitsList = ingredientContext.GetUnits();
-            var ingredientsList = ingredientContext.GetBaseIngredients();
 
-            if (ingredientsList.Count == 0)
-                comboBoxEditIngredient.Items.Add("Ningún Ingrediente Detectado");
-            else
-            {
-                var ingredientsDict = new Dictionary<int, string>();
-                foreach (var ingredient in ingredientsList)
-                {
-                    ingredientsDict.Add(ingredient.Code, ingredient.Name);
-                }
-
-                comboBoxEditIngredient.ValueMember = "Key";
-                comboBoxEditIngredient.DisplayMember = "Value";
-                comboBoxEditIngredient.DataSource = new BindingSource(ingredientsDict, null);
-            }
             if (unitsList.Count == 0)
             {
                 comboBoxUnits.Items.Add("Ninguna Unidad Detectada");
@@ -195,7 +179,12 @@ namespace PanaderiaIkigai.Controls
             }
             catch (SQLiteException sqlEx)
             {
-                MessageBox.Show(sqlEx.Message
+                if(sqlEx.ErrorCode == 19)
+                {
+                    MessageBox.Show("No puede borrar esta unidad\nporque la misma está siendo utilizada por uno o más ingredientes.\n\nPrimero debe borrar cualquier ingrediente\nque referencie a esta unidad."
+                            , "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } else
+                    MessageBox.Show(sqlEx.Message
                             , "ERROR " + sqlEx.ErrorCode.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)

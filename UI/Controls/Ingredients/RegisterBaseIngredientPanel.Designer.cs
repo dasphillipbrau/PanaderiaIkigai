@@ -53,17 +53,9 @@ namespace PanaderiaIkigai.Controls
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.comboBoxEditIngredient = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.comboBoxEditIngredientSelectUnit = new System.Windows.Forms.ComboBox();
-            this.txtEditIngredientName = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel4.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblIngredientRegistration
@@ -111,7 +103,7 @@ namespace PanaderiaIkigai.Controls
             this.btnRegisterBaseIngredient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
             this.btnRegisterBaseIngredient.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRegisterBaseIngredient.ForeColor = System.Drawing.Color.White;
-            this.btnRegisterBaseIngredient.Location = new System.Drawing.Point(58, 183);
+            this.btnRegisterBaseIngredient.Location = new System.Drawing.Point(8, 124);
             this.btnRegisterBaseIngredient.Name = "btnRegisterBaseIngredient";
             this.btnRegisterBaseIngredient.Size = new System.Drawing.Size(154, 51);
             this.btnRegisterBaseIngredient.TabIndex = 5;
@@ -287,9 +279,10 @@ namespace PanaderiaIkigai.Controls
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
+            this.panel3.Controls.Add(this.btnRegisterBaseIngredient);
             this.panel3.Location = new System.Drawing.Point(38, 68);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(315, 178);
+            this.panel3.Size = new System.Drawing.Size(644, 178);
             this.panel3.TabIndex = 16;
             // 
             // label1
@@ -315,92 +308,6 @@ namespace PanaderiaIkigai.Controls
             this.label2.TabIndex = 21;
             this.label2.Visible = false;
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
-            this.button1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(154, 115);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(158, 51);
-            this.button1.TabIndex = 20;
-            this.button1.Text = "Editar Ingrediente Base";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
-            this.panel4.Controls.Add(this.label5);
-            this.panel4.Controls.Add(this.label4);
-            this.panel4.Controls.Add(this.txtEditIngredientName);
-            this.panel4.Controls.Add(this.comboBoxEditIngredientSelectUnit);
-            this.panel4.Controls.Add(this.label3);
-            this.panel4.Controls.Add(this.comboBoxEditIngredient);
-            this.panel4.Controls.Add(this.button1);
-            this.panel4.Location = new System.Drawing.Point(370, 68);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(315, 178);
-            this.panel4.TabIndex = 24;
-            // 
-            // comboBoxEditIngredient
-            // 
-            this.comboBoxEditIngredient.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxEditIngredient.FormattingEnabled = true;
-            this.comboBoxEditIngredient.Location = new System.Drawing.Point(20, 22);
-            this.comboBoxEditIngredient.Name = "comboBoxEditIngredient";
-            this.comboBoxEditIngredient.Size = new System.Drawing.Size(158, 21);
-            this.comboBoxEditIngredient.TabIndex = 0;
-            this.comboBoxEditIngredient.SelectedIndexChanged += new System.EventHandler(this.comboBoxEditIngredient_SelectedIndexChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
-            this.label3.ForeColor = System.Drawing.Color.Beige;
-            this.label3.Location = new System.Drawing.Point(17, 6);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(131, 13);
-            this.label3.TabIndex = 25;
-            this.label3.Text = "Seleccione un Ingrediente";
-            // 
-            // comboBoxEditIngredientSelectUnit
-            // 
-            this.comboBoxEditIngredientSelectUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxEditIngredientSelectUnit.FormattingEnabled = true;
-            this.comboBoxEditIngredientSelectUnit.Location = new System.Drawing.Point(20, 145);
-            this.comboBoxEditIngredientSelectUnit.Name = "comboBoxEditIngredientSelectUnit";
-            this.comboBoxEditIngredientSelectUnit.Size = new System.Drawing.Size(128, 21);
-            this.comboBoxEditIngredientSelectUnit.TabIndex = 25;
-            // 
-            // txtEditIngredientName
-            // 
-            this.txtEditIngredientName.Location = new System.Drawing.Point(20, 89);
-            this.txtEditIngredientName.Name = "txtEditIngredientName";
-            this.txtEditIngredientName.Size = new System.Drawing.Size(128, 20);
-            this.txtEditIngredientName.TabIndex = 25;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
-            this.label4.ForeColor = System.Drawing.Color.Beige;
-            this.label4.Location = new System.Drawing.Point(17, 73);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(115, 13);
-            this.label4.TabIndex = 25;
-            this.label4.Text = "Nombre de Ingrediente";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Arial", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(154, 89);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(0, 13);
-            this.label5.TabIndex = 25;
-            this.label5.Visible = false;
-            // 
             // BaseIngredientPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -413,9 +320,7 @@ namespace PanaderiaIkigai.Controls
             this.Controls.Add(this.lblMeasuringUnitTitle);
             this.Controls.Add(this.lblBaseIngredientUnitValidation);
             this.Controls.Add(this.lblBaseIngredientNameValidation);
-            this.Controls.Add(this.btnRegisterBaseIngredient);
             this.Controls.Add(this.lblMeasuringUnit);
-            this.Controls.Add(this.panel4);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblIngredientName);
             this.Controls.Add(this.lblIngredientRegistration);
@@ -428,8 +333,7 @@ namespace PanaderiaIkigai.Controls
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -461,13 +365,5 @@ namespace PanaderiaIkigai.Controls
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBoxEditIngredient;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtEditIngredientName;
-        private System.Windows.Forms.ComboBox comboBoxEditIngredientSelectUnit;
     }
 }

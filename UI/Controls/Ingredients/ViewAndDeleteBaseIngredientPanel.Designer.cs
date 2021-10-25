@@ -56,6 +56,7 @@ namespace PanaderiaIkigai.Controls.Ingredients
             this.dgvEditBaseIngredients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEditBaseIngredients.Location = new System.Drawing.Point(24, 53);
             this.dgvEditBaseIngredients.Name = "dgvEditBaseIngredients";
+            this.dgvEditBaseIngredients.ReadOnly = true;
             this.dgvEditBaseIngredients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvEditBaseIngredients.Size = new System.Drawing.Size(659, 226);
             this.dgvEditBaseIngredients.TabIndex = 3;
