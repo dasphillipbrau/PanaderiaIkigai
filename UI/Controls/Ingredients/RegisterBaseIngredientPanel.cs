@@ -36,7 +36,7 @@ namespace PanaderiaIkigai.Controls
                     MessageBox.Show("No se ha registrado el ingrediente.\nRevise el mensaje en los campos."
                             , "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            } catch (System.Data.SQLite.SQLiteException sqlEx)
+            } catch (SQLiteException sqlEx)
             {
                 if (sqlEx.ErrorCode == 19)
                 {
@@ -61,14 +61,11 @@ namespace PanaderiaIkigai.Controls
             if (unitsList.Count == 0)
             {
                 comboBoxUnits.Items.Add("Ninguna Unidad Detectada");
-                comboBoxSelectUnitToEdit.Items.Add("Ninguna Unidad Detectada");
-                comboBoxSelectUnitToEdit.SelectedIndex = 0;
                 comboBoxUnits.SelectedIndex = 0;
 
             }
             else { 
                 comboBoxUnits.DataSource = unitsList;
-                comboBoxSelectUnitToEdit.DataSource = unitsList;
             }
 
 
@@ -85,8 +82,6 @@ namespace PanaderiaIkigai.Controls
                     txtUnitName.Text = "";
                     comboBoxUnits.DataSource = ingredientContext.GetUnits();
                     comboBoxUnits.SelectedIndex = 0;
-                    comboBoxSelectUnitToEdit.DataSource = ingredientContext.GetUnits();
-                    comboBoxSelectUnitToEdit.SelectedIndex = 0;
                 } else
                 {
                     MessageBox.Show("No se ha registrado la unidad\nRevise los mensajes de error."
@@ -114,89 +109,6 @@ namespace PanaderiaIkigai.Controls
             }
         }
 
-        private void btnEditUnit_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (!txtEditUnit.Text.ToUpper().Equals(comboBoxSelectUnitToEdit.SelectedItem.ToString()))
-                {
-                    lblEditIngredientValidation.Text = "";
-                    if (ingredientContext.EditUnit(txtEditUnit, lblEditIngredientValidation, comboBoxSelectUnitToEdit.SelectedItem.ToString()))
-                    {
-                        MessageBox.Show("Unidad Editada"
-                                , "Operación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        comboBoxSelectUnitToEdit.DataSource = ingredientContext.GetUnits();
-                        comboBoxUnits.DataSource = ingredientContext.GetUnits();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Unidad No Editada"
-                                , "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                else
-                {
-                    lblEditIngredientValidation.Text = "No se detecta ningún cambio.";
-                }
-            }
-            catch (SQLiteException sqlEx)
-            {
-                MessageBox.Show(sqlEx.Message
-                            , "ERROR " + sqlEx.ErrorCode.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message
-                            , "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void comboBoxSelectUnitToEdit_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            txtEditUnit.Text = comboBoxSelectUnitToEdit.SelectedItem.ToString();
-        }
-
-        private void btnDeleteUnit_Click(object sender, EventArgs e)
-        {
-            try { 
-                if (!comboBoxSelectUnitToEdit.SelectedItem.ToString().Equals("Ninguna Unidad Detectada"))
-                {
-                    DialogResult confirmationPositive = MessageBox.Show("¿Está seguro que desea borrar esta unidad?",
-                        "Confirme Operación", MessageBoxButtons.YesNo);
-                    if(confirmationPositive == DialogResult.Yes) { 
-                        if (ingredientContext.DeleteUnit(comboBoxSelectUnitToEdit.SelectedItem.ToString()))
-                            MessageBox.Show("Se ha borrado la unidad"
-                                    , "Operación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        else
-                            MessageBox.Show("No se ha borrado la unidad"
-                                    , "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                } else
-                {
-                    MessageBox.Show("No hay unidades para borrar"
-                                    , "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (SQLiteException sqlEx)
-            {
-                if(sqlEx.ErrorCode == 19)
-                {
-                    MessageBox.Show("No puede borrar esta unidad\nporque la misma está siendo utilizada por uno o más ingredientes.\n\nPrimero debe borrar cualquier ingrediente\nque referencie a esta unidad."
-                            , "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                } else
-                    MessageBox.Show(sqlEx.Message
-                            , "ERROR " + sqlEx.ErrorCode.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message
-                            , "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void comboBoxEditIngredient_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

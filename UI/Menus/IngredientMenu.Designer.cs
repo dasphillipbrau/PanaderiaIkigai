@@ -31,7 +31,6 @@ namespace PanaderiaIkigai.Menus
         {
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnOpenEditBaseIngredient = new System.Windows.Forms.Button();
             this.btnGoToEditBaseIngredient = new System.Windows.Forms.Button();
             this.btnOpenRegisterBasePanel = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
@@ -51,25 +50,12 @@ namespace PanaderiaIkigai.Menus
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
-            this.panel1.Controls.Add(this.btnOpenEditBaseIngredient);
             this.panel1.Controls.Add(this.btnGoToEditBaseIngredient);
             this.panel1.Controls.Add(this.btnOpenRegisterBasePanel);
             this.panel1.Location = new System.Drawing.Point(13, 63);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 442);
             this.panel1.TabIndex = 1;
-            // 
-            // btnOpenEditBaseIngredient
-            // 
-            this.btnOpenEditBaseIngredient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.btnOpenEditBaseIngredient.ForeColor = System.Drawing.Color.Beige;
-            this.btnOpenEditBaseIngredient.Location = new System.Drawing.Point(3, 199);
-            this.btnOpenEditBaseIngredient.Name = "btnOpenEditBaseIngredient";
-            this.btnOpenEditBaseIngredient.Size = new System.Drawing.Size(194, 68);
-            this.btnOpenEditBaseIngredient.TabIndex = 2;
-            this.btnOpenEditBaseIngredient.Text = "Consultar Ingredientes Base";
-            this.btnOpenEditBaseIngredient.UseVisualStyleBackColor = false;
-            this.btnOpenEditBaseIngredient.Click += new System.EventHandler(this.btnOpenEditBaseIngredient_Click);
             // 
             // btnGoToEditBaseIngredient
             // 
@@ -79,7 +65,7 @@ namespace PanaderiaIkigai.Menus
             this.btnGoToEditBaseIngredient.Name = "btnGoToEditBaseIngredient";
             this.btnGoToEditBaseIngredient.Size = new System.Drawing.Size(194, 68);
             this.btnGoToEditBaseIngredient.TabIndex = 1;
-            this.btnGoToEditBaseIngredient.Text = "Editar Ingredientes Base y Unidades";
+            this.btnGoToEditBaseIngredient.Text = "Consultar y Editar Ingredientes Base o Unidades";
             this.btnGoToEditBaseIngredient.UseVisualStyleBackColor = false;
             this.btnGoToEditBaseIngredient.Click += new System.EventHandler(this.btnQueryBaseIngredients_Click);
             // 
@@ -114,7 +100,6 @@ namespace PanaderiaIkigai.Menus
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnOpenEditBaseIngredient;
         private System.Windows.Forms.Button btnGoToEditBaseIngredient;
         private System.Windows.Forms.Button btnOpenRegisterBasePanel;
     }

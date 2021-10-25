@@ -28,7 +28,7 @@ namespace PanaderiaIkigai.Controls.Ingredients
             var ingredientsList = ingredientContext.GetBaseIngredients();
             var unitsList = ingredientContext.GetUnits();
             dgvViewBaseIngredients.DataSource = ingredientsList;
-            dgvViewBaseIngredients.ClearSelection();
+            
 
             if (unitsList.Count == 0)
             {
@@ -43,7 +43,7 @@ namespace PanaderiaIkigai.Controls.Ingredients
                 comboBoxSelectUnitToEdit.DataSource = unitsList;
                 comboBoxSelectUnitForIngredientEdit.DataSource = unitsList;
             }
-
+            dgvViewBaseIngredients.ClearSelection();
         }
 
         private void txtFilterIngredientByName_TextChanged(object sender, EventArgs e)

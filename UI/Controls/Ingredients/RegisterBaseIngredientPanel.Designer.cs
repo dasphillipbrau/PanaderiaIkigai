@@ -42,18 +42,10 @@ namespace PanaderiaIkigai.Controls
             this.btnRegisterUnit = new System.Windows.Forms.Button();
             this.comboBoxUnits = new System.Windows.Forms.ComboBox();
             this.lblUnitRegisterValidation = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnDeleteUnit = new System.Windows.Forms.Button();
-            this.lblEditIngredientValidation = new System.Windows.Forms.Label();
-            this.lblEditUnitTitle = new System.Windows.Forms.Label();
-            this.btnEditUnit = new System.Windows.Forms.Button();
-            this.txtEditUnit = new System.Windows.Forms.TextBox();
-            this.comboBoxSelectUnitToEdit = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -193,77 +185,6 @@ namespace PanaderiaIkigai.Controls
             this.lblUnitRegisterValidation.Size = new System.Drawing.Size(0, 13);
             this.lblUnitRegisterValidation.TabIndex = 13;
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
-            this.panel1.Controls.Add(this.btnDeleteUnit);
-            this.panel1.Controls.Add(this.lblEditIngredientValidation);
-            this.panel1.Controls.Add(this.lblEditUnitTitle);
-            this.panel1.Controls.Add(this.btnEditUnit);
-            this.panel1.Controls.Add(this.txtEditUnit);
-            this.panel1.Controls.Add(this.comboBoxSelectUnitToEdit);
-            this.panel1.Location = new System.Drawing.Point(370, 287);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(315, 143);
-            this.panel1.TabIndex = 14;
-            // 
-            // btnDeleteUnit
-            // 
-            this.btnDeleteUnit.Location = new System.Drawing.Point(195, 92);
-            this.btnDeleteUnit.Name = "btnDeleteUnit";
-            this.btnDeleteUnit.Size = new System.Drawing.Size(117, 48);
-            this.btnDeleteUnit.TabIndex = 3;
-            this.btnDeleteUnit.Text = "Eliminar Unidad";
-            this.btnDeleteUnit.UseVisualStyleBackColor = true;
-            this.btnDeleteUnit.Click += new System.EventHandler(this.btnDeleteUnit_Click);
-            // 
-            // lblEditIngredientValidation
-            // 
-            this.lblEditIngredientValidation.AutoSize = true;
-            this.lblEditIngredientValidation.ForeColor = System.Drawing.Color.Red;
-            this.lblEditIngredientValidation.Location = new System.Drawing.Point(3, 99);
-            this.lblEditIngredientValidation.Name = "lblEditIngredientValidation";
-            this.lblEditIngredientValidation.Size = new System.Drawing.Size(0, 13);
-            this.lblEditIngredientValidation.TabIndex = 5;
-            // 
-            // lblEditUnitTitle
-            // 
-            this.lblEditUnitTitle.AutoSize = true;
-            this.lblEditUnitTitle.ForeColor = System.Drawing.Color.Beige;
-            this.lblEditUnitTitle.Location = new System.Drawing.Point(104, 4);
-            this.lblEditUnitTitle.Name = "lblEditUnitTitle";
-            this.lblEditUnitTitle.Size = new System.Drawing.Size(105, 13);
-            this.lblEditUnitTitle.TabIndex = 4;
-            this.lblEditUnitTitle.Text = "Edicion de Unidades";
-            // 
-            // btnEditUnit
-            // 
-            this.btnEditUnit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnEditUnit.Location = new System.Drawing.Point(195, 36);
-            this.btnEditUnit.Name = "btnEditUnit";
-            this.btnEditUnit.Size = new System.Drawing.Size(117, 48);
-            this.btnEditUnit.TabIndex = 2;
-            this.btnEditUnit.Text = "Editar Unidad";
-            this.btnEditUnit.UseVisualStyleBackColor = true;
-            this.btnEditUnit.Click += new System.EventHandler(this.btnEditUnit_Click);
-            // 
-            // txtEditUnit
-            // 
-            this.txtEditUnit.Location = new System.Drawing.Point(3, 72);
-            this.txtEditUnit.Name = "txtEditUnit";
-            this.txtEditUnit.Size = new System.Drawing.Size(175, 20);
-            this.txtEditUnit.TabIndex = 1;
-            // 
-            // comboBoxSelectUnitToEdit
-            // 
-            this.comboBoxSelectUnitToEdit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxSelectUnitToEdit.FormattingEnabled = true;
-            this.comboBoxSelectUnitToEdit.Location = new System.Drawing.Point(3, 42);
-            this.comboBoxSelectUnitToEdit.Name = "comboBoxSelectUnitToEdit";
-            this.comboBoxSelectUnitToEdit.Size = new System.Drawing.Size(175, 21);
-            this.comboBoxSelectUnitToEdit.TabIndex = 0;
-            this.comboBoxSelectUnitToEdit.SelectedIndexChanged += new System.EventHandler(this.comboBoxSelectUnitToEdit_SelectedIndexChanged);
-            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
@@ -273,7 +194,7 @@ namespace PanaderiaIkigai.Controls
             this.panel2.Controls.Add(this.lblUnitName);
             this.panel2.Location = new System.Drawing.Point(38, 287);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(315, 143);
+            this.panel2.Size = new System.Drawing.Size(644, 143);
             this.panel2.TabIndex = 15;
             // 
             // panel3
@@ -313,7 +234,6 @@ namespace PanaderiaIkigai.Controls
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBoxUnits);
             this.Controls.Add(this.label2);
@@ -329,8 +249,6 @@ namespace PanaderiaIkigai.Controls
             this.Name = "BaseIngredientPanel";
             this.Size = new System.Drawing.Size(707, 442);
             this.Load += new System.EventHandler(this.BaseIngredientPanel_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -354,13 +272,6 @@ namespace PanaderiaIkigai.Controls
         private System.Windows.Forms.Button btnRegisterUnit;
         private System.Windows.Forms.ComboBox comboBoxUnits;
         private System.Windows.Forms.Label lblUnitRegisterValidation;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnDeleteUnit;
-        private System.Windows.Forms.Label lblEditIngredientValidation;
-        private System.Windows.Forms.Label lblEditUnitTitle;
-        private System.Windows.Forms.Button btnEditUnit;
-        private System.Windows.Forms.TextBox txtEditUnit;
-        private System.Windows.Forms.ComboBox comboBoxSelectUnitToEdit;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label1;

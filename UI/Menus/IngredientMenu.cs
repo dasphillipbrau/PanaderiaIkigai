@@ -43,13 +43,5 @@ namespace PanaderiaIkigai.Menus
             queryPanel.BringToFront();
         }
 
-        private void btnOpenEditBaseIngredient_Click(object sender, EventArgs e)
-        {
-            ViewAndDeleteBaseIngredientPanel editPanel = new ViewAndDeleteBaseIngredientPanel();
-            editPanel.Location = new Point(255, 63);
-            this.Controls.Add(editPanel);
-            editPanel.Show();
-            editPanel.BringToFront();
-        }
     }
 }
