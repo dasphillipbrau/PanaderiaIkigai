@@ -52,7 +52,6 @@ namespace PanaderiaIkigai.BusinessLogic
         public List<DetailedIngredient> GetDetailedIngredients()
         {
             var result = dataAccess.GetDetailedIngredients() as List<DetailedIngredient>;
-            Console.WriteLine(result);
             return result;
         }
         /// <summary>
@@ -213,6 +212,25 @@ namespace PanaderiaIkigai.BusinessLogic
                     else
                         return false;
                 }
+                else
+                    return false;
+            }
+            catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool RegisterDetailedIngredient(int pBaseCode, TextBox pBrandBox, TextBox pOriginBox, TextBox pAmountInUnitBox, TextBox pUnitPriceBox, ComboBox pQualityBox, TextBox pUnitsAvailableBox)
+        {
+            try { 
+                DetailedIngredient ingredientToRegister = informationCapturer.CaptureDetailedIngredient(pBaseCode, pBrandBox, pOriginBox, pAmountInUnitBox, pUnitPriceBox, pQualityBox, pUnitsAvailableBox);
+                if (dataAccess.SaveDetailedIngredient(ingredientToRegister) == 1)
+                    return true;
                 else
                     return false;
             }

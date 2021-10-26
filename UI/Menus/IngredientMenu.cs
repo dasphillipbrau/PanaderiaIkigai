@@ -1,5 +1,6 @@
 ﻿using PanaderiaIkigai.Controls;
 using PanaderiaIkigai.Controls.Ingredients;
+using PanaderiaIkigai.UI.Controls.Ingredients;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,12 +37,29 @@ namespace PanaderiaIkigai.Menus
 
         private void btnQueryBaseIngredients_Click(object sender, EventArgs e)
         {
-            EditBaseIngredientPanel queryPanel = new EditBaseIngredientPanel();
-            queryPanel.Location = new Point(255, 63);
-            this.Controls.Add(queryPanel);
-            queryPanel.Show();
-            queryPanel.BringToFront();
+            EditBaseIngredientPanel editBaseIngredientPanel = new EditBaseIngredientPanel();
+            editBaseIngredientPanel.Location = new Point(255, 63);
+            this.Controls.Add(editBaseIngredientPanel);
+            editBaseIngredientPanel.Show();
+            editBaseIngredientPanel.BringToFront();
         }
 
+        private void btnGoToRegisterDetailedIngredient_Click(object sender, EventArgs e)
+        {
+            RegisterDetailedIngredientsPanel detailedIngredientPanel = new RegisterDetailedIngredientsPanel();
+            detailedIngredientPanel.Location = new Point(255, 63);
+            this.Controls.Add(detailedIngredientPanel);
+            detailedIngredientPanel.Show();
+            detailedIngredientPanel.BringToFront();
+        }
+
+        private void btnGoToEditDetailedIngredients_Click(object sender, EventArgs e)
+        {
+            EditDetailedIngredientPanel editDetailedIngredientPanel = new EditDetailedIngredientPanel();
+            editDetailedIngredientPanel.Location = new Point(255, 63);
+            this.Controls.Add(editDetailedIngredientPanel);
+            editDetailedIngredientPanel.Show();
+            editDetailedIngredientPanel.BringToFront();
+        }
     }
 }

@@ -117,6 +117,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLogic\IngredientContext.cs" />
+    <Compile Include="UI\Controls\Ingredients\EditDetailedIngredientPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Ingredients\EditDetailedIngredientPanel.Designer.cs">
+      <DependentUpon>EditDetailedIngredientPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\Ingredients\RegisterBaseIngredientPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -131,6 +137,12 @@
     </Compile>
     <Compile Include="Data\SqliteIngredientManager.cs" />
     <Compile Include="BusinessLogic\InformationCapture\IngredientInformationCapturer.cs" />
+    <Compile Include="UI\Controls\Ingredients\RegisterDetailedIngredientsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Ingredients\RegisterDetailedIngredientsPanel.Designer.cs">
+      <DependentUpon>RegisterDetailedIngredientsPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Menus\IngredientMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -155,11 +167,17 @@
     <Content Include="x86\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="UI\Controls\Ingredients\EditDetailedIngredientPanel.resx">
+      <DependentUpon>EditDetailedIngredientPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Ingredients\RegisterBaseIngredientPanel.resx">
       <DependentUpon>RegisterBaseIngredientPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Ingredients\EditBaseIngredientPanel.resx">
       <DependentUpon>EditBaseIngredientPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Ingredients\RegisterDetailedIngredientsPanel.resx">
+      <DependentUpon>RegisterDetailedIngredientsPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Menus\IngredientMenu.resx">
       <DependentUpon>IngredientMenu.cs</DependentUpon>

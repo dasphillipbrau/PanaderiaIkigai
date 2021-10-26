@@ -31,8 +31,10 @@ namespace PanaderiaIkigai.Menus
         {
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnGoToRegisterDetailedIngredient = new System.Windows.Forms.Button();
             this.btnGoToEditBaseIngredient = new System.Windows.Forms.Button();
             this.btnOpenRegisterBasePanel = new System.Windows.Forms.Button();
+            this.btnGoToEditDetailedIngredients = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,12 +52,26 @@ namespace PanaderiaIkigai.Menus
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
+            this.panel1.Controls.Add(this.btnGoToEditDetailedIngredients);
+            this.panel1.Controls.Add(this.btnGoToRegisterDetailedIngredient);
             this.panel1.Controls.Add(this.btnGoToEditBaseIngredient);
             this.panel1.Controls.Add(this.btnOpenRegisterBasePanel);
             this.panel1.Location = new System.Drawing.Point(13, 63);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 442);
             this.panel1.TabIndex = 1;
+            // 
+            // btnGoToRegisterDetailedIngredient
+            // 
+            this.btnGoToRegisterDetailedIngredient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.btnGoToRegisterDetailedIngredient.ForeColor = System.Drawing.Color.Beige;
+            this.btnGoToRegisterDetailedIngredient.Location = new System.Drawing.Point(3, 187);
+            this.btnGoToRegisterDetailedIngredient.Name = "btnGoToRegisterDetailedIngredient";
+            this.btnGoToRegisterDetailedIngredient.Size = new System.Drawing.Size(194, 68);
+            this.btnGoToRegisterDetailedIngredient.TabIndex = 2;
+            this.btnGoToRegisterDetailedIngredient.Text = "Registrar Ingrediente Detallado";
+            this.btnGoToRegisterDetailedIngredient.UseVisualStyleBackColor = false;
+            this.btnGoToRegisterDetailedIngredient.Click += new System.EventHandler(this.btnGoToRegisterDetailedIngredient_Click);
             // 
             // btnGoToEditBaseIngredient
             // 
@@ -81,6 +97,18 @@ namespace PanaderiaIkigai.Menus
             this.btnOpenRegisterBasePanel.UseVisualStyleBackColor = false;
             this.btnOpenRegisterBasePanel.Click += new System.EventHandler(this.btnOpenRegisterBasePanel_Click);
             // 
+            // btnGoToEditDetailedIngredients
+            // 
+            this.btnGoToEditDetailedIngredients.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.btnGoToEditDetailedIngredients.ForeColor = System.Drawing.Color.Beige;
+            this.btnGoToEditDetailedIngredients.Location = new System.Drawing.Point(3, 261);
+            this.btnGoToEditDetailedIngredients.Name = "btnGoToEditDetailedIngredients";
+            this.btnGoToEditDetailedIngredients.Size = new System.Drawing.Size(194, 68);
+            this.btnGoToEditDetailedIngredients.TabIndex = 3;
+            this.btnGoToEditDetailedIngredients.Text = "Consultar y Editar Ingredientes Detallados";
+            this.btnGoToEditDetailedIngredients.UseVisualStyleBackColor = false;
+            this.btnGoToEditDetailedIngredients.Click += new System.EventHandler(this.btnGoToEditDetailedIngredients_Click);
+            // 
             // IngredientMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -102,5 +130,7 @@ namespace PanaderiaIkigai.Menus
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnGoToEditBaseIngredient;
         private System.Windows.Forms.Button btnOpenRegisterBasePanel;
+        private System.Windows.Forms.Button btnGoToRegisterDetailedIngredient;
+        private System.Windows.Forms.Button btnGoToEditDetailedIngredients;
     }
 }

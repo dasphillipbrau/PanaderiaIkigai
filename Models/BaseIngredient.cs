@@ -20,7 +20,7 @@ namespace PanaderiaIkigai.Models
         public string MeasuringUnit { get; set; }
         [DisplayName("Precio Promedio")]
         public decimal AveragePrice { get; set; }
-        [DisplayName("Precio por Unidad de Medida")]
+        [DisplayName("Precio Promedio por Unidad de Medida")]
         public decimal AverageMinimumPrice { get; set; }
         [DisplayName("Unidades Disponibles")]
         public int UnitsAvailable { get; set; }
@@ -44,6 +44,11 @@ namespace PanaderiaIkigai.Models
             AveragePrice = decimal.Parse(dgv.SelectedRows[rowIndex].Cells[3].Value.ToString());
             AverageMinimumPrice = decimal.Parse(dgv.SelectedRows[rowIndex].Cells[4].Value.ToString());
             UnitsAvailable = int.Parse(dgv.SelectedRows[rowIndex].Cells[5].Value.ToString());
+        }
+
+        public BaseIngredient(int pCode)
+        {
+            Code = pCode;
         }
 
         public bool CompareIngredients(BaseIngredient pIngredientToCompare)

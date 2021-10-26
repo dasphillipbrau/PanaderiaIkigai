@@ -53,19 +53,18 @@ namespace PanaderiaIkigai.Data
         /// </summary>
         /// <param name="pDetailedIngredient">Detailed Ingredient to Register.</param>
 
-        public void SaveDetailedIngredient(DetailedIngredient pDetailedIngredient)
+        public int SaveDetailedIngredient(DetailedIngredient pDetailedIngredient)
         {
             try
             {
                 using (var conn = new SQLiteConnection(GetConnectionString()))
                 {
-                    var saveDetailedIngredientCommand = new SQLiteCommand("INSERT INTO INGREDIENT_DETAILED (INGREDIENT_CODE, BRAND, " +
-                        "INGREDIENT_SOURCE, UNIT_PRICE, AMOUNT_IN_UNIT, MINIMUM_PRICE_PER_UNIT, QUALITY, UNITS_AVAILABLE) " +
-                        "VALUES ($pCode, $pBrand, $pSource, $pUnitPrice, $pAmountInUnit, $pPricePerUnit, $pQuality, pUnitsAvailable", conn);
+                    var saveDetailedIngredientCommand = new SQLiteCommand("INSERT INTO INGREDIENT_DETAILED (INGREDIENT_CODE, BRAND, INGREDIENT_SOURCE, UNIT_PRICE, AMOUNT_IN_UNIT, MINIMUM_PRICE_PER_UNIT, QUALITY, UNITS_AVAILABLE) " +
+                        "VALUES ($pCode, $pBrand, $pSource, $pUnitPrice, $pAmountInUnit, $pPricePerUnit, $pQuality, $pUnitsAvailable)", conn);
 
                     saveDetailedIngredientCommand.Parameters.AddWithValue("pCode", pDetailedIngredient.Code);
-                    saveDetailedIngredientCommand.Parameters.AddWithValue("pBrand", pDetailedIngredient.Brand.ToUpper());
-                    saveDetailedIngredientCommand.Parameters.AddWithValue("pSource", pDetailedIngredient.IngredientSource.ToUpper());
+                    saveDetailedIngredientCommand.Parameters.AddWithValue("pBrand", pDetailedIngredient.Brand.Trim().ToUpper());
+                    saveDetailedIngredientCommand.Parameters.AddWithValue("pSource", pDetailedIngredient.IngredientSource.Trim().ToUpper());
                     saveDetailedIngredientCommand.Parameters.AddWithValue("pUnitPrice,", pDetailedIngredient.UnitPrice);
                     saveDetailedIngredientCommand.Parameters.AddWithValue("pAmountInUnit", pDetailedIngredient.AmountInUnit);
                     saveDetailedIngredientCommand.Parameters.AddWithValue("pPricePerUnit", pDetailedIngredient.MinimumUnitPrice);
@@ -73,7 +72,7 @@ namespace PanaderiaIkigai.Data
                     saveDetailedIngredientCommand.Parameters.AddWithValue("pUnitsAvailable", pDetailedIngredient.UnitsAvailable);
 
                     conn.Open();
-                    saveDetailedIngredientCommand.ExecuteNonQuery();
+                    return saveDetailedIngredientCommand.ExecuteNonQuery();
 
                 }
             }
@@ -447,7 +446,7 @@ namespace PanaderiaIkigai.Data
                     List<DetailedIngredient> detailedIngredientsList = new List<DetailedIngredient>();
                     var getDetailedIngredientsCommand = new SQLiteCommand("SELECT A.INGREDIENT_CODE, A.DETAILED_INGREDIENT_ID, A.BRAND, " +
                         "A.INGREDIENT_SOURCE, A.UNIT_PRICE, A.AMOUNT_IN_UNIT, A.MINIMUM_PRICE_PER_UNIT, A.QUALITY, A.UNITS_AVAILABLE, " +
-                        "B.NAME, B.UNIT_OF_MEASURE, B.TOTAL_UNITS_AVAILABLE, B.AVERAGE_PRICE, B.MINIMUM_AVERAGE_PRICE " +
+                        "B.NAME, B.UNIT_OF_MEASURE, B.TOTAL_UNITS_AVAILABLE, B.AVERAGE_PRICE, B.AVERAGE_MINIMUM_PRICE " +
                         "FROM INGREDIENT_DETAILED A " +
                         "INNER JOIN INGREDIENT B " +
                         "ON A.INGREDIENT_CODE = B.CODE ORDER BY A.INGREDIENT_CODE ASC", conn);
