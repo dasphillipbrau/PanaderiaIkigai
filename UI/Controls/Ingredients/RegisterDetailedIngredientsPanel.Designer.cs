@@ -56,6 +56,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
             this.errorProviderAmountInUnit = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorProviderUnitPrice = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorProviderUnitsAvailable = new System.Windows.Forms.ErrorProvider(this.components);
+            this.lblBaseIngredientFound = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvViewBaseIngredients)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderBrand)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderOrigin)).BeginInit();
@@ -119,13 +120,15 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
             // 
             // btnSaveDetailedIngredient
             // 
+            this.btnSaveDetailedIngredient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnSaveDetailedIngredient.Enabled = false;
+            this.btnSaveDetailedIngredient.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSaveDetailedIngredient.Location = new System.Drawing.Point(576, 391);
             this.btnSaveDetailedIngredient.Name = "btnSaveDetailedIngredient";
-            this.btnSaveDetailedIngredient.Size = new System.Drawing.Size(114, 35);
+            this.btnSaveDetailedIngredient.Size = new System.Drawing.Size(114, 48);
             this.btnSaveDetailedIngredient.TabIndex = 22;
             this.btnSaveDetailedIngredient.Text = "Registrar Ingrediente Detallado";
-            this.btnSaveDetailedIngredient.UseVisualStyleBackColor = true;
+            this.btnSaveDetailedIngredient.UseVisualStyleBackColor = false;
             this.btnSaveDetailedIngredient.Click += new System.EventHandler(this.btnSaveDetailedIngredient_Click);
             // 
             // btnSearchBaseIngredient
@@ -285,11 +288,22 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
             // 
             this.errorProviderUnitsAvailable.ContainerControl = this;
             // 
+            // lblBaseIngredientFound
+            // 
+            this.lblBaseIngredientFound.AutoSize = true;
+            this.lblBaseIngredientFound.ForeColor = System.Drawing.Color.Lime;
+            this.lblBaseIngredientFound.Location = new System.Drawing.Point(181, 194);
+            this.lblBaseIngredientFound.Name = "lblBaseIngredientFound";
+            this.lblBaseIngredientFound.Size = new System.Drawing.Size(35, 13);
+            this.lblBaseIngredientFound.TabIndex = 37;
+            this.lblBaseIngredientFound.Text = "label8";
+            // 
             // RegisterDetailedIngredientsPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.Controls.Add(this.lblBaseIngredientFound);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -353,5 +367,6 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
         private System.Windows.Forms.ErrorProvider errorProviderAmountInUnit;
         private System.Windows.Forms.ErrorProvider errorProviderUnitPrice;
         private System.Windows.Forms.ErrorProvider errorProviderUnitsAvailable;
+        private System.Windows.Forms.Label lblBaseIngredientFound;
     }
 }

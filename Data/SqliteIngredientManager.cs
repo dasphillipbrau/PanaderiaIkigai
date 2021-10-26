@@ -59,17 +59,20 @@ namespace PanaderiaIkigai.Data
             {
                 using (var conn = new SQLiteConnection(GetConnectionString()))
                 {
-                    var saveDetailedIngredientCommand = new SQLiteCommand("INSERT INTO INGREDIENT_DETAILED (INGREDIENT_CODE, BRAND, INGREDIENT_SOURCE, UNIT_PRICE, AMOUNT_IN_UNIT, MINIMUM_PRICE_PER_UNIT, QUALITY, UNITS_AVAILABLE) " +
-                        "VALUES ($pCode, $pBrand, $pSource, $pUnitPrice, $pAmountInUnit, $pPricePerUnit, $pQuality, $pUnitsAvailable)", conn);
-
-                    saveDetailedIngredientCommand.Parameters.AddWithValue("pCode", pDetailedIngredient.Code);
-                    saveDetailedIngredientCommand.Parameters.AddWithValue("pBrand", pDetailedIngredient.Brand.Trim().ToUpper());
-                    saveDetailedIngredientCommand.Parameters.AddWithValue("pSource", pDetailedIngredient.IngredientSource.Trim().ToUpper());
-                    saveDetailedIngredientCommand.Parameters.AddWithValue("pUnitPrice,", pDetailedIngredient.UnitPrice);
-                    saveDetailedIngredientCommand.Parameters.AddWithValue("pAmountInUnit", pDetailedIngredient.AmountInUnit);
-                    saveDetailedIngredientCommand.Parameters.AddWithValue("pPricePerUnit", pDetailedIngredient.MinimumUnitPrice);
-                    saveDetailedIngredientCommand.Parameters.AddWithValue("pQuality", pDetailedIngredient.Quality);
-                    saveDetailedIngredientCommand.Parameters.AddWithValue("pUnitsAvailable", pDetailedIngredient.UnitsAvailable);
+                    var saveDetailedIngredientCommand = new SQLiteCommand("INSERT INTO INGREDIENT_DETAILED (DETAILED_INGREDIENT_ID, " +
+                        "INGREDIENT_CODE, BRAND, INGREDIENT_SOURCE, UNIT_PRICE, AMOUNT_IN_UNIT, MINIMUM_PRICE_PER_UNIT, " +
+                        "QUALITY, UNITS_AVAILABLE) " +
+                        "VALUES ($pDetailedIngredientId, $pCode, $pBrand, $pSource, $pUnitPrice, $pAmountInUnit, $pPricePerUnit, $pQuality, $pUnitsAvailable)", conn);
+                    pDetailedIngredient.DetailedIngredientCode = pDetailedIngredient.BaseIngredientCode + "-" + pDetailedIngredient.Brand.Trim().ToUpper() + "-" + pDetailedIngredient.IngredientSource.Trim().ToUpper();
+                    saveDetailedIngredientCommand.Parameters.Add("pDetailedIngredientId", DbType.String).Value = pDetailedIngredient.DetailedIngredientCode;
+                    saveDetailedIngredientCommand.Parameters.Add("pCode", DbType.Int32).Value = pDetailedIngredient.BaseIngredientCode;
+                    saveDetailedIngredientCommand.Parameters.Add("pBrand", DbType.String).Value = pDetailedIngredient.Brand.Trim().ToUpper();
+                    saveDetailedIngredientCommand.Parameters.Add("pSource", DbType.String).Value = pDetailedIngredient.IngredientSource.Trim().ToUpper();
+                    saveDetailedIngredientCommand.Parameters.Add("pUnitPrice", DbType.Decimal).Value = pDetailedIngredient.UnitPrice;
+                    saveDetailedIngredientCommand.Parameters.Add("pAmountInUnit", DbType.Decimal).Value = pDetailedIngredient.AmountInUnit;
+                    saveDetailedIngredientCommand.Parameters.Add("pPricePerUnit", DbType.Decimal).Value = pDetailedIngredient.MinimumUnitPrice;
+                    saveDetailedIngredientCommand.Parameters.Add("pQuality", DbType.Int32).Value = pDetailedIngredient.Quality;
+                    saveDetailedIngredientCommand.Parameters.Add("pUnitsAvailable", DbType.Int32).Value = pDetailedIngredient.TotalUnitsAvailable;
 
                     conn.Open();
                     return saveDetailedIngredientCommand.ExecuteNonQuery();
@@ -401,8 +404,11 @@ namespace PanaderiaIkigai.Data
                 using(var conn = new SQLiteConnection(GetConnectionString()))
                 {
                     List<DetailedIngredient> detailedIngredientsList = new List<DetailedIngredient>();
-                    var getDetailedIngredientsCommand = new SQLiteCommand("SELECT INGREDIENT_CODE, DETAILED_INGREDIENT_ID, BRAND, INGREDIENT_SOURCE, " +
-                        "UNIT_PRICE, AMOUNT_IN_UNIT, MINIMUM_PRICE_PER_UNIT, QUALITY, UNITS_AVAILABLE FROM INGREDIENT_DETAILED WHERE INGREDIENT_CODE = $code", conn);
+                    var getDetailedIngredientsCommand = new SQLiteCommand("SELECT A.DETAILED_INGREDIENT_ID, A.INGREDIENT_CODE, B.NAME, A.BRAND, A.INGREDIENT_SOURCE, " +
+                        "A.UNIT_PRICE, A.AMOUNT_IN_UNIT, A.MINIMUM_PRICE_PER_UNIT, A.QUALITY, A.UNITS_AVAILABLE " +
+                        "FROM INGREDIENT_DETAILED A " +
+                        "INNER JOIN INGREDIENT B ON A.INGREDIENT_CODE = B.CODE " +
+                        "WHERE INGREDIENT_CODE = $code", conn);
                     conn.Open();
 
                     getDetailedIngredientsCommand.Parameters.AddWithValue("$code", pBaseIngredient.Code);
@@ -410,10 +416,8 @@ namespace PanaderiaIkigai.Data
 
                     while (reader.Read())
                     {
-                        var detailedIngredient = new DetailedIngredient(pBaseIngredient, reader.GetString(1), reader.GetString(2), reader.GetString(3),
-                            reader.GetDecimal(4), reader.GetDecimal(5), reader.GetDecimal(6), reader.GetInt32(7));
-                        var unitsAvailable = reader.GetInt32(8);
-                        detailedIngredient.UnitsAvailable = unitsAvailable;
+                        var baseIngredient = new BaseIngredient() { Code = reader.GetInt32(1), Name = reader.GetString(2) };
+                        var detailedIngredient = new DetailedIngredient(baseIngredient, reader.GetString(0), reader.GetString(3), reader.GetString(4), reader.GetDecimal(5), reader.GetDecimal(6), reader.GetDecimal(7), reader.GetInt32(8), reader.GetInt32(9));
                         detailedIngredientsList.Add(detailedIngredient);
                     }
 
@@ -444,9 +448,8 @@ namespace PanaderiaIkigai.Data
                 using (var conn = new SQLiteConnection(GetConnectionString()))
                 {
                     List<DetailedIngredient> detailedIngredientsList = new List<DetailedIngredient>();
-                    var getDetailedIngredientsCommand = new SQLiteCommand("SELECT A.INGREDIENT_CODE, A.DETAILED_INGREDIENT_ID, A.BRAND, " +
-                        "A.INGREDIENT_SOURCE, A.UNIT_PRICE, A.AMOUNT_IN_UNIT, A.MINIMUM_PRICE_PER_UNIT, A.QUALITY, A.UNITS_AVAILABLE, " +
-                        "B.NAME, B.UNIT_OF_MEASURE, B.TOTAL_UNITS_AVAILABLE, B.AVERAGE_PRICE, B.AVERAGE_MINIMUM_PRICE " +
+                    var getDetailedIngredientsCommand = new SQLiteCommand("SELECT A.DETAILED_INGREDIENT_ID, A.INGREDIENT_CODE, B.NAME, A.BRAND, " +
+                        "A.INGREDIENT_SOURCE, A.UNIT_PRICE, A.AMOUNT_IN_UNIT, A.MINIMUM_PRICE_PER_UNIT, A.QUALITY, A.UNITS_AVAILABLE " +
                         "FROM INGREDIENT_DETAILED A " +
                         "INNER JOIN INGREDIENT B " +
                         "ON A.INGREDIENT_CODE = B.CODE ORDER BY A.INGREDIENT_CODE ASC", conn);
@@ -454,11 +457,8 @@ namespace PanaderiaIkigai.Data
                     var reader = getDetailedIngredientsCommand.ExecuteReader();
                     while (reader.Read())
                     {
-                        var baseIngredient = new BaseIngredient(reader.GetInt32(0), reader.GetString(9), reader.GetString(10), reader.GetDecimal(12), reader.GetDecimal(13), reader.GetInt32(11));
-                        var detailedIngredient = new DetailedIngredient(baseIngredient, reader.GetString(1),
-                            reader.GetString(2), reader.GetString(3), reader.GetDecimal(4), reader.GetDecimal(5), reader.GetDecimal(6), reader.GetInt32(7));
-                        var unitsAvailable = reader.GetInt32(8);
-                        detailedIngredient.UnitsAvailable = unitsAvailable;
+                        var baseIngredient = new BaseIngredient() { Code = reader.GetInt32(1), Name = reader.GetString(2) };
+                        var detailedIngredient = new DetailedIngredient(baseIngredient, reader.GetString(0), reader.GetString(3), reader.GetString(4), reader.GetDecimal(5), reader.GetDecimal(6), reader.GetDecimal(7), reader.GetInt32(8), reader.GetInt32(9));
                         detailedIngredientsList.Add(detailedIngredient);
                     }
                     return detailedIngredientsList;

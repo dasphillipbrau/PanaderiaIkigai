@@ -16,6 +16,13 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
     {
         static IngredientContext ingredientContext = new IngredientContext();
         static int staticCode = -1;
+
+        static bool brandValid = false;
+        static bool originValid = false;
+        static bool amountInUnitValid = false;
+        static bool unitPriceValid = false;
+        static bool unitsAvailableValid = false;
+
         public RegisterDetailedIngredientsPanel()
         {
             InitializeComponent();
@@ -23,6 +30,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
 
         private void RegisterDetailedIngredientsPanel_Load(object sender, EventArgs e)
         {
+            lblBaseIngredientFound.Text = "";
             var ingredientsList = ingredientContext.GetBaseIngredients();
             dgvViewBaseIngredients.DataSource = ingredientsList;
             for(int i = 1; i <= 10; i++)
@@ -59,6 +67,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
                 }
                 else
                 {
+                    lblBaseIngredientFound.Text = "Ingrediente Encontrado: " + ingredientFound.Name;
                     btnSaveDetailedIngredient.Enabled = true;
                 }
             }
@@ -66,18 +75,38 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
 
         private void btnSaveDetailedIngredient_Click(object sender, EventArgs e)
         {
-            try { 
-                if (ValidateChildren(ValidationConstraints.Enabled))
+            try {
+                if (!btnSaveDetailedIngredient.Enabled)
                 {
-                    if(ingredientContext.RegisterDetailedIngredient(staticCode, txtBrand, txtOrigin, txtAmountInUnit, txtUnitPrice, comboBoxQuality, txtAmountAvailable)) { 
-                        MessageBox.Show("Ingrediente Registrado", "Operación Éxitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        btnSaveDetailedIngredient.Enabled = false;
+                    MessageBox.Show("Primero debe buscar un ingrediente base", "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } else {
+                    
+                    if (ValidateChildren(ValidationConstraints.Enabled) && brandValid && originValid && amountInUnitValid && unitPriceValid && unitsAvailableValid)
+                    {
+                        if(ingredientContext.RegisterDetailedIngredient(staticCode, txtBrand, txtOrigin, txtAmountInUnit, txtUnitPrice, comboBoxQuality, txtAmountAvailable)) { 
+                            MessageBox.Show("Ingrediente Registrado", "Operación Éxitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            btnSaveDetailedIngredient.Enabled = false;
+                            staticCode = -1;
+                            lblBaseIngredientFound.Text = "";
+                            txtSearchIngredientCode.Text = "";
+                            txtBrand.Text = "";
+                            txtOrigin.Text = "";
+                            txtAmountAvailable.Text = "";
+                            txtUnitPrice.Text = "";
+                            txtAmountInUnit.Text = "";
+                            comboBoxQuality.SelectedIndex = 0;
+                            brandValid = false;
+                            originValid = false;
+                            amountInUnitValid = false;
+                            unitPriceValid = false;
+                            unitsAvailableValid = false;
+                        }
+                        else
+                            MessageBox.Show("No se ha registrado el ingrediente", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    } else
+                    {
+                        MessageBox.Show("Hay problemas con alguno de los campos\nRevise los mensajes de error e intente de nuevo.", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    else
-                        MessageBox.Show("No se ha registrado el ingrediente", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                } else
-                {
-                    MessageBox.Show("Hay problemas con alguno de los campos\nRevise los mensajes de error e intente de nuevo.", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             } catch (SQLiteException sqlEx)
             {
@@ -98,15 +127,16 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
         {
             if(txtBrand.Text.Trim().Length == 0)
             {
-                e.Cancel = true;
                 errorProviderBrand.SetError(txtBrand, "Nombre de marca no puede estar vacío");
+                brandValid = false;
             } else if(txtBrand.Text.Length > 30)
             {
-                e.Cancel = true;
+                brandValid = false;
                 errorProviderBrand.SetError(txtBrand, "Nombre de marca no puede exceder los 30 caracteres");
             } else
             {
                 e.Cancel = false;
+                brandValid = true;
                 errorProviderBrand.Clear();
             }
         }
@@ -115,15 +145,16 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
         {
             if (txtOrigin.Text.Trim().Length == 0)
             {
-                e.Cancel = true;
+                originValid = false;
                 errorProviderOrigin.SetError(txtOrigin, "Nombre de tienda no puede estar vacío");
             }
             else if (txtOrigin.Text.Length > 30)
             {
-                e.Cancel = true;
+                originValid = false;
                 errorProviderOrigin.SetError(txtOrigin, "Nombre de tienda no puede exceder los 30 caracteres");
             } else
             {
+                originValid = true;
                 e.Cancel = false;
                 errorProviderOrigin.Clear();
             }
@@ -133,19 +164,20 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
         {
             if (txtUnitPrice.Text.Trim().Length == 0)
             {
-                e.Cancel = true;
+                unitPriceValid = false;
                 errorProviderUnitPrice.SetError(txtUnitPrice, "Precio no puede estar vacío");
             } else if(!decimal.TryParse(txtUnitPrice.Text.Trim(), out decimal i))
             {
-                e.Cancel = true;
+                unitPriceValid = false;
                 errorProviderUnitPrice.SetError(txtUnitPrice, "Indique un valor decimal.\nRecuerde usar coma para indicar el punto decimal");
             } else if(decimal.TryParse(txtUnitPrice.Text.Trim(), out decimal j) && decimal.Parse(txtUnitPrice.Text.Trim()) < 0)
             {
-                e.Cancel = true;
+                unitPriceValid = false;
                 errorProviderUnitPrice.SetError(txtUnitPrice, "Valor debe de ser positivo");
             } 
             else
             {
+                unitPriceValid = true;
                 e.Cancel = false;
                 errorProviderUnitPrice.Clear();
             }
@@ -155,18 +187,19 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
         {
             if(txtAmountAvailable.Text.Trim().Length == 0)
             {
-                e.Cancel = true;
+                unitsAvailableValid = false;
                 errorProviderUnitsAvailable.SetError(txtAmountAvailable, "Cantidad no puede estar vacía");
             } else if(!int.TryParse(txtAmountAvailable.Text.Trim(), out int i))
             {
-                e.Cancel = true;
+                unitsAvailableValid = false;
                 errorProviderUnitsAvailable.SetError(txtAmountAvailable, "Cantidad debe de ser un número entero");
             } else if(int.TryParse(txtAmountAvailable.Text.Trim(), out int j) && int.Parse(txtAmountAvailable.Text.Trim()) < 0)
             {
-                e.Cancel = true;
+                unitsAvailableValid = false;
                 errorProviderUnitsAvailable.SetError(txtAmountAvailable, "Cantidad debe de ser un número entero positivo");
             } else
             {
+                unitsAvailableValid = true;
                 e.Cancel = false;
                 errorProviderUnitsAvailable.Clear();
             }
@@ -176,21 +209,22 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
         {
             if(txtAmountInUnit.Text.Trim().Length == 0)
             {
-                e.Cancel = true;
+                amountInUnitValid = false;
                 errorProviderAmountInUnit.SetError(txtAmountInUnit, "Cantidad no puede estar vacía");
             }
             else if (!decimal.TryParse(txtAmountInUnit.Text.Trim(), out decimal i))
             {
-                e.Cancel = true;
+                amountInUnitValid = false;
                 errorProviderAmountInUnit.SetError(txtAmountInUnit, "Indique un valor decimal.\nRecuerde usar coma para indicar el punto decimal");
             }
             else if (decimal.TryParse(txtAmountInUnit.Text.Trim(), out decimal j) && decimal.Parse(txtAmountInUnit.Text.Trim()) < 0)
             {
-                e.Cancel = true;
+                amountInUnitValid = false;
                 errorProviderAmountInUnit.SetError(txtAmountInUnit, "Valor debe de ser positivo");
             }
             else
             {
+                amountInUnitValid = true;
                 e.Cancel = false;
                 errorProviderAmountInUnit.Clear();
             }

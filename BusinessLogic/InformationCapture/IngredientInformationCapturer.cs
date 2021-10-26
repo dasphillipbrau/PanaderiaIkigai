@@ -113,10 +113,8 @@ namespace PanaderiaIkigai.InformationCapture
 
         public DetailedIngredient CaptureDetailedIngredient(int pBaseCode, TextBox txtBrand, TextBox txtStore, TextBox txtAmountInUnitBox, TextBox txtUnitPriceBox, ComboBox comboBoxQuality, TextBox txtUnitsAvailableBox)
         {
-            BaseIngredient baseIngredient = new BaseIngredient();
-            baseIngredient.Code = pBaseCode;
-            DetailedIngredient detailedIngredient = new DetailedIngredient(baseIngredient, txtBrand.Text.Trim(), txtStore.Text.Trim(), 
-                decimal.Parse(txtAmountInUnitBox.Text), decimal.Parse(txtUnitPriceBox.Text), int.Parse(comboBoxQuality.SelectedItem.ToString()), int.Parse(txtUnitsAvailableBox.Text));
+            DetailedIngredient detailedIngredient = new DetailedIngredient(pBaseCode, txtBrand.Text.Trim(), txtStore.Text.Trim(),
+                decimal.Parse(txtUnitPriceBox.Text), decimal.Parse(txtAmountInUnitBox.Text), int.Parse(comboBoxQuality.SelectedItem.ToString()), int.Parse(txtUnitsAvailableBox.Text));
             return detailedIngredient;
         }
     }

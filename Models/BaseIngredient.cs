@@ -17,7 +17,7 @@ namespace PanaderiaIkigai.Models
         [DisplayName("Nombre")]
         public string Name { get; set; }
         [DisplayName("Unidad de Medida")]
-        public string MeasuringUnit { get; set; }
+        public string MeasuringUnit { get ; set; }
         [DisplayName("Precio Promedio")]
         public decimal AveragePrice { get; set; }
         [DisplayName("Precio Promedio por Unidad de Medida")]
