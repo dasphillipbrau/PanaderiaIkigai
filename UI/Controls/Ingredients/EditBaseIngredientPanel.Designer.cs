@@ -60,7 +60,7 @@ namespace PanaderiaIkigai.Controls.Ingredients
             this.lblBaseIngredientQuery.AutoSize = true;
             this.lblBaseIngredientQuery.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBaseIngredientQuery.ForeColor = System.Drawing.Color.Beige;
-            this.lblBaseIngredientQuery.Location = new System.Drawing.Point(190, 20);
+            this.lblBaseIngredientQuery.Location = new System.Drawing.Point(16, 19);
             this.lblBaseIngredientQuery.Name = "lblBaseIngredientQuery";
             this.lblBaseIngredientQuery.Size = new System.Drawing.Size(302, 24);
             this.lblBaseIngredientQuery.TabIndex = 1;
@@ -86,14 +86,14 @@ namespace PanaderiaIkigai.Controls.Ingredients
             this.dgvViewBaseIngredients.Name = "dgvViewBaseIngredients";
             this.dgvViewBaseIngredients.ReadOnly = true;
             this.dgvViewBaseIngredients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvViewBaseIngredients.Size = new System.Drawing.Size(672, 150);
+            this.dgvViewBaseIngredients.Size = new System.Drawing.Size(991, 150);
             this.dgvViewBaseIngredients.TabIndex = 5;
             // 
             // lblFilterByNameTitle
             // 
             this.lblFilterByNameTitle.AutoSize = true;
             this.lblFilterByNameTitle.ForeColor = System.Drawing.Color.White;
-            this.lblFilterByNameTitle.Location = new System.Drawing.Point(440, 58);
+            this.lblFilterByNameTitle.Location = new System.Drawing.Point(760, 58);
             this.lblFilterByNameTitle.Name = "lblFilterByNameTitle";
             this.lblFilterByNameTitle.Size = new System.Drawing.Size(90, 13);
             this.lblFilterByNameTitle.TabIndex = 9;
@@ -101,7 +101,7 @@ namespace PanaderiaIkigai.Controls.Ingredients
             // 
             // txtFilterIngredientByName
             // 
-            this.txtFilterIngredientByName.Location = new System.Drawing.Point(536, 58);
+            this.txtFilterIngredientByName.Location = new System.Drawing.Point(856, 58);
             this.txtFilterIngredientByName.Name = "txtFilterIngredientByName";
             this.txtFilterIngredientByName.Size = new System.Drawing.Size(155, 20);
             this.txtFilterIngredientByName.TabIndex = 8;
@@ -158,7 +158,7 @@ namespace PanaderiaIkigai.Controls.Ingredients
             this.panel1.Controls.Add(this.btnEditUnit);
             this.panel1.Controls.Add(this.txtEditUnit);
             this.panel1.Controls.Add(this.comboBoxSelectUnitToEdit);
-            this.panel1.Location = new System.Drawing.Point(377, 279);
+            this.panel1.Location = new System.Drawing.Point(696, 401);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(315, 143);
             this.panel1.TabIndex = 15;
@@ -264,7 +264,7 @@ namespace PanaderiaIkigai.Controls.Ingredients
             this.btnDeleteBaseIngredient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(59)))), ((int)(((byte)(59)))));
             this.btnDeleteBaseIngredient.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteBaseIngredient.ForeColor = System.Drawing.Color.Red;
-            this.btnDeleteBaseIngredient.Location = new System.Drawing.Point(536, 236);
+            this.btnDeleteBaseIngredient.Location = new System.Drawing.Point(452, 240);
             this.btnDeleteBaseIngredient.Name = "btnDeleteBaseIngredient";
             this.btnDeleteBaseIngredient.Size = new System.Drawing.Size(155, 32);
             this.btnDeleteBaseIngredient.TabIndex = 20;
@@ -295,7 +295,7 @@ namespace PanaderiaIkigai.Controls.Ingredients
             this.Controls.Add(this.lblSelectIngredientTitle);
             this.Controls.Add(this.lblBaseIngredientQuery);
             this.Name = "EditBaseIngredientPanel";
-            this.Size = new System.Drawing.Size(707, 442);
+            this.Size = new System.Drawing.Size(1028, 560);
             this.Load += new System.EventHandler(this.DisplayBaseIngredientPanel_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvViewBaseIngredients)).EndInit();
             this.panel1.ResumeLayout(false);

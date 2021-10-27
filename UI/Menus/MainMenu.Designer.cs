@@ -1,7 +1,7 @@
 ﻿
 namespace PanaderiaIkigai
 {
-    partial class Form1
+    partial class MainMenu
     {
         /// <summary>
         /// Required designer variable.
@@ -70,7 +70,7 @@ namespace PanaderiaIkigai
             this.mainMenuControlsPanel.Size = new System.Drawing.Size(776, 299);
             this.mainMenuControlsPanel.TabIndex = 2;
             // 
-            // Form1
+            // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -78,7 +78,7 @@ namespace PanaderiaIkigai
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.IkigaiTitle);
             this.Controls.Add(this.mainMenuControlsPanel);
-            this.Name = "Form1";
+            this.Name = "MainMenu";
             this.Text = "Panadería Ikigai";
             this.mainMenuControlsPanel.ResumeLayout(false);
             this.ResumeLayout(false);

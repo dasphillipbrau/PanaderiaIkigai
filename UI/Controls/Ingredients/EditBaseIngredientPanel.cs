@@ -28,7 +28,8 @@ namespace PanaderiaIkigai.Controls.Ingredients
             var ingredientsList = ingredientContext.GetBaseIngredients();
             var unitsList = ingredientContext.GetUnits();
             dgvViewBaseIngredients.DataSource = ingredientsList;
-            
+            dgvViewBaseIngredients.AutoResizeColumns();
+            dgvViewBaseIngredients.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             if (unitsList.Count == 0)
             {

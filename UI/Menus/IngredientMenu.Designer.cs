@@ -30,12 +30,14 @@ namespace PanaderiaIkigai.Menus
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelMenuStrip = new System.Windows.Forms.Panel();
+            this.btnGoToEditDetailedIngredients = new System.Windows.Forms.Button();
             this.btnGoToRegisterDetailedIngredient = new System.Windows.Forms.Button();
             this.btnGoToEditBaseIngredient = new System.Windows.Forms.Button();
             this.btnOpenRegisterBasePanel = new System.Windows.Forms.Button();
-            this.btnGoToEditDetailedIngredients = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
+            this.panelMenuHolders = new System.Windows.Forms.Panel();
+            this.btnGoToMainMenu = new System.Windows.Forms.Button();
+            this.panelMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -49,17 +51,30 @@ namespace PanaderiaIkigai.Menus
             this.label1.TabIndex = 0;
             this.label1.Text = "Menú de Ingredientes";
             // 
-            // panel1
+            // panelMenuStrip
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
-            this.panel1.Controls.Add(this.btnGoToEditDetailedIngredients);
-            this.panel1.Controls.Add(this.btnGoToRegisterDetailedIngredient);
-            this.panel1.Controls.Add(this.btnGoToEditBaseIngredient);
-            this.panel1.Controls.Add(this.btnOpenRegisterBasePanel);
-            this.panel1.Location = new System.Drawing.Point(13, 63);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 442);
-            this.panel1.TabIndex = 1;
+            this.panelMenuStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
+            this.panelMenuStrip.Controls.Add(this.btnGoToMainMenu);
+            this.panelMenuStrip.Controls.Add(this.btnGoToEditDetailedIngredients);
+            this.panelMenuStrip.Controls.Add(this.btnGoToRegisterDetailedIngredient);
+            this.panelMenuStrip.Controls.Add(this.btnGoToEditBaseIngredient);
+            this.panelMenuStrip.Controls.Add(this.btnOpenRegisterBasePanel);
+            this.panelMenuStrip.Location = new System.Drawing.Point(13, 63);
+            this.panelMenuStrip.Name = "panelMenuStrip";
+            this.panelMenuStrip.Size = new System.Drawing.Size(200, 561);
+            this.panelMenuStrip.TabIndex = 1;
+            // 
+            // btnGoToEditDetailedIngredients
+            // 
+            this.btnGoToEditDetailedIngredients.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.btnGoToEditDetailedIngredients.ForeColor = System.Drawing.Color.Beige;
+            this.btnGoToEditDetailedIngredients.Location = new System.Drawing.Point(3, 261);
+            this.btnGoToEditDetailedIngredients.Name = "btnGoToEditDetailedIngredients";
+            this.btnGoToEditDetailedIngredients.Size = new System.Drawing.Size(194, 68);
+            this.btnGoToEditDetailedIngredients.TabIndex = 3;
+            this.btnGoToEditDetailedIngredients.Text = "Consultar y Editar Ingredientes Detallados";
+            this.btnGoToEditDetailedIngredients.UseVisualStyleBackColor = false;
+            this.btnGoToEditDetailedIngredients.Click += new System.EventHandler(this.btnGoToEditDetailedIngredients_Click);
             // 
             // btnGoToRegisterDetailedIngredient
             // 
@@ -97,28 +112,36 @@ namespace PanaderiaIkigai.Menus
             this.btnOpenRegisterBasePanel.UseVisualStyleBackColor = false;
             this.btnOpenRegisterBasePanel.Click += new System.EventHandler(this.btnOpenRegisterBasePanel_Click);
             // 
-            // btnGoToEditDetailedIngredients
+            // panelMenuHolders
             // 
-            this.btnGoToEditDetailedIngredients.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.btnGoToEditDetailedIngredients.ForeColor = System.Drawing.Color.Beige;
-            this.btnGoToEditDetailedIngredients.Location = new System.Drawing.Point(3, 261);
-            this.btnGoToEditDetailedIngredients.Name = "btnGoToEditDetailedIngredients";
-            this.btnGoToEditDetailedIngredients.Size = new System.Drawing.Size(194, 68);
-            this.btnGoToEditDetailedIngredients.TabIndex = 3;
-            this.btnGoToEditDetailedIngredients.Text = "Consultar y Editar Ingredientes Detallados";
-            this.btnGoToEditDetailedIngredients.UseVisualStyleBackColor = false;
-            this.btnGoToEditDetailedIngredients.Click += new System.EventHandler(this.btnGoToEditDetailedIngredients_Click);
+            this.panelMenuHolders.Location = new System.Drawing.Point(220, 28);
+            this.panelMenuHolders.Name = "panelMenuHolders";
+            this.panelMenuHolders.Size = new System.Drawing.Size(1186, 606);
+            this.panelMenuHolders.TabIndex = 2;
+            // 
+            // btnGoToMainMenu
+            // 
+            this.btnGoToMainMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.btnGoToMainMenu.ForeColor = System.Drawing.Color.Beige;
+            this.btnGoToMainMenu.Location = new System.Drawing.Point(3, 335);
+            this.btnGoToMainMenu.Name = "btnGoToMainMenu";
+            this.btnGoToMainMenu.Size = new System.Drawing.Size(194, 68);
+            this.btnGoToMainMenu.TabIndex = 4;
+            this.btnGoToMainMenu.Text = "Volver al Menú Principal";
+            this.btnGoToMainMenu.UseVisualStyleBackColor = false;
+            this.btnGoToMainMenu.Click += new System.EventHandler(this.btnGoToMainMenu_Click);
             // 
             // IngredientMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(59)))), ((int)(((byte)(59)))));
-            this.ClientSize = new System.Drawing.Size(974, 540);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(1418, 646);
+            this.Controls.Add(this.panelMenuHolders);
+            this.Controls.Add(this.panelMenuStrip);
             this.Controls.Add(this.label1);
             this.Name = "IngredientMenu";
-            this.panel1.ResumeLayout(false);
+            this.panelMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -127,10 +150,12 @@ namespace PanaderiaIkigai.Menus
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelMenuStrip;
         private System.Windows.Forms.Button btnGoToEditBaseIngredient;
         private System.Windows.Forms.Button btnOpenRegisterBasePanel;
         private System.Windows.Forms.Button btnGoToRegisterDetailedIngredient;
         private System.Windows.Forms.Button btnGoToEditDetailedIngredients;
+        private System.Windows.Forms.Panel panelMenuHolders;
+        private System.Windows.Forms.Button btnGoToMainMenu;
     }
 }

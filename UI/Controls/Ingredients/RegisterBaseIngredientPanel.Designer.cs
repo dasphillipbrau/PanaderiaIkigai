@@ -55,7 +55,7 @@ namespace PanaderiaIkigai.Controls
             this.lblIngredientRegistration.AutoSize = true;
             this.lblIngredientRegistration.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIngredientRegistration.ForeColor = System.Drawing.Color.White;
-            this.lblIngredientRegistration.Location = new System.Drawing.Point(194, 24);
+            this.lblIngredientRegistration.Location = new System.Drawing.Point(42, 24);
             this.lblIngredientRegistration.Name = "lblIngredientRegistration";
             this.lblIngredientRegistration.Size = new System.Drawing.Size(314, 24);
             this.lblIngredientRegistration.TabIndex = 0;
@@ -141,7 +141,7 @@ namespace PanaderiaIkigai.Controls
             this.lblMeasuringUnitTitle.AutoSize = true;
             this.lblMeasuringUnitTitle.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMeasuringUnitTitle.ForeColor = System.Drawing.Color.White;
-            this.lblMeasuringUnitTitle.Location = new System.Drawing.Point(192, 249);
+            this.lblMeasuringUnitTitle.Location = new System.Drawing.Point(42, 318);
             this.lblMeasuringUnitTitle.Name = "lblMeasuringUnitTitle";
             this.lblMeasuringUnitTitle.Size = new System.Drawing.Size(335, 24);
             this.lblMeasuringUnitTitle.TabIndex = 9;
@@ -192,9 +192,9 @@ namespace PanaderiaIkigai.Controls
             this.panel2.Controls.Add(this.txtUnitName);
             this.panel2.Controls.Add(this.btnRegisterUnit);
             this.panel2.Controls.Add(this.lblUnitName);
-            this.panel2.Location = new System.Drawing.Point(38, 287);
+            this.panel2.Location = new System.Drawing.Point(38, 361);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(644, 143);
+            this.panel2.Size = new System.Drawing.Size(974, 143);
             this.panel2.TabIndex = 15;
             // 
             // panel3
@@ -203,7 +203,7 @@ namespace PanaderiaIkigai.Controls
             this.panel3.Controls.Add(this.btnRegisterBaseIngredient);
             this.panel3.Location = new System.Drawing.Point(38, 68);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(644, 178);
+            this.panel3.Size = new System.Drawing.Size(974, 178);
             this.panel3.TabIndex = 16;
             // 
             // label1
@@ -247,7 +247,7 @@ namespace PanaderiaIkigai.Controls
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);
             this.Name = "BaseIngredientPanel";
-            this.Size = new System.Drawing.Size(707, 442);
+            this.Size = new System.Drawing.Size(1028, 560);
             this.Load += new System.EventHandler(this.BaseIngredientPanel_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();

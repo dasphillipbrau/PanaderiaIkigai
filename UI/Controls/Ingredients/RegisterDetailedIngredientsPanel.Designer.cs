@@ -70,7 +70,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(159, 10);
+            this.label1.Location = new System.Drawing.Point(14, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(369, 24);
             this.label1.TabIndex = 0;
@@ -80,7 +80,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
             // 
             this.lblFilterByNameTitle.AutoSize = true;
             this.lblFilterByNameTitle.ForeColor = System.Drawing.Color.White;
-            this.lblFilterByNameTitle.Location = new System.Drawing.Point(438, 48);
+            this.lblFilterByNameTitle.Location = new System.Drawing.Point(758, 48);
             this.lblFilterByNameTitle.Name = "lblFilterByNameTitle";
             this.lblFilterByNameTitle.Size = new System.Drawing.Size(90, 13);
             this.lblFilterByNameTitle.TabIndex = 12;
@@ -88,7 +88,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
             // 
             // txtFilterIngredientByName
             // 
-            this.txtFilterIngredientByName.Location = new System.Drawing.Point(534, 41);
+            this.txtFilterIngredientByName.Location = new System.Drawing.Point(854, 48);
             this.txtFilterIngredientByName.Name = "txtFilterIngredientByName";
             this.txtFilterIngredientByName.Size = new System.Drawing.Size(155, 20);
             this.txtFilterIngredientByName.TabIndex = 11;
@@ -100,11 +100,11 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
             this.dgvViewBaseIngredients.AllowUserToDeleteRows = false;
             this.dgvViewBaseIngredients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvViewBaseIngredients.GridColor = System.Drawing.Color.White;
-            this.dgvViewBaseIngredients.Location = new System.Drawing.Point(18, 64);
+            this.dgvViewBaseIngredients.Location = new System.Drawing.Point(18, 78);
             this.dgvViewBaseIngredients.Name = "dgvViewBaseIngredients";
             this.dgvViewBaseIngredients.ReadOnly = true;
             this.dgvViewBaseIngredients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvViewBaseIngredients.Size = new System.Drawing.Size(672, 105);
+            this.dgvViewBaseIngredients.Size = new System.Drawing.Size(991, 105);
             this.dgvViewBaseIngredients.TabIndex = 10;
             // 
             // label2
@@ -123,7 +123,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
             this.btnSaveDetailedIngredient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnSaveDetailedIngredient.Enabled = false;
             this.btnSaveDetailedIngredient.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveDetailedIngredient.Location = new System.Drawing.Point(576, 391);
+            this.btnSaveDetailedIngredient.Location = new System.Drawing.Point(21, 483);
             this.btnSaveDetailedIngredient.Name = "btnSaveDetailedIngredient";
             this.btnSaveDetailedIngredient.Size = new System.Drawing.Size(114, 48);
             this.btnSaveDetailedIngredient.TabIndex = 22;
@@ -133,7 +133,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
             // 
             // btnSearchBaseIngredient
             // 
-            this.btnSearchBaseIngredient.Location = new System.Drawing.Point(21, 214);
+            this.btnSearchBaseIngredient.Location = new System.Drawing.Point(21, 262);
             this.btnSearchBaseIngredient.Name = "btnSearchBaseIngredient";
             this.btnSearchBaseIngredient.Size = new System.Drawing.Size(153, 24);
             this.btnSearchBaseIngredient.TabIndex = 21;
@@ -143,7 +143,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
             // 
             // txtSearchIngredientCode
             // 
-            this.txtSearchIngredientCode.Location = new System.Drawing.Point(21, 188);
+            this.txtSearchIngredientCode.Location = new System.Drawing.Point(21, 236);
             this.txtSearchIngredientCode.Name = "txtSearchIngredientCode";
             this.txtSearchIngredientCode.Size = new System.Drawing.Size(153, 20);
             this.txtSearchIngredientCode.TabIndex = 20;
@@ -152,7 +152,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
             // 
             this.lblSelectIngredientTitle.AutoSize = true;
             this.lblSelectIngredientTitle.ForeColor = System.Drawing.Color.White;
-            this.lblSelectIngredientTitle.Location = new System.Drawing.Point(18, 172);
+            this.lblSelectIngredientTitle.Location = new System.Drawing.Point(18, 220);
             this.lblSelectIngredientTitle.Name = "lblSelectIngredientTitle";
             this.lblSelectIngredientTitle.Size = new System.Drawing.Size(473, 13);
             this.lblSelectIngredientTitle.TabIndex = 19;
@@ -161,7 +161,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
             // 
             // txtBrand
             // 
-            this.txtBrand.Location = new System.Drawing.Point(21, 268);
+            this.txtBrand.Location = new System.Drawing.Point(21, 316);
             this.txtBrand.Name = "txtBrand";
             this.txtBrand.Size = new System.Drawing.Size(153, 20);
             this.txtBrand.TabIndex = 23;
@@ -169,7 +169,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
             // 
             // txtOrigin
             // 
-            this.txtOrigin.Location = new System.Drawing.Point(21, 323);
+            this.txtOrigin.Location = new System.Drawing.Point(21, 371);
             this.txtOrigin.Name = "txtOrigin";
             this.txtOrigin.Size = new System.Drawing.Size(153, 20);
             this.txtOrigin.TabIndex = 24;
@@ -177,7 +177,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
             // 
             // txtAmountInUnit
             // 
-            this.txtAmountInUnit.Location = new System.Drawing.Point(21, 374);
+            this.txtAmountInUnit.Location = new System.Drawing.Point(21, 422);
             this.txtAmountInUnit.Name = "txtAmountInUnit";
             this.txtAmountInUnit.Size = new System.Drawing.Size(153, 20);
             this.txtAmountInUnit.TabIndex = 25;
@@ -185,7 +185,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
             // 
             // txtUnitPrice
             // 
-            this.txtUnitPrice.Location = new System.Drawing.Point(338, 268);
+            this.txtUnitPrice.Location = new System.Drawing.Point(218, 316);
             this.txtUnitPrice.Name = "txtUnitPrice";
             this.txtUnitPrice.Size = new System.Drawing.Size(153, 20);
             this.txtUnitPrice.TabIndex = 26;
@@ -193,7 +193,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
             // 
             // txtAmountAvailable
             // 
-            this.txtAmountAvailable.Location = new System.Drawing.Point(338, 374);
+            this.txtAmountAvailable.Location = new System.Drawing.Point(218, 422);
             this.txtAmountAvailable.Name = "txtAmountAvailable";
             this.txtAmountAvailable.Size = new System.Drawing.Size(153, 20);
             this.txtAmountAvailable.TabIndex = 28;
@@ -203,7 +203,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
             // 
             this.comboBoxQuality.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxQuality.FormattingEnabled = true;
-            this.comboBoxQuality.Location = new System.Drawing.Point(338, 323);
+            this.comboBoxQuality.Location = new System.Drawing.Point(218, 371);
             this.comboBoxQuality.Name = "comboBoxQuality";
             this.comboBoxQuality.Size = new System.Drawing.Size(153, 21);
             this.comboBoxQuality.TabIndex = 30;
@@ -212,7 +212,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
             // 
             this.lblIngredientBrand.AutoSize = true;
             this.lblIngredientBrand.ForeColor = System.Drawing.Color.White;
-            this.lblIngredientBrand.Location = new System.Drawing.Point(21, 249);
+            this.lblIngredientBrand.Location = new System.Drawing.Point(21, 297);
             this.lblIngredientBrand.Name = "lblIngredientBrand";
             this.lblIngredientBrand.Size = new System.Drawing.Size(110, 13);
             this.lblIngredientBrand.TabIndex = 31;
@@ -222,7 +222,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(21, 307);
+            this.label3.Location = new System.Drawing.Point(21, 355);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(94, 13);
             this.label3.TabIndex = 32;
@@ -232,7 +232,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(21, 358);
+            this.label4.Location = new System.Drawing.Point(21, 406);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(112, 13);
             this.label4.TabIndex = 33;
@@ -242,7 +242,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
             // 
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(335, 252);
+            this.label5.Location = new System.Drawing.Point(215, 297);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(76, 13);
             this.label5.TabIndex = 34;
@@ -252,7 +252,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(335, 307);
+            this.label6.Location = new System.Drawing.Point(215, 355);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(115, 13);
             this.label6.TabIndex = 35;
@@ -262,7 +262,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
             // 
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(335, 358);
+            this.label7.Location = new System.Drawing.Point(215, 406);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(117, 13);
             this.label7.TabIndex = 36;
@@ -292,7 +292,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
             // 
             this.lblBaseIngredientFound.AutoSize = true;
             this.lblBaseIngredientFound.ForeColor = System.Drawing.Color.Lime;
-            this.lblBaseIngredientFound.Location = new System.Drawing.Point(181, 194);
+            this.lblBaseIngredientFound.Location = new System.Drawing.Point(181, 242);
             this.lblBaseIngredientFound.Name = "lblBaseIngredientFound";
             this.lblBaseIngredientFound.Size = new System.Drawing.Size(35, 13);
             this.lblBaseIngredientFound.TabIndex = 37;
@@ -326,7 +326,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
             this.Controls.Add(this.dgvViewBaseIngredients);
             this.Controls.Add(this.label1);
             this.Name = "RegisterDetailedIngredientsPanel";
-            this.Size = new System.Drawing.Size(707, 442);
+            this.Size = new System.Drawing.Size(1028, 560);
             this.Load += new System.EventHandler(this.RegisterDetailedIngredientsPanel_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvViewBaseIngredients)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderBrand)).EndInit();

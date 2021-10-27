@@ -222,7 +222,7 @@ namespace PanaderiaIkigai.Data
                 using (var conn = new SQLiteConnection(GetConnectionString()))
                 {
                     var deleteIngredientCommand = new SQLiteCommand("DELETE FROM INGREDIENT_DETAILED WHERE DETAILED_INGREDIENT_ID = $pDetailedIngredientCode", conn);
-                    deleteIngredientCommand.Parameters.AddWithValue("pDetailedIngredientCode", pDetailedIngredientCode.ToUpper());
+                    deleteIngredientCommand.Parameters.AddWithValue("pDetailedIngredientCode", pDetailedIngredientCode.Trim().ToUpper());
                     conn.Open();
                     deleteIngredientCommand.ExecuteNonQuery();
                 }
@@ -438,6 +438,93 @@ namespace PanaderiaIkigai.Data
             }
         }
         /// <summary>
+        /// Retrieves every detailed ingredient in the database which is similar to a filter
+        /// </summary>
+        /// <param name="pFilter">Name filter</param>
+        /// <returns>List with results</returns>
+        public IEnumerable<DetailedIngredient> GetDetailedIngredientsByName(string pFilter)
+        {
+            try
+            {
+                using(var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    List<DetailedIngredient> ingredientsList = new List<DetailedIngredient>();
+                    var getDetailedIngredientsCommand = new SQLiteCommand("SELECT A.DETAILED_INGREDIENT_ID, A.INGREDIENT_CODE, B.NAME, A.BRAND, " +
+                        "A.INGREDIENT_SOURCE, A.UNIT_PRICE, A.AMOUNT_IN_UNIT, A.MINIMUM_PRICE_PER_UNIT, A.QUALITY, A.UNITS_AVAILABLE " +
+                        "FROM INGREDIENT_DETAILED A " +
+                        "INNER JOIN INGREDIENT B " +
+                        "ON A.INGREDIENT_CODE = B.CODE " +
+                        " WHERE B.NAME LIKE $pFilter || '%' " +
+                        "ORDER BY B.NAME ASC", conn);
+                    getDetailedIngredientsCommand.Parameters.AddWithValue("pFilter", pFilter);
+                    conn.Open();
+                    var reader = getDetailedIngredientsCommand.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        var baseIngredient = new BaseIngredient() { Code = reader.GetInt32(1), Name = reader.GetString(2) };
+                        var detailedIngredient = new DetailedIngredient(baseIngredient, reader.GetString(0), reader.GetString(3), reader.GetString(4), reader.GetDecimal(5), reader.GetDecimal(6), reader.GetDecimal(7), reader.GetInt32(8), reader.GetInt32(9));
+                        ingredientsList.Add(detailedIngredient);
+                    }
+                    return ingredientsList;
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                Console.WriteLine(sqlEx.Message);
+                Console.WriteLine(sqlEx.ErrorCode);
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine("ERROR OCCURRED");
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+        }
+
+        public IEnumerable<DetailedIngredient> GetDetailedIngredientsByDetailedCode(string pDetailedCode)
+        {
+            try { 
+                using (var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    List<DetailedIngredient> ingredientsList = new List<DetailedIngredient>();
+                    var getDetailedIngredientsCommand = new SQLiteCommand("SELECT A.DETAILED_INGREDIENT_ID, A.INGREDIENT_CODE, B.NAME, A.BRAND, " +
+                        "A.INGREDIENT_SOURCE, A.UNIT_PRICE, A.AMOUNT_IN_UNIT, A.MINIMUM_PRICE_PER_UNIT, A.QUALITY, A.UNITS_AVAILABLE " +
+                        "FROM INGREDIENT_DETAILED A " +
+                        "INNER JOIN INGREDIENT B " +
+                        "ON A.INGREDIENT_CODE = B.CODE " +
+                        " WHERE A.DETAILED_INGREDIENT_ID LIKE $pDetailedCode || '%' " +
+                        "ORDER BY B.NAME ASC", conn);
+                    getDetailedIngredientsCommand.Parameters.AddWithValue("pDetailedCode", pDetailedCode);
+                    conn.Open();
+                    var reader = getDetailedIngredientsCommand.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        var baseIngredient = new BaseIngredient() { Code = reader.GetInt32(1), Name = reader.GetString(2) };
+                        var detailedIngredient = new DetailedIngredient(baseIngredient, reader.GetString(0), reader.GetString(3), reader.GetString(4), reader.GetDecimal(5), reader.GetDecimal(6), reader.GetDecimal(7), reader.GetInt32(8), reader.GetInt32(9));
+                        ingredientsList.Add(detailedIngredient);
+                    }
+                    return ingredientsList;
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                Console.WriteLine(sqlEx.Message);
+                Console.WriteLine(sqlEx.ErrorCode);
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine("ERROR OCCURRED");
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+        }
+            
+        
+        /// <summary>
         /// Accesses the database and retrieves every detailed ingredient regardless of base ingredient.
         /// </summary>
         /// <returns>All the records in the detailed ingredients table</returns>
@@ -478,6 +565,93 @@ namespace PanaderiaIkigai.Data
                 throw ex;
             }
         }
+        /// <summary>
+        /// Retrieves a specific instance of detailed ingredient based on its database code
+        /// </summary>
+        /// <param name="pDetailedIngredientCode">Code to filter by</param>
+        /// <returns>Ingredient found. Null if none found</returns>
+        public DetailedIngredient GetDetailedIngredients(string pDetailedIngredientCode)
+        {
+            try
+            {
+                using (var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    DetailedIngredient detailedIngredient = null;
+                    var getDetailedIngredientsCommand = new SQLiteCommand("SELECT A.DETAILED_INGREDIENT_ID, A.INGREDIENT_CODE, B.NAME, A.BRAND, " +
+                        "A.INGREDIENT_SOURCE, A.UNIT_PRICE, A.AMOUNT_IN_UNIT, A.MINIMUM_PRICE_PER_UNIT, A.QUALITY, A.UNITS_AVAILABLE " +
+                        "FROM INGREDIENT_DETAILED A " +
+                        "INNER JOIN INGREDIENT B " +
+                        "ON A.INGREDIENT_CODE = B.CODE WHERE A.DETAILED_INGREDIENT_ID = $pDetailedIngredientCode", conn);
+                    getDetailedIngredientsCommand.Parameters.AddWithValue("pDetailedIngredientCode", pDetailedIngredientCode);
+                    conn.Open();
+                    var reader = getDetailedIngredientsCommand.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        var baseIngredient = new BaseIngredient() { Code = reader.GetInt32(1), Name = reader.GetString(2) };
+                        detailedIngredient = new DetailedIngredient(baseIngredient, reader.GetString(0), reader.GetString(3), reader.GetString(4), reader.GetDecimal(5), reader.GetDecimal(6), reader.GetDecimal(7), reader.GetInt32(8), reader.GetInt32(9));
+                    }
+                    return detailedIngredient;
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                Console.WriteLine(sqlEx.Message);
+                Console.WriteLine(sqlEx.ErrorCode);
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine("ERROR OCCURRED");
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+        }
+        /// <summary>
+        /// Updates an instance of detailed ingredient based on its original detailed code
+        /// </summary>
+        /// <param name="pDetailedIngredient">Original Detail Code</param>
+        /// <returns>Amount of rows updated</returns>
+        public int UpdateDetailedIngredient(DetailedIngredient pDetailedIngredient, string pOriginalCode)
+        {
+            try { 
+                using (var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    DetailedIngredient detailedIngredient = null;
+                    pDetailedIngredient.DetailedIngredientCode = pDetailedIngredient.BaseIngredientCode + "-" + pDetailedIngredient.Brand.Trim().ToUpper() + "-" + pDetailedIngredient.IngredientSource.Trim().ToUpper();
+
+                    var updateDetailedIngredientCommand = new SQLiteCommand("UPDATE INGREDIENT_DETAILED SET DETAILED_INGREDIENT_ID = $pDetailedIngredientCode, BRAND = $pBrand, INGREDIENT_SOURCE = $pSource, " +
+                        "UNIT_PRICE = $pUnitPrice, AMOUNT_IN_UNIT = $pAmountInUnit, MINIMUM_PRICE_PER_UNIT = $pPricePerMinimumUnit, QUALITY = $pQuality, UNITS_AVAILABLE = $pUnitsAvailable WHERE DETAILED_INGREDIENT_ID = $pOriginalCode", conn);
+
+                    updateDetailedIngredientCommand.Parameters.AddWithValue("pOriginalCode", pOriginalCode);
+                    updateDetailedIngredientCommand.Parameters.AddWithValue("pDetailedIngredientCode", pDetailedIngredient.DetailedIngredientCode);
+                    updateDetailedIngredientCommand.Parameters.AddWithValue("pBrand", pDetailedIngredient.Brand);
+                    updateDetailedIngredientCommand.Parameters.AddWithValue("pSource", pDetailedIngredient.IngredientSource);
+                    updateDetailedIngredientCommand.Parameters.Add("pUnitPrice", DbType.Decimal).Value = pDetailedIngredient.UnitPrice;
+                    updateDetailedIngredientCommand.Parameters.Add("pAmountInUnit", DbType.Decimal).Value = pDetailedIngredient.AmountInUnit;
+                    updateDetailedIngredientCommand.Parameters.Add("pPricePerMinimumUnit", DbType.Decimal).Value = pDetailedIngredient.MinimumUnitPrice;
+                    updateDetailedIngredientCommand.Parameters.AddWithValue("pQuality", pDetailedIngredient.Quality);
+                    updateDetailedIngredientCommand.Parameters.AddWithValue("pUnitsAvailable", pDetailedIngredient.TotalUnitsAvailable);
+                    conn.Open();
+                    return updateDetailedIngredientCommand.ExecuteNonQuery();
+                    
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                Console.WriteLine(sqlEx.Message);
+                Console.WriteLine(sqlEx.ErrorCode);
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine("ERROR OCCURRED");
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+        }
+            
         /// <summary>
         /// Saves a measuring unit to be used within the app.
         /// </summary>

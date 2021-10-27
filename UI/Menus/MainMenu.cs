@@ -13,10 +13,10 @@ using System.Windows.Forms;
 
 namespace PanaderiaIkigai
 {
-    public partial class Form1 : Form
+    public partial class MainMenu : Form
     {
         static IngredientContext context = new IngredientContext();
-        public Form1()
+        public MainMenu()
         {
             InitializeComponent();
         }

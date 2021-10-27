@@ -54,6 +54,21 @@ namespace PanaderiaIkigai.BusinessLogic
             var result = dataAccess.GetDetailedIngredients() as List<DetailedIngredient>;
             return result;
         }
+
+        public DetailedIngredient GetDetailedIngredient(string pDetailedIngredientCode)
+        {
+            return dataAccess.GetDetailedIngredients(pDetailedIngredientCode.Trim().ToUpper());
+        }
+
+        public List<DetailedIngredient> GetDetailedIngredientsByName(string pNameFilter)
+        {
+            return dataAccess.GetDetailedIngredientsByName(pNameFilter.Trim().ToUpper()) as List<DetailedIngredient>;
+        }
+
+        public List<DetailedIngredient> GetDetailedIngredientsByDetailedCode(string pDetailedCodeFilter)
+        {
+            return dataAccess.GetDetailedIngredientsByDetailedCode(pDetailedCodeFilter.Trim().ToUpper()) as List<DetailedIngredient>;
+        }
         /// <summary>
         /// Retrieves all the base ingredients in the database
         /// </summary>
@@ -242,6 +257,44 @@ namespace PanaderiaIkigai.BusinessLogic
             {
                 throw ex;
             }
+        }
+
+        public bool UpdateDetailedIngredient(int pBaseCode, string pOriginalCode, TextBox pBrandBox, TextBox pOriginBox, TextBox pAmountInUnitBox, TextBox pUnitPriceBox, ComboBox pQualityBox, TextBox pUnitsAvailableBox)
+        {
+            try
+            {
+                DetailedIngredient ingredientToUpdate = informationCapturer.CaptureDetailedIngredient(pBaseCode, pBrandBox, pOriginBox, pAmountInUnitBox, pUnitPriceBox, pQualityBox, pUnitsAvailableBox);
+                if (dataAccess.UpdateDetailedIngredient(ingredientToUpdate, pOriginalCode.Trim().ToUpper()) == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool DeleteDetailedIngredient(string pDetailedCode)
+        {
+            try
+            {
+                dataAccess.DeleteDetailedIngredients(pDetailedCode);
+                return true;
+            }
+            catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
         }
     }
 }

@@ -32,12 +32,15 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
         {
             lblBaseIngredientFound.Text = "";
             var ingredientsList = ingredientContext.GetBaseIngredients();
+            dgvViewBaseIngredients.AutoResizeColumns();
             dgvViewBaseIngredients.DataSource = ingredientsList;
-            for(int i = 1; i <= 10; i++)
+            dgvViewBaseIngredients.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            for (int i = 1; i <= 10; i++)
             {
                 comboBoxQuality.Items.Add(i);
             }
             comboBoxQuality.SelectedIndex = 0;
+            
         }
 
         private void txtFilterIngredientByName_TextChanged(object sender, EventArgs e)
@@ -100,6 +103,8 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
                             amountInUnitValid = false;
                             unitPriceValid = false;
                             unitsAvailableValid = false;
+                            txtSearchIngredientCode.Focus();
+                            errorProviderBrand.Clear();
                         }
                         else
                             MessageBox.Show("No se ha registrado el ingrediente", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
