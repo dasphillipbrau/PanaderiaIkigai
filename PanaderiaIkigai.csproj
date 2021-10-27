@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="packages\SQLite.3.13.0\build\net45\SQLite.props" Condition="Exists('packages\SQLite.3.13.0\build\net45\SQLite.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -15,6 +16,22 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\dasph\OneDrive\Desktop\Appt\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>11</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,7 +52,25 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>861272E94247CE718FF2ABD9BED31880A0C42169</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>PanaderiaIkigai_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
     </Reference>
@@ -45,14 +80,8 @@
     <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Data.Sqlite, Version=5.0.11.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Data.Sqlite.Core.5.0.11\lib\netstandard2.0\Microsoft.Data.Sqlite.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="SQLitePCLRaw.core, Version=2.0.4.976, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
-      <HintPath>packages\SQLitePCLRaw.core.2.0.4\lib\netstandard2.0\SQLitePCLRaw.core.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
@@ -88,46 +117,72 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLogic\IngredientContext.cs" />
-    <Compile Include="Controls\Ingredients\BaseIngredientPanel.cs">
+    <Compile Include="UI\Controls\Ingredients\EditDetailedIngredientPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Ingredients\BaseIngredientPanel.Designer.cs">
-      <DependentUpon>BaseIngredientPanel.cs</DependentUpon>
+    <Compile Include="UI\Controls\Ingredients\EditDetailedIngredientPanel.Designer.cs">
+      <DependentUpon>EditDetailedIngredientPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Ingredients\DisplayBaseIngredientPanel.cs">
+    <Compile Include="UI\Controls\Ingredients\RegisterBaseIngredientPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Ingredients\DisplayBaseIngredientPanel.Designer.cs">
-      <DependentUpon>DisplayBaseIngredientPanel.cs</DependentUpon>
+    <Compile Include="UI\Controls\Ingredients\RegisterBaseIngredientPanel.Designer.cs">
+      <DependentUpon>RegisterBaseIngredientPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Ingredients\EditBaseIngredientPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Ingredients\EditBaseIngredientPanel.Designer.cs">
+      <DependentUpon>EditBaseIngredientPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Data\SqliteIngredientManager.cs" />
-    <Compile Include="InformationCapture\IngredientInformationCapturer.cs" />
-    <Compile Include="Menus\IngredientMenu.cs">
+    <Compile Include="BusinessLogic\InformationCapture\IngredientInformationCapturer.cs" />
+    <Compile Include="UI\Controls\Ingredients\RegisterDetailedIngredientsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Ingredients\RegisterDetailedIngredientsPanel.Designer.cs">
+      <DependentUpon>RegisterDetailedIngredientsPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Menus\IngredientMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Menus\IngredientMenu.Designer.cs">
+    <Compile Include="UI\Menus\IngredientMenu.Designer.cs">
       <DependentUpon>IngredientMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Menus\MainMenu.cs">
+    <Compile Include="UI\Menus\MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Menus\MainMenu.Designer.cs">
+    <Compile Include="UI\Menus\MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DetailedIngredient.cs" />
     <Compile Include="Models\BaseIngredient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Controls\Ingredients\BaseIngredientPanel.resx">
-      <DependentUpon>BaseIngredientPanel.cs</DependentUpon>
+    <Content Include="Data\SQL\DDL\tables.sql" />
+    <Content Include="Data\SQL\DDL\triggers.sql" />
+    <Content Include="x64\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="UI\Controls\Ingredients\EditDetailedIngredientPanel.resx">
+      <DependentUpon>EditDetailedIngredientPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Ingredients\DisplayBaseIngredientPanel.resx">
-      <DependentUpon>DisplayBaseIngredientPanel.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Controls\Ingredients\RegisterBaseIngredientPanel.resx">
+      <DependentUpon>RegisterBaseIngredientPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Menus\IngredientMenu.resx">
+    <EmbeddedResource Include="UI\Controls\Ingredients\EditBaseIngredientPanel.resx">
+      <DependentUpon>EditBaseIngredientPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Ingredients\RegisterDetailedIngredientsPanel.resx">
+      <DependentUpon>RegisterDetailedIngredientsPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Menus\IngredientMenu.resx">
       <DependentUpon>IngredientMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Menus\MainMenu.resx">
+    <EmbeddedResource Include="UI\Menus\MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -143,6 +198,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
+    <None Include="PanaderiaIkigai_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -156,6 +212,30 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="Data\Ikigai.db">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -164,6 +244,9 @@
     </PropertyGroup>
     <Error Condition="!Exists('packages\SQLite.3.13.0\build\net45\SQLite.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\SQLite.3.13.0\build\net45\SQLite.props'))" />
     <Error Condition="!Exists('packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
   </Target>
   <Import Project="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
+  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
 </Project>
