@@ -148,6 +148,12 @@
     <Compile Include="UI\Controls\Ingredients\RegisterDetailedIngredientsPanel.Designer.cs">
       <DependentUpon>RegisterDetailedIngredientsPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Controls\Recipes\EditRecipePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Recipes\EditRecipePanel.Designer.cs">
+      <DependentUpon>EditRecipePanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\Recipes\RegisterRecipePanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -195,6 +201,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Ingredients\RegisterDetailedIngredientsPanel.resx">
       <DependentUpon>RegisterDetailedIngredientsPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Recipes\EditRecipePanel.resx">
+      <DependentUpon>EditRecipePanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Recipes\RegisterRecipePanel.resx">
       <DependentUpon>RegisterRecipePanel.cs</DependentUpon>

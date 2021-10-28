@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PanaderiaIkigai.BusinessLogic.InformationCapture;
 using PanaderiaIkigai.Data;
 using PanaderiaIkigai.Models;
 
@@ -14,6 +15,7 @@ namespace PanaderiaIkigai.BusinessLogic
     {
         static SQLiteRecipeManager recipeDataAccess = new SQLiteRecipeManager();
         static SqliteIngredientManager ingredientDataAccess = new SqliteIngredientManager();
+        static RecipeCapturer recipeCapturer = new RecipeCapturer();
         public bool RegisterCategory(TextBox txtCategoryName, Label lblCategoryValidation)
         {
             try { 
@@ -79,6 +81,30 @@ namespace PanaderiaIkigai.BusinessLogic
             {
                 throw ex;
             }
+        }
+
+        public bool RegisterRecipe(string pName, string pCategory, string pAuthor, int pUnits, decimal pIngredientAmount, string pImagePath, string pPreparationNotes)
+        {
+            try {
+                Recipe recipeToRegister = recipeCapturer.CaptureRecipeInformation(pName, pCategory, pAuthor, pUnits, pIngredientAmount, pImagePath, pPreparationNotes);
+                if (recipeDataAccess.RegisterRecipe(recipeToRegister) == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch(SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<Recipe> GetRecipes()
+        {
+            return recipeDataAccess.GetRecipes() as List<Recipe>;
         }
     }
 }

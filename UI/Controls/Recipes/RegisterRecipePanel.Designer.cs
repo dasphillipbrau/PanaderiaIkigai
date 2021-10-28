@@ -58,6 +58,7 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
             this.errorProviderUnitsAvailable = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorProviderIngredientAmount = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnBrowseImg = new System.Windows.Forms.Button();
+            this.lblImgFound = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panelCategoryRegistration.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderRecipeName)).BeginInit();
@@ -80,6 +81,7 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
+            this.panel1.Controls.Add(this.lblImgFound);
             this.panel1.Controls.Add(this.btnBrowseImg);
             this.panel1.Controls.Add(this.btnSaveRecipe);
             this.panel1.Controls.Add(this.comboBoxCategory);
@@ -177,6 +179,7 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
             this.txtRecipeName.Name = "txtRecipeName";
             this.txtRecipeName.Size = new System.Drawing.Size(172, 20);
             this.txtRecipeName.TabIndex = 4;
+            this.txtRecipeName.Validating += new System.ComponentModel.CancelEventHandler(this.txtRecipeName_Validating);
             // 
             // label3
             // 
@@ -202,6 +205,7 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
             this.txtRecipeAuthor.Name = "txtRecipeAuthor";
             this.txtRecipeAuthor.Size = new System.Drawing.Size(172, 20);
             this.txtRecipeAuthor.TabIndex = 8;
+            this.txtRecipeAuthor.Validating += new System.ComponentModel.CancelEventHandler(this.txtRecipeAuthor_Validating);
             // 
             // label5
             // 
@@ -218,6 +222,7 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
             this.txtUnitsAvailable.Name = "txtUnitsAvailable";
             this.txtUnitsAvailable.Size = new System.Drawing.Size(172, 20);
             this.txtUnitsAvailable.TabIndex = 10;
+            this.txtUnitsAvailable.Validating += new System.ComponentModel.CancelEventHandler(this.txtUnitsAvailable_Validating);
             // 
             // label6
             // 
@@ -234,6 +239,7 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
             this.txtMainIngredientAmount.Name = "txtMainIngredientAmount";
             this.txtMainIngredientAmount.Size = new System.Drawing.Size(172, 20);
             this.txtMainIngredientAmount.TabIndex = 12;
+            this.txtMainIngredientAmount.Validating += new System.ComponentModel.CancelEventHandler(this.txtMainIngredientAmount_Validating);
             // 
             // label7
             // 
@@ -269,6 +275,7 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
             this.comboBoxCategory.Name = "comboBoxCategory";
             this.comboBoxCategory.Size = new System.Drawing.Size(172, 21);
             this.comboBoxCategory.TabIndex = 17;
+            this.comboBoxCategory.Validating += new System.ComponentModel.CancelEventHandler(this.comboBoxCategory_Validating);
             // 
             // btnSaveRecipe
             // 
@@ -281,6 +288,7 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
             this.btnSaveRecipe.TabIndex = 4;
             this.btnSaveRecipe.Text = "Guardar Receta";
             this.btnSaveRecipe.UseVisualStyleBackColor = false;
+            this.btnSaveRecipe.Click += new System.EventHandler(this.btnSaveRecipe_Click);
             // 
             // errorProviderRecipeName
             // 
@@ -311,6 +319,18 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
             this.btnBrowseImg.TabIndex = 18;
             this.btnBrowseImg.Text = "Buscar Imagen";
             this.btnBrowseImg.UseVisualStyleBackColor = true;
+            this.btnBrowseImg.Click += new System.EventHandler(this.btnBrowseImg_Click);
+            // 
+            // lblImgFound
+            // 
+            this.lblImgFound.AutoSize = true;
+            this.lblImgFound.ForeColor = System.Drawing.Color.Lime;
+            this.lblImgFound.Location = new System.Drawing.Point(256, 176);
+            this.lblImgFound.Name = "lblImgFound";
+            this.lblImgFound.Size = new System.Drawing.Size(99, 13);
+            this.lblImgFound.TabIndex = 19;
+            this.lblImgFound.Text = "Imagen encontrada";
+            this.lblImgFound.Visible = false;
             // 
             // RegisterRecipePanel
             // 
@@ -369,5 +389,6 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
         private System.Windows.Forms.ErrorProvider errorProviderAuthor;
         private System.Windows.Forms.ErrorProvider errorProviderUnitsAvailable;
         private System.Windows.Forms.ErrorProvider errorProviderIngredientAmount;
+        private System.Windows.Forms.Label lblImgFound;
     }
 }
