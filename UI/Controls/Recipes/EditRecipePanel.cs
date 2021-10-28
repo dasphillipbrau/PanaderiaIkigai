@@ -40,17 +40,15 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
             if (categoryList.Count == 0)
             {
                 comboBoxCurrentCategories.Items.Add("No hay Categorías");
-                comboBoxEditRecipeCategory.Items.Add("No hay Categorías");
-                comboBoxCurrentCategories.SelectedIndex = 0;
-                comboBoxEditRecipeCategory.SelectedIndex = 0;
+                comboBoxEditRecipeCategory.Items.Add("No hay Categorías");        
             }
             else
             {
                 comboBoxEditRecipeCategory.DataSource = categoryList;
                 comboBoxCurrentCategories.DataSource = categoryList;
-                comboBoxCurrentCategories.SelectedIndex = 0;
-                comboBoxEditRecipeCategory.SelectedIndex = 0;
             }
+            comboBoxCurrentCategories.SelectedIndex = 0;
+            comboBoxEditRecipeCategory.SelectedIndex = 0;
             if (recipeList.Count != 0) {
                 dgvRecipes.DataSource = recipeList;
                 dgvRecipes.AutoResizeColumns();
@@ -427,13 +425,19 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
             {
                 if (recipeContext.DeleteCategory(comboBoxCurrentCategories.SelectedItem.ToString().ToUpper())) { 
                     MessageBox.Show("Categoría Borrada", successfulOperationMessage, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    var updatedCategories = recipeContext.GetCategories();
-                    comboBoxCurrentCategories.DataSource = updatedCategories;
+                    var categoryList = recipeContext.GetCategories();
+                    if (categoryList.Count == 0)
+                    {
+                        comboBoxCurrentCategories.Items.Add("No hay Categorías");
+                        comboBoxEditRecipeCategory.Items.Add("No hay Categorías");
+                    }
+                    else
+                    {
+                        comboBoxEditRecipeCategory.DataSource = categoryList;
+                        comboBoxCurrentCategories.DataSource = categoryList;
+                    }
                     comboBoxCurrentCategories.SelectedIndex = 0;
-                    comboBoxEditRecipeCategory.DataSource = updatedCategories;
                     comboBoxEditRecipeCategory.SelectedIndex = 0;
-                    dgvRecipes.DataSource = recipeContext.GetRecipes();
-                    dgvRecipes.ClearSelection();
                 }
             }
         }
