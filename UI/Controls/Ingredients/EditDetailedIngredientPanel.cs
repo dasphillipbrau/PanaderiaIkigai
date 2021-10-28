@@ -140,9 +140,10 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
                 staticDetailedCode = txtSearchIngredientCode.Text.ToUpper();
                 
                 var ingredientFound = ingredientContext.GetDetailedIngredient(staticDetailedCode);
-                staticBaseCode = ingredientFound.BaseIngredientCode;
-
-                if (ingredientFound == null)
+                if(ingredientFound != null) { 
+                    staticBaseCode = ingredientFound.BaseIngredientCode;
+                } 
+                else if (ingredientFound == null)
                 {
                     MessageBox.Show("No se encuentra ningún ingrediente con ese código"
                             , "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
