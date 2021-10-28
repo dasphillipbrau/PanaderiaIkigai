@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PanaderiaIkigai.BusinessLogic.InformationCapture;
 using PanaderiaIkigai.Data;
 using PanaderiaIkigai.Models;
 
@@ -14,6 +15,7 @@ namespace PanaderiaIkigai.BusinessLogic
     {
         static SQLiteRecipeManager recipeDataAccess = new SQLiteRecipeManager();
         static SqliteIngredientManager ingredientDataAccess = new SqliteIngredientManager();
+        static RecipeCapturer recipeCapturer = new RecipeCapturer();
         public bool RegisterCategory(TextBox txtCategoryName, Label lblCategoryValidation)
         {
             try { 
@@ -80,5 +82,132 @@ namespace PanaderiaIkigai.BusinessLogic
                 throw ex;
             }
         }
+
+        public bool UpdateCategory(string pNewName, string pOldName)
+        {
+            try { 
+                if (recipeDataAccess.UpdateCategory(pNewName, pOldName) == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (SQLiteException sqlEx)
+            {
+                if(sqlEx.ErrorCode == 19)
+                {
+                    MessageBox.Show("El nuevo nombre que quiere usar para la categoría ya existe para otra.", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+                else
+                {
+                    MessageBox.Show("ERROR " + sqlEx.ErrorCode + ": " + sqlEx.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("ERROR: " + ex.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        public bool DeleteCategory(string pCategoryName)
+        {
+            try
+            {
+                if (recipeDataAccess.DeleteCategory(pCategoryName) == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (SQLiteException sqlEx)
+            {
+                if (sqlEx.ErrorCode == 19)
+                {
+                    MessageBox.Show("La categoría que quiere borrar es referenciada por algún otro registro.\nDebe borrar todos los registros que referencien la categoría antes de borrarla.", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+                else
+                {
+                    MessageBox.Show("ERROR " + sqlEx.ErrorCode + ": " + sqlEx.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("ERROR: " + ex.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+    
+
+        public bool RegisterRecipe(string pName, string pCategory, string pAuthor, int pUnits, decimal pIngredientAmount, string pImagePath, string pPreparationNotes)
+        {
+            try {
+                Recipe recipeToRegister = recipeCapturer.CaptureRecipeInformation(pName, pCategory, pAuthor, pUnits, pIngredientAmount, pImagePath, pPreparationNotes);
+                if (recipeDataAccess.RegisterRecipe(recipeToRegister) == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch(SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<Recipe> GetRecipes()
+        {
+            return recipeDataAccess.GetRecipes() as List<Recipe>;
+        }
+
+        public List<Recipe> GetRecipes(string pFilterValue, string pAttributeToFilterBy)
+        {
+            return recipeDataAccess.GetRecipes(pFilterValue, pAttributeToFilterBy) as List<Recipe>;
+        }
+
+        public bool DeleteRecipe(Recipe recipeToDelete)
+        {
+            try { 
+            if (recipeDataAccess.DeleteRecipe(recipeToDelete) == 1)
+                return true;
+            else
+                return false;
+            }
+            catch (SQLiteException sqlEx)
+            {
+                if(sqlEx.ErrorCode == 19)
+                    MessageBox.Show("No se puede borrar el ingrediente, pues es referenciado por otro registro." +
+                        "\nDebe borrar primero cualquier registro que referencie el ingrediente.", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool UpdateRecipe(int pCode, string pName, string pCategory, string pAuthor, int pUnits, decimal pIngredientAmount, string pImagePath, string pPreparationNotes, byte[] imageByteAr)
+        {
+            try
+            {
+                
+                Recipe recipeToUpdate = recipeCapturer.CaptureRecipeInformation(pName, pCategory, pAuthor, pUnits, pIngredientAmount, pImagePath, pPreparationNotes, imageByteAr);
+                recipeToUpdate.Code = pCode;
+                if (recipeDataAccess.UpdateRecipe(recipeToUpdate) == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }
