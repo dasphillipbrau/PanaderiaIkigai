@@ -160,6 +160,12 @@
     <Compile Include="UI\Controls\Recipes\RegisterRecipePanel.Designer.cs">
       <DependentUpon>RegisterRecipePanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Controls\Recipes\RegisterRecipeStepPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Recipes\RegisterRecipeStepPanel.Designer.cs">
+      <DependentUpon>RegisterRecipeStepPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Menus\IngredientMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -207,6 +213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Recipes\RegisterRecipePanel.resx">
       <DependentUpon>RegisterRecipePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Recipes\RegisterRecipeStepPanel.resx">
+      <DependentUpon>RegisterRecipeStepPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Menus\IngredientMenu.resx">
       <DependentUpon>IngredientMenu.cs</DependentUpon>

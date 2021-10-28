@@ -30,21 +30,35 @@ namespace PanaderiaIkigai.UI.Menus
         private void InitializeComponent()
         {
             this.panelNavigation = new System.Windows.Forms.Panel();
+            this.btnGoToEditRecipe = new System.Windows.Forms.Button();
             this.btnOpenRegisterBasePanel = new System.Windows.Forms.Button();
             this.panelHolder = new System.Windows.Forms.Panel();
-            this.btnGoToEditRecipe = new System.Windows.Forms.Button();
+            this.btnGoToRecipeSteps = new System.Windows.Forms.Button();
             this.panelNavigation.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelNavigation
             // 
             this.panelNavigation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
+            this.panelNavigation.Controls.Add(this.btnGoToRecipeSteps);
             this.panelNavigation.Controls.Add(this.btnGoToEditRecipe);
             this.panelNavigation.Controls.Add(this.btnOpenRegisterBasePanel);
             this.panelNavigation.Location = new System.Drawing.Point(12, 12);
             this.panelNavigation.Name = "panelNavigation";
             this.panelNavigation.Size = new System.Drawing.Size(200, 616);
             this.panelNavigation.TabIndex = 1;
+            // 
+            // btnGoToEditRecipe
+            // 
+            this.btnGoToEditRecipe.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.btnGoToEditRecipe.ForeColor = System.Drawing.Color.Beige;
+            this.btnGoToEditRecipe.Location = new System.Drawing.Point(3, 128);
+            this.btnGoToEditRecipe.Name = "btnGoToEditRecipe";
+            this.btnGoToEditRecipe.Size = new System.Drawing.Size(194, 68);
+            this.btnGoToEditRecipe.TabIndex = 2;
+            this.btnGoToEditRecipe.Text = "Editar Recetas y Categorías";
+            this.btnGoToEditRecipe.UseVisualStyleBackColor = false;
+            this.btnGoToEditRecipe.Click += new System.EventHandler(this.btnGoToEditRecipe_Click);
             // 
             // btnOpenRegisterBasePanel
             // 
@@ -65,17 +79,17 @@ namespace PanaderiaIkigai.UI.Menus
             this.panelHolder.Size = new System.Drawing.Size(1234, 633);
             this.panelHolder.TabIndex = 2;
             // 
-            // btnGoToEditRecipe
+            // btnGoToRecipeSteps
             // 
-            this.btnGoToEditRecipe.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.btnGoToEditRecipe.ForeColor = System.Drawing.Color.Beige;
-            this.btnGoToEditRecipe.Location = new System.Drawing.Point(3, 128);
-            this.btnGoToEditRecipe.Name = "btnGoToEditRecipe";
-            this.btnGoToEditRecipe.Size = new System.Drawing.Size(194, 68);
-            this.btnGoToEditRecipe.TabIndex = 2;
-            this.btnGoToEditRecipe.Text = "Editar Recetas y Categorías";
-            this.btnGoToEditRecipe.UseVisualStyleBackColor = false;
-            this.btnGoToEditRecipe.Click += new System.EventHandler(this.btnGoToEditRecipe_Click);
+            this.btnGoToRecipeSteps.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.btnGoToRecipeSteps.ForeColor = System.Drawing.Color.Beige;
+            this.btnGoToRecipeSteps.Location = new System.Drawing.Point(3, 229);
+            this.btnGoToRecipeSteps.Name = "btnGoToRecipeSteps";
+            this.btnGoToRecipeSteps.Size = new System.Drawing.Size(194, 68);
+            this.btnGoToRecipeSteps.TabIndex = 3;
+            this.btnGoToRecipeSteps.Text = "Pasos de Recetas";
+            this.btnGoToRecipeSteps.UseVisualStyleBackColor = false;
+            this.btnGoToRecipeSteps.Click += new System.EventHandler(this.btnGoToRecipeSteps_Click);
             // 
             // RecipeMenu
             // 
@@ -98,5 +112,6 @@ namespace PanaderiaIkigai.UI.Menus
         private System.Windows.Forms.Button btnOpenRegisterBasePanel;
         private System.Windows.Forms.Panel panelHolder;
         private System.Windows.Forms.Button btnGoToEditRecipe;
+        private System.Windows.Forms.Button btnGoToRecipeSteps;
     }
 }

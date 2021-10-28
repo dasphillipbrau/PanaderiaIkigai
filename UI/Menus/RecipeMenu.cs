@@ -37,5 +37,15 @@ namespace PanaderiaIkigai.UI.Menus
             editRecipePanel.Show();
             editRecipePanel.BringToFront();
         }
+
+        private void btnGoToRecipeSteps_Click(object sender, EventArgs e)
+        {
+            panelHolder.Controls.Clear();
+            RegisterRecipeStepPanel recipeStepPanel = new RegisterRecipeStepPanel();
+            recipeStepPanel.Location = new Point(1, 34);
+            panelHolder.Controls.Add(recipeStepPanel);
+            recipeStepPanel.Show();
+            recipeStepPanel.BringToFront();
+        }
     }
 }
