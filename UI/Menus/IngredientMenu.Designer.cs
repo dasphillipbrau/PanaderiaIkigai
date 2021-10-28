@@ -31,12 +31,12 @@ namespace PanaderiaIkigai.Menus
         {
             this.label1 = new System.Windows.Forms.Label();
             this.panelMenuStrip = new System.Windows.Forms.Panel();
+            this.btnGoToMainMenu = new System.Windows.Forms.Button();
             this.btnGoToEditDetailedIngredients = new System.Windows.Forms.Button();
             this.btnGoToRegisterDetailedIngredient = new System.Windows.Forms.Button();
             this.btnGoToEditBaseIngredient = new System.Windows.Forms.Button();
             this.btnOpenRegisterBasePanel = new System.Windows.Forms.Button();
             this.panelMenuHolders = new System.Windows.Forms.Panel();
-            this.btnGoToMainMenu = new System.Windows.Forms.Button();
             this.panelMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,6 +63,18 @@ namespace PanaderiaIkigai.Menus
             this.panelMenuStrip.Name = "panelMenuStrip";
             this.panelMenuStrip.Size = new System.Drawing.Size(200, 561);
             this.panelMenuStrip.TabIndex = 1;
+            // 
+            // btnGoToMainMenu
+            // 
+            this.btnGoToMainMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.btnGoToMainMenu.ForeColor = System.Drawing.Color.Beige;
+            this.btnGoToMainMenu.Location = new System.Drawing.Point(3, 335);
+            this.btnGoToMainMenu.Name = "btnGoToMainMenu";
+            this.btnGoToMainMenu.Size = new System.Drawing.Size(194, 68);
+            this.btnGoToMainMenu.TabIndex = 4;
+            this.btnGoToMainMenu.Text = "Volver al Menú Principal";
+            this.btnGoToMainMenu.UseVisualStyleBackColor = false;
+            this.btnGoToMainMenu.Click += new System.EventHandler(this.btnGoToMainMenu_Click);
             // 
             // btnGoToEditDetailedIngredients
             // 
@@ -118,18 +130,6 @@ namespace PanaderiaIkigai.Menus
             this.panelMenuHolders.Name = "panelMenuHolders";
             this.panelMenuHolders.Size = new System.Drawing.Size(1186, 606);
             this.panelMenuHolders.TabIndex = 2;
-            // 
-            // btnGoToMainMenu
-            // 
-            this.btnGoToMainMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.btnGoToMainMenu.ForeColor = System.Drawing.Color.Beige;
-            this.btnGoToMainMenu.Location = new System.Drawing.Point(3, 335);
-            this.btnGoToMainMenu.Name = "btnGoToMainMenu";
-            this.btnGoToMainMenu.Size = new System.Drawing.Size(194, 68);
-            this.btnGoToMainMenu.TabIndex = 4;
-            this.btnGoToMainMenu.Text = "Volver al Menú Principal";
-            this.btnGoToMainMenu.UseVisualStyleBackColor = false;
-            this.btnGoToMainMenu.Click += new System.EventHandler(this.btnGoToMainMenu_Click);
             // 
             // IngredientMenu
             // 
