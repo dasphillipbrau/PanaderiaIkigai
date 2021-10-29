@@ -304,6 +304,83 @@ namespace PanaderiaIkigai.Data
                 throw ex;
             }
         }
+
+        public IEnumerable<BaseIngredient> GetBaseIngredientsWithPrice()
+        {
+            try
+            {
+                using (var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    var ingredientsList = new List<BaseIngredient>();
+
+                    var getIngredientsCommand = new SQLiteCommand("SELECT CODE, NAME, UNIT_OF_MEASURE, AVERAGE_PRICE, AVERAGE_MINIMUM_PRICE, " +
+                        "TOTAL_UNITS_AVAILABLE FROM INGREDIENT WHERE AVERAGE_PRICE > 0 AND AVERAGE_MINIMUM_PRICE > 0", conn);
+
+                    conn.Open();
+
+                    var reader = getIngredientsCommand.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        ingredientsList.Add(new BaseIngredient(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetDecimal(3), reader.GetDecimal(4), reader.GetInt32(5)));
+                    }
+
+                    return ingredientsList;
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+
+                Console.WriteLine(sqlEx.Message);
+                Console.WriteLine(sqlEx.ErrorCode);
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+        }
+
+        public IEnumerable<BaseIngredient> GetBaseIngredientsWithPrice(string pName)
+        {
+            try
+            {
+                using (var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    var ingredientsList = new List<BaseIngredient>();
+
+                    var getIngredientsCommand = new SQLiteCommand("SELECT CODE, NAME, UNIT_OF_MEASURE, AVERAGE_PRICE, AVERAGE_MINIMUM_PRICE, " +
+                        "TOTAL_UNITS_AVAILABLE FROM INGREDIENT WHERE AVERAGE_PRICE > 0 AND AVERAGE_MINIMUM_PRICE > 0 AND NAME LIKE $pName || '%'", conn);
+                    getIngredientsCommand.Parameters.AddWithValue("pName", pName.ToUpper().Trim());
+                    conn.Open();
+
+                    var reader = getIngredientsCommand.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        ingredientsList.Add(new BaseIngredient(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetDecimal(3), reader.GetDecimal(4), reader.GetInt32(5)));
+                    }
+
+                    return ingredientsList;
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+
+                Console.WriteLine(sqlEx.Message);
+                Console.WriteLine(sqlEx.ErrorCode);
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+        }
+
         /// <summary>
         /// Returns a specific instance of BaseIngredient based on its code
         /// </summary>

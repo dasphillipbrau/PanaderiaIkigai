@@ -1,6 +1,7 @@
 ﻿using PanaderiaIkigai.BusinessLogic;
 using PanaderiaIkigai.Menus;
 using PanaderiaIkigai.Models;
+using PanaderiaIkigai.UI.Menus;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +16,6 @@ namespace PanaderiaIkigai
 {
     public partial class MainMenu : Form
     {
-        static IngredientContext context = new IngredientContext();
         public MainMenu()
         {
             InitializeComponent();
@@ -26,6 +26,13 @@ namespace PanaderiaIkigai
             IngredientMenu ingredientMenu = new IngredientMenu();
             ingredientMenu.Show();
             ingredientMenu.BringToFront();
+        }
+
+        private void btnGoToRecipeMenu_Click(object sender, EventArgs e)
+        {
+            RecipeMenu recipeMenu = new RecipeMenu();
+            recipeMenu.Show();
+            recipeMenu.BringToFront();
         }
     }
 }

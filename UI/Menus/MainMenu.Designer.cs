@@ -32,6 +32,7 @@ namespace PanaderiaIkigai
             this.btnGoToIngredientMenu = new System.Windows.Forms.Button();
             this.IkigaiTitle = new System.Windows.Forms.Label();
             this.mainMenuControlsPanel = new System.Windows.Forms.Panel();
+            this.btnGoToRecipeMenu = new System.Windows.Forms.Button();
             this.mainMenuControlsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,12 +64,27 @@ namespace PanaderiaIkigai
             // mainMenuControlsPanel
             // 
             this.mainMenuControlsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
+            this.mainMenuControlsPanel.Controls.Add(this.btnGoToRecipeMenu);
             this.mainMenuControlsPanel.Controls.Add(this.btnGoToIngredientMenu);
             this.mainMenuControlsPanel.ForeColor = System.Drawing.SystemColors.ControlText;
             this.mainMenuControlsPanel.Location = new System.Drawing.Point(12, 83);
             this.mainMenuControlsPanel.Name = "mainMenuControlsPanel";
             this.mainMenuControlsPanel.Size = new System.Drawing.Size(776, 299);
             this.mainMenuControlsPanel.TabIndex = 2;
+            // 
+            // btnGoToRecipeMenu
+            // 
+            this.btnGoToRecipeMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.btnGoToRecipeMenu.FlatAppearance.BorderSize = 0;
+            this.btnGoToRecipeMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGoToRecipeMenu.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnGoToRecipeMenu.Location = new System.Drawing.Point(21, 222);
+            this.btnGoToRecipeMenu.Name = "btnGoToRecipeMenu";
+            this.btnGoToRecipeMenu.Size = new System.Drawing.Size(193, 54);
+            this.btnGoToRecipeMenu.TabIndex = 1;
+            this.btnGoToRecipeMenu.Text = "Menú de Recetas";
+            this.btnGoToRecipeMenu.UseVisualStyleBackColor = false;
+            this.btnGoToRecipeMenu.Click += new System.EventHandler(this.btnGoToRecipeMenu_Click);
             // 
             // MainMenu
             // 
@@ -91,6 +107,7 @@ namespace PanaderiaIkigai
         private System.Windows.Forms.Button btnGoToIngredientMenu;
         private System.Windows.Forms.Label IkigaiTitle;
         private System.Windows.Forms.Panel mainMenuControlsPanel;
+        private System.Windows.Forms.Button btnGoToRecipeMenu;
     }
 }
 

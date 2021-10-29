@@ -88,3 +88,58 @@ AFTER UPDATE ON Measurement_Unit
                     FROM Measurement_UNIT
                 ) WHERE UNIT_OF_MEASURE = old.name;
     END;
+
+CREATE TRIGGER UpdateRecipe_DELETE
+AFTER DELETE ON Recipe_Step
+    BEGIN
+        UPDATE Recipe
+            SET 
+                TOTAL_PRICE = (
+                    SELECT
+			TOTAL(A.PRICE_FOR_AMOUNT_USED)
+                    FROM Recipe_Step AS A
+		    WHERE A.RECIPE_CODE = old.RECIPE_CODE
+                )
+		WHERE CODE = old.RECIPE_CODE;
+    END;
+
+CREATE TRIGGER UpdateRecipe_INSERT
+AFTER INSERT ON Recipe_Step
+    BEGIN
+        UPDATE Recipe
+            SET 
+                TOTAL_PRICE = (
+                    SELECT
+                        TOTAL(A.PRICE_FOR_AMOUNT_USED)
+                    FROM Recipe_Step AS A
+		    WHERE A.RECIPE_CODE = new.RECIPE_CODE
+                )
+
+		WHERE CODE = new.RECIPE_CODE;
+    END;
+
+CREATE TRIGGER UpdateRecipe_UPDATE
+AFTER UPDATE ON Recipe_Step
+    BEGIN
+        UPDATE Recipe
+            SET 
+                TOTAL_PRICE = (
+                    SELECT
+                        TOTAL(A.PRICE_FOR_AMOUNT_USED)
+                    FROM Recipe_Step AS A
+		    WHERE A.RECIPE_CODE = new.RECIPE_CODE
+                )		
+		WHERE CODE = new.RECIPE_CODE;
+    END;
+	
+CREATE TRIGGER UpdateCategoryName_UPDATE
+AFTER UPDATE ON Product_Category
+    BEGIN
+        UPDATE Recipe
+            SET 
+                CATEGORY_NAME = (
+                    SELECT
+						NAME
+                    FROM Product_Category
+                ) WHERE CATEGORY_NAME = old.name;
+    END
