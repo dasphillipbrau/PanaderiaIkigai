@@ -34,12 +34,14 @@ namespace PanaderiaIkigai.UI.Menus
             this.btnOpenRegisterBasePanel = new System.Windows.Forms.Button();
             this.panelHolder = new System.Windows.Forms.Panel();
             this.btnGoToRecipeSteps = new System.Windows.Forms.Button();
+            this.btnGoToMainMenu = new System.Windows.Forms.Button();
             this.panelNavigation.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelNavigation
             // 
             this.panelNavigation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
+            this.panelNavigation.Controls.Add(this.btnGoToMainMenu);
             this.panelNavigation.Controls.Add(this.btnGoToRecipeSteps);
             this.panelNavigation.Controls.Add(this.btnGoToEditRecipe);
             this.panelNavigation.Controls.Add(this.btnOpenRegisterBasePanel);
@@ -91,6 +93,18 @@ namespace PanaderiaIkigai.UI.Menus
             this.btnGoToRecipeSteps.UseVisualStyleBackColor = false;
             this.btnGoToRecipeSteps.Click += new System.EventHandler(this.btnGoToRecipeSteps_Click);
             // 
+            // btnGoToMainMenu
+            // 
+            this.btnGoToMainMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.btnGoToMainMenu.ForeColor = System.Drawing.Color.Beige;
+            this.btnGoToMainMenu.Location = new System.Drawing.Point(3, 314);
+            this.btnGoToMainMenu.Name = "btnGoToMainMenu";
+            this.btnGoToMainMenu.Size = new System.Drawing.Size(194, 68);
+            this.btnGoToMainMenu.TabIndex = 4;
+            this.btnGoToMainMenu.Text = "Volver al Menú Principal";
+            this.btnGoToMainMenu.UseVisualStyleBackColor = false;
+            this.btnGoToMainMenu.Click += new System.EventHandler(this.btnGoToMainMenu_Click);
+            // 
             // RecipeMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -113,5 +127,6 @@ namespace PanaderiaIkigai.UI.Menus
         private System.Windows.Forms.Panel panelHolder;
         private System.Windows.Forms.Button btnGoToEditRecipe;
         private System.Windows.Forms.Button btnGoToRecipeSteps;
+        private System.Windows.Forms.Button btnGoToMainMenu;
     }
 }

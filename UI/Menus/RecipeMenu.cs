@@ -47,5 +47,10 @@ namespace PanaderiaIkigai.UI.Menus
             recipeStepPanel.Show();
             recipeStepPanel.BringToFront();
         }
+
+        private void btnGoToMainMenu_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

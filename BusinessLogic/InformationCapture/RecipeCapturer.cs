@@ -1,4 +1,5 @@
 ﻿using PanaderiaIkigai.Models;
+using PanaderiaIkigai.Models.Recipes;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -65,6 +66,12 @@ namespace PanaderiaIkigai.BusinessLogic.InformationCapture
             {
                 throw ioEx;
             }
+        }
+
+        public RecipeStep CaptureStep(decimal pPercentage, Recipe pRecipe, BaseIngredient pBaseIngredient)
+        {
+            var stepToRegister = new RecipeStep(pRecipe.Code, pBaseIngredient, pPercentage, pRecipe);
+            return stepToRegister;
         }
 
     }

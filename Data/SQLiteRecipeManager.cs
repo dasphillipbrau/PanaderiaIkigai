@@ -1,4 +1,5 @@
 ﻿using PanaderiaIkigai.Models;
+using PanaderiaIkigai.Models.Recipes;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -361,6 +362,126 @@ namespace PanaderiaIkigai.Data
                     command.Parameters.AddWithValue("pPreparationNotes", pRecipe.PreparationNotes.Trim());
                     command.Parameters.Add("pImage", DbType.Binary).Value = pRecipe.Image;
                     conn.Open();
+                    return command.ExecuteNonQuery();
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public int RegisterStep(RecipeStep pStep)
+        {
+            try
+            {
+                using (var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    var command = new SQLiteCommand(conn);
+                    command.CommandText = "iNSERT INTO RECIPE_STEP (RECIPE_STEP_CODE, RECIPE_CODE, INGREDIENT_NAME, INGREDIENT_PERCENTAGE, INGREDIENT_QUANTITY, PRICE_FOR_AMOUNT_USED) " +
+                        "VALUES ($pStepCode, $pRecipeCode, $pIngredientName, $pPercentage, $pIngredientQuantity, $pPrice)";
+
+                    command.Parameters.AddWithValue("pStepCode", pStep.StepCode.Trim().ToUpper());
+                    command.Parameters.AddWithValue("pRecipeCode", pStep.RecipeCode);
+                    command.Parameters.AddWithValue("pIngredientName", pStep.IngredientName.Trim().ToUpper());
+                    command.Parameters.Add("pPercentage", DbType.Decimal).Value = pStep.IngredientPercentage;
+                    command.Parameters.Add("pIngredientQuantity", DbType.Decimal).Value = pStep.IngredientAmount;
+                    command.Parameters.AddWithValue("pPrice", pStep.PriceForAmountUsed);
+
+                    conn.Open();
+                    return command.ExecuteNonQuery();
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public IEnumerable<RecipeStep> GetRecipeSteps(int pRecipeCode)
+        {
+            try
+            {
+                using(var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    var stepsList = new List<RecipeStep>();
+                    var command = new SQLiteCommand(conn);
+                    command.CommandText = "SELECT RECIPE_STEP_CODE, RECIPE_CODE, INGREDIENT_NAME, INGREDIENT_PERCENTAGE, INGREDIENT_QUANTITY, PRICE_FOR_AMOUNT_USED FROM RECIPE_STEP WHERE RECIPE_CODE = $pRecipeCode ORDER BY INGREDIENT_PERCENTAGE DESC";
+                    command.Parameters.AddWithValue("pRecipeCode", pRecipeCode);
+                    conn.Open();
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        stepsList.Add(new RecipeStep(reader.GetString(0), reader.GetInt32(1), reader.GetString(2), reader.GetDecimal(3), reader.GetDecimal(4), reader.GetDecimal(5)));
+                    }
+                    return stepsList;
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public int UpdateRecipeStep(RecipeStep pStep, string pOldCode)
+        {
+            try
+            {
+                using (var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    var stepsList = new List<RecipeStep>();
+                    var command = new SQLiteCommand(conn);
+                    command.CommandText = "UPDATE RECIPE_STEP SET " +
+                        "RECIPE_STEP_CODE = $pNewStepCode, RECIPE_CODE = $pRecipeCode, INGREDIENT_NAME = $pIngredientName, INGREDIENT_PERCENTAGE = $pPercentage, " +
+                        "INGREDIENT_QUANTITY = $pQuantity, PRICE_FOR_AMOUNT_USED = $pPrice WHERE RECIPE_STEP_CODE = $pOldCode";
+                    command.Parameters.AddWithValue("pOldCode", pOldCode);
+                    command.Parameters.AddWithValue("pNewStepCode", pStep.StepCode);
+                    command.Parameters.AddWithValue("pRecipeCode", pStep.RecipeCode);
+                    command.Parameters.AddWithValue("pIngredientName", pStep.IngredientName);
+                    command.Parameters.Add("pPercentage", DbType.Decimal).Value = pStep.IngredientPercentage;
+                    command.Parameters.Add("pQuantity", DbType.Decimal).Value = pStep.IngredientAmount;
+                    command.Parameters.Add("pPrice", DbType.Decimal).Value = pStep.PriceForAmountUsed;
+
+                    conn.Open();
+
+                    return command.ExecuteNonQuery();
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public int DeleteRecipeStep(string pCode)
+        {
+            try
+            {
+                using (var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    var stepsList = new List<RecipeStep>();
+                    var command = new SQLiteCommand(conn);
+                    command.CommandText = "DELETE FROM RECIPE_STEP WHERE RECIPE_STEP_CODE = $pCode";
+                    command.Parameters.AddWithValue("pCode", pCode.Trim().ToUpper());
+
+                    conn.Open();
+
                     return command.ExecuteNonQuery();
                 }
             }

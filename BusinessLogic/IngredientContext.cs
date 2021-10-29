@@ -99,6 +99,38 @@ namespace PanaderiaIkigai.BusinessLogic
             }
         }
 
+        public List<BaseIngredient> GetBaseIngredientsWithPrice()
+        {
+            try
+            {
+                return dataAccess.GetBaseIngredientsWithPrice() as List<BaseIngredient>;
+            }
+            catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<BaseIngredient> GetBaseIngredientsWithPrice(string pName)
+        {
+            try
+            {
+                return dataAccess.GetBaseIngredientsWithPrice(pName) as List<BaseIngredient>;
+            }
+            catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public BaseIngredient GetBaseIngredient(int pCode)
         {
             try
