@@ -15,7 +15,7 @@ namespace PanaderiaIkigai.BusinessLogic
     public class RecipeContext
     {
         static SQLiteRecipeManager recipeDataAccess = new SQLiteRecipeManager();
-        static SqliteIngredientManager ingredientDataAccess = new SqliteIngredientManager();
+        static SQLiteIngredientManager ingredientDataAccess = new SQLiteIngredientManager();
         static RecipeCapturer recipeCapturer = new RecipeCapturer();
         public bool RegisterCategory(TextBox txtCategoryName, Label lblCategoryValidation)
         {

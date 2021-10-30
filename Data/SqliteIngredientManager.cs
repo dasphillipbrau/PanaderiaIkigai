@@ -10,7 +10,7 @@ using System.Data.SQLite;
 
 namespace PanaderiaIkigai.Data
 {
-    public class SqliteIngredientManager
+    public class SQLiteIngredientManager
     {
         private string GetConnectionString(string id = "Default")
         {
