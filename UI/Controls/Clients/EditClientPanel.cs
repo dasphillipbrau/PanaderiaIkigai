@@ -28,6 +28,8 @@ namespace PanaderiaIkigai.UI.Controls.Clients
         static string successMessage = "Operación Exitosa";
         static string errorMessage = "Ha ocurrido un Error";
 
+        static int clientCode = -1;
+
         Client selectedClient;
 
         public EditClientPanel()
@@ -46,8 +48,9 @@ namespace PanaderiaIkigai.UI.Controls.Clients
 
         private void dgvClients_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+            CleanFields();
             selectedClient = (Client)dgvClients.CurrentRow.DataBoundItem;
+            clientCode = selectedClient.Code;
             EnableFields();
         }
 
@@ -86,6 +89,8 @@ namespace PanaderiaIkigai.UI.Controls.Clients
 
         private void CleanFields()
         {
+            clientCode = -1;
+
             nameValid = false;
             phoneValid = false;
             emailValid = false;
@@ -104,6 +109,9 @@ namespace PanaderiaIkigai.UI.Controls.Clients
             txtAddress.ReadOnly = true;
 
             txtFilter.Text = "";
+
+            btnDeleteClient.Enabled = false;
+            btnSaveChanges.Enabled = false;
         }
 
         private void txtName_Validating(object sender, CancelEventArgs e)
@@ -198,7 +206,7 @@ namespace PanaderiaIkigai.UI.Controls.Clients
             {
                 if (ValidateChildren(ValidationConstraints.Enabled) && nameValid && phoneValid && emailValid && addressValid)
                 {
-                    if (clientContext.UpdateClient(txtName.Text.Trim().ToUpper(), txtPhone.Text.Trim().ToUpper(), txtEmail.Text.Trim().ToUpper(), txtAddress.Text.Trim().ToUpper()))
+                    if (clientContext.UpdateClient(clientCode, txtName.Text.Trim().ToUpper(), txtPhone.Text.Trim().ToUpper(), txtEmail.Text.Trim().ToUpper(), txtAddress.Text.Trim().ToUpper()))
                     {
 
                         MessageBox.Show("Cliente Actualizado", successMessage, MessageBoxButtons.OK, MessageBoxIcon.Information);
