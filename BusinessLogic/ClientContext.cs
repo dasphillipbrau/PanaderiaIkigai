@@ -84,11 +84,12 @@ namespace PanaderiaIkigai.BusinessLogic
 
         }
 
-        public bool UpdateClient(string pName, string pPhone, string pEmail, string pAddress)
+        public bool UpdateClient(int pCode, string pName, string pPhone, string pEmail, string pAddress)
         {
             try
             {
                 var clientToUpdate = clientCapturer.CaptureClient(pName, pPhone, pEmail, pAddress);
+                clientToUpdate.Code = pCode;
                 if (clientDataAccess.UpdateClient(clientToUpdate) == 1)
                     return true;
                 else
