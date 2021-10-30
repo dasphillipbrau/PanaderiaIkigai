@@ -435,6 +435,35 @@ namespace PanaderiaIkigai.Data
             }
         }
 
+        public IEnumerable<RecipeStep> GetRecipeSteps()
+        {
+            try
+            {
+                using (var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    var stepsList = new List<RecipeStep>();
+                    var command = new SQLiteCommand(conn);
+                    command.CommandText = "SELECT RECIPE_STEP_CODE, RECIPE_CODE, INGREDIENT_NAME, INGREDIENT_PERCENTAGE, INGREDIENT_QUANTITY, " +
+                        "PRICE_FOR_AMOUNT_USED FROM RECIPE_STEP ORDER BY INGREDIENT_PERCENTAGE DESC";
+                    conn.Open();
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        stepsList.Add(new RecipeStep(reader.GetString(0), reader.GetInt32(1), reader.GetString(2), reader.GetDecimal(3), reader.GetDecimal(4), reader.GetDecimal(5)));
+                    }
+                    return stepsList;
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public int UpdateRecipeStep(RecipeStep pStep, string pOldCode)
         {
             try

@@ -1,7 +1,7 @@
 ﻿
 namespace PanaderiaIkigai.UI.Menus
 {
-    partial class ClientsMenu
+    partial class OrdersMenu
     {
         /// <summary>
         /// Required designer variable.
@@ -33,8 +33,8 @@ namespace PanaderiaIkigai.UI.Menus
             this.btnGoToMainMenu = new System.Windows.Forms.Button();
             this.btnGoToEditClient = new System.Windows.Forms.Button();
             this.btnGoToRegisterClientPanel = new System.Windows.Forms.Button();
-            this.panelHolder = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.panelHolder = new System.Windows.Forms.Panel();
             this.panelNavigation.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,10 +44,10 @@ namespace PanaderiaIkigai.UI.Menus
             this.panelNavigation.Controls.Add(this.btnGoToMainMenu);
             this.panelNavigation.Controls.Add(this.btnGoToEditClient);
             this.panelNavigation.Controls.Add(this.btnGoToRegisterClientPanel);
-            this.panelNavigation.Location = new System.Drawing.Point(12, 35);
+            this.panelNavigation.Location = new System.Drawing.Point(12, 40);
             this.panelNavigation.Name = "panelNavigation";
-            this.panelNavigation.Size = new System.Drawing.Size(200, 593);
-            this.panelNavigation.TabIndex = 2;
+            this.panelNavigation.Size = new System.Drawing.Size(200, 588);
+            this.panelNavigation.TabIndex = 3;
             // 
             // btnGoToMainMenu
             // 
@@ -59,7 +59,6 @@ namespace PanaderiaIkigai.UI.Menus
             this.btnGoToMainMenu.TabIndex = 4;
             this.btnGoToMainMenu.Text = "Volver al Menú Principal";
             this.btnGoToMainMenu.UseVisualStyleBackColor = false;
-            this.btnGoToMainMenu.Click += new System.EventHandler(this.btnGoToMainMenu_Click);
             // 
             // btnGoToEditClient
             // 
@@ -71,7 +70,6 @@ namespace PanaderiaIkigai.UI.Menus
             this.btnGoToEditClient.TabIndex = 2;
             this.btnGoToEditClient.Text = "Consultar y Editar Clientes";
             this.btnGoToEditClient.UseVisualStyleBackColor = false;
-            this.btnGoToEditClient.Click += new System.EventHandler(this.btnGoToEditRecipe_Click);
             // 
             // btnGoToRegisterClientPanel
             // 
@@ -83,37 +81,36 @@ namespace PanaderiaIkigai.UI.Menus
             this.btnGoToRegisterClientPanel.TabIndex = 1;
             this.btnGoToRegisterClientPanel.Text = "Registrar Clientes";
             this.btnGoToRegisterClientPanel.UseVisualStyleBackColor = false;
-            this.btnGoToRegisterClientPanel.Click += new System.EventHandler(this.btnGoToRegisterClientPanel_Click);
-            // 
-            // panelHolder
-            // 
-            this.panelHolder.Location = new System.Drawing.Point(218, 12);
-            this.panelHolder.Name = "panelHolder";
-            this.panelHolder.Size = new System.Drawing.Size(698, 633);
-            this.panelHolder.TabIndex = 3;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Bahnschrift", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(12, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(157, 23);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Menú de Clientes";
+            this.label1.Size = new System.Drawing.Size(158, 23);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Menú de Ordenes";
             // 
-            // ClientsMenu
+            // panelHolder
+            // 
+            this.panelHolder.Location = new System.Drawing.Point(218, 40);
+            this.panelHolder.Name = "panelHolder";
+            this.panelHolder.Size = new System.Drawing.Size(913, 588);
+            this.panelHolder.TabIndex = 5;
+            // 
+            // OrdersMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(59)))), ((int)(((byte)(59)))));
-            this.ClientSize = new System.Drawing.Size(921, 640);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(1143, 630);
             this.Controls.Add(this.panelHolder);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.panelNavigation);
-            this.Name = "ClientsMenu";
-            this.Text = "Menú de Clientes";
+            this.Name = "OrdersMenu";
+            this.Text = "Menú de Ordenes";
             this.panelNavigation.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -126,7 +123,7 @@ namespace PanaderiaIkigai.UI.Menus
         private System.Windows.Forms.Button btnGoToMainMenu;
         private System.Windows.Forms.Button btnGoToEditClient;
         private System.Windows.Forms.Button btnGoToRegisterClientPanel;
-        private System.Windows.Forms.Panel panelHolder;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panelHolder;
     }
 }

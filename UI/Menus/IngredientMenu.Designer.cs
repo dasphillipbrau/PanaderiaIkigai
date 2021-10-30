@@ -29,7 +29,6 @@ namespace PanaderiaIkigai.Menus
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
             this.panelMenuStrip = new System.Windows.Forms.Panel();
             this.btnGoToMainMenu = new System.Windows.Forms.Button();
             this.btnGoToEditDetailedIngredients = new System.Windows.Forms.Button();
@@ -37,19 +36,9 @@ namespace PanaderiaIkigai.Menus
             this.btnGoToEditBaseIngredient = new System.Windows.Forms.Button();
             this.btnOpenRegisterBasePanel = new System.Windows.Forms.Button();
             this.panelMenuHolders = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.panelMenuStrip.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Beige;
-            this.label1.Location = new System.Drawing.Point(30, 28);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(165, 19);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Menú de Ingredientes";
             // 
             // panelMenuStrip
             // 
@@ -131,16 +120,28 @@ namespace PanaderiaIkigai.Menus
             this.panelMenuHolders.Size = new System.Drawing.Size(1186, 606);
             this.panelMenuHolders.TabIndex = 2;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Bahnschrift", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(12, 28);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(193, 23);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Menú de Ingredientes";
+            // 
             // IngredientMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(59)))), ((int)(((byte)(59)))));
             this.ClientSize = new System.Drawing.Size(1418, 646);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.panelMenuHolders);
             this.Controls.Add(this.panelMenuStrip);
-            this.Controls.Add(this.label1);
             this.Name = "IngredientMenu";
+            this.Text = "Menú de Ingredientes";
             this.panelMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -148,8 +149,6 @@ namespace PanaderiaIkigai.Menus
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panelMenuStrip;
         private System.Windows.Forms.Button btnGoToEditBaseIngredient;
         private System.Windows.Forms.Button btnOpenRegisterBasePanel;
@@ -157,5 +156,6 @@ namespace PanaderiaIkigai.Menus
         private System.Windows.Forms.Button btnGoToEditDetailedIngredients;
         private System.Windows.Forms.Panel panelMenuHolders;
         private System.Windows.Forms.Button btnGoToMainMenu;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -124,6 +124,8 @@
     <Compile Include="Data\SQLiteClientManager.cs" />
     <Compile Include="Data\SQLiteRecipeManager.cs" />
     <Compile Include="Models\Clients\Client.cs" />
+    <Compile Include="Models\Orders\Order.cs" />
+    <Compile Include="Models\Orders\OrderItem.cs" />
     <Compile Include="Models\Recipes\Recipe.cs" />
     <Compile Include="Models\Recipes\RecipeStep.cs" />
     <Compile Include="UI\Controls\Clients\EditClientPanel.cs">
@@ -163,6 +165,12 @@
     </Compile>
     <Compile Include="UI\Controls\Ingredients\RegisterDetailedIngredientsPanel.Designer.cs">
       <DependentUpon>RegisterDetailedIngredientsPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Orders\RegisterOrderPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Orders\RegisterOrderPanel.Designer.cs">
+      <DependentUpon>RegisterOrderPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\Recipes\EditRecipePanel.cs">
       <SubType>UserControl</SubType>
@@ -204,6 +212,12 @@
     <Compile Include="Models\Ingredients\BaseIngredient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\Menus\OrdersMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Menus\OrdersMenu.Designer.cs">
+      <DependentUpon>OrdersMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Menus\RecipeMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -236,6 +250,9 @@
     <EmbeddedResource Include="UI\Controls\Ingredients\RegisterDetailedIngredientsPanel.resx">
       <DependentUpon>RegisterDetailedIngredientsPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Orders\RegisterOrderPanel.resx">
+      <DependentUpon>RegisterOrderPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Recipes\EditRecipePanel.resx">
       <DependentUpon>EditRecipePanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -266,6 +283,9 @@
     <Content Include="Data\Ikigai.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="UI\Menus\OrdersMenu.resx">
+      <DependentUpon>OrdersMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Menus\RecipeMenu.resx">
       <DependentUpon>RecipeMenu.cs</DependentUpon>
     </EmbeddedResource>
