@@ -13,7 +13,7 @@ namespace PanaderiaIkigai.BusinessLogic
 {
     public class IngredientContext
     {
-        static SqliteIngredientManager dataAccess = new SqliteIngredientManager();
+        static SQLiteIngredientManager dataAccess = new SQLiteIngredientManager();
         static IngredientInformationCapturer informationCapturer = new IngredientInformationCapturer();
         /// <summary>
         /// Validates a BaseIngredient entry and registers it to the database if validation succeeds

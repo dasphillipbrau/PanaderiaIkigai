@@ -116,12 +116,28 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLogic\ClientContext.cs" />
+    <Compile Include="BusinessLogic\InformationCapture\ClientInformationCapturer.cs" />
     <Compile Include="BusinessLogic\InformationCapture\RecipeCapturer.cs" />
     <Compile Include="BusinessLogic\IngredientContext.cs" />
     <Compile Include="BusinessLogic\RecipeContext.cs" />
+    <Compile Include="Data\SQLiteClientManager.cs" />
     <Compile Include="Data\SQLiteRecipeManager.cs" />
+    <Compile Include="Models\Clients\Client.cs" />
     <Compile Include="Models\Recipes\Recipe.cs" />
     <Compile Include="Models\Recipes\RecipeStep.cs" />
+    <Compile Include="UI\Controls\Clients\EditClientPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Clients\EditClientPanel.Designer.cs">
+      <DependentUpon>EditClientPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Clients\RegisterClientPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Clients\RegisterClientPanel.Designer.cs">
+      <DependentUpon>RegisterClientPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\Ingredients\EditDetailedIngredientPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -140,7 +156,7 @@
     <Compile Include="UI\Controls\Ingredients\EditBaseIngredientPanel.Designer.cs">
       <DependentUpon>EditBaseIngredientPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Data\SqliteIngredientManager.cs" />
+    <Compile Include="Data\SQLiteIngredientManager.cs" />
     <Compile Include="BusinessLogic\InformationCapture\IngredientInformationCapturer.cs" />
     <Compile Include="UI\Controls\Ingredients\RegisterDetailedIngredientsPanel.cs">
       <SubType>UserControl</SubType>
@@ -165,6 +181,12 @@
     </Compile>
     <Compile Include="UI\Controls\Recipes\RegisterRecipeStepPanel.Designer.cs">
       <DependentUpon>RegisterRecipeStepPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Menus\ClientsMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Menus\ClientsMenu.Designer.cs">
+      <DependentUpon>ClientsMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Menus\IngredientMenu.cs">
       <SubType>Form</SubType>
@@ -196,6 +218,12 @@
     <Content Include="x86\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="UI\Controls\Clients\EditClientPanel.resx">
+      <DependentUpon>EditClientPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Clients\RegisterClientPanel.resx">
+      <DependentUpon>RegisterClientPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Ingredients\EditDetailedIngredientPanel.resx">
       <DependentUpon>EditDetailedIngredientPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -216,6 +244,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Recipes\RegisterRecipeStepPanel.resx">
       <DependentUpon>RegisterRecipeStepPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Menus\ClientsMenu.resx">
+      <DependentUpon>ClientsMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Menus\IngredientMenu.resx">
       <DependentUpon>IngredientMenu.cs</DependentUpon>

@@ -34,5 +34,12 @@ namespace PanaderiaIkigai
             recipeMenu.Show();
             recipeMenu.BringToFront();
         }
+
+        private void btnOpenClientsMenu_Click(object sender, EventArgs e)
+        {
+            ClientsMenu clientsMenu = new ClientsMenu();
+            clientsMenu.Show();
+            clientsMenu.BringToFront();
+        }
     }
 }
