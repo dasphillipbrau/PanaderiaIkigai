@@ -126,6 +126,12 @@
     <Compile Include="Models\Clients\Client.cs" />
     <Compile Include="Models\Recipes\Recipe.cs" />
     <Compile Include="Models\Recipes\RecipeStep.cs" />
+    <Compile Include="UI\Controls\Clients\EditClientPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Clients\EditClientPanel.Designer.cs">
+      <DependentUpon>EditClientPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\Clients\RegisterClientPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -212,6 +218,9 @@
     <Content Include="x86\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="UI\Controls\Clients\EditClientPanel.resx">
+      <DependentUpon>EditClientPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Clients\RegisterClientPanel.resx">
       <DependentUpon>RegisterClientPanel.cs</DependentUpon>
     </EmbeddedResource>

@@ -18,6 +18,7 @@ namespace PanaderiaIkigai.Models.Clients
         [DisplayName("Correo Electrónico")]
         public string Email { get; set; }
         [DisplayName("Dirección de Cliente")]
+        [Browsable(false)]
         public string Address { get; set; }
         [DisplayName("Dinero Gastado en Compras")]
         public decimal TotalSpent { get; set; }

@@ -31,8 +31,7 @@ namespace PanaderiaIkigai.UI.Menus
         {
             this.panelNavigation = new System.Windows.Forms.Panel();
             this.btnGoToMainMenu = new System.Windows.Forms.Button();
-            this.btnGoToRecipeSteps = new System.Windows.Forms.Button();
-            this.btnGoToEditRecipe = new System.Windows.Forms.Button();
+            this.btnGoToEditClient = new System.Windows.Forms.Button();
             this.btnGoToRegisterClientPanel = new System.Windows.Forms.Button();
             this.panelHolder = new System.Windows.Forms.Panel();
             this.panelNavigation.SuspendLayout();
@@ -42,8 +41,7 @@ namespace PanaderiaIkigai.UI.Menus
             // 
             this.panelNavigation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
             this.panelNavigation.Controls.Add(this.btnGoToMainMenu);
-            this.panelNavigation.Controls.Add(this.btnGoToRecipeSteps);
-            this.panelNavigation.Controls.Add(this.btnGoToEditRecipe);
+            this.panelNavigation.Controls.Add(this.btnGoToEditClient);
             this.panelNavigation.Controls.Add(this.btnGoToRegisterClientPanel);
             this.panelNavigation.Location = new System.Drawing.Point(12, 12);
             this.panelNavigation.Name = "panelNavigation";
@@ -54,34 +52,25 @@ namespace PanaderiaIkigai.UI.Menus
             // 
             this.btnGoToMainMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
             this.btnGoToMainMenu.ForeColor = System.Drawing.Color.Beige;
-            this.btnGoToMainMenu.Location = new System.Drawing.Point(3, 314);
+            this.btnGoToMainMenu.Location = new System.Drawing.Point(3, 312);
             this.btnGoToMainMenu.Name = "btnGoToMainMenu";
             this.btnGoToMainMenu.Size = new System.Drawing.Size(194, 68);
             this.btnGoToMainMenu.TabIndex = 4;
             this.btnGoToMainMenu.Text = "Volver al Menú Principal";
             this.btnGoToMainMenu.UseVisualStyleBackColor = false;
+            this.btnGoToMainMenu.Click += new System.EventHandler(this.btnGoToMainMenu_Click);
             // 
-            // btnGoToRecipeSteps
+            // btnGoToEditClient
             // 
-            this.btnGoToRecipeSteps.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.btnGoToRecipeSteps.ForeColor = System.Drawing.Color.Beige;
-            this.btnGoToRecipeSteps.Location = new System.Drawing.Point(3, 229);
-            this.btnGoToRecipeSteps.Name = "btnGoToRecipeSteps";
-            this.btnGoToRecipeSteps.Size = new System.Drawing.Size(194, 68);
-            this.btnGoToRecipeSteps.TabIndex = 3;
-            this.btnGoToRecipeSteps.Text = "Pasos de Recetas";
-            this.btnGoToRecipeSteps.UseVisualStyleBackColor = false;
-            // 
-            // btnGoToEditRecipe
-            // 
-            this.btnGoToEditRecipe.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.btnGoToEditRecipe.ForeColor = System.Drawing.Color.Beige;
-            this.btnGoToEditRecipe.Location = new System.Drawing.Point(3, 128);
-            this.btnGoToEditRecipe.Name = "btnGoToEditRecipe";
-            this.btnGoToEditRecipe.Size = new System.Drawing.Size(194, 68);
-            this.btnGoToEditRecipe.TabIndex = 2;
-            this.btnGoToEditRecipe.Text = "Editar Recetas y Categorías";
-            this.btnGoToEditRecipe.UseVisualStyleBackColor = false;
+            this.btnGoToEditClient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.btnGoToEditClient.ForeColor = System.Drawing.Color.Beige;
+            this.btnGoToEditClient.Location = new System.Drawing.Point(3, 128);
+            this.btnGoToEditClient.Name = "btnGoToEditClient";
+            this.btnGoToEditClient.Size = new System.Drawing.Size(194, 68);
+            this.btnGoToEditClient.TabIndex = 2;
+            this.btnGoToEditClient.Text = "Consultar y Editar Clientes";
+            this.btnGoToEditClient.UseVisualStyleBackColor = false;
+            this.btnGoToEditClient.Click += new System.EventHandler(this.btnGoToEditRecipe_Click);
             // 
             // btnGoToRegisterClientPanel
             // 
@@ -121,8 +110,7 @@ namespace PanaderiaIkigai.UI.Menus
 
         private System.Windows.Forms.Panel panelNavigation;
         private System.Windows.Forms.Button btnGoToMainMenu;
-        private System.Windows.Forms.Button btnGoToRecipeSteps;
-        private System.Windows.Forms.Button btnGoToEditRecipe;
+        private System.Windows.Forms.Button btnGoToEditClient;
         private System.Windows.Forms.Button btnGoToRegisterClientPanel;
         private System.Windows.Forms.Panel panelHolder;
     }
