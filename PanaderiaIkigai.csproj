@@ -169,12 +169,6 @@
     <Compile Include="UI\Controls\Ingredients\RegisterDetailedIngredientsPanel.Designer.cs">
       <DependentUpon>RegisterDetailedIngredientsPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\Orders\OrderContainer.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Controls\Orders\OrderContainer.Designer.cs">
-      <DependentUpon>OrderContainer.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\Controls\Orders\RegisterOrderPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>

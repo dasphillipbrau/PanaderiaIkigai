@@ -88,5 +88,110 @@ namespace PanaderiaIkigai.Data.SQL
                 throw ex;
             }
         }
+
+        public IEnumerable<Order> GetOrders(string pFilterValue, OrderFilter pFilterMode)
+        {
+            try
+            {
+                using (var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    var orderList = new List<Order>();
+                    var command = new SQLiteCommand(conn);
+                    switch (pFilterMode)
+                    {
+                        case OrderFilter.ClientName:
+                            command.CommandText = "SELECT A.CODE, A.CLIENT_CODE, B.NAME, A.ORDER_STATUS, A.ORDER_NOTES, A.ORDER_DATE, A.DELIVERY_DATE, " +
+                        "A.ITEMS_IN_ORDER, A.TAX_PERCENTAGE, A.TAX_TOTAL, A.PREPARATION_COST, A.ITEMS_TOTAL_PRICE, A.FINAL_PRICE " +
+                        "FROM ORDER_BASE A " +
+                        "INNER JOIN CLIENT B " +
+                        "ON A.CLIENT_CODE = B.CODE WHERE B.NAME LIKE $pFilter || '%' ORDER BY A.CODE ASC";
+                            command.Parameters.AddWithValue("pFilter", pFilterValue.ToUpper().Trim());
+                            break;
+                        case OrderFilter.OrderDate:
+                            command.CommandText = "SELECT A.CODE, A.CLIENT_CODE, B.NAME, A.ORDER_STATUS, A.ORDER_NOTES, A.ORDER_DATE, A.DELIVERY_DATE, " +
+                        "A.ITEMS_IN_ORDER, A.TAX_PERCENTAGE, A.TAX_TOTAL, A.PREPARATION_COST, A.ITEMS_TOTAL_PRICE, A.FINAL_PRICE " +
+                        "FROM ORDER_BASE A " +
+                        "INNER JOIN CLIENT B " +
+                        "ON A.CLIENT_CODE = B.CODE WHERE A.ORDER_DATE LIKE $pFilter || '%' ORDER BY A.CODE ASC";
+                            command.Parameters.AddWithValue("pFilter", pFilterValue.ToUpper().Trim());
+                            break;
+                        case OrderFilter.OrderDeliveryDate:
+                            command.CommandText = "SELECT A.CODE, A.CLIENT_CODE, B.NAME, A.ORDER_STATUS, A.ORDER_NOTES, A.ORDER_DATE, A.DELIVERY_DATE, " +
+                        "A.ITEMS_IN_ORDER, A.TAX_PERCENTAGE, A.TAX_TOTAL, A.PREPARATION_COST, A.ITEMS_TOTAL_PRICE, A.FINAL_PRICE " +
+                        "FROM ORDER_BASE A " +
+                        "INNER JOIN CLIENT B " +
+                        "ON A.CLIENT_CODE = B.CODE WHERE A.DELIVERY_DATE LIKE $pFilter || '%' ORDER BY A.CODE ASC";
+                            command.Parameters.AddWithValue("pFilter", pFilterValue.ToUpper().Trim());
+                            break;
+                        case OrderFilter.OrderStatus:
+                            command.CommandText = "SELECT A.CODE, A.CLIENT_CODE, B.NAME, A.ORDER_STATUS, A.ORDER_NOTES, A.ORDER_DATE, A.DELIVERY_DATE, " +
+                        "A.ITEMS_IN_ORDER, A.TAX_PERCENTAGE, A.TAX_TOTAL, A.PREPARATION_COST, A.ITEMS_TOTAL_PRICE, A.FINAL_PRICE " +
+                        "FROM ORDER_BASE A " +
+                        "INNER JOIN CLIENT B " +
+                        "ON A.CLIENT_CODE = B.CODE WHERE A.ORDER_STATUS LIKE $pFilter || '%' ORDER BY A.CODE ASC";
+                            command.Parameters.AddWithValue("pFilter", pFilterValue.ToUpper().Trim());
+                            break;
+
+                    }
+
+
+                    conn.Open();
+
+                    var reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        orderList.Add(new Order(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetDateTime(5),
+                            reader.GetDateTime(6), reader.GetInt32(7), reader.GetDecimal(8), reader.GetDecimal(9), reader.GetDecimal(10), reader.GetDecimal(11), reader.GetDecimal(12)));
+                    }
+                    return orderList;
+
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public int UpdateOrder(Order pOrder)
+        {
+            try
+            {
+                using (var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    var command = new SQLiteCommand(conn);
+
+                    command.CommandText = "UPDATE ORDER_BASE SET CLIENT_CODE = $pClientCode, ORDER_STATUS = $pOrderStatus, ORDER_NOTES = $pOrderNotes, " +
+                        "ORDER_DATE = $pOrderDate, DELIVERY_DATE = $pOrderDeliveryDate, TAX_PERCENTAGE = $pTax, PREPARATION_COST = $pPrepCost " +
+                        "WHERE CODE = $pCode";
+
+                    command.Parameters.AddWithValue("pCode", pOrder.Code);
+                    command.Parameters.AddWithValue("pClientCode", pOrder.ClientCode);
+                    command.Parameters.AddWithValue("pOrderStatus", pOrder.OrderStatus.ToUpper());
+                    command.Parameters.AddWithValue("pOrderNotes", pOrder.OrderNotes.Trim().ToUpper());
+                    command.Parameters.AddWithValue("pOrderDate", pOrder.OrderDate.Date);
+                    command.Parameters.AddWithValue("pOrderDeliveryDate", pOrder.DeliveryDate.Date);
+                    command.Parameters.Add("pTax", System.Data.DbType.Decimal).Value = Math.Round(pOrder.TaxPercentage, 2);
+                    command.Parameters.Add("pPrepCost", System.Data.DbType.Decimal).Value = Math.Round(pOrder.PreparationCost, 2);
+
+                    conn.Open();
+                    return command.ExecuteNonQuery();
+
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

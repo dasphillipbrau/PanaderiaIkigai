@@ -91,4 +91,12 @@ namespace PanaderiaIkigai.Models.Orders
             TotalPrice = Math.Round(pTotalPrice, 2);
         }
     }
+
+    public enum OrderFilter
+    {
+        ClientName,
+        OrderStatus,
+        OrderDate,
+        OrderDeliveryDate
+    }
 }

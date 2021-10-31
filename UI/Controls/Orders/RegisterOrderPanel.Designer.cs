@@ -50,7 +50,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             this.label23 = new System.Windows.Forms.Label();
             this.numTaxPercentage = new System.Windows.Forms.NumericUpDown();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rBtnOrderEditInsertMode = new System.Windows.Forms.RadioButton();
+            this.rBtnOrderEditMode = new System.Windows.Forms.RadioButton();
             this.rBtnOrderRegisterMode = new System.Windows.Forms.RadioButton();
             this.label20 = new System.Windows.Forms.Label();
             this.btnSaveOrderChanges = new System.Windows.Forms.Button();
@@ -67,14 +67,12 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             this.label7 = new System.Windows.Forms.Label();
             this.dgvItems = new System.Windows.Forms.DataGridView();
             this.pnlRegisterItem = new System.Windows.Forms.Panel();
-            this.numItemTotalPrice = new System.Windows.Forms.NumericUpDown();
             this.numUnitAmount = new System.Windows.Forms.NumericUpDown();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rBtnItemEditMode = new System.Windows.Forms.RadioButton();
             this.rBtnItemRegisterMode = new System.Windows.Forms.RadioButton();
             this.label21 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.txtRecipeCode = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -88,6 +86,10 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             this.errorProviderOrderNotes = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorProviderOrderDate = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorProviderDeliveryDate = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtFilterOrders = new System.Windows.Forms.TextBox();
+            this.comboBoxFilterOrders = new System.Windows.Forms.ComboBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.lblDateFormat = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClients)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecipes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
@@ -97,7 +99,6 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             this.pnlRegisterItem.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numItemTotalPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUnitAmount)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderOrderNotes)).BeginInit();
@@ -122,11 +123,13 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             this.dgvClients.AllowUserToDeleteRows = false;
             this.dgvClients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClients.Location = new System.Drawing.Point(8, 283);
+            this.dgvClients.MultiSelect = false;
             this.dgvClients.Name = "dgvClients";
             this.dgvClients.ReadOnly = true;
+            this.dgvClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvClients.Size = new System.Drawing.Size(615, 150);
             this.dgvClients.TabIndex = 1;
-            this.dgvClients.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClients_CellContentClick);
+            this.dgvClients.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClients_CellClick);
             // 
             // label2
             // 
@@ -171,6 +174,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             this.txtFilterClient.Name = "txtFilterClient";
             this.txtFilterClient.Size = new System.Drawing.Size(212, 20);
             this.txtFilterClient.TabIndex = 5;
+            this.txtFilterClient.TextChanged += new System.EventHandler(this.txtFilterClient_TextChanged);
             // 
             // txtClientAddress
             // 
@@ -197,10 +201,12 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             this.dgvRecipes.AllowUserToAddRows = false;
             this.dgvRecipes.AllowUserToDeleteRows = false;
             this.dgvRecipes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvRecipes.Location = new System.Drawing.Point(1081, 47);
+            this.dgvRecipes.Location = new System.Drawing.Point(1081, 283);
+            this.dgvRecipes.MultiSelect = false;
             this.dgvRecipes.Name = "dgvRecipes";
             this.dgvRecipes.ReadOnly = true;
-            this.dgvRecipes.Size = new System.Drawing.Size(771, 375);
+            this.dgvRecipes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvRecipes.Size = new System.Drawing.Size(771, 139);
             this.dgvRecipes.TabIndex = 8;
             // 
             // label5
@@ -208,7 +214,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(1075, 28);
+            this.label5.Location = new System.Drawing.Point(1078, 264);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(127, 16);
             this.label5.TabIndex = 9;
@@ -216,10 +222,11 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             // 
             // txtRecipeFilter
             // 
-            this.txtRecipeFilter.Location = new System.Drawing.Point(1420, 429);
+            this.txtRecipeFilter.Location = new System.Drawing.Point(1420, 428);
             this.txtRecipeFilter.Name = "txtRecipeFilter";
             this.txtRecipeFilter.Size = new System.Drawing.Size(172, 20);
             this.txtRecipeFilter.TabIndex = 12;
+            this.txtRecipeFilter.TextChanged += new System.EventHandler(this.txtRecipeFilter_TextChanged);
             // 
             // comboBoxFilterRecipe
             // 
@@ -248,12 +255,15 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             // dgvOrders
             // 
             this.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvOrders.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dgvOrders.Location = new System.Drawing.Point(8, 47);
+            this.dgvOrders.MultiSelect = false;
             this.dgvOrders.Name = "dgvOrders";
+            this.dgvOrders.ReadOnly = true;
             this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOrders.Size = new System.Drawing.Size(1064, 213);
+            this.dgvOrders.Size = new System.Drawing.Size(1727, 213);
             this.dgvOrders.TabIndex = 26;
-            this.dgvOrders.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrders_CellContentClick);
+            this.dgvOrders.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrders_CellClick);
             // 
             // label13
             // 
@@ -303,11 +313,6 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             this.numPrepPrice.Name = "numPrepPrice";
             this.numPrepPrice.Size = new System.Drawing.Size(120, 20);
             this.numPrepPrice.TabIndex = 43;
-            this.numPrepPrice.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // label23
             // 
@@ -329,14 +334,14 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             this.numTaxPercentage.Size = new System.Drawing.Size(120, 20);
             this.numTaxPercentage.TabIndex = 41;
             this.numTaxPercentage.Value = new decimal(new int[] {
-            1,
+            13,
             0,
             0,
             0});
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.rBtnOrderEditInsertMode);
+            this.groupBox1.Controls.Add(this.rBtnOrderEditMode);
             this.groupBox1.Controls.Add(this.rBtnOrderRegisterMode);
             this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(521, 29);
@@ -346,15 +351,16 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Modo de Operación";
             // 
-            // rBtnOrderEditInsertMode
+            // rBtnOrderEditMode
             // 
-            this.rBtnOrderEditInsertMode.AutoSize = true;
-            this.rBtnOrderEditInsertMode.Location = new System.Drawing.Point(7, 66);
-            this.rBtnOrderEditInsertMode.Name = "rBtnOrderEditInsertMode";
-            this.rBtnOrderEditInsertMode.Size = new System.Drawing.Size(60, 17);
-            this.rBtnOrderEditInsertMode.TabIndex = 1;
-            this.rBtnOrderEditInsertMode.Text = "Edición";
-            this.rBtnOrderEditInsertMode.UseVisualStyleBackColor = true;
+            this.rBtnOrderEditMode.AutoSize = true;
+            this.rBtnOrderEditMode.Location = new System.Drawing.Point(7, 66);
+            this.rBtnOrderEditMode.Name = "rBtnOrderEditMode";
+            this.rBtnOrderEditMode.Size = new System.Drawing.Size(60, 17);
+            this.rBtnOrderEditMode.TabIndex = 1;
+            this.rBtnOrderEditMode.Text = "Edición";
+            this.rBtnOrderEditMode.UseVisualStyleBackColor = true;
+            this.rBtnOrderEditMode.CheckedChanged += new System.EventHandler(this.rBtnOrderEditInsertMode_CheckedChanged);
             // 
             // rBtnOrderRegisterMode
             // 
@@ -523,19 +529,19 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             // 
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItems.Location = new System.Drawing.Point(629, 461);
+            this.dgvItems.MultiSelect = false;
             this.dgvItems.Name = "dgvItems";
             this.dgvItems.Size = new System.Drawing.Size(573, 217);
             this.dgvItems.TabIndex = 29;
+            this.dgvItems.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItems_CellClick);
             // 
             // pnlRegisterItem
             // 
             this.pnlRegisterItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
-            this.pnlRegisterItem.Controls.Add(this.numItemTotalPrice);
             this.pnlRegisterItem.Controls.Add(this.numUnitAmount);
             this.pnlRegisterItem.Controls.Add(this.groupBox2);
             this.pnlRegisterItem.Controls.Add(this.label21);
             this.pnlRegisterItem.Controls.Add(this.button1);
-            this.pnlRegisterItem.Controls.Add(this.label19);
             this.pnlRegisterItem.Controls.Add(this.label18);
             this.pnlRegisterItem.Controls.Add(this.txtRecipeCode);
             this.pnlRegisterItem.Controls.Add(this.label17);
@@ -550,25 +556,6 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             this.pnlRegisterItem.Name = "pnlRegisterItem";
             this.pnlRegisterItem.Size = new System.Drawing.Size(526, 217);
             this.pnlRegisterItem.TabIndex = 30;
-            // 
-            // numItemTotalPrice
-            // 
-            this.numItemTotalPrice.DecimalPlaces = 2;
-            this.numItemTotalPrice.Location = new System.Drawing.Point(243, 161);
-            this.numItemTotalPrice.Maximum = new decimal(new int[] {
-            1410065408,
-            2,
-            0,
-            0});
-            this.numItemTotalPrice.Name = "numItemTotalPrice";
-            this.numItemTotalPrice.ReadOnly = true;
-            this.numItemTotalPrice.Size = new System.Drawing.Size(132, 20);
-            this.numItemTotalPrice.TabIndex = 43;
-            this.numItemTotalPrice.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // numUnitAmount
             // 
@@ -644,18 +631,6 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             this.button1.TabIndex = 39;
             this.button1.Text = "Guardar Cambios";
             this.button1.UseVisualStyleBackColor = false;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
-            this.label19.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.ForeColor = System.Drawing.Color.White;
-            this.label19.Location = new System.Drawing.Point(240, 142);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(123, 16);
-            this.label19.TabIndex = 38;
-            this.label19.Text = "Precio Total de Item";
             // 
             // label18
             // 
@@ -756,9 +731,9 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             this.label22.ForeColor = System.Drawing.Color.White;
             this.label22.Location = new System.Drawing.Point(629, 442);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(117, 16);
+            this.label22.Size = new System.Drawing.Size(105, 16);
             this.label22.TabIndex = 31;
-            this.label22.Text = "Items de la Receta";
+            this.label22.Text = "Items del Pedido";
             // 
             // errorProviderOrderNotes
             // 
@@ -772,11 +747,60 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             // 
             this.errorProviderDeliveryDate.ContainerControl = this;
             // 
+            // txtFilterOrders
+            // 
+            this.txtFilterOrders.Location = new System.Drawing.Point(1522, 24);
+            this.txtFilterOrders.Name = "txtFilterOrders";
+            this.txtFilterOrders.Size = new System.Drawing.Size(212, 20);
+            this.txtFilterOrders.TabIndex = 34;
+            this.txtFilterOrders.TextChanged += new System.EventHandler(this.txtFilterOrders_TextChanged);
+            // 
+            // comboBoxFilterOrders
+            // 
+            this.comboBoxFilterOrders.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxFilterOrders.FormattingEnabled = true;
+            this.comboBoxFilterOrders.Items.AddRange(new object[] {
+            "Nombre de Cliente",
+            "Estado de Orden",
+            "Fecha de Orden",
+            "Fecha de Entrega"});
+            this.comboBoxFilterOrders.Location = new System.Drawing.Point(1344, 23);
+            this.comboBoxFilterOrders.Name = "comboBoxFilterOrders";
+            this.comboBoxFilterOrders.Size = new System.Drawing.Size(172, 21);
+            this.comboBoxFilterOrders.TabIndex = 33;
+            this.comboBoxFilterOrders.SelectedIndexChanged += new System.EventHandler(this.comboBoxFilterOrders_SelectedIndexChanged);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.ForeColor = System.Drawing.Color.White;
+            this.label19.Location = new System.Drawing.Point(1275, 24);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(63, 16);
+            this.label19.TabIndex = 32;
+            this.label19.Text = "Filtrar por";
+            // 
+            // lblDateFormat
+            // 
+            this.lblDateFormat.AutoSize = true;
+            this.lblDateFormat.ForeColor = System.Drawing.Color.Yellow;
+            this.lblDateFormat.Location = new System.Drawing.Point(1510, 4);
+            this.lblDateFormat.Name = "lblDateFormat";
+            this.lblDateFormat.Size = new System.Drawing.Size(225, 13);
+            this.lblDateFormat.TabIndex = 35;
+            this.lblDateFormat.Text = "Escriba la Fecha con este formato yyyy-mm-dd";
+            this.lblDateFormat.Visible = false;
+            // 
             // RegisterOrderPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.Controls.Add(this.lblDateFormat);
+            this.Controls.Add(this.txtFilterOrders);
+            this.Controls.Add(this.comboBoxFilterOrders);
+            this.Controls.Add(this.label19);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.pnlRegisterItem);
             this.Controls.Add(this.dgvItems);
@@ -811,7 +835,6 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
             this.pnlRegisterItem.ResumeLayout(false);
             this.pnlRegisterItem.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numItemTotalPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUnitAmount)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -865,7 +888,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
         private System.Windows.Forms.TextBox txtRecipeName;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton rBtnOrderEditInsertMode;
+        private System.Windows.Forms.RadioButton rBtnOrderEditMode;
         private System.Windows.Forms.RadioButton rBtnOrderRegisterMode;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label22;
@@ -874,14 +897,16 @@ namespace PanaderiaIkigai.UI.Controls.Orders
         private System.Windows.Forms.RadioButton rBtnItemRegisterMode;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label19;
         private System.Windows.Forms.NumericUpDown numTaxPercentage;
         private System.Windows.Forms.NumericUpDown numUnitAmount;
         private System.Windows.Forms.NumericUpDown numPrepPrice;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.NumericUpDown numItemTotalPrice;
         private System.Windows.Forms.ErrorProvider errorProviderOrderNotes;
         private System.Windows.Forms.ErrorProvider errorProviderOrderDate;
         private System.Windows.Forms.ErrorProvider errorProviderDeliveryDate;
+        private System.Windows.Forms.TextBox txtFilterOrders;
+        private System.Windows.Forms.ComboBox comboBoxFilterOrders;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label lblDateFormat;
     }
 }

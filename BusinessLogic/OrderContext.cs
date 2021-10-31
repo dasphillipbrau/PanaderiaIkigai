@@ -42,5 +42,49 @@ namespace PanaderiaIkigai.BusinessLogic
         {
             return orderDataAccess.GetOrders() as List<Order>;
         }
+
+        public List<Order> GetOrders(string pFilterValue, string pFilterMode)
+        {
+            var orderList = new List<Order>();
+            switch (pFilterMode)
+            {
+                case "Nombre de Cliente":
+                    orderList = orderDataAccess.GetOrders(pFilterValue, OrderFilter.ClientName) as List<Order>;
+                    break;
+                case "Estado de Orden":
+                    orderList = orderDataAccess.GetOrders(pFilterValue, OrderFilter.OrderStatus) as List<Order>;
+                    break;
+                case "Fecha de Orden":
+                    orderList = orderDataAccess.GetOrders(pFilterValue, OrderFilter.OrderDate) as List<Order>;
+                    break;
+                case "Fecha de Entrega":
+                    orderList = orderDataAccess.GetOrders(pFilterValue, OrderFilter.OrderDeliveryDate) as List<Order>;
+                    break;
+                
+            }
+            return orderList;
+        }
+
+        public bool UpdateOrder(int pOrderCode, int pClientCode, string pOrderStatus, string pOrderNotes, DateTime pOrderDate, DateTime pDeliveryDate, decimal pTax, decimal pPrepPrice)
+        {
+            try { 
+                var orderToUpdate = orderCapturer.CaptureOrderInformation(pClientCode, pOrderStatus, pOrderNotes, pOrderDate, pDeliveryDate, pTax, pPrepPrice);
+                orderToUpdate.Code = pOrderCode;
+                if (orderDataAccess.UpdateOrder(orderToUpdate) == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (SQLiteException sqlEx)
+            {
+                MessageBox.Show("Error " + sqlEx.ErrorCode + ": " + sqlEx.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
     }
 }
