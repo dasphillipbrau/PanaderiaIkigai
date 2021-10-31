@@ -37,10 +37,13 @@ namespace PanaderiaIkigai
             {
                 MessageBox.Show("Para poder acceder al menú de recetas, deben existir al menos un ingrediente detallado registrado" +
                     "\nUtilice el menu de ingredientes para añadir un registro", "No hay ingredientes detallados registrados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } 
+            else 
+            { 
+                RecipeMenu recipeMenu = new RecipeMenu();
+                recipeMenu.Show();
+                recipeMenu.BringToFront();
             }
-            RecipeMenu recipeMenu = new RecipeMenu();
-            recipeMenu.Show();
-            recipeMenu.BringToFront();
         }
 
         private void btnOpenClientsMenu_Click(object sender, EventArgs e)
