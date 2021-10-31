@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PanaderiaIkigai.UI.Controls.Orders;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,15 @@ namespace PanaderiaIkigai.UI.Menus
         public OrdersMenu()
         {
             InitializeComponent();
+        }
+
+        private void btnGoToRegisterOrder_Click(object sender, EventArgs e)
+        {
+            RegisterOrderPanel registerOrderPanel = new RegisterOrderPanel();
+            registerOrderPanel.Location = new Point(1, 1);
+            panelHolder.Controls.Add(registerOrderPanel);
+            registerOrderPanel.Show();
+            registerOrderPanel.BringToFront();
         }
     }
 }

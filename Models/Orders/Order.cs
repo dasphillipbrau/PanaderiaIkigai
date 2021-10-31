@@ -13,7 +13,7 @@ namespace PanaderiaIkigai.Models.Orders
         public int Code { get; set; }
         [DisplayName("Código de Cliente")]
         public int ClientCode { get; set; }
-        [DisplayName("Nombre de Client")]
+        [DisplayName("Nombre de Cliente")]
         public string ClientName { get; set; }
         [DisplayName("Estado de Pedido")]
         public string OrderStatus { get; set; }
@@ -48,16 +48,15 @@ namespace PanaderiaIkigai.Models.Orders
         /// <param name="pItemsInOrder"></param>
         /// <param name="pTaxPercentage"></param>
         /// <param name="pPreparationCost"></param>
-        public Order(int pClientCode, string pOrderStatus, string pOrderNotes, DateTime pOrderDate, DateTime pDeliveryDate, int pItemsInOrder, decimal pTaxPercentage, decimal pPreparationCost)
+        public Order(int pClientCode, string pOrderStatus, string pOrderNotes, DateTime pOrderDate, DateTime pDeliveryDate, decimal pTaxPercentage, decimal pPreparationCost)
         {
             ClientCode = pClientCode;
             OrderStatus = pOrderStatus;
             OrderNotes = pOrderNotes;
             OrderDate = pOrderDate;
             DeliveryDate = pDeliveryDate;
-            ItemsInOrder = pItemsInOrder;
-            TaxPercentage = pTaxPercentage;
-            PreparationCost = pPreparationCost;
+            TaxPercentage = Math.Round(pTaxPercentage, 2);
+            PreparationCost = Math.Round(pPreparationCost, 2);
         }
         /// <summary>
         /// Constructor to use when populating a record from the database
@@ -82,14 +81,14 @@ namespace PanaderiaIkigai.Models.Orders
             ClientName = pClientName;
             OrderStatus = pOrderStatus;
             OrderNotes = pOrderNotes;
-            OrderDate = pOrderDate;
-            DeliveryDate = pDeliveryDate;
+            OrderDate = pOrderDate.Date;
+            DeliveryDate = pDeliveryDate.Date;
             ItemsInOrder = pItemsInOrder;
-            TaxPercentage = pTaxPercentage;
-            TaxAmount = pTaxAmount;
-            PreparationCost = pPreparationCost;
-            ItemsTotalPrice = pItemsPrice;
-            TotalPrice = pTotalPrice;
+            TaxPercentage = Math.Round(pTaxPercentage, 2);
+            TaxAmount = Math.Round(pTaxAmount, 2);
+            PreparationCost = Math.Round(pPreparationCost, 2);
+            ItemsTotalPrice = Math.Round(pItemsPrice, 2);
+            TotalPrice = Math.Round(pTotalPrice, 2);
         }
     }
 }

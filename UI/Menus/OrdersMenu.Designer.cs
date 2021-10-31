@@ -32,7 +32,7 @@ namespace PanaderiaIkigai.UI.Menus
             this.panelNavigation = new System.Windows.Forms.Panel();
             this.btnGoToMainMenu = new System.Windows.Forms.Button();
             this.btnGoToEditClient = new System.Windows.Forms.Button();
-            this.btnGoToRegisterClientPanel = new System.Windows.Forms.Button();
+            this.btnGoToRegisterOrder = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panelHolder = new System.Windows.Forms.Panel();
             this.panelNavigation.SuspendLayout();
@@ -43,7 +43,7 @@ namespace PanaderiaIkigai.UI.Menus
             this.panelNavigation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
             this.panelNavigation.Controls.Add(this.btnGoToMainMenu);
             this.panelNavigation.Controls.Add(this.btnGoToEditClient);
-            this.panelNavigation.Controls.Add(this.btnGoToRegisterClientPanel);
+            this.panelNavigation.Controls.Add(this.btnGoToRegisterOrder);
             this.panelNavigation.Location = new System.Drawing.Point(12, 40);
             this.panelNavigation.Name = "panelNavigation";
             this.panelNavigation.Size = new System.Drawing.Size(200, 588);
@@ -71,16 +71,17 @@ namespace PanaderiaIkigai.UI.Menus
             this.btnGoToEditClient.Text = "Consultar y Editar Clientes";
             this.btnGoToEditClient.UseVisualStyleBackColor = false;
             // 
-            // btnGoToRegisterClientPanel
+            // btnGoToRegisterOrder
             // 
-            this.btnGoToRegisterClientPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.btnGoToRegisterClientPanel.ForeColor = System.Drawing.Color.Beige;
-            this.btnGoToRegisterClientPanel.Location = new System.Drawing.Point(3, 25);
-            this.btnGoToRegisterClientPanel.Name = "btnGoToRegisterClientPanel";
-            this.btnGoToRegisterClientPanel.Size = new System.Drawing.Size(194, 68);
-            this.btnGoToRegisterClientPanel.TabIndex = 1;
-            this.btnGoToRegisterClientPanel.Text = "Registrar Clientes";
-            this.btnGoToRegisterClientPanel.UseVisualStyleBackColor = false;
+            this.btnGoToRegisterOrder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.btnGoToRegisterOrder.ForeColor = System.Drawing.Color.Beige;
+            this.btnGoToRegisterOrder.Location = new System.Drawing.Point(3, 25);
+            this.btnGoToRegisterOrder.Name = "btnGoToRegisterOrder";
+            this.btnGoToRegisterOrder.Size = new System.Drawing.Size(194, 68);
+            this.btnGoToRegisterOrder.TabIndex = 1;
+            this.btnGoToRegisterOrder.Text = "Registrar o Editar Orden";
+            this.btnGoToRegisterOrder.UseVisualStyleBackColor = false;
+            this.btnGoToRegisterOrder.Click += new System.EventHandler(this.btnGoToRegisterOrder_Click);
             // 
             // label1
             // 
@@ -97,7 +98,7 @@ namespace PanaderiaIkigai.UI.Menus
             // 
             this.panelHolder.Location = new System.Drawing.Point(218, 40);
             this.panelHolder.Name = "panelHolder";
-            this.panelHolder.Size = new System.Drawing.Size(913, 588);
+            this.panelHolder.Size = new System.Drawing.Size(1855, 683);
             this.panelHolder.TabIndex = 5;
             // 
             // OrdersMenu
@@ -105,7 +106,7 @@ namespace PanaderiaIkigai.UI.Menus
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(59)))), ((int)(((byte)(59)))));
-            this.ClientSize = new System.Drawing.Size(1143, 630);
+            this.ClientSize = new System.Drawing.Size(2100, 729);
             this.Controls.Add(this.panelHolder);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panelNavigation);
@@ -122,7 +123,7 @@ namespace PanaderiaIkigai.UI.Menus
         private System.Windows.Forms.Panel panelNavigation;
         private System.Windows.Forms.Button btnGoToMainMenu;
         private System.Windows.Forms.Button btnGoToEditClient;
-        private System.Windows.Forms.Button btnGoToRegisterClientPanel;
+        private System.Windows.Forms.Button btnGoToRegisterOrder;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panelHolder;
     }

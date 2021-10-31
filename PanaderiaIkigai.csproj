@@ -27,7 +27,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>11</ApplicationRevision>
+    <ApplicationRevision>12</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -118,11 +118,14 @@
   <ItemGroup>
     <Compile Include="BusinessLogic\ClientContext.cs" />
     <Compile Include="BusinessLogic\InformationCapture\ClientInformationCapturer.cs" />
+    <Compile Include="BusinessLogic\InformationCapture\OrderInformationCapture.cs" />
     <Compile Include="BusinessLogic\InformationCapture\RecipeCapturer.cs" />
     <Compile Include="BusinessLogic\IngredientContext.cs" />
+    <Compile Include="BusinessLogic\OrderContext.cs" />
     <Compile Include="BusinessLogic\RecipeContext.cs" />
     <Compile Include="Data\SQLiteClientManager.cs" />
     <Compile Include="Data\SQLiteRecipeManager.cs" />
+    <Compile Include="Data\SQL\SQLiteOrderManager.cs" />
     <Compile Include="Models\Clients\Client.cs" />
     <Compile Include="Models\Orders\Order.cs" />
     <Compile Include="Models\Orders\OrderItem.cs" />
@@ -165,6 +168,12 @@
     </Compile>
     <Compile Include="UI\Controls\Ingredients\RegisterDetailedIngredientsPanel.Designer.cs">
       <DependentUpon>RegisterDetailedIngredientsPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Orders\OrderContainer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Orders\OrderContainer.Designer.cs">
+      <DependentUpon>OrderContainer.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\Orders\RegisterOrderPanel.cs">
       <SubType>UserControl</SubType>
