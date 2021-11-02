@@ -169,6 +169,12 @@
     <Compile Include="UI\Controls\Ingredients\RegisterDetailedIngredientsPanel.Designer.cs">
       <DependentUpon>RegisterDetailedIngredientsPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Controls\Orders\RegisterOrderItemPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Orders\RegisterOrderItemPanel.Designer.cs">
+      <DependentUpon>RegisterOrderItemPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\Orders\RegisterOrderPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -252,6 +258,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Ingredients\RegisterDetailedIngredientsPanel.resx">
       <DependentUpon>RegisterDetailedIngredientsPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Orders\RegisterOrderItemPanel.resx">
+      <DependentUpon>RegisterOrderItemPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Orders\RegisterOrderPanel.resx">
       <DependentUpon>RegisterOrderPanel.cs</DependentUpon>

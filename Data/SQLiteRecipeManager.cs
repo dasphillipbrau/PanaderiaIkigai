@@ -251,6 +251,45 @@ namespace PanaderiaIkigai.Data
                 throw ex;
             }
         }
+
+        public IEnumerable<Recipe> GetRecipesWithUnitsAvailable()
+        {
+            try
+            {
+                using (var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    var command = new SQLiteCommand(conn);
+                    var recipeList = new List<Recipe>();
+
+                    command.CommandText = "SELECT CODE, NAME, CATEGORY_NAME, AUTHOR, TOTAL_PRICE, UNITS_PREPARED, MAIN_INGREDIENT_QUANTITY, PREPARATION_NOTES, IMAGE " +
+                        "FROM RECIPE WHERE UNITS_PREPARED > 0 AND TOTAL_PRICE > 0 ORDER BY NAME ASC";
+
+                    conn.Open();
+
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+
+                        Recipe recipeFound = new Recipe(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetDecimal(4), reader.GetInt32(5),
+                            reader.GetDecimal(6), reader.GetString(7));
+                        if (reader[8].GetType() == typeof(DBNull))
+                            recipeFound.Image = null;
+                        else
+                            recipeFound.Image = (byte[])reader[8];
+                        recipeList.Add(recipeFound);
+                    }
+                    return recipeList;
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         /// <summary>
         /// Retrieves a filtered list of Recipes
         /// </summary>
@@ -464,6 +503,8 @@ namespace PanaderiaIkigai.Data
             }
         }
 
+
+
         public int UpdateRecipeStep(RecipeStep pStep, string pOldCode)
         {
             try
@@ -523,5 +564,58 @@ namespace PanaderiaIkigai.Data
                 throw ex;
             }
         }
+
+        public int SubtractRecipeUnits(Recipe pRecipe, int pAmountToSubtract)
+        {
+            try
+            {
+                using (var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    var command = new SQLiteCommand(conn);
+                    command.CommandText = "UPDATE RECIPE SET UNITS_PREPARED = (UNITS_PREPARED - $pSubtract) WHERE CODE = $pCode";
+                    command.Parameters.AddWithValue("pCode", pRecipe.Code);
+                    command.Parameters.AddWithValue("pSubtract", pAmountToSubtract);
+
+                    conn.Open();
+
+                    return command.ExecuteNonQuery();
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public int AddRecipeUnits(Recipe pRecipe, int pAmountToAdd)
+        {
+            try
+            {
+                using (var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    var command = new SQLiteCommand(conn);
+                    command.CommandText = "UPDATE RECIPE SET UNITS_PREPARED = (UNITS_PREPARED - $pAdd) WHERE CODE = $pCode";
+                    command.Parameters.AddWithValue("pCode", pRecipe.Code);
+                    command.Parameters.AddWithValue("pAdd", pAmountToAdd);
+
+                    conn.Open();
+
+                    return command.ExecuteNonQuery();
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

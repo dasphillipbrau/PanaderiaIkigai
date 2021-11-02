@@ -58,14 +58,19 @@ namespace PanaderiaIkigai
             
             if(clientContext.GetClients().Count == 0)
             {
-                MessageBox.Show("Para poder acceder al menú de ordenes, deben existir al menos un cliente registrado" +
+                MessageBox.Show("Para poder acceder al menú de pedidos, deben existir al menos un cliente registrado" +
                     "\nUtilice el menu de clientes para añadir un registro", "No hay clientes registrados", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 
             }
             else if(recipeContext.GetSteps().Count == 0)
             {
-                MessageBox.Show("Para poder acceder al menú de ordenes, deben existir al menos una receta registrada" +
+                MessageBox.Show("Para poder acceder al menú de pedidos, deben existir al menos una receta registrada" +
                     "\nUtilice el menu de recetas para añadir un registro", "No hay recetas registradas", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if(recipeContext.GetAvailableOrders().Count == 0)
+            {
+                MessageBox.Show("Actualmente ninguna de las recetas que tiene registradas tiene unidades disponibles" +
+                    "\nPrimero utilice la funcionalidad de edición de recetas en el menú de recetas y añada unidades a al menos una receta", "No hay recetas disponibles", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {

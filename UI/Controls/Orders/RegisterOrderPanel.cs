@@ -48,7 +48,6 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             dateOrder.Value = DateTime.Now;
 
             comboBoxFilterClients.SelectedIndex = 0;
-            comboBoxFilterRecipe.SelectedIndex = 0;
             comboBoxFilterOrders.SelectedIndex = 0;
         }
 
@@ -64,12 +63,8 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             dgvClients.AutoResizeColumns();
             dgvClients.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-            dgvRecipes.DataSource = recipeContext.GetRecipes();
-            dgvRecipes.AutoResizeColumns();
-            dgvRecipes.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             dgvClients.ClearSelection();
-            dgvRecipes.ClearSelection();
             dgvOrders.ClearSelection();
         }
 
@@ -77,6 +72,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
         private void dgvOrders_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             selectedOrder = (Order)dgvOrders.CurrentRow.DataBoundItem;
+            btnDeleteOrder.Enabled = true;
             if (rBtnOrderEditMode.Checked)
             {
                 EnableOrderFields();
@@ -113,6 +109,9 @@ namespace PanaderiaIkigai.UI.Controls.Orders
                 dateDelivery.Enabled = true;
                 txtPrepNotes.ReadOnly = false;
             }
+            btnDeleteOrder.Enabled = true;
+            rBtnOrderEditMode.Enabled = true;
+            rBtnOrderRegisterMode.Enabled = true;
         }
 
         private void textBox4_Validating(object sender, CancelEventArgs e)
@@ -166,12 +165,12 @@ namespace PanaderiaIkigai.UI.Controls.Orders
                 {
                     if(orderContext.RegisterOrder(selectedClient.Code, comboBoxOrderStatus.SelectedItem.ToString(), txtPrepNotes.Text, dateOrder.Value.Date, dateDelivery.Value.Date, Math.Round(numTaxPercentage.Value, 2), Math.Round(numPrepPrice.Value, 2)))
                     {
-                        MessageBox.Show("Orden Registrada", successMessage, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Pedido Registrado\nRecuerde añadir ítems al pedido mediante el panel de ítems", successMessage, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         ClearFields();
                     }
                     else
                     {
-                        MessageBox.Show("Orden no Registrada", errorMessage, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Pedido no Registrado", errorMessage, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
@@ -179,12 +178,12 @@ namespace PanaderiaIkigai.UI.Controls.Orders
                     if(orderContext.UpdateOrder(selectedOrder.Code, selectedOrder.ClientCode, comboBoxOrderStatus.SelectedItem.ToString(), 
                         txtPrepNotes.Text, dateOrder.Value.Date, dateDelivery.Value.Date, Math.Round(numTaxPercentage.Value, 2), Math.Round(numPrepPrice.Value, 2)))
                     {
-                        MessageBox.Show("Orden Actualizada", successMessage, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Pedido Actualizado", successMessage, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         ClearFields();
                     }
                     else
                     {
-                        MessageBox.Show("Orden no Actualizada", errorMessage, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Pedido no Actualizado", errorMessage, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -201,33 +200,39 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             numTaxPercentage.ReadOnly = true;
             numPrepPrice.Value = 0;
             numPrepPrice.ReadOnly = true;
-            dgvOrders.DataSource = orderContext.GetOrders();
+            dgvOrders.DataSource = orderContext.GetOrders().Count == 0 ? null : orderContext.GetOrders();
+            if(dgvOrders.DataSource != null)
+            {
+                dgvOrders.AutoResizeColumns();
+                dgvOrders.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
             selectedOrder = null;
             selectedClient = null;
             selectedRecipe = null;
             dgvClients.DataSource = clientContext.GetClients();
-            dgvOrders.DataSource = orderContext.GetOrders();
-            dgvRecipes.DataSource = recipeContext.GetRecipes();
+            btnDeleteOrder.Enabled = false;
+            rBtnOrderEditMode.Enabled = false;
+            rBtnOrderRegisterMode.Enabled = false;
+            rBtnOrderRegisterMode.Checked = true;
         }
 
         private void rBtnOrderEditInsertMode_CheckedChanged(object sender, EventArgs e)
         {
-            if (rBtnOrderEditMode.Checked)
+            if(rBtnOrderEditMode.Checked && orderContext.GetOrders().Count == 0) {
+                MessageBox.Show("No hay pedidos para editar", "Agregue pedidos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                rBtnOrderRegisterMode.Checked = true;
+            }
+            else
             {
-                MessageBox.Show("Modo de Edición Activo. Recuerde hacer click en una fila de la lista de ordenes para señalar cual orden quiere editar", "Cambio de Modo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ClearFields();
+                if (rBtnOrderEditMode.Checked)
+                {
+                    MessageBox.Show("Modo de Edición Activo. Recuerde hacer click en una fila de la lista de ordenes para señalar cual orden quiere editar", "Cambio de Modo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ClearFields();
+                }
             }
         }
 
-        private void txtRecipeFilter_TextChanged(object sender, EventArgs e)
-        {
-            if (comboBoxFilterRecipe.SelectedIndex == 0)
-                dgvRecipes.DataSource = recipeContext.GetRecipes(txtRecipeFilter.Text.ToUpper(), "NAME");
-            else if (comboBoxFilterRecipe.SelectedIndex == 1)
-                dgvRecipes.DataSource = recipeContext.GetRecipes(txtFilterClient.Text.ToUpper(), "CATEGORY");
-            else if (comboBoxFilterRecipe.SelectedIndex == 2)
-                dgvRecipes.DataSource = recipeContext.GetRecipes(txtFilterClient.Text.ToUpper(), "AUTHOR");
-        }
+     
 
         private void txtFilterClient_TextChanged(object sender, EventArgs e)
         {
@@ -242,11 +247,6 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             }
         }
 
-        private void dgvItems_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-        }
-
         private void comboBoxFilterOrders_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(comboBoxFilterOrders.SelectedIndex == 2 || comboBoxFilterOrders.SelectedIndex == 3)
@@ -257,6 +257,28 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             {
                 lblDateFormat.Visible = false;
             }
+        }
+
+        private void btnDeleteOrder_Click(object sender, EventArgs e)
+        {
+            if (selectedOrder == null)
+            {
+                btnDeleteOrder.Enabled = false;
+                MessageBox.Show("No hay ningún pedido seleccionado", errorMessage, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if(MessageBox.Show("¿Está seguro que quiere borrar el pedido con código " + selectedOrder.Code + "?", "Confirme Operación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                if (orderContext.DeleteOrder(selectedOrder)) { 
+                    MessageBox.Show("Pedido Eliminado", successMessage, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ClearFields();
+                }
+                else
+                {
+                    MessageBox.Show("Pedido no Eliminado", errorMessage, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+            
         }
     }
 }

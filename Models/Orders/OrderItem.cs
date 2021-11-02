@@ -32,14 +32,14 @@ namespace PanaderiaIkigai.Models.Orders
         /// <param name="pRecipeName"></param>
         /// <param name="pUnitsInItem"></param>
         /// <param name="pTotalItemPrice"></param>
-        public OrderItem(int pOrderCode, int pRecipeCode, string pRecipeName, int pUnitsInItem, decimal pTotalItemPrice)
+        public OrderItem(Order pOrder, Recipe pRecipe, int pUnits)
         {
-            OrderCode = pOrderCode;
-            RecipeCode = pRecipeCode;
-            RecipeName = pRecipeName;
-            UnitsInItem = pUnitsInItem;
-            TotalItemPrice = Math.Round(pTotalItemPrice, 2);
-            Code = pOrderCode + "-" + pRecipeName;
+            OrderCode = pOrder.Code;
+            RecipeCode = pRecipe.Code;
+            RecipeName = pRecipe.Name;
+            UnitsInItem = pUnits;
+            TotalItemPrice = Math.Round((pUnits * pRecipe.TotalPrice), 2);
+            Code = pOrder.Code + "-" + pRecipe.Name;
         }
         /// <summary>
         /// Constructor to use when retrieving a record from the database

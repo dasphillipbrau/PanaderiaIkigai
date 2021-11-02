@@ -1,5 +1,6 @@
 ﻿using PanaderiaIkigai.BusinessLogic.InformationCapture;
 using PanaderiaIkigai.Data.SQL;
+using PanaderiaIkigai.Models;
 using PanaderiaIkigai.Models.Orders;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace PanaderiaIkigai.BusinessLogic
     {
         static SQLiteOrderManager orderDataAccess = new SQLiteOrderManager();
         static OrderInformationCapture orderCapturer = new OrderInformationCapture();
+        static RecipeContext recipeContext = new RecipeContext();
 
         public bool RegisterOrder(int pClientCode, string pOrderStatus, string pOrderNotes, DateTime pOrderDate, DateTime pOrderDelivery, decimal pTax, decimal pPrepPrice)
         {
@@ -65,12 +67,130 @@ namespace PanaderiaIkigai.BusinessLogic
             return orderList;
         }
 
+
         public bool UpdateOrder(int pOrderCode, int pClientCode, string pOrderStatus, string pOrderNotes, DateTime pOrderDate, DateTime pDeliveryDate, decimal pTax, decimal pPrepPrice)
         {
             try { 
                 var orderToUpdate = orderCapturer.CaptureOrderInformation(pClientCode, pOrderStatus, pOrderNotes, pOrderDate, pDeliveryDate, pTax, pPrepPrice);
                 orderToUpdate.Code = pOrderCode;
                 if (orderDataAccess.UpdateOrder(orderToUpdate) == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (SQLiteException sqlEx)
+            {
+                MessageBox.Show("Error " + sqlEx.ErrorCode + ": " + sqlEx.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        public bool DeleteOrder(Order pOrder)
+        {
+            try
+            {
+                if (orderDataAccess.DeleteOrder(pOrder) == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (SQLiteException sqlEx)
+            {
+                MessageBox.Show("Error " + sqlEx.ErrorCode + ": " + sqlEx.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+        public bool RegisterItem(Order pOrder, Recipe pRecipe, int pUnitAmount)
+        {
+            try { 
+                var itemToRegister = new OrderItem(pOrder, pRecipe, pUnitAmount);
+                if (!recipeContext.SubstractRecipeUnits(pRecipe, itemToRegister.UnitsInItem))
+                    return false;
+                if (orderDataAccess.RegisterItem(itemToRegister) == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (SQLiteException sqlEx)
+            {
+                if(sqlEx.ErrorCode == 19)
+                {
+                    MessageBox.Show("Ya existe un item en la orden que corresponde a esta receta\nLos pedidos no pueden tener más de un item por receta", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    
+                }
+                else
+                    MessageBox.Show("Error " + sqlEx.ErrorCode + ": " + sqlEx.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        public List<OrderItem> GetItems()
+        {
+            return orderDataAccess.GetItems() as List<OrderItem>;
+        }
+
+        public List<OrderItem> GetItems(Order pOrder)
+        {
+            return orderDataAccess.GetItems(pOrder) as List<OrderItem>;
+        }
+
+        public bool UpdateItem(Order pOrder, Recipe pRecipe, int pNewUnitAmount, int pOldUnitAmount)
+        {
+            try
+            {
+                if(pNewUnitAmount != pOldUnitAmount) { 
+                    int amountDifference = pNewUnitAmount > pOldUnitAmount ? (pNewUnitAmount - pOldUnitAmount) : (pOldUnitAmount - pNewUnitAmount);
+                    recipeContext.AddRecipeUnits(pRecipe, amountDifference);
+                    recipeContext.SubstractRecipeUnits(pRecipe, pNewUnitAmount);
+                }
+
+                var itemToRegister = new OrderItem(pOrder, pRecipe, pNewUnitAmount);
+                if (orderDataAccess.RegisterItem(itemToRegister) == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (SQLiteException sqlEx)
+            {
+                if (sqlEx.ErrorCode == 19)
+                {
+                    MessageBox.Show("Ya existe un item en la orden que corresponde a esta receta\nLos pedidos no pueden tener más de un item por receta", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+                else
+                    MessageBox.Show("Error " + sqlEx.ErrorCode + ": " + sqlEx.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        public bool DeleteItem(OrderItem pOrderItem)
+        {
+            try
+            {
+                var recipe = new Recipe();
+                recipe.Code = pOrderItem.RecipeCode;
+                recipeContext.AddRecipeUnits(recipe, pOrderItem.UnitsInItem);
+                if (orderDataAccess.DeleteItem(pOrderItem) == 1)
                     return true;
                 else
                     return false;
