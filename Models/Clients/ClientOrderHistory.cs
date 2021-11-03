@@ -15,7 +15,7 @@ namespace PanaderiaIkigai.Models.Clients
         public string ClientName { get; set; }
         [DisplayName("Código de Pedido")]
         public int OrderCode { get; set; }
-        [DisplayName("Nombre de Receta")]
+        [DisplayName("Nombre de Artículo")]
         public string RecipeName { get; set; }
         [DisplayName("Cantidad Comprada")]
         public int UnitsPurchased { get; set; }

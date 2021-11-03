@@ -149,15 +149,12 @@ namespace PanaderiaIkigai.BusinessLogic
             return orderDataAccess.GetItems(pOrder) as List<OrderItem>;
         }
 
-        public bool UpdateItem(Order pOrder, Recipe pRecipe, int pNewUnitAmount, int pOldUnitAmount, string pOldCode)
+        public bool UpdateItem(Order pOrder, Recipe pRecipe, int pNewUnitAmount, string pOldCode)
         {
             try
             {
-                if(pNewUnitAmount != pOldUnitAmount) { 
-                    int amountDifference = pNewUnitAmount > pOldUnitAmount ? (pNewUnitAmount - pOldUnitAmount) : (pOldUnitAmount - pNewUnitAmount);
-                    recipeContext.AddRecipeUnits(pRecipe, amountDifference);
-                    recipeContext.SubstractRecipeUnits(pRecipe, pNewUnitAmount);
-                }
+                recipeContext.SubstractRecipeUnits(pRecipe, pNewUnitAmount);
+
 
                 var itemToRegister = new OrderItem(pOrder, pRecipe, pNewUnitAmount);
                 if (orderDataAccess.UpdateItem(itemToRegister, pOldCode) == 1)

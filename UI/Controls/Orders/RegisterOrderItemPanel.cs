@@ -147,15 +147,22 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             }
             else
             {
-                if(orderContext.UpdateItem(selectedOrder, selectedRecipe, Convert.ToInt32(Math.Round(numUnitAmount.Value, 0)), selectedItem.UnitsInItem, selectedItem.Code))
+                if (selectedItem.UnitsInItem - Convert.ToInt32(numUnitAmount.Value) < 0)
                 {
-                    MessageBox.Show("Item Actualizado", "Operación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    dgvItems.DataSource = orderContext.GetItems(selectedOrder);
-                    lblItemToEditName.Visible = false;
+                    MessageBox.Show("No hay suficientes unidades disponibles de la receta para agregar la cantidad que indica", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    MessageBox.Show("Item no Actualizado", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (orderContext.UpdateItem(selectedOrder, selectedRecipe, Convert.ToInt32(Math.Round(numUnitAmount.Value, 0)), selectedItem.Code))
+                    {
+                        MessageBox.Show("Item Actualizado", "Operación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        dgvItems.DataSource = orderContext.GetItems(selectedOrder);
+                        lblItemToEditName.Visible = false;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Item no Actualizado", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
