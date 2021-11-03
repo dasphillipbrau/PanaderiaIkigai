@@ -27,7 +27,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>11</ApplicationRevision>
+    <ApplicationRevision>12</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -118,12 +118,18 @@
   <ItemGroup>
     <Compile Include="BusinessLogic\ClientContext.cs" />
     <Compile Include="BusinessLogic\InformationCapture\ClientInformationCapturer.cs" />
+    <Compile Include="BusinessLogic\InformationCapture\OrderInformationCapture.cs" />
     <Compile Include="BusinessLogic\InformationCapture\RecipeCapturer.cs" />
     <Compile Include="BusinessLogic\IngredientContext.cs" />
+    <Compile Include="BusinessLogic\OrderContext.cs" />
     <Compile Include="BusinessLogic\RecipeContext.cs" />
     <Compile Include="Data\SQLiteClientManager.cs" />
     <Compile Include="Data\SQLiteRecipeManager.cs" />
+    <Compile Include="Data\SQL\SQLiteOrderManager.cs" />
     <Compile Include="Models\Clients\Client.cs" />
+    <Compile Include="Models\Clients\ClientOrderHistory.cs" />
+    <Compile Include="Models\Orders\Order.cs" />
+    <Compile Include="Models\Orders\OrderItem.cs" />
     <Compile Include="Models\Recipes\Recipe.cs" />
     <Compile Include="Models\Recipes\RecipeStep.cs" />
     <Compile Include="UI\Controls\Clients\EditClientPanel.cs">
@@ -137,6 +143,18 @@
     </Compile>
     <Compile Include="UI\Controls\Clients\RegisterClientPanel.Designer.cs">
       <DependentUpon>RegisterClientPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Clients\ViewClientOrderHistory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Clients\ViewClientOrderHistory.Designer.cs">
+      <DependentUpon>ViewClientOrderHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Clients\ViewClientsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Clients\ViewClientsPanel.Designer.cs">
+      <DependentUpon>ViewClientsPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\Ingredients\EditDetailedIngredientPanel.cs">
       <SubType>UserControl</SubType>
@@ -163,6 +181,18 @@
     </Compile>
     <Compile Include="UI\Controls\Ingredients\RegisterDetailedIngredientsPanel.Designer.cs">
       <DependentUpon>RegisterDetailedIngredientsPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Orders\RegisterOrderItemPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Orders\RegisterOrderItemPanel.Designer.cs">
+      <DependentUpon>RegisterOrderItemPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Orders\RegisterOrderPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Orders\RegisterOrderPanel.Designer.cs">
+      <DependentUpon>RegisterOrderPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\Recipes\EditRecipePanel.cs">
       <SubType>UserControl</SubType>
@@ -204,14 +234,20 @@
     <Compile Include="Models\Ingredients\BaseIngredient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\Menus\OrdersMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Menus\OrdersMenu.Designer.cs">
+      <DependentUpon>OrdersMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Menus\RecipeMenu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Menus\RecipeMenu.Designer.cs">
       <DependentUpon>RecipeMenu.cs</DependentUpon>
     </Compile>
-    <Content Include="Data\SQL\DDL\tables.sql" />
-    <Content Include="Data\SQL\DDL\triggers.sql" />
+    <None Include="Data\SQL\DDL\tables.sql" />
+    <None Include="Data\SQL\DDL\triggers.sql" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -224,6 +260,12 @@
     <EmbeddedResource Include="UI\Controls\Clients\RegisterClientPanel.resx">
       <DependentUpon>RegisterClientPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Clients\ViewClientOrderHistory.resx">
+      <DependentUpon>ViewClientOrderHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Clients\ViewClientsPanel.resx">
+      <DependentUpon>ViewClientsPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Ingredients\EditDetailedIngredientPanel.resx">
       <DependentUpon>EditDetailedIngredientPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -235,6 +277,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Ingredients\RegisterDetailedIngredientsPanel.resx">
       <DependentUpon>RegisterDetailedIngredientsPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Orders\RegisterOrderItemPanel.resx">
+      <DependentUpon>RegisterOrderItemPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Orders\RegisterOrderPanel.resx">
+      <DependentUpon>RegisterOrderPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Recipes\EditRecipePanel.resx">
       <DependentUpon>EditRecipePanel.cs</DependentUpon>
@@ -266,6 +314,9 @@
     <Content Include="Data\Ikigai.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="UI\Menus\OrdersMenu.resx">
+      <DependentUpon>OrdersMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Menus\RecipeMenu.resx">
       <DependentUpon>RecipeMenu.cs</DependentUpon>
     </EmbeddedResource>

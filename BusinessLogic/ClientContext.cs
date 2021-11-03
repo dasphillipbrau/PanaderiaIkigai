@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static PanaderiaIkigai.Models.Clients.ClientOrderHistory;
 
 namespace PanaderiaIkigai.BusinessLogic
 {
@@ -131,6 +132,30 @@ namespace PanaderiaIkigai.BusinessLogic
             {
                 MessageBox.Show(ex.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
+            }
+        }
+
+        public List<ClientOrderHistory> GetClientOrderHistories()
+        {
+            return clientDataAccess.GetClientsOrderHistories() as List<ClientOrderHistory>;
+        }
+
+        public List<ClientOrderHistory> GetClientOrderHistories(string pFilterMode, string pFilterValue)
+        {
+            switch (pFilterMode.ToUpper())
+            {
+                case "CÓDIGO DE CLIENTE":
+                    return clientDataAccess.GetClientsOrderHistories(ClientOrderFilter.ClientCode, pFilterValue) as List<ClientOrderHistory>;
+                case "NOMBRE DE CLIENTE":
+                    return clientDataAccess.GetClientsOrderHistories(ClientOrderFilter.ClientName, pFilterValue) as List<ClientOrderHistory>;
+                case "CÓDIGO DE PEDIDO":
+                    return clientDataAccess.GetClientsOrderHistories(ClientOrderFilter.OrderCode, pFilterValue) as List<ClientOrderHistory>;
+                case "NOMBRE DE ARTÍCULO":
+                    return clientDataAccess.GetClientsOrderHistories(ClientOrderFilter.RecipeName, pFilterValue) as List<ClientOrderHistory>;
+                case "ESTADO DE PEDIDO":
+                    return clientDataAccess.GetClientsOrderHistories(ClientOrderFilter.OrderStatus, pFilterValue) as List<ClientOrderHistory>;
+                default:
+                    return clientDataAccess.GetClientsOrderHistories(ClientOrderFilter.ClientName, pFilterValue) as List<ClientOrderHistory>;
             }
         }
     }
