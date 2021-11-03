@@ -83,6 +83,12 @@
     <Reference Include="LiveChartsCore, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\LiveChartsCore.2.0.0-beta.80\lib\net462\LiveChartsCore.dll</HintPath>
     </Reference>
+    <Reference Include="LiveChartsCore.SkiaSharpView, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\LiveChartsCore.SkiaSharpView.2.0.0-beta.80\lib\net462\LiveChartsCore.SkiaSharpView.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveChartsCore.SkiaSharpView.WinForms, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\LiveChartsCore.SkiaSharpView.WinForms.2.0.0-beta.80\lib\net462\LiveChartsCore.SkiaSharpView.WinForms.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -94,6 +100,15 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="SkiaSharp, Version=2.80.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>packages\SkiaSharp.2.80.3\lib\net462\SkiaSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Views.Desktop.Common, Version=2.80.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>packages\SkiaSharp.Views.Desktop.Common.2.80.3\lib\net462\SkiaSharp.Views.Desktop.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Views.WindowsForms, Version=2.80.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>packages\SkiaSharp.Views.WindowsForms.2.80.3\lib\net462\SkiaSharp.Views.WindowsForms.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
@@ -103,6 +118,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite, Version=1.0.115.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.0\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing.Common, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Drawing.Common.4.5.1\lib\net461\System.Drawing.Common.dll</HintPath>
     </Reference>
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
@@ -128,6 +146,7 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLogic\BIContext.cs" />
     <Compile Include="BusinessLogic\ClientContext.cs" />
     <Compile Include="BusinessLogic\InformationCapture\ClientInformationCapturer.cs" />
     <Compile Include="BusinessLogic\InformationCapture\OrderInformationCapture.cs" />
@@ -135,9 +154,11 @@
     <Compile Include="BusinessLogic\IngredientContext.cs" />
     <Compile Include="BusinessLogic\OrderContext.cs" />
     <Compile Include="BusinessLogic\RecipeContext.cs" />
+    <Compile Include="Data\SQLiteBusinessIntelligenceManager.cs" />
     <Compile Include="Data\SQLiteClientManager.cs" />
     <Compile Include="Data\SQLiteRecipeManager.cs" />
     <Compile Include="Data\SQL\SQLiteOrderManager.cs" />
+    <Compile Include="Models\BI\ClientSpending.cs" />
     <Compile Include="Models\Clients\Client.cs" />
     <Compile Include="Models\Clients\ClientOrderHistory.cs" />
     <Compile Include="Models\Orders\Order.cs" />
@@ -224,11 +245,11 @@
     <Compile Include="UI\Controls\Recipes\RegisterRecipeStepPanel.Designer.cs">
       <DependentUpon>RegisterRecipeStepPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Menus\BI_Menu.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="UI\Menus\BiMenu.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Menus\BI_Menu.Designer.cs">
-      <DependentUpon>BI_Menu.cs</DependentUpon>
+    <Compile Include="UI\Menus\BiMenu.Designer.cs">
+      <DependentUpon>BiMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Menus\ClientsMenu.cs">
       <SubType>Form</SubType>
@@ -311,8 +332,8 @@
     <EmbeddedResource Include="UI\Controls\Recipes\RegisterRecipeStepPanel.resx">
       <DependentUpon>RegisterRecipeStepPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Menus\BI_Menu.resx">
-      <DependentUpon>BI_Menu.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Menus\BiMenu.resx">
+      <DependentUpon>BiMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Menus\ClientsMenu.resx">
       <DependentUpon>ClientsMenu.cs</DependentUpon>
@@ -391,7 +412,9 @@
     <Error Condition="!Exists('packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
     <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('packages\SkiaSharp.2.80.3\build\net462\SkiaSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\SkiaSharp.2.80.3\build\net462\SkiaSharp.targets'))" />
   </Target>
   <Import Project="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
   <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="packages\SkiaSharp.2.80.3\build\net462\SkiaSharp.targets" Condition="Exists('packages\SkiaSharp.2.80.3\build\net462\SkiaSharp.targets')" />
 </Project>

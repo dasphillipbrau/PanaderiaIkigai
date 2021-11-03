@@ -81,5 +81,12 @@ namespace PanaderiaIkigai
             
             
         }
+
+        private void btnGoToBiMenu_Click(object sender, EventArgs e)
+        {
+            BiMenu bImenu = new BiMenu();
+            bImenu.Show();
+            bImenu.BringToFront();
+        }
     }
 }

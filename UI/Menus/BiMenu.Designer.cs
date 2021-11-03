@@ -1,7 +1,7 @@
 ﻿
 namespace PanaderiaIkigai.UI.Menus
 {
-    partial class BI_Menu
+    partial class BiMenu
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,31 +29,32 @@ namespace PanaderiaIkigai.UI.Menus
         /// </summary>
         private void InitializeComponent()
         {
-            this.pieChart1 = new LiveCharts.WinForms.PieChart();
+            this.cartesianChart1 = new LiveCharts.WinForms.CartesianChart();
             this.SuspendLayout();
             // 
-            // pieChart1
+            // cartesianChart1
             // 
-            this.pieChart1.Location = new System.Drawing.Point(33, 21);
-            this.pieChart1.Name = "pieChart1";
-            this.pieChart1.Size = new System.Drawing.Size(413, 282);
-            this.pieChart1.TabIndex = 0;
-            this.pieChart1.Text = "pieChart1";
+            this.cartesianChart1.Location = new System.Drawing.Point(336, 138);
+            this.cartesianChart1.Name = "cartesianChart1";
+            this.cartesianChart1.Size = new System.Drawing.Size(387, 176);
+            this.cartesianChart1.TabIndex = 0;
+            this.cartesianChart1.Text = "cartesianChartClientSpending";
             // 
             // BI_Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.Controls.Add(this.pieChart1);
+            this.Controls.Add(this.cartesianChart1);
             this.Name = "BI_Menu";
             this.Size = new System.Drawing.Size(1235, 580);
+            this.Load += new System.EventHandler(this.BI_Menu_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private LiveCharts.WinForms.PieChart pieChart1;
+        private LiveCharts.WinForms.CartesianChart cartesianChart1;
     }
 }
