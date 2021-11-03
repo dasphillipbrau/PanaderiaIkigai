@@ -298,12 +298,12 @@ namespace PanaderiaIkigai.Data.SQL
                 {
                     var command = new SQLiteCommand(conn);
 
-                    command.CommandText = "SELECT A.CODE, A.ORDER_CODE, A.RECIPE_CODE, B.NAME, UNITS_IN_ITEM, TOTAL_ITEM_PRICE " +
+                    command.CommandText = "SELECT A.CODE, A.ORDER_CODE, A.RECIPE_CODE, B.NAME, A.UNITS_IN_ITEM, A.TOTAL_ITEM_PRICE " +
                         "FROM ORDER_ITEM A " +
                         "INNER JOIN RECIPE B ON A.RECIPE_CODE = B.CODE " +
                         "WHERE A.ORDER_CODE = $pOrderCode " +
                         "ORDER BY A.CODE ASC";
-                    command.Parameters.AddWithValue("pCode", pOrder.Code);
+                    command.Parameters.AddWithValue("pOrderCode", pOrder.Code);
                     conn.Open();
                     var reader = command.ExecuteReader();
                     while (reader.Read())

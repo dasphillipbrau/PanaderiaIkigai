@@ -233,8 +233,8 @@
     <Compile Include="UI\Menus\RecipeMenu.Designer.cs">
       <DependentUpon>RecipeMenu.cs</DependentUpon>
     </Compile>
-    <Content Include="Data\SQL\DDL\tables.sql" />
-    <Content Include="Data\SQL\DDL\triggers.sql" />
+    <None Include="Data\SQL\DDL\tables.sql" />
+    <None Include="Data\SQL\DDL\triggers.sql" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

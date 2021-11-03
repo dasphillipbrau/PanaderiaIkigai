@@ -58,6 +58,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             this.label5 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.btnDeleteItem = new System.Windows.Forms.Button();
+            this.lblItemToEditName = new System.Windows.Forms.Label();
             this.pnlRegisterItem.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUnitAmount)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -69,6 +70,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             // pnlRegisterItem
             // 
             this.pnlRegisterItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
+            this.pnlRegisterItem.Controls.Add(this.lblItemToEditName);
             this.pnlRegisterItem.Controls.Add(this.numUnitAmount);
             this.pnlRegisterItem.Controls.Add(this.groupBox2);
             this.pnlRegisterItem.Controls.Add(this.label21);
@@ -83,7 +85,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             this.pnlRegisterItem.ForeColor = System.Drawing.Color.White;
             this.pnlRegisterItem.Location = new System.Drawing.Point(3, 463);
             this.pnlRegisterItem.Name = "pnlRegisterItem";
-            this.pnlRegisterItem.Size = new System.Drawing.Size(540, 217);
+            this.pnlRegisterItem.Size = new System.Drawing.Size(676, 217);
             this.pnlRegisterItem.TabIndex = 36;
             // 
             // numUnitAmount
@@ -108,7 +110,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             // 
             this.groupBox2.Controls.Add(this.rBtnItemEditMode);
             this.groupBox2.Controls.Add(this.rBtnItemRegisterMode);
-            this.groupBox2.Location = new System.Drawing.Point(448, 53);
+            this.groupBox2.Location = new System.Drawing.Point(598, 53);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(75, 100);
             this.groupBox2.TabIndex = 41;
@@ -157,7 +159,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             this.btnSaveChanges.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnSaveChanges.Enabled = false;
             this.btnSaveChanges.ForeColor = System.Drawing.Color.Black;
-            this.btnSaveChanges.Location = new System.Drawing.Point(448, 167);
+            this.btnSaveChanges.Location = new System.Drawing.Point(598, 167);
             this.btnSaveChanges.Name = "btnSaveChanges";
             this.btnSaveChanges.Size = new System.Drawing.Size(75, 40);
             this.btnSaveChanges.TabIndex = 39;
@@ -243,6 +245,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             this.dgvItems.Location = new System.Drawing.Point(780, 287);
             this.dgvItems.MultiSelect = false;
             this.dgvItems.Name = "dgvItems";
+            this.dgvItems.ReadOnly = true;
             this.dgvItems.Size = new System.Drawing.Size(573, 217);
             this.dgvItems.TabIndex = 35;
             this.dgvItems.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItems_CellClick);
@@ -408,6 +411,17 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             this.btnDeleteItem.UseVisualStyleBackColor = false;
             this.btnDeleteItem.Click += new System.EventHandler(this.btnDeleteItem_Click);
             // 
+            // lblItemToEditName
+            // 
+            this.lblItemToEditName.AutoSize = true;
+            this.lblItemToEditName.ForeColor = System.Drawing.Color.Yellow;
+            this.lblItemToEditName.Location = new System.Drawing.Point(395, 139);
+            this.lblItemToEditName.Name = "lblItemToEditName";
+            this.lblItemToEditName.Size = new System.Drawing.Size(72, 13);
+            this.lblItemToEditName.TabIndex = 43;
+            this.lblItemToEditName.Text = "Editando Item";
+            this.lblItemToEditName.Visible = false;
+            // 
             // RegisterOrderItemPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -476,5 +490,6 @@ namespace PanaderiaIkigai.UI.Controls.Orders
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Button btnDeleteItem;
+        private System.Windows.Forms.Label lblItemToEditName;
     }
 }

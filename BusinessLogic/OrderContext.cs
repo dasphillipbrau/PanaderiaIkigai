@@ -149,7 +149,7 @@ namespace PanaderiaIkigai.BusinessLogic
             return orderDataAccess.GetItems(pOrder) as List<OrderItem>;
         }
 
-        public bool UpdateItem(Order pOrder, Recipe pRecipe, int pNewUnitAmount, int pOldUnitAmount)
+        public bool UpdateItem(Order pOrder, Recipe pRecipe, int pNewUnitAmount, int pOldUnitAmount, string pOldCode)
         {
             try
             {
@@ -160,7 +160,7 @@ namespace PanaderiaIkigai.BusinessLogic
                 }
 
                 var itemToRegister = new OrderItem(pOrder, pRecipe, pNewUnitAmount);
-                if (orderDataAccess.RegisterItem(itemToRegister) == 1)
+                if (orderDataAccess.UpdateItem(itemToRegister, pOldCode) == 1)
                     return true;
                 else
                     return false;
