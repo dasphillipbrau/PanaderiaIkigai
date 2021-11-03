@@ -127,6 +127,7 @@
     <Compile Include="Data\SQLiteRecipeManager.cs" />
     <Compile Include="Data\SQL\SQLiteOrderManager.cs" />
     <Compile Include="Models\Clients\Client.cs" />
+    <Compile Include="Models\Clients\ClientOrderHistory.cs" />
     <Compile Include="Models\Orders\Order.cs" />
     <Compile Include="Models\Orders\OrderItem.cs" />
     <Compile Include="Models\Recipes\Recipe.cs" />
@@ -142,6 +143,18 @@
     </Compile>
     <Compile Include="UI\Controls\Clients\RegisterClientPanel.Designer.cs">
       <DependentUpon>RegisterClientPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Clients\ViewClientOrderHistory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Clients\ViewClientOrderHistory.Designer.cs">
+      <DependentUpon>ViewClientOrderHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Clients\ViewClientsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Clients\ViewClientsPanel.Designer.cs">
+      <DependentUpon>ViewClientsPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\Ingredients\EditDetailedIngredientPanel.cs">
       <SubType>UserControl</SubType>
@@ -246,6 +259,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Clients\RegisterClientPanel.resx">
       <DependentUpon>RegisterClientPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Clients\ViewClientOrderHistory.resx">
+      <DependentUpon>ViewClientOrderHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Clients\ViewClientsPanel.resx">
+      <DependentUpon>ViewClientsPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Ingredients\EditDetailedIngredientPanel.resx">
       <DependentUpon>EditDetailedIngredientPanel.cs</DependentUpon>
