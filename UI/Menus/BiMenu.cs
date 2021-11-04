@@ -42,5 +42,15 @@ namespace PanaderiaIkigai.UI.Menus
             clientsBiPanel.Show();
             clientsBiPanel.BringToFront();
         }
+
+        private void btnGoToProductBi_Click(object sender, EventArgs e)
+        {
+            panelHolder.Controls.Clear();
+            ProductsBiPanel productBiPanel = new ProductsBiPanel();
+            productBiPanel.Location = new Point(1, 1);
+            panelHolder.Controls.Add(productBiPanel);
+            productBiPanel.Show();
+            productBiPanel.BringToFront();
+        }
     }
 }

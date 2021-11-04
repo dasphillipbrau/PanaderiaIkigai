@@ -160,6 +160,7 @@
     <Compile Include="Data\SQLiteRecipeManager.cs" />
     <Compile Include="Data\SQL\SQLiteOrderManager.cs" />
     <Compile Include="Models\BI\ClientSpending.cs" />
+    <Compile Include="Models\BI\ProductPopularity.cs" />
     <Compile Include="Models\Clients\Client.cs" />
     <Compile Include="Models\Clients\ClientOrderHistory.cs" />
     <Compile Include="Models\Orders\Order.cs" />
@@ -171,6 +172,12 @@
     </Compile>
     <Compile Include="UI\Controls\BI\ClientsBiPanel.Designer.cs">
       <DependentUpon>ClientsBiPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\BI\ProductsBiPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\BI\ProductsBiPanel.Designer.cs">
+      <DependentUpon>ProductsBiPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\Clients\EditClientPanel.cs">
       <SubType>UserControl</SubType>
@@ -303,6 +310,9 @@
     <EmbeddedResource Include="UI\Controls\BI\ClientsBiPanel.resx">
       <DependentUpon>ClientsBiPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\BI\ProductsBiPanel.resx">
+      <DependentUpon>ProductsBiPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Clients\EditClientPanel.resx">
       <DependentUpon>EditClientPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -403,12 +413,12 @@
   <ItemGroup>
     <PublishFile Include="Data\Ikigai.db">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>

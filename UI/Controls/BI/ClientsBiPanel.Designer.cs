@@ -29,8 +29,8 @@ namespace PanaderiaIkigai.UI.Controls.BI
         /// </summary>
         private void InitializeComponent()
         {
-            this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblLowestTitle = new System.Windows.Forms.Label();
+            this.lblTopTitle = new System.Windows.Forms.Label();
             this.chartTopClientExpenses = new LiveCharts.WinForms.CartesianChart();
             this.label2 = new System.Windows.Forms.Label();
             this.chartLowestExpenses = new LiveCharts.WinForms.CartesianChart();
@@ -39,29 +39,33 @@ namespace PanaderiaIkigai.UI.Controls.BI
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.btnRecalculatePlots = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rBtnAmountInvested = new System.Windows.Forms.RadioButton();
+            this.rBtnProductsPurchased = new System.Windows.Forms.RadioButton();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label3
+            // lblLowestTitle
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(524, 45);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(328, 16);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Top 10 Peores Clientes Según Monto Invertido";
+            this.lblLowestTitle.AutoSize = true;
+            this.lblLowestTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLowestTitle.ForeColor = System.Drawing.Color.White;
+            this.lblLowestTitle.Location = new System.Drawing.Point(524, 45);
+            this.lblLowestTitle.Name = "lblLowestTitle";
+            this.lblLowestTitle.Size = new System.Drawing.Size(328, 16);
+            this.lblLowestTitle.TabIndex = 7;
+            this.lblLowestTitle.Text = "Top 10 Peores Clientes Según Monto Invertido";
             // 
-            // label1
+            // lblTopTitle
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(12, 45);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(334, 16);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Top 10 Mejores Clientes Según Monto Invertido";
+            this.lblTopTitle.AutoSize = true;
+            this.lblTopTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTopTitle.ForeColor = System.Drawing.Color.White;
+            this.lblTopTitle.Location = new System.Drawing.Point(12, 45);
+            this.lblTopTitle.Name = "lblTopTitle";
+            this.lblTopTitle.Size = new System.Drawing.Size(334, 16);
+            this.lblTopTitle.TabIndex = 6;
+            this.lblTopTitle.Text = "Top 10 Mejores Clientes Según Monto Invertido";
             // 
             // chartTopClientExpenses
             // 
@@ -127,7 +131,7 @@ namespace PanaderiaIkigai.UI.Controls.BI
             // 
             // btnRecalculatePlots
             // 
-            this.btnRecalculatePlots.Location = new System.Drawing.Point(466, 622);
+            this.btnRecalculatePlots.Location = new System.Drawing.Point(622, 622);
             this.btnRecalculatePlots.Name = "btnRecalculatePlots";
             this.btnRecalculatePlots.Size = new System.Drawing.Size(75, 39);
             this.btnRecalculatePlots.TabIndex = 14;
@@ -135,11 +139,47 @@ namespace PanaderiaIkigai.UI.Controls.BI
             this.btnRecalculatePlots.UseVisualStyleBackColor = true;
             this.btnRecalculatePlots.Click += new System.EventHandler(this.btnRecalculatePlots_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rBtnProductsPurchased);
+            this.groupBox1.Controls.Add(this.rBtnAmountInvested);
+            this.groupBox1.ForeColor = System.Drawing.Color.White;
+            this.groupBox1.Location = new System.Drawing.Point(466, 561);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(146, 100);
+            this.groupBox1.TabIndex = 15;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Criterio";
+            // 
+            // rBtnAmountInvested
+            // 
+            this.rBtnAmountInvested.AutoSize = true;
+            this.rBtnAmountInvested.Checked = true;
+            this.rBtnAmountInvested.Location = new System.Drawing.Point(7, 20);
+            this.rBtnAmountInvested.Name = "rBtnAmountInvested";
+            this.rBtnAmountInvested.Size = new System.Drawing.Size(99, 17);
+            this.rBtnAmountInvested.TabIndex = 0;
+            this.rBtnAmountInvested.TabStop = true;
+            this.rBtnAmountInvested.Text = "Monto Invertido";
+            this.rBtnAmountInvested.UseVisualStyleBackColor = true;
+            // 
+            // rBtnProductsPurchased
+            // 
+            this.rBtnProductsPurchased.AutoSize = true;
+            this.rBtnProductsPurchased.Location = new System.Drawing.Point(7, 61);
+            this.rBtnProductsPurchased.Name = "rBtnProductsPurchased";
+            this.rBtnProductsPurchased.Size = new System.Drawing.Size(129, 17);
+            this.rBtnProductsPurchased.TabIndex = 1;
+            this.rBtnProductsPurchased.Text = "Productos Comprados";
+            this.rBtnProductsPurchased.UseVisualStyleBackColor = true;
+            this.rBtnProductsPurchased.CheckedChanged += new System.EventHandler(this.rBtnProductsPurchased_CheckedChanged);
+            // 
             // ClientsBiPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnRecalculatePlots);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -147,12 +187,14 @@ namespace PanaderiaIkigai.UI.Controls.BI
             this.Controls.Add(this.dtpStart);
             this.Controls.Add(this.chartLowestExpenses);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblLowestTitle);
+            this.Controls.Add(this.lblTopTitle);
             this.Controls.Add(this.chartTopClientExpenses);
             this.Name = "ClientsBiPanel";
             this.Size = new System.Drawing.Size(1122, 681);
             this.Load += new System.EventHandler(this.ClientsBiPanel_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -160,8 +202,8 @@ namespace PanaderiaIkigai.UI.Controls.BI
 
         #endregion
 
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblLowestTitle;
+        private System.Windows.Forms.Label lblTopTitle;
         private LiveCharts.WinForms.CartesianChart chartTopClientExpenses;
         private System.Windows.Forms.Label label2;
         private LiveCharts.WinForms.CartesianChart chartLowestExpenses;
@@ -170,5 +212,8 @@ namespace PanaderiaIkigai.UI.Controls.BI
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnRecalculatePlots;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton rBtnProductsPurchased;
+        private System.Windows.Forms.RadioButton rBtnAmountInvested;
     }
 }

@@ -32,7 +32,7 @@ namespace PanaderiaIkigai.UI.Menus
             this.label2 = new System.Windows.Forms.Label();
             this.panelNavigation = new System.Windows.Forms.Panel();
             this.btnGoToMainMenu = new System.Windows.Forms.Button();
-            this.btnGoToRegisterItem = new System.Windows.Forms.Button();
+            this.btnGoToProductBi = new System.Windows.Forms.Button();
             this.btnGoToClientBI = new System.Windows.Forms.Button();
             this.panelHolder = new System.Windows.Forms.Panel();
             this.panelNavigation.SuspendLayout();
@@ -53,7 +53,7 @@ namespace PanaderiaIkigai.UI.Menus
             // 
             this.panelNavigation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
             this.panelNavigation.Controls.Add(this.btnGoToMainMenu);
-            this.panelNavigation.Controls.Add(this.btnGoToRegisterItem);
+            this.panelNavigation.Controls.Add(this.btnGoToProductBi);
             this.panelNavigation.Controls.Add(this.btnGoToClientBI);
             this.panelNavigation.Location = new System.Drawing.Point(12, 33);
             this.panelNavigation.Name = "panelNavigation";
@@ -72,16 +72,17 @@ namespace PanaderiaIkigai.UI.Menus
             this.btnGoToMainMenu.UseVisualStyleBackColor = false;
             this.btnGoToMainMenu.Click += new System.EventHandler(this.btnGoToMainMenu_Click);
             // 
-            // btnGoToRegisterItem
+            // btnGoToProductBi
             // 
-            this.btnGoToRegisterItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.btnGoToRegisterItem.ForeColor = System.Drawing.Color.Beige;
-            this.btnGoToRegisterItem.Location = new System.Drawing.Point(3, 128);
-            this.btnGoToRegisterItem.Name = "btnGoToRegisterItem";
-            this.btnGoToRegisterItem.Size = new System.Drawing.Size(194, 68);
-            this.btnGoToRegisterItem.TabIndex = 2;
-            this.btnGoToRegisterItem.Text = "Registrar o Editar Items";
-            this.btnGoToRegisterItem.UseVisualStyleBackColor = false;
+            this.btnGoToProductBi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.btnGoToProductBi.ForeColor = System.Drawing.Color.Beige;
+            this.btnGoToProductBi.Location = new System.Drawing.Point(3, 128);
+            this.btnGoToProductBi.Name = "btnGoToProductBi";
+            this.btnGoToProductBi.Size = new System.Drawing.Size(194, 68);
+            this.btnGoToProductBi.TabIndex = 2;
+            this.btnGoToProductBi.Text = "Datos de Receta";
+            this.btnGoToProductBi.UseVisualStyleBackColor = false;
+            this.btnGoToProductBi.Click += new System.EventHandler(this.btnGoToProductBi_Click);
             // 
             // btnGoToClientBI
             // 
@@ -124,7 +125,7 @@ namespace PanaderiaIkigai.UI.Menus
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panelNavigation;
         private System.Windows.Forms.Button btnGoToMainMenu;
-        private System.Windows.Forms.Button btnGoToRegisterItem;
+        private System.Windows.Forms.Button btnGoToProductBi;
         private System.Windows.Forms.Button btnGoToClientBI;
         private System.Windows.Forms.Panel panelHolder;
     }

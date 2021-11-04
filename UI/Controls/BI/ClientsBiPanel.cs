@@ -29,8 +29,23 @@ namespace PanaderiaIkigai.UI.Controls.BI
 
         private void btnRecalculatePlots_Click(object sender, EventArgs e)
         {
-            biContext.UpdatePlotHighestClientByAmountSpend(chartTopClientExpenses, dtpStart.Value, dtpEnd.Value);
-            biContext.UpdatePlotLowestClientByAmountSpend(chartLowestExpenses, dtpStart.Value, dtpEnd.Value);
+            if (rBtnAmountInvested.Checked) { 
+                biContext.UpdatePlotHighestClientByAmountSpend(chartTopClientExpenses, dtpStart.Value, dtpEnd.Value);
+                biContext.UpdatePlotLowestClientByAmountSpend(chartLowestExpenses, dtpStart.Value, dtpEnd.Value);
+                lblTopTitle.Text = "Top 10 Mejores Clientes Según Monto Invertido";
+                lblLowestTitle.Text = "Top 10 Peores Clientes Según Monto Invertido";
+            }
+            else
+            {
+                biContext.UpdatePlotHighestClientByUnitsPurchased(chartTopClientExpenses, dtpStart.Value, dtpEnd.Value);
+                biContext.UpdatePlotLowestClientByUnitsPurchased(chartLowestExpenses, dtpStart.Value, dtpEnd.Value);
+                lblTopTitle.Text = "Top 10 Mejores Clientes Según Unidades Compradas";
+                lblLowestTitle.Text = "Top 10 Peores Clientes Según Unidades Compradas";
+            }
+        }
+
+        private void rBtnProductsPurchased_CheckedChanged(object sender, EventArgs e)
+        {
         }
     }
 }
