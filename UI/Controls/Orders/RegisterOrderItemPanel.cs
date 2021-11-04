@@ -71,10 +71,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
         private void dgvOrders_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             selectedOrder = (Order)dgvOrders.CurrentRow.DataBoundItem;
-            if(selectedOrder != null && orderContext.GetItems(selectedOrder).Count > 0)
-            {
-                dgvItems.DataSource = orderContext.GetItems(selectedOrder);
-            }
+            dgvItems.DataSource = orderContext.GetItems(selectedOrder);
             if(selectedOrder != null && selectedRecipe != null)
             {
                 
@@ -169,18 +166,26 @@ namespace PanaderiaIkigai.UI.Controls.Orders
 
         private void dgvItems_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            selectedItem = (OrderItem)dgvItems.CurrentRow.DataBoundItem;
-            btnDeleteItem.Enabled = true;
-            btnSaveChanges.Enabled = true;
-            if(rBtnItemEditMode.Checked && selectedItem != null)
-            {
-                if (!rBtnItemEditMode.Enabled)
-                {
-                    rBtnItemEditMode.Enabled = true;
-                    rBtnItemRegisterMode.Enabled = true;
+            try {
+                if(dgvItems.Rows.Count > 0) { 
+                    selectedItem = (OrderItem)dgvItems.CurrentRow.DataBoundItem;
+                    btnDeleteItem.Enabled = true;
+                    btnSaveChanges.Enabled = true;
+                    if(rBtnItemEditMode.Checked && selectedItem != null)
+                    {
+                        if (!rBtnItemEditMode.Enabled)
+                        {
+                            rBtnItemEditMode.Enabled = true;
+                            rBtnItemRegisterMode.Enabled = true;
+                        }
+                        lblItemToEditName.Text = "Editando Item " + selectedItem.Code;
+                        lblItemToEditName.Visible = true;
+                    }
                 }
-                lblItemToEditName.Text = "Editando Item " + selectedItem.Code;
-                lblItemToEditName.Visible = true;
+            }
+            catch(NullReferenceException)
+            {
+                MessageBox.Show("No hay ningún item para seleccionar", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

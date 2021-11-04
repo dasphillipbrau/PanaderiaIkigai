@@ -132,6 +132,7 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -165,6 +166,12 @@
     <Compile Include="Models\Orders\OrderItem.cs" />
     <Compile Include="Models\Recipes\Recipe.cs" />
     <Compile Include="Models\Recipes\RecipeStep.cs" />
+    <Compile Include="UI\Controls\BI\ClientsBiPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\BI\ClientsBiPanel.Designer.cs">
+      <DependentUpon>ClientsBiPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\Clients\EditClientPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -293,6 +300,9 @@
     <Content Include="x86\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="UI\Controls\BI\ClientsBiPanel.resx">
+      <DependentUpon>ClientsBiPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Clients\EditClientPanel.resx">
       <DependentUpon>EditClientPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -393,12 +403,12 @@
   <ItemGroup>
     <PublishFile Include="Data\Ikigai.db">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>

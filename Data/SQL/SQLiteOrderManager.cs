@@ -168,7 +168,7 @@ namespace PanaderiaIkigai.Data.SQL
                     var command = new SQLiteCommand(conn);
 
                     command.CommandText = "UPDATE ORDER_BASE SET CLIENT_CODE = $pClientCode, ORDER_STATUS = $pOrderStatus, ORDER_NOTES = $pOrderNotes, " +
-                        "ORDER_DATE = $pOrderDate, DELIVERY_DATE = $pOrderDeliveryDate, TAX_PERCENTAGE = $pTax, PREPARATION_COST = $pPrepCost " +
+                        "ORDER_DATE = $pOrderDate, DELIVERY_DATE = $pOrderDeliveryDate, TAX_PERCENTAGE = $pTax, PREPARATION_COST = $pPrepCost, FINAL_PRICE = $pFinalPrice " +
                         "WHERE CODE = $pCode";
 
                     command.Parameters.AddWithValue("pCode", pOrder.Code);
@@ -179,6 +179,7 @@ namespace PanaderiaIkigai.Data.SQL
                     command.Parameters.AddWithValue("pOrderDeliveryDate", pOrder.DeliveryDate.Date);
                     command.Parameters.Add("pTax", DbType.Decimal).Value = Math.Round(pOrder.TaxPercentage, 2);
                     command.Parameters.Add("pPrepCost", DbType.Decimal).Value = Math.Round(pOrder.PreparationCost, 2);
+                    command.Parameters.Add("pFinalPrice", DbType.Decimal).Value = pOrder.TotalPrice;
 
                     conn.Open();
                     return command.ExecuteNonQuery();

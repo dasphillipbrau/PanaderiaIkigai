@@ -2,6 +2,7 @@
 using LiveCharts.Wpf;
 using LiveChartsCore;
 using PanaderiaIkigai.BusinessLogic;
+using PanaderiaIkigai.UI.Controls.BI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,22 +25,22 @@ namespace PanaderiaIkigai.UI.Menus
 
         private void BI_Menu_Load(object sender, EventArgs e)
         {
-            var clientExpensesList = biContext.GetClientSpendings();
-            ColumnSeries col = new ColumnSeries() { DataLabels = true, Values = new ChartValues<decimal>(), LabelPoint = point => point.Y.ToString() };
-            Axis ax = new Axis() { Separator = new Separator() { Step = 1, IsEnabled = false } };
-            ax.Labels = new List<string>();
-            foreach(var client in clientExpensesList)
-            {
-                col.Values.Add(client.TotalSpent);
-                ax.Labels.Add(client.ClientName);
-            }
-            cartesianChart1.Series.Add(col);
-            cartesianChart1.AxisX.Add(ax);
-            cartesianChart1.AxisY.Add(new Axis
-            {
-                LabelFormatter = value => value.ToString(),
-                Separator = new Separator()
-            });
+            
+        }
+
+        private void btnGoToMainMenu_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnGoToClientBI_Click(object sender, EventArgs e)
+        {
+            panelHolder.Controls.Clear();
+            ClientsBiPanel clientsBiPanel = new ClientsBiPanel();
+            clientsBiPanel.Location = new Point(1, 1);
+            panelHolder.Controls.Add(clientsBiPanel);
+            clientsBiPanel.Show();
+            clientsBiPanel.BringToFront();
         }
     }
 }

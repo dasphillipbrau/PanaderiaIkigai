@@ -16,7 +16,7 @@ namespace PanaderiaIkigai.Data
             return ConfigurationManager.ConnectionStrings[name].ConnectionString;
         }
 
-        public List<ClientSpending> GetClientSpending()
+        public List<ClientSpending> GetTopClientByAmountSpent(string pType, DateTime pStartDate, DateTime pEndDate)
         {
 
             try
@@ -25,12 +25,21 @@ namespace PanaderiaIkigai.Data
                 using (var conn = new SQLiteConnection(GetConnectionString()))
                 {
                     var command = new SQLiteCommand(conn);
-                    command.CommandText = "SELECT NAME, TOTAL(TOTAL_SPENT) FROM CLIENT GROUP BY NAME ORDER BY TOTAL(TOTAL_SPENT)";
+                    string commandText = "";
+                    if(pType.Equals("HIGHEST"))
+                        commandText = "SELECT CLIENT_CODE, CLIENT_NAME, TOTAL(ORDER_TOTAL) AS TOTAL_AMOUNT FROM CLIENT_ORDER_HISTORY " +
+                            "WHERE ORDER_PURCHASE_DATE BETWEEN $pStartDate AND $pEndDate GROUP BY CLIENT_CODE, CLIENT_NAME ORDER BY TOTAL(ORDER_TOTAL) DESC LIMIT 10";
+                    else
+                        commandText = "SELECT CLIENT_CODE, CLIENT_NAME, TOTAL(ORDER_TOTAL) FROM CLIENT_ORDER_HISTORY " +
+                            "WHERE ORDER_PURCHASE_DATE BETWEEN $pStartDate AND $pEndDate GROUP BY CLIENT_CODE, CLIENT_NAME ORDER BY TOTAL(ORDER_TOTAL) ASC LIMIT 10";
+                    command.CommandText = commandText;
+                    command.Parameters.AddWithValue("pStartDate", pStartDate.Date);
+                    command.Parameters.AddWithValue("pEndDate", pEndDate.Date);
                     conn.Open();
                     var reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        list.Add(new ClientSpending(reader.GetString(0), reader.GetDecimal(1)));
+                        list.Add(new ClientSpending(reader.GetInt32(0), reader.GetString(1), reader.GetDecimal(2)));
                     }
                     return list;
                 }

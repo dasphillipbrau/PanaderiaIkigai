@@ -68,11 +68,16 @@ namespace PanaderiaIkigai.BusinessLogic
         }
 
 
-        public bool UpdateOrder(int pOrderCode, int pClientCode, string pOrderStatus, string pOrderNotes, DateTime pOrderDate, DateTime pDeliveryDate, decimal pTax, decimal pPrepPrice)
+        public bool UpdateOrder(Order pOriginalOrder, 
+            string pOrderStatus, string pOrderNotes, DateTime pOrderDate, DateTime pDeliveryDate, decimal pTax, decimal pPrepPrice)
         {
             try { 
-                var orderToUpdate = orderCapturer.CaptureOrderInformation(pClientCode, pOrderStatus, pOrderNotes, pOrderDate, pDeliveryDate, pTax, pPrepPrice);
-                orderToUpdate.Code = pOrderCode;
+                var orderToUpdate = orderCapturer.CaptureOrderInformation(pOriginalOrder.ClientCode, pOrderStatus, pOrderNotes, pOrderDate, pDeliveryDate, pTax, pPrepPrice);
+                orderToUpdate.Code = pOriginalOrder.Code;
+                orderToUpdate.ItemsInOrder = pOriginalOrder.ItemsInOrder;
+                orderToUpdate.ItemsTotalPrice = pOriginalOrder.ItemsTotalPrice;
+                orderToUpdate.TaxAmount = Math.Round(orderToUpdate.TaxPercentage * (orderToUpdate.PreparationCost + orderToUpdate.ItemsTotalPrice) / 100);
+                orderToUpdate.TotalPrice = orderToUpdate.TaxAmount + orderToUpdate.PreparationCost + orderToUpdate.ItemsTotalPrice;
                 if (orderDataAccess.UpdateOrder(orderToUpdate) == 1)
                     return true;
                 else
@@ -101,7 +106,13 @@ namespace PanaderiaIkigai.BusinessLogic
             }
             catch (SQLiteException sqlEx)
             {
-                MessageBox.Show("Error " + sqlEx.ErrorCode + ": " + sqlEx.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if(sqlEx.ErrorCode == 19)
+                {
+                    MessageBox.Show("Este pedido es referenciada por otros registros en la base de datos\nPrimero debe " +
+                        "borrar cualquier registro que referencie a este pedido", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } else { 
+                    MessageBox.Show("Error " + sqlEx.ErrorCode + ": " + sqlEx.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 return false;
             }
             catch (Exception ex)
@@ -114,6 +125,7 @@ namespace PanaderiaIkigai.BusinessLogic
         {
             try { 
                 var itemToRegister = new OrderItem(pOrder, pRecipe, pUnitAmount);
+                UpdateOrder(pOrder, pOrder.OrderStatus, pOrder.OrderNotes, pOrder.OrderDate, pOrder.DeliveryDate, pOrder.TaxPercentage, pOrder.PreparationCost);
                 if (!recipeContext.SubstractRecipeUnits(pRecipe, itemToRegister.UnitsInItem))
                     return false;
                 if (orderDataAccess.RegisterItem(itemToRegister) == 1)
