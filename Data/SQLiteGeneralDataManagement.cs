@@ -80,5 +80,31 @@ namespace PanaderiaIkigai.Data
                 throw sqlEx;
             }
         }
+
+        public bool TestDatabaseConnection()
+        {
+            try
+            {
+                using (var conn = new SQLiteConnection(GetConnectionStrings()))
+                {
+                    var command = new SQLiteCommand(conn);
+                    var commandText = "SELECT NAME FROM CLIENT";
+                    command.CommandText = commandText;
+                    conn.Open();
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+
+                    }
+                    return true;
+                }
+            }
+            catch(Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return false;
+                
+            }
+        }
     }
 }

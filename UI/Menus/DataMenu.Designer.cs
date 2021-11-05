@@ -33,6 +33,9 @@ namespace PanaderiaIkigai.UI.Menus
             this.btnCleanDatabase = new System.Windows.Forms.Button();
             this.btnCreateLocalBackup = new System.Windows.Forms.Button();
             this.btnBackupToGDrive = new System.Windows.Forms.Button();
+            this.btnChangeDatabase = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtCurrentDatabase = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -50,7 +53,7 @@ namespace PanaderiaIkigai.UI.Menus
             // 
             this.btnCleanDatabase.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
             this.btnCleanDatabase.ForeColor = System.Drawing.Color.Beige;
-            this.btnCleanDatabase.Location = new System.Drawing.Point(17, 67);
+            this.btnCleanDatabase.Location = new System.Drawing.Point(17, 70);
             this.btnCleanDatabase.Name = "btnCleanDatabase";
             this.btnCleanDatabase.Size = new System.Drawing.Size(194, 68);
             this.btnCleanDatabase.TabIndex = 3;
@@ -62,7 +65,7 @@ namespace PanaderiaIkigai.UI.Menus
             // 
             this.btnCreateLocalBackup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
             this.btnCreateLocalBackup.ForeColor = System.Drawing.Color.Beige;
-            this.btnCreateLocalBackup.Location = new System.Drawing.Point(17, 170);
+            this.btnCreateLocalBackup.Location = new System.Drawing.Point(17, 158);
             this.btnCreateLocalBackup.Name = "btnCreateLocalBackup";
             this.btnCreateLocalBackup.Size = new System.Drawing.Size(194, 68);
             this.btnCreateLocalBackup.TabIndex = 4;
@@ -74,7 +77,7 @@ namespace PanaderiaIkigai.UI.Menus
             // 
             this.btnBackupToGDrive.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
             this.btnBackupToGDrive.ForeColor = System.Drawing.Color.Beige;
-            this.btnBackupToGDrive.Location = new System.Drawing.Point(17, 267);
+            this.btnBackupToGDrive.Location = new System.Drawing.Point(17, 254);
             this.btnBackupToGDrive.Name = "btnBackupToGDrive";
             this.btnBackupToGDrive.Size = new System.Drawing.Size(194, 68);
             this.btnBackupToGDrive.TabIndex = 5;
@@ -82,12 +85,45 @@ namespace PanaderiaIkigai.UI.Menus
             this.btnBackupToGDrive.UseVisualStyleBackColor = false;
             this.btnBackupToGDrive.Click += new System.EventHandler(this.btnBackupToGDrive_Click);
             // 
+            // btnChangeDatabase
+            // 
+            this.btnChangeDatabase.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.btnChangeDatabase.ForeColor = System.Drawing.Color.Beige;
+            this.btnChangeDatabase.Location = new System.Drawing.Point(17, 345);
+            this.btnChangeDatabase.Name = "btnChangeDatabase";
+            this.btnChangeDatabase.Size = new System.Drawing.Size(194, 68);
+            this.btnChangeDatabase.TabIndex = 6;
+            this.btnChangeDatabase.Text = "Seleccionar Archivo de Base de Datos";
+            this.btnChangeDatabase.UseVisualStyleBackColor = false;
+            this.btnChangeDatabase.Click += new System.EventHandler(this.btnChangeDatabase_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(218, 345);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(197, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Archivo de Base de datos Seleccionado";
+            // 
+            // txtCurrentDatabase
+            // 
+            this.txtCurrentDatabase.Location = new System.Drawing.Point(221, 375);
+            this.txtCurrentDatabase.Multiline = true;
+            this.txtCurrentDatabase.Name = "txtCurrentDatabase";
+            this.txtCurrentDatabase.ReadOnly = true;
+            this.txtCurrentDatabase.Size = new System.Drawing.Size(194, 63);
+            this.txtCurrentDatabase.TabIndex = 8;
+            // 
             // DataMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(59)))), ((int)(((byte)(59)))));
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(458, 450);
+            this.Controls.Add(this.txtCurrentDatabase);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.btnChangeDatabase);
             this.Controls.Add(this.btnBackupToGDrive);
             this.Controls.Add(this.btnCreateLocalBackup);
             this.Controls.Add(this.btnCleanDatabase);
@@ -95,6 +131,7 @@ namespace PanaderiaIkigai.UI.Menus
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "DataMenu";
             this.Text = "Manejo de Datos";
+            this.Load += new System.EventHandler(this.DataMenu_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -106,5 +143,8 @@ namespace PanaderiaIkigai.UI.Menus
         private System.Windows.Forms.Button btnCleanDatabase;
         private System.Windows.Forms.Button btnCreateLocalBackup;
         private System.Windows.Forms.Button btnBackupToGDrive;
+        private System.Windows.Forms.Button btnChangeDatabase;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtCurrentDatabase;
     }
 }

@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +39,22 @@ namespace PanaderiaIkigai.UI.Menus
         private void btnBackupToGDrive_Click(object sender, EventArgs e)
         {
             dataContext.BackupToGoogleDrive();
+        }
+
+        private void btnChangeDatabase_Click(object sender, EventArgs e)
+        {
+            if (dataContext.ChangeDatabaseFile())
+                ShowConnectionString();
+        }
+
+        private void DataMenu_Load(object sender, EventArgs e)
+        {
+            ShowConnectionString();
+        }
+        private void ShowConnectionString()
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["ConstraintsOff"].ConnectionString;
+            txtCurrentDatabase.Text = connectionString;
         }
     }
 }

@@ -30,7 +30,7 @@ namespace PanaderiaIkigai.GoogleDrive
             string folderName = "Ikigai-Backups";
 
             FilesResource.ListRequest request = service.Files.List();
-            request.Q = "mimeType = 'application/vnd.google-apps.folder' and name='Ikigai-Backups'";
+            request.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name='Ikigai-Backups'";
             var result = request.Execute();
             string folderId = result.Files.Count == 0 ? null : result.Files[0].Id;
             if(folderId == null)
@@ -46,13 +46,13 @@ namespace PanaderiaIkigai.GoogleDrive
 
                 var fileMetaData = new Google.Apis.Drive.v3.Data.File();
                 fileMetaData.Name = Path.GetFileName(pFilePath);
-                fileMetaData.MimeType = "application/vnd.google-apps.file";
+                fileMetaData.MimeType = "application/vnd.sqlite3";
                 fileMetaData.Parents = new List<string> { parentFolderId };
                 FilesResource.CreateMediaUpload request;
-                using(var stream = new FileStream(pFilePath, FileMode.Open))
+                using(var stream = new FileStream(pFilePath, FileMode.Open, FileAccess.Read))
                 {
-                    request = service.Files.Create(fileMetaData, stream, "application/vnd.google-apps.file");
-                    request.Fields = "id";
+                    request = service.Files.Create(fileMetaData, stream, "application/vnd.sqlite3");
+                    request.Fields = "*";
                     request.Upload();
                 }
                 var file = request.ResponseBody;
@@ -63,7 +63,7 @@ namespace PanaderiaIkigai.GoogleDrive
             var fileMetaData = new Google.Apis.Drive.v3.Data.File()
             {
                 Name = pFolderName,
-                MimeType = "application/vnd.google-apps.folder"
+                MimeType = "application/vnd.google-apps.folder",
             };
             var request = service.Files.Create(fileMetaData);
             request.Fields = "id";
