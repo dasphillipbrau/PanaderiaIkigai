@@ -68,6 +68,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             this.label19 = new System.Windows.Forms.Label();
             this.lblDateFormat = new System.Windows.Forms.Label();
             this.btnDeleteOrder = new System.Windows.Forms.Button();
+            this.lblEditingOrder = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClients)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
             this.pnlRegisterOrder.SuspendLayout();
@@ -100,7 +101,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             this.dgvClients.Name = "dgvClients";
             this.dgvClients.ReadOnly = true;
             this.dgvClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvClients.Size = new System.Drawing.Size(615, 150);
+            this.dgvClients.Size = new System.Drawing.Size(807, 150);
             this.dgvClients.TabIndex = 1;
             this.dgvClients.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClients_CellClick);
             // 
@@ -151,11 +152,11 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             // 
             // txtClientAddress
             // 
-            this.txtClientAddress.Location = new System.Drawing.Point(1250, 328);
+            this.txtClientAddress.Location = new System.Drawing.Point(1442, 328);
             this.txtClientAddress.Multiline = true;
             this.txtClientAddress.Name = "txtClientAddress";
             this.txtClientAddress.ReadOnly = true;
-            this.txtClientAddress.Size = new System.Drawing.Size(443, 150);
+            this.txtClientAddress.Size = new System.Drawing.Size(251, 150);
             this.txtClientAddress.TabIndex = 6;
             // 
             // label4
@@ -163,7 +164,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(1247, 309);
+            this.label4.Location = new System.Drawing.Point(1439, 309);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(206, 16);
             this.label4.TabIndex = 7;
@@ -196,6 +197,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             // pnlRegisterOrder
             // 
             this.pnlRegisterOrder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
+            this.pnlRegisterOrder.Controls.Add(this.lblEditingOrder);
             this.pnlRegisterOrder.Controls.Add(this.numPrepPrice);
             this.pnlRegisterOrder.Controls.Add(this.label23);
             this.pnlRegisterOrder.Controls.Add(this.numTaxPercentage);
@@ -515,6 +517,17 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             this.btnDeleteOrder.UseVisualStyleBackColor = false;
             this.btnDeleteOrder.Click += new System.EventHandler(this.btnDeleteOrder_Click);
             // 
+            // lblEditingOrder
+            // 
+            this.lblEditingOrder.AutoSize = true;
+            this.lblEditingOrder.ForeColor = System.Drawing.Color.Yellow;
+            this.lblEditingOrder.Location = new System.Drawing.Point(521, 136);
+            this.lblEditingOrder.Name = "lblEditingOrder";
+            this.lblEditingOrder.Size = new System.Drawing.Size(35, 13);
+            this.lblEditingOrder.TabIndex = 44;
+            this.lblEditingOrder.Text = "label5";
+            this.lblEditingOrder.Visible = false;
+            // 
             // RegisterOrderPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -595,5 +608,6 @@ namespace PanaderiaIkigai.UI.Controls.Orders
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label lblDateFormat;
         private System.Windows.Forms.Button btnDeleteOrder;
+        private System.Windows.Forms.Label lblEditingOrder;
     }
 }

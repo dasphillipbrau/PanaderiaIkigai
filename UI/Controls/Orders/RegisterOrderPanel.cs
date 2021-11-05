@@ -22,7 +22,6 @@ namespace PanaderiaIkigai.UI.Controls.Orders
 
         static Order selectedOrder;
         static Client selectedClient;
-        static Recipe selectedRecipe;
 
         static bool validPrepNotes = false;
         static bool validOrderDate = false;
@@ -72,16 +71,32 @@ namespace PanaderiaIkigai.UI.Controls.Orders
         private void dgvOrders_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             selectedOrder = (Order)dgvOrders.CurrentRow.DataBoundItem;
-            btnDeleteOrder.Enabled = true;
+            if(selectedOrder != null) { 
+                btnDeleteOrder.Enabled = true;
+                rBtnOrderEditMode.Enabled = true;
+                rBtnOrderRegisterMode.Enabled = true;
+                txtClientName.Text = selectedOrder.ClientName;
+                txtPrepNotes.Text = selectedOrder.OrderNotes;
+                numPrepPrice.Value = selectedOrder.PreparationCost;
+                numTaxPercentage.Value = selectedOrder.TaxPercentage;
+                dateDelivery.Value = selectedOrder.DeliveryDate;
+                dateOrder.Value = selectedOrder.OrderDate;
+                
+            }
             if (rBtnOrderEditMode.Checked)
             {
+                lblEditingOrder.Text = "Editando pedido " + selectedOrder.Code;
+                lblEditingOrder.Visible = true;
                 EnableOrderFields();
+                numPrepPrice.Value = selectedOrder.PreparationCost;
+                numTaxPercentage.Value = selectedOrder.TaxPercentage;
             }
         }
         private void dgvClients_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             selectedClient = (Client)dgvClients.CurrentRow.DataBoundItem;
             EnableOrderFields();
+            
         }
 
         private void EnableOrderFields()
@@ -110,8 +125,6 @@ namespace PanaderiaIkigai.UI.Controls.Orders
                 txtPrepNotes.ReadOnly = false;
             }
             btnDeleteOrder.Enabled = true;
-            rBtnOrderEditMode.Enabled = true;
-            rBtnOrderRegisterMode.Enabled = true;
         }
 
         private void textBox4_Validating(object sender, CancelEventArgs e)
@@ -175,7 +188,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
                 }
                 else
                 {
-                    if(orderContext.UpdateOrder(selectedOrder.Code, selectedOrder.ClientCode, comboBoxOrderStatus.SelectedItem.ToString(), 
+                    if (orderContext.UpdateOrder(selectedOrder, comboBoxOrderStatus.SelectedItem.ToString(),
                         txtPrepNotes.Text, dateOrder.Value.Date, dateDelivery.Value.Date, Math.Round(numTaxPercentage.Value, 2), Math.Round(numPrepPrice.Value, 2)))
                     {
                         MessageBox.Show("Pedido Actualizado", successMessage, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -206,9 +219,6 @@ namespace PanaderiaIkigai.UI.Controls.Orders
                 dgvOrders.AutoResizeColumns();
                 dgvOrders.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
-            selectedOrder = null;
-            selectedClient = null;
-            selectedRecipe = null;
             dgvClients.DataSource = clientContext.GetClients();
             btnDeleteOrder.Enabled = false;
             rBtnOrderEditMode.Enabled = false;
@@ -222,12 +232,24 @@ namespace PanaderiaIkigai.UI.Controls.Orders
                 MessageBox.Show("No hay pedidos para editar", "Agregue pedidos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 rBtnOrderRegisterMode.Checked = true;
             }
+            else if(selectedOrder == null && rBtnOrderEditMode.Checked)
+            {
+                MessageBox.Show("Primero seleccione un pedido para editar", "Seleccione un pedido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             else
             {
                 if (rBtnOrderEditMode.Checked)
                 {
-                    MessageBox.Show("Modo de Edición Activo. Recuerde hacer click en una fila de la lista de ordenes para señalar cual orden quiere editar", "Cambio de Modo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ClearFields();
+                    MessageBox.Show("Modo de Edición Activo. Recuerde hacer click en una fila de la lista de ordenes para señalar cual orden quiere editar" +
+                        "\nTome en cuenta que no es posible cambiar el cliente a quien le pertenece el pedido. \nPara lograr ese resultado, debe borrar el pedido", 
+                        "Cambio de Modo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    lblEditingOrder.Visible = true;
+                    lblEditingOrder.Text = "Editando pedido " + selectedOrder.Code;
+                    
+                }
+                else
+                {
+                    lblEditingOrder.Visible = false;
                 }
             }
         }
