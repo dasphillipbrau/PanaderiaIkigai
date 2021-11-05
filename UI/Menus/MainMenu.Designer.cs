@@ -32,10 +32,11 @@ namespace PanaderiaIkigai
             this.btnGoToIngredientMenu = new System.Windows.Forms.Button();
             this.IkigaiTitle = new System.Windows.Forms.Label();
             this.mainMenuControlsPanel = new System.Windows.Forms.Panel();
+            this.btnGoToBiMenu = new System.Windows.Forms.Button();
             this.btnGoToOrdersMenu = new System.Windows.Forms.Button();
             this.btnOpenClientsMenu = new System.Windows.Forms.Button();
             this.btnGoToRecipeMenu = new System.Windows.Forms.Button();
-            this.btnGoToBiMenu = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.mainMenuControlsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,6 +68,7 @@ namespace PanaderiaIkigai
             // mainMenuControlsPanel
             // 
             this.mainMenuControlsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
+            this.mainMenuControlsPanel.Controls.Add(this.button1);
             this.mainMenuControlsPanel.Controls.Add(this.btnGoToBiMenu);
             this.mainMenuControlsPanel.Controls.Add(this.btnGoToOrdersMenu);
             this.mainMenuControlsPanel.Controls.Add(this.btnOpenClientsMenu);
@@ -77,6 +79,20 @@ namespace PanaderiaIkigai
             this.mainMenuControlsPanel.Name = "mainMenuControlsPanel";
             this.mainMenuControlsPanel.Size = new System.Drawing.Size(776, 299);
             this.mainMenuControlsPanel.TabIndex = 2;
+            // 
+            // btnGoToBiMenu
+            // 
+            this.btnGoToBiMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.btnGoToBiMenu.FlatAppearance.BorderSize = 0;
+            this.btnGoToBiMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGoToBiMenu.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnGoToBiMenu.Location = new System.Drawing.Point(288, 3);
+            this.btnGoToBiMenu.Name = "btnGoToBiMenu";
+            this.btnGoToBiMenu.Size = new System.Drawing.Size(193, 54);
+            this.btnGoToBiMenu.TabIndex = 4;
+            this.btnGoToBiMenu.Text = "Menú de Inteligencia de Negocios";
+            this.btnGoToBiMenu.UseVisualStyleBackColor = false;
+            this.btnGoToBiMenu.Click += new System.EventHandler(this.btnGoToBiMenu_Click);
             // 
             // btnGoToOrdersMenu
             // 
@@ -120,19 +136,19 @@ namespace PanaderiaIkigai
             this.btnGoToRecipeMenu.UseVisualStyleBackColor = false;
             this.btnGoToRecipeMenu.Click += new System.EventHandler(this.btnGoToRecipeMenu_Click);
             // 
-            // btnGoToBiMenu
+            // button1
             // 
-            this.btnGoToBiMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.btnGoToBiMenu.FlatAppearance.BorderSize = 0;
-            this.btnGoToBiMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGoToBiMenu.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnGoToBiMenu.Location = new System.Drawing.Point(288, 3);
-            this.btnGoToBiMenu.Name = "btnGoToBiMenu";
-            this.btnGoToBiMenu.Size = new System.Drawing.Size(193, 54);
-            this.btnGoToBiMenu.TabIndex = 4;
-            this.btnGoToBiMenu.Text = "Menú de Inteligencia de Negocios";
-            this.btnGoToBiMenu.UseVisualStyleBackColor = false;
-            this.btnGoToBiMenu.Click += new System.EventHandler(this.btnGoToBiMenu_Click);
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.button1.Location = new System.Drawing.Point(288, 222);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(193, 54);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Menú de Manejo de Datos";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // MainMenu
             // 
@@ -159,6 +175,7 @@ namespace PanaderiaIkigai
         private System.Windows.Forms.Button btnOpenClientsMenu;
         private System.Windows.Forms.Button btnGoToOrdersMenu;
         private System.Windows.Forms.Button btnGoToBiMenu;
+        private System.Windows.Forms.Button button1;
     }
 }
 

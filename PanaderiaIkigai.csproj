@@ -71,6 +71,24 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Apis, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.1.55.0\lib\net45\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.Auth.1.55.0\lib\net461\Google.Apis.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.Auth.1.55.0\lib\net461\Google.Apis.Auth.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.Core.1.55.0\lib\net45\Google.Apis.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Drive.v3, Version=1.55.0.2481, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.Drive.v3.1.55.0.2481\lib\net45\Google.Apis.Drive.v3.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.1.55.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+    </Reference>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>packages\LiveCharts.Core.0.9.8\lib\net40\LiveCharts.dll</HintPath>
     </Reference>
@@ -149,6 +167,7 @@
   <ItemGroup>
     <Compile Include="BusinessLogic\BIContext.cs" />
     <Compile Include="BusinessLogic\ClientContext.cs" />
+    <Compile Include="BusinessLogic\GeneralDataContext.cs" />
     <Compile Include="BusinessLogic\InformationCapture\ClientInformationCapturer.cs" />
     <Compile Include="BusinessLogic\InformationCapture\OrderInformationCapture.cs" />
     <Compile Include="BusinessLogic\InformationCapture\RecipeCapturer.cs" />
@@ -157,8 +176,10 @@
     <Compile Include="BusinessLogic\RecipeContext.cs" />
     <Compile Include="Data\SQLiteBusinessIntelligenceManager.cs" />
     <Compile Include="Data\SQLiteClientManager.cs" />
+    <Compile Include="Data\SQLiteGeneralDataManagement.cs" />
     <Compile Include="Data\SQLiteRecipeManager.cs" />
     <Compile Include="Data\SQL\SQLiteOrderManager.cs" />
+    <Compile Include="GoogleDrive\DriveApi.cs" />
     <Compile Include="Models\BI\ClientSpending.cs" />
     <Compile Include="Models\BI\ProductPopularity.cs" />
     <Compile Include="Models\Clients\Client.cs" />
@@ -271,6 +292,12 @@
     <Compile Include="UI\Menus\ClientsMenu.Designer.cs">
       <DependentUpon>ClientsMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Menus\DataMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Menus\DataMenu.Designer.cs">
+      <DependentUpon>DataMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Menus\IngredientMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -301,6 +328,10 @@
     </Compile>
     <None Include="Data\SQL\DDL\tables.sql" />
     <None Include="Data\SQL\DDL\triggers.sql" />
+    <Content Include="Backups\backup-history-drive.txt" />
+    <Content Include="Backups\backup-history-local.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -358,6 +389,9 @@
     <EmbeddedResource Include="UI\Menus\ClientsMenu.resx">
       <DependentUpon>ClientsMenu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Menus\DataMenu.resx">
+      <DependentUpon>DataMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Menus\IngredientMenu.resx">
       <DependentUpon>IngredientMenu.cs</DependentUpon>
     </EmbeddedResource>
@@ -382,6 +416,9 @@
     <EmbeddedResource Include="UI\Menus\RecipeMenu.resx">
       <DependentUpon>RecipeMenu.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="GoogleDrive\credentials.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
     <None Include="PanaderiaIkigai_TemporaryKey.pfx" />
