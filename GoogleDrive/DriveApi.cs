@@ -31,7 +31,8 @@ namespace PanaderiaIkigai.GoogleDrive
 
             FilesResource.ListRequest request = service.Files.List();
             request.Q = "mimeType = 'application/vnd.google-apps.folder' and name='Ikigai-Backups'";
-            string folderId = request.Execute().Files[0].Id;
+            var result = request.Execute();
+            string folderId = result.Files.Count == 0 ? null : result.Files[0].Id;
             if(folderId == null)
             {
                 folderId = CreateFolder(folderName, service);
@@ -42,19 +43,20 @@ namespace PanaderiaIkigai.GoogleDrive
 
         private static string CreateFile(string pFilePath, string parentFolderId, DriveService service)
         {
-            var fileMetaData = new Google.Apis.Drive.v3.Data.File();
-            fileMetaData.Name = Path.GetFileName(pFilePath);
-            fileMetaData.MimeType = "application/vnd.google-apps.file";
-            fileMetaData.Parents = new List<string> { parentFolderId };
-            FilesResource.CreateMediaUpload request;
-            using(var stream = new FileStream(pFilePath, FileMode.Open))
-            {
-                request = service.Files.Create(fileMetaData, stream, "application/vnd.google-apps.file");
-                request.Fields = "id";
-                request.Upload();
-            }
-            var file = request.ResponseBody;
-            return file.Id;
+
+                var fileMetaData = new Google.Apis.Drive.v3.Data.File();
+                fileMetaData.Name = Path.GetFileName(pFilePath);
+                fileMetaData.MimeType = "application/vnd.google-apps.file";
+                fileMetaData.Parents = new List<string> { parentFolderId };
+                FilesResource.CreateMediaUpload request;
+                using(var stream = new FileStream(pFilePath, FileMode.Open))
+                {
+                    request = service.Files.Create(fileMetaData, stream, "application/vnd.google-apps.file");
+                    request.Fields = "id";
+                    request.Upload();
+                }
+                var file = request.ResponseBody;
+                return file.Id;
         }
         private static string CreateFolder(string pFolderName, DriveService service)
         {
