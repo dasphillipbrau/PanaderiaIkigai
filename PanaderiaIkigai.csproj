@@ -416,6 +416,7 @@
     <EmbeddedResource Include="UI\Menus\RecipeMenu.resx">
       <DependentUpon>RecipeMenu.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="GoogleDrive\credentials.json" />
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
     <None Include="PanaderiaIkigai_TemporaryKey.pfx" />
