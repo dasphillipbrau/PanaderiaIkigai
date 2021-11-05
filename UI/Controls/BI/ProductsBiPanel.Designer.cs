@@ -42,6 +42,7 @@ namespace PanaderiaIkigai.UI.Controls.BI
             this.dtpStart = new System.Windows.Forms.DateTimePicker();
             this.pieLowestProducts = new LiveCharts.WinForms.PieChart();
             this.lblLowest = new System.Windows.Forms.Label();
+            this.cartesianChart1 = new LiveCharts.WinForms.CartesianChart();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -171,11 +172,20 @@ namespace PanaderiaIkigai.UI.Controls.BI
             this.lblLowest.TabIndex = 23;
             this.lblLowest.Text = "Top 10 Productos Menos Populares";
             // 
+            // cartesianChart1
+            // 
+            this.cartesianChart1.Location = new System.Drawing.Point(262, 312);
+            this.cartesianChart1.Name = "cartesianChart1";
+            this.cartesianChart1.Size = new System.Drawing.Size(516, 236);
+            this.cartesianChart1.TabIndex = 24;
+            this.cartesianChart1.Text = "cartesianChart";
+            // 
             // ProductsBiPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.Controls.Add(this.cartesianChart1);
             this.Controls.Add(this.lblLowest);
             this.Controls.Add(this.pieLowestProducts);
             this.Controls.Add(this.groupBox1);
@@ -212,5 +222,6 @@ namespace PanaderiaIkigai.UI.Controls.BI
         private System.Windows.Forms.DateTimePicker dtpStart;
         private LiveCharts.WinForms.PieChart pieLowestProducts;
         private System.Windows.Forms.Label lblLowest;
+        private LiveCharts.WinForms.CartesianChart cartesianChart1;
     }
 }

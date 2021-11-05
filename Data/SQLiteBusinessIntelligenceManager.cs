@@ -118,5 +118,32 @@ namespace PanaderiaIkigai.Data
                 throw sqlEx;
             }
         }
+
+        public List<ProductPopularity> GetOrderTotal(DateTime pStartDate, DateTime pEndDate)
+        {
+            try
+            {
+                var list = new List<ProductPopularity>();
+                using (var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    var command = new SQLiteCommand(conn);
+                    var commandText = "SELECT ORDER_CODE, ORDER_PURCHASE_DATE, TOTAL(ORDER_TOTAL) FROM CLIENT_ORDER_HISTORY WHERE ORDER_PURCHASE_DATE BETWEEN $pStartDate AND $pEndDate GROUP BY ORDER_CODE, ORDER_PURCHASE_DATE ORDER BY ORDER_PURCHASE_DATE ASC LIMIT 10";
+                    command.CommandText = commandText;
+                    command.Parameters.AddWithValue("pStartDate", pStartDate.Date);
+                    command.Parameters.AddWithValue("pEndDate", pEndDate.Date);
+                    conn.Open();
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        list.Add(new ProductPopularity(reader.GetInt32(0), reader.GetDateTime(1).Date, reader.GetDecimal(2)));
+                    }
+                    return list;
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+        }
     }
 }

@@ -25,6 +25,7 @@ namespace PanaderiaIkigai.UI.Controls.BI
             dtpEnd.Value = DateTime.Today;
             bIContext.PlotProductPie(pieTopProducts, dtpStart.Value, dtpEnd.Value, "HIGHEST", "REVENUE");
             bIContext.PlotProductPie(pieLowestProducts, dtpStart.Value, dtpEnd.Value, "LOWEST", "REVENUE");
+            bIContext.PlotProductLine(cartesianChart1, dtpStart.Value, dtpEnd.Value);
         }
     }
 }
