@@ -1,6 +1,5 @@
 ﻿using LiveCharts;
 using LiveCharts.Wpf;
-using LiveChartsCore;
 using PanaderiaIkigai.BusinessLogic;
 using PanaderiaIkigai.UI.Controls.BI;
 using System;

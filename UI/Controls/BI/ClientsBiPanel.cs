@@ -21,8 +21,8 @@ namespace PanaderiaIkigai.UI.Controls.BI
 
         private void ClientsBiPanel_Load(object sender, EventArgs e)
         {
-            dtpStart.Value = DateTime.Today.AddYears(-1);
-            dtpEnd.Value = DateTime.Today;
+            dtpStart.Value = DateTime.Today.AddMonths(-4);
+            dtpEnd.Value = DateTime.Today.AddMonths(+4);
             biContext.PlotTopClientsByAmountSpent(chartTopClientExpenses, dtpStart.Value, dtpEnd.Value);
             biContext.PlotLowestClientsByAmountSpend(chartLowestExpenses, dtpStart.Value, dtpEnd.Value);
         }

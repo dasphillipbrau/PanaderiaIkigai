@@ -32,9 +32,6 @@ namespace PanaderiaIkigai.UI.Controls.BI
             this.label2 = new System.Windows.Forms.Label();
             this.pieTopProducts = new LiveCharts.WinForms.PieChart();
             this.lblTopTitle = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rBtnProductsPurchased = new System.Windows.Forms.RadioButton();
-            this.rBtnAmountInvested = new System.Windows.Forms.RadioButton();
             this.btnRecalculatePlots = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -42,8 +39,8 @@ namespace PanaderiaIkigai.UI.Controls.BI
             this.dtpStart = new System.Windows.Forms.DateTimePicker();
             this.pieLowestProducts = new LiveCharts.WinForms.PieChart();
             this.lblLowest = new System.Windows.Forms.Label();
-            this.cartesianChart1 = new LiveCharts.WinForms.CartesianChart();
-            this.groupBox1.SuspendLayout();
+            this.productEvolution = new LiveCharts.WinForms.CartesianChart();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label2
@@ -76,43 +73,9 @@ namespace PanaderiaIkigai.UI.Controls.BI
             this.lblTopTitle.TabIndex = 11;
             this.lblTopTitle.Text = "Top 10 Productos Más Populares";
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.rBtnProductsPurchased);
-            this.groupBox1.Controls.Add(this.rBtnAmountInvested);
-            this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(468, 565);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(146, 100);
-            this.groupBox1.TabIndex = 21;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Criterio";
-            // 
-            // rBtnProductsPurchased
-            // 
-            this.rBtnProductsPurchased.AutoSize = true;
-            this.rBtnProductsPurchased.Location = new System.Drawing.Point(7, 61);
-            this.rBtnProductsPurchased.Name = "rBtnProductsPurchased";
-            this.rBtnProductsPurchased.Size = new System.Drawing.Size(129, 17);
-            this.rBtnProductsPurchased.TabIndex = 1;
-            this.rBtnProductsPurchased.Text = "Productos Comprados";
-            this.rBtnProductsPurchased.UseVisualStyleBackColor = true;
-            // 
-            // rBtnAmountInvested
-            // 
-            this.rBtnAmountInvested.AutoSize = true;
-            this.rBtnAmountInvested.Checked = true;
-            this.rBtnAmountInvested.Location = new System.Drawing.Point(7, 20);
-            this.rBtnAmountInvested.Name = "rBtnAmountInvested";
-            this.rBtnAmountInvested.Size = new System.Drawing.Size(99, 17);
-            this.rBtnAmountInvested.TabIndex = 0;
-            this.rBtnAmountInvested.TabStop = true;
-            this.rBtnAmountInvested.Text = "Monto Invertido";
-            this.rBtnAmountInvested.UseVisualStyleBackColor = true;
-            // 
             // btnRecalculatePlots
             // 
-            this.btnRecalculatePlots.Location = new System.Drawing.Point(624, 626);
+            this.btnRecalculatePlots.Location = new System.Drawing.Point(468, 626);
             this.btnRecalculatePlots.Name = "btnRecalculatePlots";
             this.btnRecalculatePlots.Size = new System.Drawing.Size(75, 39);
             this.btnRecalculatePlots.TabIndex = 20;
@@ -172,23 +135,34 @@ namespace PanaderiaIkigai.UI.Controls.BI
             this.lblLowest.TabIndex = 23;
             this.lblLowest.Text = "Top 10 Productos Menos Populares";
             // 
-            // cartesianChart1
+            // productEvolution
             // 
-            this.cartesianChart1.Location = new System.Drawing.Point(262, 312);
-            this.cartesianChart1.Name = "cartesianChart1";
-            this.cartesianChart1.Size = new System.Drawing.Size(516, 236);
-            this.cartesianChart1.TabIndex = 24;
-            this.cartesianChart1.Text = "cartesianChart";
+            this.productEvolution.Location = new System.Drawing.Point(262, 312);
+            this.productEvolution.Name = "productEvolution";
+            this.productEvolution.Size = new System.Drawing.Size(573, 254);
+            this.productEvolution.TabIndex = 24;
+            this.productEvolution.Text = "cartesianChart";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(259, 293);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(325, 16);
+            this.label1.TabIndex = 25;
+            this.label1.Text = "Evolución de los 10 Productos más Populares";
             // 
             // ProductsBiPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.Controls.Add(this.cartesianChart1);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.productEvolution);
             this.Controls.Add(this.lblLowest);
             this.Controls.Add(this.pieLowestProducts);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnRecalculatePlots);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -200,8 +174,6 @@ namespace PanaderiaIkigai.UI.Controls.BI
             this.Name = "ProductsBiPanel";
             this.Size = new System.Drawing.Size(1122, 681);
             this.Load += new System.EventHandler(this.ProductsBiPanel_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -212,9 +184,6 @@ namespace PanaderiaIkigai.UI.Controls.BI
         private System.Windows.Forms.Label label2;
         private LiveCharts.WinForms.PieChart pieTopProducts;
         private System.Windows.Forms.Label lblTopTitle;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton rBtnProductsPurchased;
-        private System.Windows.Forms.RadioButton rBtnAmountInvested;
         private System.Windows.Forms.Button btnRecalculatePlots;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -222,6 +191,7 @@ namespace PanaderiaIkigai.UI.Controls.BI
         private System.Windows.Forms.DateTimePicker dtpStart;
         private LiveCharts.WinForms.PieChart pieLowestProducts;
         private System.Windows.Forms.Label lblLowest;
-        private LiveCharts.WinForms.CartesianChart cartesianChart1;
+        private LiveCharts.WinForms.CartesianChart productEvolution;
+        private System.Windows.Forms.Label label1;
     }
 }

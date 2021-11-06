@@ -21,11 +21,11 @@ namespace PanaderiaIkigai.UI.Controls.BI
 
         private void ProductsBiPanel_Load(object sender, EventArgs e)
         {
-            dtpStart.Value = DateTime.Today.AddYears(-1);
-            dtpEnd.Value = DateTime.Today;
+            dtpStart.Value = DateTime.Today.AddMonths(-4);
+            dtpEnd.Value = DateTime.Today.AddMonths(+4);
             bIContext.PlotProductPie(pieTopProducts, dtpStart.Value, dtpEnd.Value, "HIGHEST", "REVENUE");
             bIContext.PlotProductPie(pieLowestProducts, dtpStart.Value, dtpEnd.Value, "LOWEST", "REVENUE");
-            bIContext.PlotProductLine(cartesianChart1, dtpStart.Value, dtpEnd.Value);
+            bIContext.PlotProductEvolution(productEvolution, dtpStart.Value, dtpEnd.Value);
         }
     }
 }

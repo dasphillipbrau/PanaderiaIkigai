@@ -28,10 +28,11 @@ namespace PanaderiaIkigai.BusinessLogic
         }
         public void PlotTopClientsByAmountSpent(LiveCharts.WinForms.CartesianChart pChart, DateTime pStartDate, DateTime pEndDate)
         {
+            pChart.BackColorTransparent = true;
             var clientExpensesList = GetClientSpendings("HIGHEST", pStartDate, pEndDate);
             ColumnSeries col = new ColumnSeries() { Foreground = Brushes.White, Fill = Brushes.Orange, Title = "Invertido: ", 
                 DataLabels = true, Values = new ChartValues<decimal>(), LabelPoint = point => point.Y.ToString() };
-            Axis ax = new Axis() { LabelsRotation = 21, Title = "Clientes", Separator = new Separator() { Step = 1, IsEnabled = false } };
+            Axis ax = new Axis() {Foreground = Brushes.White, LabelsRotation = 21, Title = "Clientes", Separator = new Separator() { Step = 1, IsEnabled = false } };
             ax.Labels = new List<string>();
             foreach (var client in clientExpensesList)
             {
@@ -51,6 +52,7 @@ namespace PanaderiaIkigai.BusinessLogic
 
         public void PlotLowestClientsByAmountSpend(LiveCharts.WinForms.CartesianChart pChart, DateTime startDate, DateTime endDate)
         {
+            pChart.BackColorTransparent = true;
             var clientExpensesList = GetClientSpendings("LOWEST", startDate, endDate);
             ColumnSeries col = new ColumnSeries()
             {
@@ -61,7 +63,7 @@ namespace PanaderiaIkigai.BusinessLogic
                 Values = new ChartValues<decimal>(),
                 LabelPoint = point => point.Y.ToString()
             };
-            Axis ax = new Axis() { LabelsRotation = 21, Title = "Clientes", Separator = new Separator() { Step = 1, IsEnabled = false } };
+            Axis ax = new Axis() {Foreground = Brushes.White, LabelsRotation = 21, Title = "Clientes", Separator = new Separator() { Step = 1, IsEnabled = false } };
             ax.Labels = new List<string>();
             foreach (var client in clientExpensesList)
             {
@@ -81,6 +83,7 @@ namespace PanaderiaIkigai.BusinessLogic
 
         public void UpdatePlotHighestClientByAmountSpend(LiveCharts.WinForms.CartesianChart pChart, DateTime startDate, DateTime endDate)
         {
+            pChart.BackColorTransparent = true;
             var clientExpensesList = GetClientSpendings("HIGHEST", startDate, endDate);
             ColumnSeries col = new ColumnSeries()
             {
@@ -91,7 +94,7 @@ namespace PanaderiaIkigai.BusinessLogic
                 Values = new ChartValues<decimal>(),
                 LabelPoint = point => point.Y.ToString()
             };
-            Axis ax = new Axis() { LabelsRotation = 21, Title = "Clientes", Separator = new Separator() { Step = 1, IsEnabled = false } };
+            Axis ax = new Axis() {Foreground = Brushes.White, LabelsRotation = 21, Title = "Clientes", Separator = new Separator() { Step = 1, IsEnabled = false } };
             ax.Labels = new List<string>();
             foreach (var client in clientExpensesList)
             {
@@ -115,6 +118,7 @@ namespace PanaderiaIkigai.BusinessLogic
 
         public void UpdatePlotLowestClientByAmountSpend(LiveCharts.WinForms.CartesianChart pChart, DateTime startDate, DateTime endDate)
         {
+            pChart.BackColorTransparent = true;
             var clientExpensesList = GetClientSpendings("LOWEST", startDate, endDate);
             ColumnSeries col = new ColumnSeries()
             {
@@ -125,7 +129,7 @@ namespace PanaderiaIkigai.BusinessLogic
                 Values = new ChartValues<decimal>(),
                 LabelPoint = point => point.Y.ToString()
             };
-            Axis ax = new Axis() { LabelsRotation = 21, Title = "Clientes", Separator = new Separator() { Step = 1, IsEnabled = false } };
+            Axis ax = new Axis() {Foreground = Brushes.White, LabelsRotation = 21, Title = "Clientes", Separator = new Separator() { Step = 1, IsEnabled = false } };
             ax.Labels = new List<string>();
             foreach (var client in clientExpensesList)
             {
@@ -149,6 +153,7 @@ namespace PanaderiaIkigai.BusinessLogic
 
         public void PlotHighestClientByItemsPurchased(LiveCharts.WinForms.CartesianChart pChart, DateTime startDate, DateTime endDate)
         {
+            pChart.BackColorTransparent = true;
             var clientExpensesList = GetClientUnitsPurchased("HIGHEST", startDate, endDate);
             ColumnSeries col = new ColumnSeries()
             {
@@ -159,7 +164,7 @@ namespace PanaderiaIkigai.BusinessLogic
                 Values = new ChartValues<decimal>(),
                 LabelPoint = point => point.Y.ToString()
             };
-            Axis ax = new Axis() { LabelsRotation = 21, Title = "Clientes", Separator = new Separator() { Step = 1, IsEnabled = false } };
+            Axis ax = new Axis() { Foreground = Brushes.White, LabelsRotation = 21, Title = "Clientes", Separator = new Separator() { Step = 1, IsEnabled = false } };
             ax.Labels = new List<string>();
             foreach (var client in clientExpensesList)
             {
@@ -182,6 +187,7 @@ namespace PanaderiaIkigai.BusinessLogic
 
         public void PlotLowestClientByItemsPurchased(LiveCharts.WinForms.CartesianChart pChart, DateTime startDate, DateTime endDate)
         {
+            pChart.BackColorTransparent = true;
             var clientExpensesList = GetClientUnitsPurchased("LOWEST", startDate, endDate);
             ColumnSeries col = new ColumnSeries()
             {
@@ -192,7 +198,7 @@ namespace PanaderiaIkigai.BusinessLogic
                 Values = new ChartValues<decimal>(),
                 LabelPoint = point => point.Y.ToString()
             };
-            Axis ax = new Axis() { LabelsRotation = 21, Title = "Clientes", Separator = new Separator() { Step = 1, IsEnabled = false } };
+            Axis ax = new Axis() { Foreground = Brushes.White, LabelsRotation = 21, Title = "Clientes", Separator = new Separator() { Step = 1, IsEnabled = false } };
             ax.Labels = new List<string>();
             foreach (var client in clientExpensesList)
             {
@@ -215,6 +221,7 @@ namespace PanaderiaIkigai.BusinessLogic
 
         public void UpdatePlotHighestClientByUnitsPurchased(LiveCharts.WinForms.CartesianChart pChart, DateTime startDate, DateTime endDate)
         {
+            pChart.BackColorTransparent = true;
             var clientExpensesList = GetClientUnitsPurchased("HIGHEST", startDate, endDate);
             ColumnSeries col = new ColumnSeries()
             {
@@ -225,7 +232,7 @@ namespace PanaderiaIkigai.BusinessLogic
                 Values = new ChartValues<decimal>(),
                 LabelPoint = point => point.Y.ToString()
             };
-            Axis ax = new Axis() { LabelsRotation = 21, Title = "Clientes", Separator = new Separator() { Step = 1, IsEnabled = false } };
+            Axis ax = new Axis() { Foreground = Brushes.White, LabelsRotation = 21, Title = "Clientes", Separator = new Separator() { Step = 1, IsEnabled = false } };
             ax.Labels = new List<string>();
             foreach (var client in clientExpensesList)
             {
@@ -250,6 +257,7 @@ namespace PanaderiaIkigai.BusinessLogic
         public void UpdatePlotLowestClientByUnitsPurchased(LiveCharts.WinForms.CartesianChart pChart, DateTime startDate, DateTime endDate)
         {
             var clientExpensesList = GetClientUnitsPurchased("LOWEST", startDate, endDate);
+            pChart.BackColorTransparent = true;
             ColumnSeries col = new ColumnSeries()
             {
                 Foreground = Brushes.White,
@@ -259,7 +267,7 @@ namespace PanaderiaIkigai.BusinessLogic
                 Values = new ChartValues<decimal>(),
                 LabelPoint = point => point.Y.ToString()
             };
-            Axis ax = new Axis() { LabelsRotation = 21, Title = "Clientes", Separator = new Separator() { Step = 1, IsEnabled = false } };
+            Axis ax = new Axis() { Foreground = Brushes.White, LabelsRotation = 21, Title = "Clientes", Separator = new Separator() { Step = 1, IsEnabled = false } };
             ax.Labels = new List<string>();
             foreach (var client in clientExpensesList)
             {
@@ -297,31 +305,86 @@ namespace PanaderiaIkigai.BusinessLogic
             pie.BackColorTransparent = true;
         }
 
-        public void PlotProductLine(LiveCharts.WinForms.CartesianChart chart, DateTime pStart, DateTime pEnd)
+        public void PlotOrderAmountByDate(LiveCharts.WinForms.CartesianChart chart, DateTime pStart, DateTime pEnd)
         {
+            chart.Series.Clear();
+            chart.AxisX.Clear();
+            chart.AxisY.Clear();
+            chart.BackColorTransparent = true;
             var dataList = dataAccess.GetOrderTotal(pStart.Date, pEnd.Date);
-            if (chart.Series.Count > 0)
-                chart.Series.Clear();
-            SeriesCollection series = new SeriesCollection();
-            Axis ax = new Axis() { LabelsRotation = 21, Title = "Fechas", Separator = new Separator() { Step = 1, IsEnabled = false } };
+            var revenueList = new List<Decimal>();
+            var dateList = new List<string>();
             foreach (var order in dataList)
             {
-                series.Add(new LineSeries { 
-                    Foreground = Brushes.White, 
-                    Title = "Total de Orden", 
-                    Values = new ChartValues<decimal> { order.Popularity }, 
-                    Stroke = new SolidColorBrush(System.Windows.Media.Color.FromRgb(29, 137, 152)),
-                    Fill = Brushes.Transparent,
-                    PointGeometrySize = 20,
-                    PointForeground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(40,26,29))
-                });
-                ax.Labels.Add(order.OrderDate.ToString("dd/MM/yyyy"));
+                revenueList.Add(order.Popularity);
+                dateList.Add(order.OrderDate.Date.ToString("dd-MM-yyyy"));
+            }
+            if (chart.Series.Count > 0)
+                chart.Series.Clear();
+            chart.Series = new SeriesCollection()
+            {
+                new LineSeries
+                {
+                    Title = "Monto Final de Pedidos",
+                    Values = new ChartValues<decimal>(revenueList),
+                    PointGeometry = DefaultGeometries.Circle
+                }
+            };
+            chart.AxisX.Add(new Axis
+            {
+                Title = "Fecha",
+                Labels = dateList
+            });
+            chart.AxisY.Add(new Axis
+            {
+                Title = "Monto",
+                LabelFormatter = values => values.ToString()
+            });
+            
+            chart.LegendLocation = LegendLocation.Right;
+        }
+
+        public void PlotProductEvolution(LiveCharts.WinForms.CartesianChart chart, DateTime pStart, DateTime pEnd)
+        {
+            chart.Series.Clear();
+            chart.AxisX.Clear();
+            chart.AxisY.Clear();
+            chart.BackColorTransparent = true;
+            var dataList = dataAccess.GetProductEvolution(pStart, pEnd);
+            chart.AxisX.Add(new Axis
+            {
+                Title = "Mes",
+                Labels = new[] {"ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "NOV", "DIC"},
+                LabelsRotation = 15
+            });
+            chart.AxisY.Add(new Axis
+            {
+                Title = "Cantidad Vendida",
+                LabelFormatter = value => value.ToString()
+            });
+            SeriesCollection series = new SeriesCollection();
+            var products = (from product in dataList
+                            select new { product.RecipeName }).Distinct();
+            foreach(var product in products)
+            {
+                List<decimal> values = new List<decimal>();
+                for(int month = 1; month <= 12; month++)
+                {
+                    decimal value = 0;
+                    var data = from o in dataList
+                               where o.RecipeName.Equals(product.RecipeName) && o.OrderDate.Month.Equals(month)
+                               group o by o.OrderDate.Month into g
+                               select new { 
+                                   Date = g.Key,
+                                   SumOfUnits = g.Sum(val => val.Popularity)    
+                               };
+                    if (data.SingleOrDefault() != null)
+                        value = data.SingleOrDefault().SumOfUnits;
+                    values.Add(value);
+                }
+                series.Add(new LineSeries() { Title = product.RecipeName, Values = new ChartValues<decimal>(values) });
             }
             chart.Series = series;
-            chart.AxisX.Add(ax);
-            chart.LegendLocation = LegendLocation.Right;
-            
-
         }
     
 
