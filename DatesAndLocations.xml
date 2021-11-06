@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configs>
+	<dates>
+		<dateOfLastBackup value="05-09-2021"/>
+		<dateOfLastManualBackup value="05-11-2021"/>
+		<dateOfLastDataWipe value="05-11-2021"/>
+	</dates>
+	<backupLocations>
+		<backup location="No se ha creado ningún respaldo"/>
+	</backupLocations>
+</configs>
