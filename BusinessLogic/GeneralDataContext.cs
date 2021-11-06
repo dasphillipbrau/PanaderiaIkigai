@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SQLite;
+using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace PanaderiaIkigai.BusinessLogic
             }
         }
 
-        public void CopyDatabase()
+        public string CopyDatabase()
         {
             try
             {
@@ -44,21 +45,22 @@ namespace PanaderiaIkigai.BusinessLogic
                 string destinationFileAbsolute = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Ikigai-Backup-" + unixStamp.ToString() + ".db";
                 File.Copy(sourceFileAbsolute, destinationFileAbsolute);
 
-                
-
                 using(StreamWriter sw = File.AppendText(localLogFileRelative))
                 {
                     sw.WriteLine("FECHA " + timestamp.ToString() + " CORRESPONDE A " + Path.GetFileName(destinationFileAbsolute));
                 }
                 MessageBox.Show("Ubicación del Respaldo: " + destinationFileAbsolute, "Respaldo Creado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                UpdateManualBackupLocation(destinationFileAbsolute);
+                return destinationFileAbsolute;
             }
             catch(IOException ex)
             {
                 MessageBox.Show(ex.Message, "Error creando respaldo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
             }
         }
 
-        public void BackupToGoogleDrive()
+        public bool BackupToGoogleDrive()
         {
             try
             {
@@ -85,23 +87,40 @@ namespace PanaderiaIkigai.BusinessLogic
                         sw.WriteLine("RESPALDO CREADO: " + timestamp.ToString() + ". CORRESPONDE A " + unixStamp.ToString());
                     }
                     MessageBox.Show("Identificador del archivo en Google Drive: " + driveFileId, "Respaldo Creado en Google Drive", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return true;
 
                 }
                 else
                 {
                     MessageBox.Show("No se ha logrado respaldar a Google Drive", "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
                 }
+
 
 
             }
             catch (IOException ex)
             {
                 MessageBox.Show(ex.Message, "Error creando respaldo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
+        }
+
+        public bool StartAutoBackup()
+        {
+            if (BackupToGoogleDrive())
+            {
+                UpdateDateOfLatestDataAction(0);
+                return true;
+            }
+                
+            else
+                return false;
         }
 
         public bool ChangeDatabaseFile()
@@ -140,7 +159,7 @@ namespace PanaderiaIkigai.BusinessLogic
                     doc.Save(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
 
                     ConfigurationManager.RefreshSection("connectionStrings");
-                    if (!newDbPath.Equals("") && !dataAccess.TestDatabaseConnection())
+                    if (!newDbPath.Equals("") && !TestDatabase())
                         ChangeDatabaseFile();
                     else 
                     { 
@@ -164,7 +183,120 @@ namespace PanaderiaIkigai.BusinessLogic
             }
         }
 
+        public bool TestDatabase()
+        {
+            if (dataAccess.TestDatabaseConnection())
+                return true;
+            else
+                return false;
+        }
 
+        public void ShowDateOfLatestDataAction(TextBox pTextBox, int childNodeIndex)
+        {
+            XmlDocument doc = new XmlDocument();
+
+            doc.Load("./DatesAndLocations.xml");
+            string date = "";
+            foreach (XmlElement elem in doc.DocumentElement)
+            {
+                if (elem.Name == "dates")
+                {
+                    var latestDate = elem.ChildNodes[childNodeIndex];
+                    date = DateTime.Parse(latestDate.Attributes[0].Value).ToString("dd-MM-yyyy");
+ 
+                }
+            }
+            pTextBox.Text = date;
+        }
+
+        public string ShowDateOfLatestDataAction(int childNodeIndex)
+        {
+            XmlDocument doc = new XmlDocument();
+
+            doc.Load("./DatesAndLocations.xml");
+            string date = "";
+            foreach (XmlElement elem in doc.DocumentElement)
+            {
+                if (elem.Name == "dates")
+                {
+                    var latestDate = elem.ChildNodes[childNodeIndex];
+                    date = DateTime.Parse(latestDate.Attributes[0].Value).ToString("dd-MM-yyyy");
+
+                }
+            }
+            return date;
+        }
+
+        public void UpdateDateOfLatestDataAction(int childNodeIndex)
+        {
+            XmlDocument doc = new XmlDocument();
+
+            doc.Load("./DatesAndLocations.xml");
+
+            foreach (XmlElement elem in doc.DocumentElement)
+            {
+                if (elem.Name == "dates")
+                {
+                    var elementToUpdate = elem.ChildNodes[childNodeIndex];
+                    elementToUpdate.Attributes[0].Value = DateTime.Now.Date.ToString("dd-MM-yyyy");
+                }
+            }
+
+            doc.Save("./DatesAndLocations.xml");
+            
+        }
+
+        public void UpdateManualBackupLocation(string path)
+        {
+            XmlDocument doc = new XmlDocument();
+
+            doc.Load("./DatesAndLocations.xml");
+            foreach (XmlElement elem in doc.DocumentElement)
+            {
+                if (elem.Name == "backupLocations")
+                {
+                    var elementToUpdate = elem.ChildNodes[0];
+                    elementToUpdate.Attributes[0].Value = path;
+                }
+            }
+            doc.Save("./DatesAndLocations.xml");
+        }
+
+        public void ShowManualBackupLocation(TextBox pTextbox)
+        {
+            XmlDocument doc = new XmlDocument();
+
+            doc.Load("./DatesAndLocations.xml");
+            string path = "";
+            foreach (XmlElement elem in doc.DocumentElement)
+            {
+                if (elem.Name == "backupLocations")
+                {
+                    var elementToUpdate = elem.ChildNodes[0];
+                    path = elementToUpdate.Attributes[0].Value; 
+                }
+            }
+            pTextbox.Text = path;
+        }
+
+        public void AttemptAutoBackup()
+        {
+            DateTime dateOfLastBackup = DateTime.ParseExact(ShowDateOfLatestDataAction(0), "dd-MM-yyyy", CultureInfo.InvariantCulture).Date;
+            DateTime currentDate = DateTime.Now.Date;
+
+            if ((currentDate - dateOfLastBackup).TotalDays >= 30)
+            {
+                MessageBox.Show("Han pasado más de 30 días desde el último respaldo en linea.\nSe iniciará un nuevo respaldo", "Respaldo en Progreso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (StartAutoBackup())
+                {
+                    MessageBox.Show("Respaldo Automático Subido a Google Drive.", "Operación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Respaldo automático ha fallado. Asegurese de tener su sesión de Google Drive abierta", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
     }
 
     

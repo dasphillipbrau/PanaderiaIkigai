@@ -19,6 +19,7 @@ namespace PanaderiaIkigai
         static ClientContext clientContext = new ClientContext();
         static RecipeContext recipeContext = new RecipeContext();
         static IngredientContext ingredientContext = new IngredientContext();
+        static GeneralDataContext dataContext = new GeneralDataContext();
         public MainMenu()
         {
             InitializeComponent();
@@ -94,6 +95,24 @@ namespace PanaderiaIkigai
             DataMenu dataMenu = new DataMenu();
             dataMenu.Show();
             dataMenu.BringToFront();
+        }
+
+        private void MainMenu_Load(object sender, EventArgs e)
+        {
+            if (dataContext.TestDatabase()) { 
+                dataContext.AttemptAutoBackup();
+            }
+            else
+            {
+                MessageBox.Show("El archivo de base de datos que tiene seleccionado es inválido." +
+                    "\nSe han deshabilitado todos los menús, excepto el menú de manejo de datos" +
+                    "\nDirijase a este menu y seleccione un archivo válido.\nDespués, reinicie el programa para que los cambios tomen efecto", "Error Fatal", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                btnGoToBiMenu.Enabled = false;
+                btnGoToIngredientMenu.Enabled = false;
+                btnGoToRecipeMenu.Enabled = false;
+                btnGoToClientsMenu.Enabled = false;
+                btnGoToOrdersMenu.Enabled = false;
+            }
         }
     }
 }

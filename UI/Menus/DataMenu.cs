@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -33,7 +34,9 @@ namespace PanaderiaIkigai.UI.Menus
 
         private void btnCreateLocalBackup_Click(object sender, EventArgs e)
         {
-            dataContext.CopyDatabase();
+            var localBackupPath = dataContext.CopyDatabase();
+            if (localBackupPath != null)
+                dataContext.ShowManualBackupLocation(txtLastLocalBackupLocation);
         }
 
         private void btnBackupToGDrive_Click(object sender, EventArgs e)
@@ -50,11 +53,31 @@ namespace PanaderiaIkigai.UI.Menus
         private void DataMenu_Load(object sender, EventArgs e)
         {
             ShowConnectionString();
+            dataContext.ShowDateOfLatestDataAction(txtLastAutoBackupDate, 0);
+            dataContext.ShowDateOfLatestDataAction(lastManualBackupDate, 1);
+            dataContext.ShowDateOfLatestDataAction(txtDateOfLastWipe, 2);
+            dataContext.ShowManualBackupLocation(txtLastLocalBackupLocation);
+
         }
         private void ShowConnectionString()
         {
             var connectionString = ConfigurationManager.ConnectionStrings["ConstraintsOff"].ConnectionString;
             txtCurrentDatabase.Text = connectionString;
+        }
+
+        private void btnGoToMainMenu_Click(object sender, EventArgs e)
+        {
+            if (dataContext.TestDatabase())
+                Close();
+            else
+            {
+                if(MessageBox.Show("El archivo que ha seleccionado como base de datos es inválido." +
+                    "\n¿Está seguro que desea volver al Menú Principal?" +
+                    "\nNo podrá acceder a ningun menú de la aplicación excepto este.", "Confirme Operación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    Close();
+                }
+            }
         }
     }
 }

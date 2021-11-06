@@ -328,6 +328,9 @@
     <Compile Include="UI\Menus\RecipeMenu.Designer.cs">
       <DependentUpon>RecipeMenu.cs</DependentUpon>
     </Compile>
+    <Content Include="DatesAndLocations.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Data\SQL\DDL\tables.sql" />
     <None Include="Data\SQL\DDL\triggers.sql" />
     <Content Include="Backups\backup-history-drive.txt" />
@@ -418,7 +421,9 @@
     <EmbeddedResource Include="UI\Menus\RecipeMenu.resx">
       <DependentUpon>RecipeMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="GoogleDrive\credentials.json" />
+    <None Include="GoogleDrive\credentials.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
     <None Include="PanaderiaIkigai_TemporaryKey.pfx" />
@@ -450,12 +455,12 @@
   <ItemGroup>
     <PublishFile Include="Data\Ikigai.db">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
