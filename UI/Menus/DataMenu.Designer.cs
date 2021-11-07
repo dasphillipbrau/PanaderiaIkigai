@@ -42,9 +42,13 @@ namespace PanaderiaIkigai.UI.Menus
             this.txtLastLocalBackupLocation = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtLastAutoBackupDate = new System.Windows.Forms.TextBox();
-            this.lastManualBackupDate = new System.Windows.Forms.TextBox();
+            this.txtLastManualBackupDate = new System.Windows.Forms.TextBox();
             this.txtDateOfLastWipe = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rBtnEnableAutoBackups = new System.Windows.Forms.RadioButton();
+            this.rBtnDisableAutoBackups = new System.Windows.Forms.RadioButton();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -180,13 +184,13 @@ namespace PanaderiaIkigai.UI.Menus
             this.txtLastAutoBackupDate.Size = new System.Drawing.Size(130, 20);
             this.txtLastAutoBackupDate.TabIndex = 14;
             // 
-            // lastManualBackupDate
+            // txtLastManualBackupDate
             // 
-            this.lastManualBackupDate.Location = new System.Drawing.Point(221, 175);
-            this.lastManualBackupDate.Name = "lastManualBackupDate";
-            this.lastManualBackupDate.ReadOnly = true;
-            this.lastManualBackupDate.Size = new System.Drawing.Size(130, 20);
-            this.lastManualBackupDate.TabIndex = 15;
+            this.txtLastManualBackupDate.Location = new System.Drawing.Point(221, 175);
+            this.txtLastManualBackupDate.Name = "txtLastManualBackupDate";
+            this.txtLastManualBackupDate.ReadOnly = true;
+            this.txtLastManualBackupDate.Size = new System.Drawing.Size(130, 20);
+            this.txtLastManualBackupDate.TabIndex = 15;
             // 
             // txtDateOfLastWipe
             // 
@@ -205,15 +209,51 @@ namespace PanaderiaIkigai.UI.Menus
             this.label6.TabIndex = 17;
             this.label6.Text = "Ubicación Original del Último Respaldo Manual";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rBtnDisableAutoBackups);
+            this.groupBox1.Controls.Add(this.rBtnEnableAutoBackups);
+            this.groupBox1.Location = new System.Drawing.Point(421, 254);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(200, 68);
+            this.groupBox1.TabIndex = 18;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Habilitar Respaldos Automáticos";
+            // 
+            // rBtnEnableAutoBackups
+            // 
+            this.rBtnEnableAutoBackups.AutoSize = true;
+            this.rBtnEnableAutoBackups.Location = new System.Drawing.Point(6, 18);
+            this.rBtnEnableAutoBackups.Name = "rBtnEnableAutoBackups";
+            this.rBtnEnableAutoBackups.Size = new System.Drawing.Size(63, 17);
+            this.rBtnEnableAutoBackups.TabIndex = 0;
+            this.rBtnEnableAutoBackups.TabStop = true;
+            this.rBtnEnableAutoBackups.Text = "Habilitar";
+            this.rBtnEnableAutoBackups.UseVisualStyleBackColor = true;
+            this.rBtnEnableAutoBackups.CheckedChanged += new System.EventHandler(this.rBtnEnableAutoBackups_CheckedChanged);
+            // 
+            // rBtnDisableAutoBackups
+            // 
+            this.rBtnDisableAutoBackups.AutoSize = true;
+            this.rBtnDisableAutoBackups.Location = new System.Drawing.Point(6, 41);
+            this.rBtnDisableAutoBackups.Name = "rBtnDisableAutoBackups";
+            this.rBtnDisableAutoBackups.Size = new System.Drawing.Size(80, 17);
+            this.rBtnDisableAutoBackups.TabIndex = 1;
+            this.rBtnDisableAutoBackups.TabStop = true;
+            this.rBtnDisableAutoBackups.Text = "Deshabilitar";
+            this.rBtnDisableAutoBackups.UseVisualStyleBackColor = true;
+            this.rBtnDisableAutoBackups.CheckedChanged += new System.EventHandler(this.rBtnDisableAutoBackups_CheckedChanged);
+            // 
             // DataMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(59)))), ((int)(((byte)(59)))));
             this.ClientSize = new System.Drawing.Size(801, 524);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtDateOfLastWipe);
-            this.Controls.Add(this.lastManualBackupDate);
+            this.Controls.Add(this.txtLastManualBackupDate);
             this.Controls.Add(this.txtLastAutoBackupDate);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtLastLocalBackupLocation);
@@ -231,6 +271,8 @@ namespace PanaderiaIkigai.UI.Menus
             this.Name = "DataMenu";
             this.Text = "Manejo de Datos";
             this.Load += new System.EventHandler(this.DataMenu_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -251,8 +293,11 @@ namespace PanaderiaIkigai.UI.Menus
         private System.Windows.Forms.TextBox txtLastLocalBackupLocation;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtLastAutoBackupDate;
-        private System.Windows.Forms.TextBox lastManualBackupDate;
+        private System.Windows.Forms.TextBox txtLastManualBackupDate;
         private System.Windows.Forms.TextBox txtDateOfLastWipe;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton rBtnDisableAutoBackups;
+        private System.Windows.Forms.RadioButton rBtnEnableAutoBackups;
     }
 }

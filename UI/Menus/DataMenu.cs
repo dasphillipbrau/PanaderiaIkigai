@@ -35,8 +35,10 @@ namespace PanaderiaIkigai.UI.Menus
         private void btnCreateLocalBackup_Click(object sender, EventArgs e)
         {
             var localBackupPath = dataContext.CopyDatabase();
-            if (localBackupPath != null)
+            if (localBackupPath != null) {
                 dataContext.ShowManualBackupLocation(txtLastLocalBackupLocation);
+                txtLastManualBackupDate.Text = dataContext.ShowDateOfLatestDataAction(1);
+            }
         }
 
         private void btnBackupToGDrive_Click(object sender, EventArgs e)
@@ -54,9 +56,17 @@ namespace PanaderiaIkigai.UI.Menus
         {
             ShowConnectionString();
             dataContext.ShowDateOfLatestDataAction(txtLastAutoBackupDate, 0);
-            dataContext.ShowDateOfLatestDataAction(lastManualBackupDate, 1);
+            dataContext.ShowDateOfLatestDataAction(txtLastManualBackupDate, 1);
             dataContext.ShowDateOfLatestDataAction(txtDateOfLastWipe, 2);
             dataContext.ShowManualBackupLocation(txtLastLocalBackupLocation);
+            if (dataContext.CheckAutoBackupStatus())
+            {
+                rBtnEnableAutoBackups.Checked = true;
+            }
+            else
+            {
+                rBtnDisableAutoBackups.Checked = true;
+            }
 
         }
         private void ShowConnectionString()
@@ -77,6 +87,22 @@ namespace PanaderiaIkigai.UI.Menus
                 {
                     Close();
                 }
+            }
+        }
+
+        private void rBtnEnableAutoBackups_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rBtnEnableAutoBackups.Checked)
+            {
+                dataContext.ChangeAutoBackupStatus(true);
+            }
+        }
+
+        private void rBtnDisableAutoBackups_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rBtnEnableAutoBackups.Checked)
+            {
+                dataContext.ChangeAutoBackupStatus(false);
             }
         }
     }

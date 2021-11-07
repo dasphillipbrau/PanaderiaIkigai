@@ -386,6 +386,30 @@ namespace PanaderiaIkigai.BusinessLogic
             }
             chart.Series = series;
         }
+
+        public void CategoryPie(LiveCharts.WinForms.PieChart pie)
+        {
+            var dataList = dataAccess.GetTopCategories();
+            if (pie.Series.Count > 0)
+                pie.Series.Clear();
+            Func<ChartPoint, string> labelPoint = chartPoint => string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
+
+            SeriesCollection series = new SeriesCollection();
+            foreach (var product in dataList)
+            {
+                series.Add(new PieSeries() { 
+                    Foreground = Brushes.White, 
+                    Title = product.RecipeName, 
+                    Values = new ChartValues<decimal> { 
+                        product.Popularity 
+                    }, 
+                    DataLabels = true, 
+                    LabelPoint = labelPoint });
+            }
+            pie.Series = series;
+            pie.LegendLocation = LegendLocation.Right;
+            pie.BackColorTransparent = true;
+        }
     
 
     }

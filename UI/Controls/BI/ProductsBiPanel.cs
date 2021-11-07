@@ -26,6 +26,14 @@ namespace PanaderiaIkigai.UI.Controls.BI
             bIContext.PlotProductPie(pieTopProducts, dtpStart.Value, dtpEnd.Value, "HIGHEST", "REVENUE");
             bIContext.PlotProductPie(pieLowestProducts, dtpStart.Value, dtpEnd.Value, "LOWEST", "REVENUE");
             bIContext.PlotProductEvolution(productEvolution, dtpStart.Value, dtpEnd.Value);
+            bIContext.CategoryPie(pieChartCategories);
+        }
+
+        private void btnRecalculatePlots_Click(object sender, EventArgs e)
+        {
+            bIContext.PlotProductEvolution(productEvolution, dtpStart.Value.Date, dtpEnd.Value.Date);
+            bIContext.PlotProductPie(pieTopProducts, dtpStart.Value, dtpEnd.Value, "HIGHEST", "REVENUE");
+            bIContext.PlotProductPie(pieLowestProducts, dtpStart.Value, dtpEnd.Value, "LOWEST", "REVENUE");
         }
     }
 }
