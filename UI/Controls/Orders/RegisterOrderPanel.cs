@@ -1,15 +1,8 @@
 ﻿using PanaderiaIkigai.BusinessLogic;
-using PanaderiaIkigai.Models;
 using PanaderiaIkigai.Models.Clients;
 using PanaderiaIkigai.Models.Orders;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PanaderiaIkigai.UI.Controls.Orders
@@ -52,7 +45,8 @@ namespace PanaderiaIkigai.UI.Controls.Orders
 
         private void PopulateDataGridViews()
         {
-            if(orderContext.GetOrders().Count > 0) { 
+            if (orderContext.GetOrders().Count > 0)
+            {
                 dgvOrders.DataSource = orderContext.GetOrders();
                 dgvOrders.AutoResizeColumns();
                 dgvOrders.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -71,7 +65,8 @@ namespace PanaderiaIkigai.UI.Controls.Orders
         private void dgvOrders_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             selectedOrder = (Order)dgvOrders.CurrentRow.DataBoundItem;
-            if(selectedOrder != null) { 
+            if (selectedOrder != null)
+            {
                 btnDeleteOrder.Enabled = true;
                 rBtnOrderEditMode.Enabled = true;
                 rBtnOrderRegisterMode.Enabled = true;
@@ -81,7 +76,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
                 numTaxPercentage.Value = selectedOrder.TaxPercentage;
                 dateDelivery.Value = selectedOrder.DeliveryDate;
                 dateOrder.Value = selectedOrder.OrderDate;
-                
+
             }
             if (rBtnOrderEditMode.Checked)
             {
@@ -96,7 +91,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
         {
             selectedClient = (Client)dgvClients.CurrentRow.DataBoundItem;
             EnableOrderFields();
-            
+
         }
 
         private void EnableOrderFields()
@@ -113,7 +108,8 @@ namespace PanaderiaIkigai.UI.Controls.Orders
                 dateDelivery.Enabled = true;
                 txtPrepNotes.ReadOnly = false;
             }
-            else if (rBtnOrderRegisterMode.Checked) { 
+            else if (rBtnOrderRegisterMode.Checked)
+            {
                 txtClientAddress.Text = selectedClient.Address;
                 comboBoxOrderStatus.Enabled = true;
                 comboBoxOrderStatus.SelectedIndex = 0;
@@ -129,7 +125,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
 
         private void textBox4_Validating(object sender, CancelEventArgs e)
         {
-            if(txtPrepNotes.Text.Length > 500)
+            if (txtPrepNotes.Text.Length > 500)
             {
                 validPrepNotes = false;
                 errorProviderOrderNotes.SetError(txtPrepNotes, "Las notas de entrega no pueden exceder los 500 caracteres");
@@ -143,7 +139,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
 
         private void dateOrder_Validating(object sender, CancelEventArgs e)
         {
-            if(!(DateTime.Compare(dateOrder.Value.Date, dateDelivery.Value.Date) <= 0))
+            if (!(DateTime.Compare(dateOrder.Value.Date, dateDelivery.Value.Date) <= 0))
             {
                 validOrderDate = false;
                 errorProviderOrderDate.SetError(dateOrder, "La fecha de orden no puede ser después de la fecha de entrega");
@@ -157,8 +153,8 @@ namespace PanaderiaIkigai.UI.Controls.Orders
 
         private void dateDelivery_Validating(object sender, CancelEventArgs e)
         {
-   
-            if (!(DateTime.Compare(dateDelivery.Value.Date, dateOrder.Value.Date) >=0))
+
+            if (!(DateTime.Compare(dateDelivery.Value.Date, dateOrder.Value.Date) >= 0))
             {
                 validDeliveryDate = false;
                 errorProviderOrderDate.SetError(dateDelivery, "La fecha de entrega no puede ser antes de la fecha de orden");
@@ -172,11 +168,11 @@ namespace PanaderiaIkigai.UI.Controls.Orders
 
         private void btnSaveOrderChanges_Click(object sender, EventArgs e)
         {
-            if(ValidateChildren(ValidationConstraints.Enabled) && validDeliveryDate && validOrderDate && validPrepNotes)
+            if (ValidateChildren(ValidationConstraints.Enabled) && validDeliveryDate && validOrderDate && validPrepNotes)
             {
                 if (rBtnOrderRegisterMode.Checked)
                 {
-                    if(orderContext.RegisterOrder(selectedClient.Code, comboBoxOrderStatus.SelectedItem.ToString(), txtPrepNotes.Text, dateOrder.Value.Date, dateDelivery.Value.Date, Math.Round(numTaxPercentage.Value, 2), Math.Round(numPrepPrice.Value, 2)))
+                    if (orderContext.RegisterOrder(selectedClient.Code, comboBoxOrderStatus.SelectedItem.ToString(), txtPrepNotes.Text, dateOrder.Value.Date, dateDelivery.Value.Date, Math.Round(numTaxPercentage.Value, 2), Math.Round(numPrepPrice.Value, 2)))
                     {
                         MessageBox.Show("Pedido Registrado\nRecuerde añadir ítems al pedido mediante el panel de ítems", successMessage, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         ClearFields();
@@ -214,7 +210,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             numPrepPrice.Value = 0;
             numPrepPrice.ReadOnly = true;
             dgvOrders.DataSource = orderContext.GetOrders().Count == 0 ? null : orderContext.GetOrders();
-            if(dgvOrders.DataSource != null)
+            if (dgvOrders.DataSource != null)
             {
                 dgvOrders.AutoResizeColumns();
                 dgvOrders.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -228,11 +224,12 @@ namespace PanaderiaIkigai.UI.Controls.Orders
 
         private void rBtnOrderEditInsertMode_CheckedChanged(object sender, EventArgs e)
         {
-            if(rBtnOrderEditMode.Checked && orderContext.GetOrders().Count == 0) {
+            if (rBtnOrderEditMode.Checked && orderContext.GetOrders().Count == 0)
+            {
                 MessageBox.Show("No hay pedidos para editar", "Agregue pedidos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 rBtnOrderRegisterMode.Checked = true;
             }
-            else if(selectedOrder == null && rBtnOrderEditMode.Checked)
+            else if (selectedOrder == null && rBtnOrderEditMode.Checked)
             {
                 MessageBox.Show("Primero seleccione un pedido para editar", "Seleccione un pedido", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -241,11 +238,11 @@ namespace PanaderiaIkigai.UI.Controls.Orders
                 if (rBtnOrderEditMode.Checked)
                 {
                     MessageBox.Show("Modo de Edición Activo. Recuerde hacer click en una fila de la lista de ordenes para señalar cual orden quiere editar" +
-                        "\nTome en cuenta que no es posible cambiar el cliente a quien le pertenece el pedido. \nPara lograr ese resultado, debe borrar el pedido", 
+                        "\nTome en cuenta que no es posible cambiar el cliente a quien le pertenece el pedido. \nPara lograr ese resultado, debe borrar el pedido",
                         "Cambio de Modo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     lblEditingOrder.Visible = true;
                     lblEditingOrder.Text = "Editando pedido " + selectedOrder.Code;
-                    
+
                 }
                 else
                 {
@@ -254,7 +251,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             }
         }
 
-     
+
 
         private void txtFilterClient_TextChanged(object sender, EventArgs e)
         {
@@ -263,7 +260,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
 
         private void txtFilterOrders_TextChanged(object sender, EventArgs e)
         {
-            if(dgvOrders.DataSource != null)
+            if (dgvOrders.DataSource != null)
             {
                 dgvOrders.DataSource = orderContext.GetOrders(txtFilterOrders.Text.ToUpper(), comboBoxFilterOrders.SelectedItem.ToString());
             }
@@ -271,7 +268,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
 
         private void comboBoxFilterOrders_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(comboBoxFilterOrders.SelectedIndex == 2 || comboBoxFilterOrders.SelectedIndex == 3)
+            if (comboBoxFilterOrders.SelectedIndex == 2 || comboBoxFilterOrders.SelectedIndex == 3)
             {
                 lblDateFormat.Visible = true;
             }
@@ -288,9 +285,10 @@ namespace PanaderiaIkigai.UI.Controls.Orders
                 btnDeleteOrder.Enabled = false;
                 MessageBox.Show("No hay ningún pedido seleccionado", errorMessage, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if(MessageBox.Show("¿Está seguro que quiere borrar el pedido con código " + selectedOrder.Code + "?", "Confirme Operación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            else if (MessageBox.Show("¿Está seguro que quiere borrar el pedido con código " + selectedOrder.Code + "?", "Confirme Operación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                if (orderContext.DeleteOrder(selectedOrder)) { 
+                if (orderContext.DeleteOrder(selectedOrder))
+                {
                     MessageBox.Show("Pedido Eliminado", successMessage, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ClearFields();
                 }
@@ -300,7 +298,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
                 }
 
             }
-            
+
         }
     }
 }

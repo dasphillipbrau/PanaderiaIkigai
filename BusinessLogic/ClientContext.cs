@@ -4,9 +4,6 @@ using PanaderiaIkigai.Models.Clients;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static PanaderiaIkigai.Models.Clients.ClientOrderHistory;
 
@@ -27,9 +24,9 @@ namespace PanaderiaIkigai.BusinessLogic
                 else
                     return false;
             }
-            catch(SQLiteException sqlEx)
+            catch (SQLiteException sqlEx)
             {
-                
+
                 if (sqlEx.ErrorCode == 19 && sqlEx.Message.Equals("constraint failed\r\nUNIQUE constraint failed: Client.PHONE"))
                 {
                     MessageBox.Show("El número de teléfono ya está registrado bajo otro cliente\n" +
@@ -46,7 +43,7 @@ namespace PanaderiaIkigai.BusinessLogic
                     MessageBox.Show("Error " + sqlEx.ErrorCode + ": " + sqlEx.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
@@ -119,11 +116,11 @@ namespace PanaderiaIkigai.BusinessLogic
             }
             catch (SQLiteException sqlEx)
             {
-                if(sqlEx.ErrorCode == 19)
+                if (sqlEx.ErrorCode == 19)
                 {
                     MessageBox.Show("El registro de cliente que desea borrar es referenciado por otro registro en la base de datos" +
                         "\nprimero debe borrar cualquier registro que referencie a este cliente", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                } 
+                }
                 else
                     MessageBox.Show("Error " + sqlEx.ErrorCode + ": " + sqlEx.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;

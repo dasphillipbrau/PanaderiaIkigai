@@ -2,13 +2,6 @@
 using PanaderiaIkigai.Models;
 using PanaderiaIkigai.Models.Orders;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PanaderiaIkigai.UI.Controls.Orders
@@ -72,9 +65,9 @@ namespace PanaderiaIkigai.UI.Controls.Orders
         {
             selectedOrder = (Order)dgvOrders.CurrentRow.DataBoundItem;
             dgvItems.DataSource = orderContext.GetItems(selectedOrder);
-            if(selectedOrder != null && selectedRecipe != null)
+            if (selectedOrder != null && selectedRecipe != null)
             {
-                
+
                 EnableFields();
             }
             else
@@ -125,8 +118,9 @@ namespace PanaderiaIkigai.UI.Controls.Orders
         {
             if (rBtnItemRegisterMode.Checked)
             {
-                if(selectedRecipe.UnitsAvailable - Convert.ToInt32(Math.Round(numUnitAmount.Value, 0)) >= 0) { 
-                    if(orderContext.RegisterItem(selectedOrder, selectedRecipe, Convert.ToInt32(Math.Round(numUnitAmount.Value, 0))))
+                if (selectedRecipe.UnitsAvailable - Convert.ToInt32(Math.Round(numUnitAmount.Value, 0)) >= 0)
+                {
+                    if (orderContext.RegisterItem(selectedOrder, selectedRecipe, Convert.ToInt32(Math.Round(numUnitAmount.Value, 0))))
                     {
                         MessageBox.Show("Item Registrado", "Operación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         ClearFields();
@@ -166,12 +160,14 @@ namespace PanaderiaIkigai.UI.Controls.Orders
 
         private void dgvItems_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try {
-                if(dgvItems.Rows.Count > 0) { 
+            try
+            {
+                if (dgvItems.Rows.Count > 0)
+                {
                     selectedItem = (OrderItem)dgvItems.CurrentRow.DataBoundItem;
                     btnDeleteItem.Enabled = true;
                     btnSaveChanges.Enabled = true;
-                    if(rBtnItemEditMode.Checked && selectedItem != null)
+                    if (rBtnItemEditMode.Checked && selectedItem != null)
                     {
                         if (!rBtnItemEditMode.Enabled)
                         {
@@ -183,7 +179,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
                     }
                 }
             }
-            catch(NullReferenceException)
+            catch (NullReferenceException)
             {
                 MessageBox.Show("No hay ningún item para seleccionar", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -191,10 +187,11 @@ namespace PanaderiaIkigai.UI.Controls.Orders
 
         private void btnDeleteItem_Click(object sender, EventArgs e)
         {
-            if(selectedItem == null)
+            if (selectedItem == null)
             {
                 MessageBox.Show("Primero Seleccione un Item de la lista", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }else if (MessageBox.Show("¿Está seguro que desea borrar el ítem " + selectedItem.Code + "?", "Confirme Operación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            }
+            else if (MessageBox.Show("¿Está seguro que desea borrar el ítem " + selectedItem.Code + "?", "Confirme Operación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 if (orderContext.DeleteItem(selectedItem))
                 {
@@ -211,12 +208,13 @@ namespace PanaderiaIkigai.UI.Controls.Orders
 
         private void rBtnItemEditMode_CheckedChanged(object sender, EventArgs e)
         {
-            if(selectedOrder == null)
+            if (selectedOrder == null)
             {
                 MessageBox.Show("No ha seleccionado ninguna orden para editar", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 ClearFields();
                 rBtnItemRegisterMode.Checked = true;
-            }else if(rBtnItemEditMode.Checked && orderContext.GetItems(selectedOrder).Count == 0)
+            }
+            else if (rBtnItemEditMode.Checked && orderContext.GetItems(selectedOrder).Count == 0)
             {
                 MessageBox.Show("El pedido seleccionado no tiene items. \nSeleccione otro pedido e intente de nuevo", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 ClearFields();

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PanaderiaIkigai.Models.Orders
 {
@@ -73,7 +69,7 @@ namespace PanaderiaIkigai.Models.Orders
         /// <param name="pTaxAmount"></param>
         /// <param name="pPreparationCost"></param>
         /// <param name="pTotalPrice"></param>
-        public Order(int pCode, int pClientCode, string pClientName, string pOrderStatus, string pOrderNotes, 
+        public Order(int pCode, int pClientCode, string pClientName, string pOrderStatus, string pOrderNotes,
             DateTime pOrderDate, DateTime pDeliveryDate, int pItemsInOrder, decimal pTaxPercentage, decimal pTaxAmount, decimal pPreparationCost, decimal pItemsPrice, decimal pTotalPrice)
         {
             Code = pCode;

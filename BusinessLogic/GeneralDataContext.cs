@@ -1,14 +1,9 @@
 ﻿using PanaderiaIkigai.Data;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SQLite;
 using System.Globalization;
 using System.IO;
-using System.IO.Compression;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -24,7 +19,7 @@ namespace PanaderiaIkigai.BusinessLogic
             {
                 dataAccess.WipeTables();
             }
-            catch(SQLiteException sqlEX)
+            catch (SQLiteException sqlEX)
             {
                 MessageBox.Show(sqlEX.Message, sqlEX.ErrorCode.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -45,7 +40,7 @@ namespace PanaderiaIkigai.BusinessLogic
                 string destinationFileAbsolute = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Ikigai-Backup-" + unixStamp.ToString() + ".db";
                 File.Copy(sourceFileAbsolute, destinationFileAbsolute);
 
-                using(StreamWriter sw = File.AppendText(localLogFileRelative))
+                using (StreamWriter sw = File.AppendText(localLogFileRelative))
                 {
                     sw.WriteLine("FECHA " + timestamp.ToString() + " CORRESPONDE A " + Path.GetFileName(destinationFileAbsolute));
                 }
@@ -54,7 +49,7 @@ namespace PanaderiaIkigai.BusinessLogic
                 UpdateManualBackupLocation(destinationFileAbsolute);
                 return destinationFileAbsolute;
             }
-            catch(IOException ex)
+            catch (IOException ex)
             {
                 MessageBox.Show(ex.Message, "Error creando respaldo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
@@ -79,7 +74,7 @@ namespace PanaderiaIkigai.BusinessLogic
                 File.Copy(sourceFileAbsolute, destinationFileAbsolute);
 
                 string driveFileId = null;
-                if(File.Exists(destinationFileAbsolute))
+                if (File.Exists(destinationFileAbsolute))
                     driveFileId = GoogleDrive.DriveApi.BackupDatabase(destinationFileAbsolute);
                 if (driveFileId != null)
                 {
@@ -119,7 +114,7 @@ namespace PanaderiaIkigai.BusinessLogic
                 UpdateDateOfLatestDataAction(0);
                 return true;
             }
-                
+
             else
                 return false;
         }
@@ -162,8 +157,8 @@ namespace PanaderiaIkigai.BusinessLogic
                     ConfigurationManager.RefreshSection("connectionStrings");
                     if (!newDbPath.Equals("") && !TestDatabase())
                         ChangeDatabaseFile();
-                    else 
-                    { 
+                    else
+                    {
                         MessageBox.Show("El archivo de base de datos utilizado actualmente está en \n" + newDbPath, "Archivo de base de datos Cambiado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return true;
                     }
@@ -177,9 +172,9 @@ namespace PanaderiaIkigai.BusinessLogic
                 MessageBox.Show(fileEx.Message, "No se encuentra el archivo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            catch(SQLiteException sqlEx)
+            catch (SQLiteException sqlEx)
             {
-                MessageBox.Show("El archivo seleccionado no es una base de datos válida.", "Ha ocurrido un Error" , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("El archivo seleccionado no es una base de datos válida.", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
         }
@@ -204,7 +199,7 @@ namespace PanaderiaIkigai.BusinessLogic
                 {
                     var latestDate = elem.ChildNodes[childNodeIndex];
                     date = DateTime.Parse(latestDate.Attributes[0].Value).ToString("dd-MM-yyyy");
- 
+
                 }
             }
             pTextBox.Text = date;
@@ -244,7 +239,7 @@ namespace PanaderiaIkigai.BusinessLogic
             }
 
             doc.Save("./DatesAndLocations.xml");
-            
+
         }
 
         public void UpdateManualBackupLocation(string path)
@@ -274,7 +269,7 @@ namespace PanaderiaIkigai.BusinessLogic
                 if (elem.Name == "backupLocations")
                 {
                     var elementToUpdate = elem.ChildNodes[0];
-                    path = elementToUpdate.Attributes[0].Value; 
+                    path = elementToUpdate.Attributes[0].Value;
                 }
             }
             pTextbox.Text = path;
@@ -285,19 +280,20 @@ namespace PanaderiaIkigai.BusinessLogic
             DateTime dateOfLastBackup = DateTime.ParseExact(ShowDateOfLatestDataAction(0), "dd-MM-yyyy", CultureInfo.InvariantCulture).Date;
             DateTime currentDate = DateTime.Now.Date;
 
-            if (CheckAutoBackupStatus()) { 
-            if ((currentDate - dateOfLastBackup).TotalDays >= 30)
+            if (CheckAutoBackupStatus())
             {
-                MessageBox.Show("Han pasado más de 30 días desde el último respaldo en linea.\nSe iniciará un nuevo respaldo", "Respaldo en Progreso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                if (StartAutoBackup())
+                if ((currentDate - dateOfLastBackup).TotalDays >= 30)
                 {
-                    MessageBox.Show("Respaldo Automático Subido a Google Drive.", "Operación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Han pasado más de 30 días desde el último respaldo en linea.\nSe iniciará un nuevo respaldo", "Respaldo en Progreso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (StartAutoBackup())
+                    {
+                        MessageBox.Show("Respaldo Automático Subido a Google Drive.", "Operación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Respaldo automático ha fallado. Asegurese de tener su sesión de Google Drive abierta", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("Respaldo automático ha fallado. Asegurese de tener su sesión de Google Drive abierta", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
             }
         }
 
@@ -318,7 +314,7 @@ namespace PanaderiaIkigai.BusinessLogic
                 }
             }
             return true;
-            
+
         }
 
         public void ChangeAutoBackupStatus(bool pSwitch)
@@ -343,5 +339,5 @@ namespace PanaderiaIkigai.BusinessLogic
         }
     }
 
-    
+
 }

@@ -1,14 +1,8 @@
 ﻿using PanaderiaIkigai.BusinessLogic;
 using PanaderiaIkigai.Models.Clients;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PanaderiaIkigai.UI.Controls.Clients
@@ -71,10 +65,11 @@ namespace PanaderiaIkigai.UI.Controls.Clients
 
         private void btnDeleteClient_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("¿Está seguro que quiere borrar al cliente " + selectedClient.Name + "?", "Confirme Operación", 
+            if (MessageBox.Show("¿Está seguro que quiere borrar al cliente " + selectedClient.Name + "?", "Confirme Operación",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                if (clientContext.DeleteClient(selectedClient.Code)) { 
+                if (clientContext.DeleteClient(selectedClient.Code))
+                {
                     MessageBox.Show("Cliente Eliminado", successMessage, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     CleanFields();
                     dgvClients.DataSource = clientContext.GetClients();

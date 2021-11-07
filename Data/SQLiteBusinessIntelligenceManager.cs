@@ -3,9 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PanaderiaIkigai.Data
 {
@@ -26,7 +23,7 @@ namespace PanaderiaIkigai.Data
                 {
                     var command = new SQLiteCommand(conn);
                     string commandText = "";
-                    if(pType.Equals("HIGHEST"))
+                    if (pType.Equals("HIGHEST"))
                         commandText = "SELECT CLIENT_CODE, CLIENT_NAME, TOTAL(ORDER_TOTAL) AS TOTAL_AMOUNT FROM CLIENT_ORDER_HISTORY " +
                             "WHERE ORDER_PURCHASE_DATE BETWEEN $pStartDate AND $pEndDate GROUP BY CLIENT_CODE, CLIENT_NAME ORDER BY TOTAL(ORDER_TOTAL) DESC LIMIT 10";
                     else
@@ -44,7 +41,7 @@ namespace PanaderiaIkigai.Data
                     return list;
                 }
             }
-            catch(SQLiteException sqlEx)
+            catch (SQLiteException sqlEx)
             {
                 throw sqlEx;
             }
@@ -95,7 +92,7 @@ namespace PanaderiaIkigai.Data
                     var criteria = pCriteria.Equals("REVENUE") ? "TOTAL(UNITS_PURCHASED) AS TOTAL_AMOUNT FROM CLIENT_ORDER_HISTORY " : "COUNT(*) AS TOTAL_AMOUNT FROM CLIENT_ORDER_HISTORY ";
                     string commandText = "";
                     if (pMode.Equals("HIGHEST"))
-                        
+
                         commandText = "SELECT RECIPE_NAME, " + criteria +
                             " WHERE ORDER_PURCHASE_DATE BETWEEN $pStartDate AND $pEndDate GROUP BY RECIPE_NAME ORDER BY TOTAL_AMOUNT DESC LIMIT 10";
                     else
@@ -134,7 +131,7 @@ namespace PanaderiaIkigai.Data
                         "RECIPE_NAME IN(SELECT DISTINCT RECI_NAME " +
                         "FROM (SELECT X.NAME AS RECI_NAME, SUM(Y.UNITS_IN_ITEM) AS UNITS_SOLD FROM RECIPE X INNER JOIN ORDER_ITEM Y ON X.CODE = Y.RECIPE_CODE " +
                         "GROUP BY X.NAME ORDER BY UNITS_SOLD DESC LIMIT 10) Z) " +
-                        "GROUP BY RECIPE_NAME, C.ORDER_DATE ORDER BY C.ORDER_DATE ASC; "; 
+                        "GROUP BY RECIPE_NAME, C.ORDER_DATE ORDER BY C.ORDER_DATE ASC; ";
 
 
                     command.CommandText = commandText;
@@ -191,7 +188,7 @@ namespace PanaderiaIkigai.Data
             try
             {
                 var list = new List<ProductPopularity>();
-                
+
                 using (var conn = new SQLiteConnection(GetConnectionString()))
                 {
                     var command = new SQLiteCommand(conn);

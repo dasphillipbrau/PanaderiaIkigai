@@ -2,13 +2,9 @@
 using PanaderiaIkigai.Models;
 using PanaderiaIkigai.Models.Recipes;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PanaderiaIkigai.UI.Controls.Recipes
@@ -24,7 +20,7 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
         static bool recipeNameValid = false;
         static bool ingredientNameValid = false;
         static bool percentageValid = false;
-        
+
 
         static string successfulOperationMessage = "Operación Exitosa";
         static string errorMessage = "Ha ocurrido un Error";
@@ -87,7 +83,8 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
             txtIngredientPercentage.ReadOnly = false;
             txtPrepNotes.Text = selectedRecipe.PreparationNotes;
             dgvSteps.DataSource = recipeContext.GetSteps(selectedRecipe.Code).Count > 0 ? recipeContext.GetSteps(selectedRecipe.Code) : null;
-            if(dgvSteps.DataSource != null) { 
+            if (dgvSteps.DataSource != null)
+            {
                 dgvSteps.AutoResizeColumns();
                 dgvSteps.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
@@ -122,7 +119,7 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
                 percentageValid = false;
                 errorProviderPercentage.SetError(txtIngredientPercentage, "El primer paso de un ingrediente siempre debe tener el 100% de proporción.");
             }
-            
+
             else
             {
                 percentageValid = true;
@@ -135,18 +132,19 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
         {
             if (ValidateChildren(ValidationConstraints.Enabled) && recipeNameValid && ingredientNameValid && percentageValid)
             {
-                if (rBtnRegistration.Checked) { 
-                    if(recipeContext.RegisterStep(Math.Round(decimal.Parse(txtIngredientPercentage.Text), 2), selectedRecipe, selectedIngredient))
+                if (rBtnRegistration.Checked)
+                {
+                    if (recipeContext.RegisterStep(Math.Round(decimal.Parse(txtIngredientPercentage.Text), 2), selectedRecipe, selectedIngredient))
                     {
                         MessageBox.Show("Paso Registrado", successfulOperationMessage, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         dgvSteps.DataSource = recipeContext.GetSteps(selectedRecipe.Code);
                         ClearFields();
                         dgvRecipes.DataSource = recipeContext.GetRecipes();
                     }
-                } 
+                }
                 else
                 {
-                    if (!originalStepCode.Equals("")) 
+                    if (!originalStepCode.Equals(""))
                     {
                         if (recipeContext.UpdateStep(Math.Round(decimal.Parse(txtIngredientPercentage.Text), 2), selectedRecipe, selectedIngredient, originalStepCode))
                         {

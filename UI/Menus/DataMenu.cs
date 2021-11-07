@@ -1,15 +1,6 @@
 ﻿using PanaderiaIkigai.BusinessLogic;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
-using System.Data;
-using System.Drawing;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PanaderiaIkigai.UI.Menus
@@ -24,7 +15,7 @@ namespace PanaderiaIkigai.UI.Menus
 
         private void btnCleanDatabase_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("ADVERTENCIA: Está a punto de borrar todos los datos de la base de datos." +
+            if (MessageBox.Show("ADVERTENCIA: Está a punto de borrar todos los datos de la base de datos." +
                 "\nAsegurese de crear un respaldo antes de esta operación\n\n¿PROCEDER?", "Confirme Operación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 dataContext.WipeDatabase();
@@ -35,7 +26,8 @@ namespace PanaderiaIkigai.UI.Menus
         private void btnCreateLocalBackup_Click(object sender, EventArgs e)
         {
             var localBackupPath = dataContext.CopyDatabase();
-            if (localBackupPath != null) {
+            if (localBackupPath != null)
+            {
                 dataContext.ShowManualBackupLocation(txtLastLocalBackupLocation);
                 txtLastManualBackupDate.Text = dataContext.ShowDateOfLatestDataAction(1);
             }
@@ -81,7 +73,7 @@ namespace PanaderiaIkigai.UI.Menus
                 Close();
             else
             {
-                if(MessageBox.Show("El archivo que ha seleccionado como base de datos es inválido." +
+                if (MessageBox.Show("El archivo que ha seleccionado como base de datos es inválido." +
                     "\n¿Está seguro que desea volver al Menú Principal?" +
                     "\nNo podrá acceder a ningun menú de la aplicación excepto este.", "Confirme Operación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {

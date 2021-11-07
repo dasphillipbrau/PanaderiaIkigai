@@ -1,13 +1,7 @@
 ﻿using PanaderiaIkigai.BusinessLogic;
 using PanaderiaIkigai.UI.Controls.Orders;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PanaderiaIkigai.UI.Menus
@@ -37,7 +31,8 @@ namespace PanaderiaIkigai.UI.Menus
 
         private void btnGoToRegisterItem_Click(object sender, EventArgs e)
         {
-            if(orderContext.GetOrders().Count == 0) {
+            if (orderContext.GetOrders().Count == 0)
+            {
                 MessageBox.Show("Para agregar o editar items, primero tiene que registrar al menos un pedido", "No hay pedidos registrados", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else

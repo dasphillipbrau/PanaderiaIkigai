@@ -1,13 +1,7 @@
 ﻿using PanaderiaIkigai.BusinessLogic;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PanaderiaIkigai.UI.Controls.Clients
@@ -32,12 +26,12 @@ namespace PanaderiaIkigai.UI.Controls.Clients
 
         private void txtName_Validating(object sender, CancelEventArgs e)
         {
-            if(txtName.Text.Trim().Length == 0)
+            if (txtName.Text.Trim().Length == 0)
             {
                 nameValid = false;
                 errorProviderName.SetError(txtName, "Nombre no puede estar vacío");
             }
-            else if(txtName.Text.Trim().Length > 50)
+            else if (txtName.Text.Trim().Length > 50)
             {
                 nameValid = false;
                 errorProviderName.SetError(txtName, "Nombre no puede exceder los 50 caracteres");
@@ -51,12 +45,12 @@ namespace PanaderiaIkigai.UI.Controls.Clients
 
         private void txtPhone_Validating(object sender, CancelEventArgs e)
         {
-            if(txtPhone.Text.Trim().Length == 0)
+            if (txtPhone.Text.Trim().Length == 0)
             {
                 phoneValid = false;
                 errorProviderPhone.SetError(txtPhone, "Teléfono no puede estar vacío");
             }
-            else if(txtPhone.Text.Trim().Length > 20)
+            else if (txtPhone.Text.Trim().Length > 20)
             {
                 phoneValid = false;
                 errorProviderPhone.SetError(txtPhone, "Teléfono no puede exceder 20 caracteres");
@@ -71,7 +65,7 @@ namespace PanaderiaIkigai.UI.Controls.Clients
                 phoneValid = true;
                 errorProviderPhone.Clear();
             }
-            
+
         }
 
         private void txtEmail_Validating(object sender, CancelEventArgs e)
@@ -121,11 +115,11 @@ namespace PanaderiaIkigai.UI.Controls.Clients
         {
             try
             {
-                if(ValidateChildren(ValidationConstraints.Enabled) && nameValid && phoneValid && emailValid && addressValid)
+                if (ValidateChildren(ValidationConstraints.Enabled) && nameValid && phoneValid && emailValid && addressValid)
                 {
                     if (clientContext.RegisterClient(txtName.Text.Trim().ToUpper(), txtPhone.Text.Trim().ToUpper(), txtEmail.Text.Trim().ToUpper(), txtAddress.Text.Trim().ToUpper()))
                     {
-                        
+
                         MessageBox.Show("Cliente Registrado", successMessage, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         ClearFields();
                     }
@@ -139,7 +133,7 @@ namespace PanaderiaIkigai.UI.Controls.Clients
                     MessageBox.Show("Hay errores en el formulario. Revise los mensajes de cada campo e intente de nuevo", errorMessage, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, errorMessage, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

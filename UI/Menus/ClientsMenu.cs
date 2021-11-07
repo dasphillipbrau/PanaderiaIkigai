@@ -1,13 +1,7 @@
 ﻿using PanaderiaIkigai.BusinessLogic;
 using PanaderiaIkigai.UI.Controls.Clients;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PanaderiaIkigai.UI.Menus
@@ -32,7 +26,8 @@ namespace PanaderiaIkigai.UI.Menus
 
         private void btnGoToEditRecipe_Click(object sender, EventArgs e)
         {
-            if(clientContext.GetClients().Count != 0) { 
+            if (clientContext.GetClients().Count != 0)
+            {
                 panelHolder.Controls.Clear();
                 EditClientPanel editClientPanel = new EditClientPanel();
                 editClientPanel.Location = new Point(1, 34);

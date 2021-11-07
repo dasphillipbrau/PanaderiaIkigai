@@ -1,14 +1,9 @@
 ﻿using PanaderiaIkigai.BusinessLogic;
 using PanaderiaIkigai.Models;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PanaderiaIkigai.UI.Controls.Recipes
@@ -40,7 +35,7 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
             if (categoryList.Count == 0)
             {
                 comboBoxCurrentCategories.Items.Add("No hay Categorías");
-                comboBoxEditRecipeCategory.Items.Add("No hay Categorías");        
+                comboBoxEditRecipeCategory.Items.Add("No hay Categorías");
             }
             else
             {
@@ -49,16 +44,18 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
             }
             comboBoxCurrentCategories.SelectedIndex = 0;
             comboBoxEditRecipeCategory.SelectedIndex = 0;
-            if (recipeList.Count != 0) {
+            if (recipeList.Count != 0)
+            {
                 dgvRecipes.DataSource = recipeList;
                 dgvRecipes.AutoResizeColumns();
                 dgvRecipes.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dgvRecipes.ClearSelection();
-            } else
+            }
+            else
             {
                 ClearFields();
             }
-            
+
 
             comboBoxSelectFilter.Items.Add("Nombre");
             comboBoxSelectFilter.Items.Add("Categoría");
@@ -69,12 +66,12 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
         private void dgvRecipes_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             Recipe selectedRecipe = (Recipe)dgvRecipes.CurrentRow.DataBoundItem;
-            if (selectedRecipe.Image != null) 
-            { 
+            if (selectedRecipe.Image != null)
+            {
                 pictureBoxRecipeImage.Image = ReadImageFromByteArray(selectedRecipe.Image);
                 staticImageByteArr = selectedRecipe.Image;
             }
-            else 
+            else
             {
                 staticImageByteArr = null;
                 imagePath = "";
@@ -91,7 +88,8 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
 
         private Bitmap ReadImageFromByteArray(byte[] blob)
         {
-            try { 
+            try
+            {
                 using (MemoryStream mStream = new MemoryStream())
                 {
                     byte[] pData = blob;
@@ -102,7 +100,7 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
                     return bm;
                 }
             }
-            catch(IOException ex)
+            catch (IOException ex)
             {
                 MessageBox.Show(ex.Message, errorMessage, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 lblIngredientImage.Visible = true;
@@ -123,10 +121,10 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
 
         private void btnDeleteRecipe_Click(object sender, EventArgs e)
         {
-            if(dgvRecipes.SelectedRows.Count != 0)
+            if (dgvRecipes.SelectedRows.Count != 0)
             {
                 Recipe selectedRecipe = (Recipe)dgvRecipes.CurrentRow.DataBoundItem;
-                if(MessageBox.Show("¿Está seguro que desea borrar el registro " + selectedRecipe.Name + "?", "Confirme Operación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("¿Está seguro que desea borrar el registro " + selectedRecipe.Name + "?", "Confirme Operación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     if (recipeContext.DeleteRecipe(selectedRecipe))
                     {
@@ -134,9 +132,9 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
                         MessageBox.Show("Registro Eliminado.", successfulOperationMessage, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         ClearFields();
                         dgvRecipes.DataSource = recipeContext.GetRecipes();
-                        
+
                     }
-                    
+
                 }
             }
         }
@@ -325,7 +323,8 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
             {
                 if (ValidateChildren(ValidationConstraints.Enabled) && nameValid && authorValid && categoryValid && unitsValid && ingredientAmountValid)
                 {
-                    if(MessageBox.Show("¿Desea actualizar esta receta?", "Confirme Operación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) { 
+                    if (MessageBox.Show("¿Desea actualizar esta receta?", "Confirme Operación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
                         if (recipeContext.UpdateRecipe(staticRecipeCode, txtName.Text, comboBoxEditRecipeCategory.SelectedItem.ToString(), txtAuthorName.Text,
                             int.Parse(txtUnitsAvailable.Text.Trim()), decimal.Parse(txtIngredientAmount.Text.Trim()), imagePath, txtPrepNotes.Text, staticImageByteArr))
                         {
@@ -387,7 +386,7 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
                 lblCategoryValidation.Visible = true;
                 lblCategoryValidation.Text = "Nombre no puede exceder \nlos 30 caracteres";
             }
-            else if(txtNewNameForCategory.Text.Trim().ToUpper().Equals(comboBoxCurrentCategories.SelectedItem.ToString()))
+            else if (txtNewNameForCategory.Text.Trim().ToUpper().Equals(comboBoxCurrentCategories.SelectedItem.ToString()))
             {
                 problemWithCategoryName = true;
                 lblCategoryValidation.Visible = true;
@@ -401,10 +400,10 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
             if (problemWithCategoryName)
             {
                 MessageBox.Show("Hay problemas con el nombre de la categoría", errorMessage, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            } 
+            }
             else
             {
-                if(recipeContext.UpdateCategory(txtNewNameForCategory.Text.Trim().ToUpper(), comboBoxCurrentCategories.SelectedItem.ToString()))
+                if (recipeContext.UpdateCategory(txtNewNameForCategory.Text.Trim().ToUpper(), comboBoxCurrentCategories.SelectedItem.ToString()))
                 {
                     MessageBox.Show("Categoría Actualizada", successfulOperationMessage, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     var updatedCategories = recipeContext.GetCategories();
@@ -416,14 +415,15 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
                     dgvRecipes.ClearSelection();
                 }
             }
-            
+
         }
 
         private void btnDeleteCategory_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("¿Seguro que desea borrar la categoría " + comboBoxCurrentCategories.SelectedItem.ToString() + "?", "Confirme Operación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("¿Seguro que desea borrar la categoría " + comboBoxCurrentCategories.SelectedItem.ToString() + "?", "Confirme Operación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                if (recipeContext.DeleteCategory(comboBoxCurrentCategories.SelectedItem.ToString().ToUpper())) { 
+                if (recipeContext.DeleteCategory(comboBoxCurrentCategories.SelectedItem.ToString().ToUpper()))
+                {
                     MessageBox.Show("Categoría Borrada", successfulOperationMessage, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     var categoryList = recipeContext.GetCategories();
                     if (categoryList.Count == 0)

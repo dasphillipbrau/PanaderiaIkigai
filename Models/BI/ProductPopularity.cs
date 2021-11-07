@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PanaderiaIkigai.Models.BI
 {
@@ -14,7 +10,7 @@ namespace PanaderiaIkigai.Models.BI
 
         public int OrderCode { get; set; }
 
-        public ProductPopularity(string pName, decimal pPopularity) 
+        public ProductPopularity(string pName, decimal pPopularity)
         {
             Name = pName;
             Popularity = pPopularity;

@@ -4,9 +4,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace PanaderiaIkigai.Data.SQL
@@ -41,11 +38,11 @@ namespace PanaderiaIkigai.Data.SQL
 
                 }
             }
-            catch(SQLiteException sqlEx)
+            catch (SQLiteException sqlEx)
             {
                 throw sqlEx;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -65,7 +62,7 @@ namespace PanaderiaIkigai.Data.SQL
                         "FROM ORDER_BASE A " +
                         "INNER JOIN CLIENT B " +
                         "ON A.CLIENT_CODE = B.CODE ORDER BY A.CODE ASC";
-                    
+
 
                     conn.Open();
 
@@ -342,7 +339,7 @@ namespace PanaderiaIkigai.Data.SQL
                     command.Parameters.Add("pPrice", DbType.Decimal).Value = Math.Round(pOrderItem.TotalItemPrice, 2);
 
                     conn.Open();
-                   
+
                     return command.ExecuteNonQuery();
                 }
             }

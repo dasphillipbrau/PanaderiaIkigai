@@ -1,13 +1,6 @@
 ﻿using PanaderiaIkigai.BusinessLogic;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.SQLite;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PanaderiaIkigai.Controls.Ingredients
@@ -24,7 +17,7 @@ namespace PanaderiaIkigai.Controls.Ingredients
 
         private void DisplayBaseIngredientPanel_Load(object sender, EventArgs e)
         {
-            
+
             var ingredientsList = ingredientContext.GetBaseIngredients();
             var unitsList = ingredientContext.GetUnits();
             dgvViewBaseIngredients.DataSource = ingredientsList;
@@ -141,12 +134,13 @@ namespace PanaderiaIkigai.Controls.Ingredients
         private void btnSearchIngredient_Click(object sender, EventArgs e)
         {
             var ingredientCode = txtSearchIngredientCode.Text;
-            if(ingredientCode.Length == 0 || !int.TryParse(ingredientCode, out int i))
+            if (ingredientCode.Length == 0 || !int.TryParse(ingredientCode, out int i))
             {
                 MessageBox.Show("Debe introducir un código númerico para buscar"
                             , "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 btnSaveEdit.Enabled = false;
-            } else
+            }
+            else
             {
                 staticCode = int.Parse(ingredientCode);
                 var ingredientFound = ingredientContext.GetBaseIngredient(int.Parse(ingredientCode));
@@ -155,7 +149,8 @@ namespace PanaderiaIkigai.Controls.Ingredients
                     MessageBox.Show("No se encuentra ningún ingrediente con ese código"
                             , "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     btnSaveEdit.Enabled = false;
-                } else
+                }
+                else
                 {
                     btnSaveEdit.Enabled = true;
                     txtNewIngredientName.Text = ingredientFound.Name;
@@ -166,7 +161,8 @@ namespace PanaderiaIkigai.Controls.Ingredients
 
         private void btnSaveEdit_Click(object sender, EventArgs e)
         {
-            try { 
+            try
+            {
                 if (ingredientContext.UpdateBaseIngredient(txtNewIngredientName, comboBoxSelectUnitForIngredientEdit, lblEditIngredientNameValidation, lblUnitNameForIngredientEditValidation, staticCode))
                 {
                     MessageBox.Show("Se han guardado los cambios"
@@ -175,20 +171,23 @@ namespace PanaderiaIkigai.Controls.Ingredients
                     btnSaveEdit.Enabled = false;
                     txtSearchIngredientCode.Text = "";
                     comboBoxSelectUnitForIngredientEdit.SelectedIndex = 0;
-                } else
+                }
+                else
                 {
                     MessageBox.Show("Asegurese de estar indicando un nombre para el ingrediente."
                                , "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            } catch (SQLiteException sqlEx)
+            }
+            catch (SQLiteException sqlEx)
             {
-                if(sqlEx.ErrorCode == 19)
+                if (sqlEx.ErrorCode == 19)
                 {
                     MessageBox.Show("El nombre que quiere utilizar ya está siendo usado por otro ingrediente."
                                , "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtNewIngredientName.Text = "";
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
 
             }
@@ -223,7 +222,8 @@ namespace PanaderiaIkigai.Controls.Ingredients
                                     dgvViewBaseIngredients.DataSource = ingredientContext.GetBaseIngredients();
                                     MessageBox.Show("Registro borrado."
                                         , "Operación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                } else
+                                }
+                                else
                                 {
                                     MessageBox.Show("No se ha borrado el registro."
                                         , "Ha Ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -253,13 +253,13 @@ namespace PanaderiaIkigai.Controls.Ingredients
             }
             catch (SQLiteException sqlEx)
             {
-                if(sqlEx.ErrorCode == 19)
+                if (sqlEx.ErrorCode == 19)
                 {
                     MessageBox.Show("El ingrediente que quiere borrar es referneciado por otro registro en la aplicación.\nPrimero debe borrar cualquier registro que referencie a este ingrediente", "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
-                MessageBox.Show(sqlEx.Message
-                            , "ERROR " + sqlEx.ErrorCode.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(sqlEx.Message
+                                , "ERROR " + sqlEx.ErrorCode.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {

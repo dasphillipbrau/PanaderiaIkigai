@@ -1,15 +1,7 @@
-﻿using LiveCharts;
-using LiveCharts.Wpf;
-using PanaderiaIkigai.BusinessLogic;
+﻿using PanaderiaIkigai.BusinessLogic;
 using PanaderiaIkigai.UI.Controls.BI;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PanaderiaIkigai.UI.Menus
@@ -28,7 +20,7 @@ namespace PanaderiaIkigai.UI.Menus
 
         private void BI_Menu_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnGoToMainMenu_Click(object sender, EventArgs e)
@@ -38,7 +30,8 @@ namespace PanaderiaIkigai.UI.Menus
 
         private void btnGoToClientBI_Click(object sender, EventArgs e)
         {
-            if(clientContext.GetClients().Count > 0) { 
+            if (clientContext.GetClients().Count > 0)
+            {
                 panelHolder.Controls.Clear();
                 ClientsBiPanel clientsBiPanel = new ClientsBiPanel();
                 clientsBiPanel.Location = new Point(1, 1);
@@ -54,7 +47,8 @@ namespace PanaderiaIkigai.UI.Menus
 
         private void btnGoToProductBi_Click(object sender, EventArgs e)
         {
-            if(recipeContext.GetRecipes().Count > 0) { 
+            if (recipeContext.GetRecipes().Count > 0)
+            {
                 panelHolder.Controls.Clear();
                 ProductsBiPanel productBiPanel = new ProductsBiPanel();
                 productBiPanel.Location = new Point(1, 1);
@@ -70,7 +64,7 @@ namespace PanaderiaIkigai.UI.Menus
 
         private void btnGoToIngredientBi_Click(object sender, EventArgs e)
         {
-            if(ingredientContext.GetBaseIngredients().Count > 0)
+            if (ingredientContext.GetBaseIngredients().Count > 0)
             {
                 panelHolder.Controls.Clear();
                 IngredientsBiPanel ingredientBiPanel = new IngredientsBiPanel();
@@ -87,7 +81,7 @@ namespace PanaderiaIkigai.UI.Menus
 
         private void btnGoToOrdersBi_Click(object sender, EventArgs e)
         {
-            if(orderContext.GetOrders().Count > 0)
+            if (orderContext.GetOrders().Count > 0)
             {
                 panelHolder.Controls.Clear();
                 OrdersBiPanel orderBiPanel = new OrdersBiPanel();

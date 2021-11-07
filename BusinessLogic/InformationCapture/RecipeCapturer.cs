@@ -1,11 +1,7 @@
 ﻿using PanaderiaIkigai.Models;
 using PanaderiaIkigai.Models.Recipes;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PanaderiaIkigai.BusinessLogic.InformationCapture
 {
@@ -16,10 +12,10 @@ namespace PanaderiaIkigai.BusinessLogic.InformationCapture
             try
             {
                 byte[] imageToByteArr = null;
-                if(pImageByteArr != null)
+                if (pImageByteArr != null)
                 {
                     imageToByteArr = pImageByteArr;
-                } 
+                }
                 else if (!File.Exists(pImagePath))
                 {
                     pImagePath = null;
@@ -38,7 +34,7 @@ namespace PanaderiaIkigai.BusinessLogic.InformationCapture
             {
                 throw ex;
             }
-            
+
         }
 
         private byte[] GetImageAsByteArray(string pImagePath)
@@ -48,10 +44,10 @@ namespace PanaderiaIkigai.BusinessLogic.InformationCapture
                 byte[] imageByteArray = null;
                 FileStream fs = new FileStream(pImagePath, FileMode.Open, FileAccess.Read);
 
-                using(BinaryReader reader = new BinaryReader(fs))
+                using (BinaryReader reader = new BinaryReader(fs))
                 {
                     imageByteArray = new byte[reader.BaseStream.Length];
-                    for(int i = 0; i < reader.BaseStream.Length; i++)
+                    for (int i = 0; i < reader.BaseStream.Length; i++)
                     {
                         imageByteArray[i] = reader.ReadByte();
                     }

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PanaderiaIkigai.Data
 {
@@ -15,7 +11,7 @@ namespace PanaderiaIkigai.Data
             return ConfigurationManager.ConnectionStrings[name].ConnectionString;
         }
 
-        public void WipeTables(string pMeasurementUnit = "Measurement_Unit", string pIngredient = "Ingredient", string pDetailedIngredient = "Ingredient_Detailed", string pProductCategory = "Product_Category", string pRecipe = "Recipe", string pRecipeStep = "Recipe_Step", 
+        public void WipeTables(string pMeasurementUnit = "Measurement_Unit", string pIngredient = "Ingredient", string pDetailedIngredient = "Ingredient_Detailed", string pProductCategory = "Product_Category", string pRecipe = "Recipe", string pRecipeStep = "Recipe_Step",
             string pClient = "Client", string pOrder = "Order_Base", string pOrderItem = "Order_Item")
         {
             try
@@ -33,7 +29,7 @@ namespace PanaderiaIkigai.Data
                 ResetSequences(pIngredient, pClient, pRecipe, pOrder);
 
             }
-            catch(SQLiteException sqlEx)
+            catch (SQLiteException sqlEx)
             {
                 throw sqlEx;
             }
@@ -99,11 +95,11 @@ namespace PanaderiaIkigai.Data
                     return true;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.Message);
                 return false;
-                
+
             }
         }
     }

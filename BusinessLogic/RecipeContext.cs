@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using PanaderiaIkigai.BusinessLogic.InformationCapture;
+﻿using PanaderiaIkigai.BusinessLogic.InformationCapture;
 using PanaderiaIkigai.Data;
 using PanaderiaIkigai.Models;
 using PanaderiaIkigai.Models.Recipes;
+using System;
+using System.Collections.Generic;
+using System.Data.SQLite;
+using System.Windows.Forms;
 
 namespace PanaderiaIkigai.BusinessLogic
 {
@@ -18,16 +15,17 @@ namespace PanaderiaIkigai.BusinessLogic
         static RecipeCapturer recipeCapturer = new RecipeCapturer();
         public bool RegisterCategory(TextBox txtCategoryName, Label lblCategoryValidation)
         {
-            try { 
+            try
+            {
                 bool problemDetected = false;
-                if(txtCategoryName.Text.Trim().Length == 0)
+                if (txtCategoryName.Text.Trim().Length == 0)
                 {
                     problemDetected = true;
-                    
+
                     lblCategoryValidation.Text = "Nombre de Categoría no puede estar vacío.";
                     lblCategoryValidation.Visible = true;
                 }
-                else if(txtCategoryName.Text.Trim().Length > 30)
+                else if (txtCategoryName.Text.Trim().Length > 30)
                 {
                     problemDetected = true;
                     lblCategoryValidation.Text = "Nombre de Categoría no puede exceder los 30 caracteres.";
@@ -42,7 +40,8 @@ namespace PanaderiaIkigai.BusinessLogic
 
                 if (problemDetected)
                     return false;
-                else {
+                else
+                {
 
                     if (recipeDataAccess.RegisterCategory(txtCategoryName.Text) == 1)
                     {
@@ -51,16 +50,16 @@ namespace PanaderiaIkigai.BusinessLogic
                     else
                         return false;
                 }
-            } 
-            catch(SQLiteException sqlEx)
+            }
+            catch (SQLiteException sqlEx)
             {
-                if(sqlEx.ErrorCode == 19)
+                if (sqlEx.ErrorCode == 19)
                 {
                     MessageBox.Show("El nombre de categoría que indicó ya existe.", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 return false;
-            } 
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -72,12 +71,12 @@ namespace PanaderiaIkigai.BusinessLogic
             try
             {
                 return recipeDataAccess.GetCategories() as List<string>;
-            } 
+            }
             catch (SQLiteException sqlEx)
             {
                 throw sqlEx;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -85,7 +84,8 @@ namespace PanaderiaIkigai.BusinessLogic
 
         public bool UpdateCategory(string pNewName, string pOldName)
         {
-            try { 
+            try
+            {
                 if (recipeDataAccess.UpdateCategory(pNewName, pOldName) == 1)
                     return true;
                 else
@@ -93,7 +93,7 @@ namespace PanaderiaIkigai.BusinessLogic
             }
             catch (SQLiteException sqlEx)
             {
-                if(sqlEx.ErrorCode == 19)
+                if (sqlEx.ErrorCode == 19)
                 {
                     MessageBox.Show("El nuevo nombre que quiere usar para la categoría ya existe para otra.", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
@@ -139,22 +139,23 @@ namespace PanaderiaIkigai.BusinessLogic
                 return false;
             }
         }
-    
+
 
         public bool RegisterRecipe(string pName, string pCategory, string pAuthor, int pUnits, decimal pIngredientAmount, string pImagePath, string pPreparationNotes)
         {
-            try {
+            try
+            {
                 Recipe recipeToRegister = recipeCapturer.CaptureRecipeInformation(pName, pCategory, pAuthor, pUnits, pIngredientAmount, pImagePath, pPreparationNotes);
                 if (recipeDataAccess.RegisterRecipe(recipeToRegister) == 1)
                     return true;
                 else
                     return false;
             }
-            catch(SQLiteException sqlEx)
+            catch (SQLiteException sqlEx)
             {
                 throw sqlEx;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -172,15 +173,16 @@ namespace PanaderiaIkigai.BusinessLogic
 
         public bool DeleteRecipe(Recipe recipeToDelete)
         {
-            try { 
-            if (recipeDataAccess.DeleteRecipe(recipeToDelete) == 1)
-                return true;
-            else
-                return false;
+            try
+            {
+                if (recipeDataAccess.DeleteRecipe(recipeToDelete) == 1)
+                    return true;
+                else
+                    return false;
             }
             catch (SQLiteException sqlEx)
             {
-                if(sqlEx.ErrorCode == 19)
+                if (sqlEx.ErrorCode == 19)
                     MessageBox.Show("No se puede borrar el ingrediente, pues es referenciado por otro registro." +
                         "\nDebe borrar primero cualquier registro que referencie el ingrediente.", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
@@ -197,7 +199,7 @@ namespace PanaderiaIkigai.BusinessLogic
         {
             try
             {
-                
+
                 Recipe recipeToUpdate = recipeCapturer.CaptureRecipeInformation(pName, pCategory, pAuthor, pUnits, pIngredientAmount, pImagePath, pPreparationNotes, imageByteAr);
                 recipeToUpdate.Code = pCode;
                 if (recipeDataAccess.UpdateRecipe(recipeToUpdate) == 1)
@@ -223,7 +225,8 @@ namespace PanaderiaIkigai.BusinessLogic
             }
             catch (SQLiteException sqlEx)
             {
-                if (sqlEx.ErrorCode == 19) { 
+                if (sqlEx.ErrorCode == 19)
+                {
                     MessageBox.Show("Ya existe un paso con este ingrediente para esta receta" +
                         "\nCada receta solo puede incluir un paso por ingrediente.", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }

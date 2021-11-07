@@ -5,9 +5,6 @@ using PanaderiaIkigai.Models.Orders;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PanaderiaIkigai.BusinessLogic
@@ -28,12 +25,12 @@ namespace PanaderiaIkigai.BusinessLogic
                 else
                     return false;
             }
-            catch(SQLiteException sqlEx)
+            catch (SQLiteException sqlEx)
             {
                 MessageBox.Show("Error " + sqlEx.ErrorCode + ": " + sqlEx.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -62,16 +59,17 @@ namespace PanaderiaIkigai.BusinessLogic
                 case "Fecha de Entrega":
                     orderList = orderDataAccess.GetOrders(pFilterValue, OrderFilter.OrderDeliveryDate) as List<Order>;
                     break;
-                
+
             }
             return orderList;
         }
 
 
-        public bool UpdateOrder(Order pOriginalOrder, 
+        public bool UpdateOrder(Order pOriginalOrder,
             string pOrderStatus, string pOrderNotes, DateTime pOrderDate, DateTime pDeliveryDate, decimal pTax, decimal pPrepPrice)
         {
-            try { 
+            try
+            {
                 var orderToUpdate = orderCapturer.CaptureOrderInformation(pOriginalOrder.ClientCode, pOrderStatus, pOrderNotes, pOrderDate, pDeliveryDate, pTax, pPrepPrice);
                 orderToUpdate.Code = pOriginalOrder.Code;
                 orderToUpdate.ItemsInOrder = pOriginalOrder.ItemsInOrder;
@@ -106,11 +104,13 @@ namespace PanaderiaIkigai.BusinessLogic
             }
             catch (SQLiteException sqlEx)
             {
-                if(sqlEx.ErrorCode == 19)
+                if (sqlEx.ErrorCode == 19)
                 {
                     MessageBox.Show("Este pedido es referenciada por otros registros en la base de datos\nPrimero debe " +
                         "borrar cualquier registro que referencie a este pedido", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                } else { 
+                }
+                else
+                {
                     MessageBox.Show("Error " + sqlEx.ErrorCode + ": " + sqlEx.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 return false;
@@ -123,7 +123,8 @@ namespace PanaderiaIkigai.BusinessLogic
         }
         public bool RegisterItem(Order pOrder, Recipe pRecipe, int pUnitAmount)
         {
-            try { 
+            try
+            {
                 var itemToRegister = new OrderItem(pOrder, pRecipe, pUnitAmount);
                 UpdateOrder(pOrder, pOrder.OrderStatus, pOrder.OrderNotes, pOrder.OrderDate, pOrder.DeliveryDate, pOrder.TaxPercentage, pOrder.PreparationCost);
                 if (!recipeContext.SubstractRecipeUnits(pRecipe, itemToRegister.UnitsInItem))
@@ -135,10 +136,10 @@ namespace PanaderiaIkigai.BusinessLogic
             }
             catch (SQLiteException sqlEx)
             {
-                if(sqlEx.ErrorCode == 19)
+                if (sqlEx.ErrorCode == 19)
                 {
                     MessageBox.Show("Ya existe un item en la orden que corresponde a esta receta\nLos pedidos no pueden tener más de un item por receta", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    
+
                 }
                 else
                     MessageBox.Show("Error " + sqlEx.ErrorCode + ": " + sqlEx.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

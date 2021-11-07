@@ -1,15 +1,7 @@
 ﻿using PanaderiaIkigai.BusinessLogic;
 using PanaderiaIkigai.Menus;
-using PanaderiaIkigai.Models;
 using PanaderiaIkigai.UI.Menus;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PanaderiaIkigai
@@ -34,13 +26,13 @@ namespace PanaderiaIkigai
 
         private void btnGoToRecipeMenu_Click(object sender, EventArgs e)
         {
-            if(ingredientContext.GetDetailedIngredients().Count == 0)
+            if (ingredientContext.GetDetailedIngredients().Count == 0)
             {
                 MessageBox.Show("Para poder acceder al menú de recetas, deben existir al menos un ingrediente detallado registrado" +
                     "\nUtilice el menu de ingredientes para añadir un registro", "No hay ingredientes detallados registrados", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            } 
-            else 
-            { 
+            }
+            else
+            {
                 RecipeMenu recipeMenu = new RecipeMenu();
                 recipeMenu.Show();
                 recipeMenu.BringToFront();
@@ -56,19 +48,19 @@ namespace PanaderiaIkigai
 
         private void btnGoToOrdersMenu_Click(object sender, EventArgs e)
         {
-            
-            if(clientContext.GetClients().Count == 0)
+
+            if (clientContext.GetClients().Count == 0)
             {
                 MessageBox.Show("Para poder acceder al menú de pedidos, deben existir al menos un cliente registrado" +
                     "\nUtilice el menu de clientes para añadir un registro", "No hay clientes registrados", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                
+
             }
-            else if(recipeContext.GetSteps().Count == 0)
+            else if (recipeContext.GetSteps().Count == 0)
             {
                 MessageBox.Show("Para poder acceder al menú de pedidos, deben existir al menos una receta registrada" +
                     "\nUtilice el menu de recetas para añadir un registro", "No hay recetas registradas", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if(recipeContext.GetAvailableOrders().Count == 0)
+            else if (recipeContext.GetAvailableOrders().Count == 0)
             {
                 MessageBox.Show("Actualmente ninguna de las recetas que tiene registradas tiene unidades disponibles" +
                     "\nPrimero utilice la funcionalidad de edición de recetas en el menú de recetas y añada unidades a al menos una receta", "No hay recetas disponibles", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -79,8 +71,8 @@ namespace PanaderiaIkigai
                 ordersMenu.Show();
                 ordersMenu.BringToFront();
             }
-            
-            
+
+
         }
 
         private void btnGoToBiMenu_Click(object sender, EventArgs e)
@@ -99,7 +91,8 @@ namespace PanaderiaIkigai
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
-            if (dataContext.TestDatabase()) { 
+            if (dataContext.TestDatabase())
+            {
                 dataContext.AttemptAutoBackup();
             }
             else

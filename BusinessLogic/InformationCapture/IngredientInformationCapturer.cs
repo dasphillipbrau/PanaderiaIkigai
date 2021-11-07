@@ -1,9 +1,6 @@
 ﻿using PanaderiaIkigai.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PanaderiaIkigai.InformationCapture
@@ -20,7 +17,8 @@ namespace PanaderiaIkigai.InformationCapture
                 pNameError.Text = "El nombre del ingrediente\n no puede estar vacío";
                 pNameError.Visible = true;
                 problemDetected = true;
-            } else
+            }
+            else
             {
                 pNameError.Visible = false;
             }
@@ -30,7 +28,8 @@ namespace PanaderiaIkigai.InformationCapture
                 pNameError.Text = "El nombre del ingrediente\n no puede pasar \nde 50 caracteres";
                 pNameError.Visible = true;
                 problemDetected = true;
-            } else
+            }
+            else
             {
                 pNameError.Text = "";
             }
@@ -40,7 +39,8 @@ namespace PanaderiaIkigai.InformationCapture
                 pUnitError.Text = "Primero debe\n de registrar \nalguna unidad de medida.";
                 pUnitError.Visible = true;
                 problemDetected = true;
-            } else
+            }
+            else
             {
                 pUnitError.Text = "";
             }
@@ -50,7 +50,8 @@ namespace PanaderiaIkigai.InformationCapture
                 pUnitError.Text = "El nombre\n de la unidad\n de medida no puede\n estar vacío";
                 pUnitError.Visible = true;
                 problemDetected = true;
-            } else
+            }
+            else
             {
                 pUnitError.Text = "";
             }
@@ -60,7 +61,8 @@ namespace PanaderiaIkigai.InformationCapture
                 pUnitError.Text = "El nombre\n de la unidad\n de medida no puede\n pasar de 20 caracteres";
                 pUnitError.Visible = true;
                 problemDetected = true;
-            } else
+            }
+            else
             {
                 pUnitError.Text = "";
             }
@@ -81,7 +83,7 @@ namespace PanaderiaIkigai.InformationCapture
         public List<BaseIngredient> CaptureBaseIngredient(DataGridView pIngredientDgv)
         {
             throw new NotImplementedException();
-            
+
         }
 
         public string CaptureMeasuringUnit(TextBox unitBox, Label unitError)

@@ -3,9 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SQLite;
 
 namespace PanaderiaIkigai.Data
@@ -24,24 +21,27 @@ namespace PanaderiaIkigai.Data
         /// <param name="pBaseIngredient">The base ingredient to register.</param>
         public void SaveBaseIngredient(BaseIngredient pBaseIngredient)
         {
-            try { 
-                using(var conn = new SQLiteConnection(GetConnectionString()))
+            try
+            {
+                using (var conn = new SQLiteConnection(GetConnectionString()))
                 {
                     var saveIngredientCommand = new SQLiteCommand("INSERT INTO INGREDIENT (NAME, UNIT_OF_MEASURE) VALUES ($pName, $pUnit)", conn);
                     saveIngredientCommand.Parameters.AddWithValue("pName", pBaseIngredient.Name.ToUpper());
                     saveIngredientCommand.Parameters.AddWithValue("pUnit", pBaseIngredient.MeasuringUnit.ToUpper());
                     conn.Open();
-                    
+
                     var x = saveIngredientCommand.ExecuteNonQuery();
-                    
+
                 }
-            } catch (SQLiteException sqlEx)
+            }
+            catch (SQLiteException sqlEx)
             {
 
                 Console.WriteLine(sqlEx.Message);
                 Console.WriteLine(sqlEx.ErrorCode);
                 throw sqlEx;
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 throw ex;
@@ -102,7 +102,7 @@ namespace PanaderiaIkigai.Data
         {
             try
             {
-                using(var conn = new SQLiteConnection(GetConnectionString()))
+                using (var conn = new SQLiteConnection(GetConnectionString()))
                 {
                     var updateIngredientCommand = new SQLiteCommand("UPDATE Ingredient SET NAME = $pName, UNIT_OF_MEASURE = $pUnit WHERE CODE = $pCode", conn);
 
@@ -276,7 +276,8 @@ namespace PanaderiaIkigai.Data
         /// <returns>List containing every Base Ingredient</returns>
         public IEnumerable<BaseIngredient> GetBaseIngredients()
         {
-            try { 
+            try
+            {
                 using (var conn = new SQLiteConnection(GetConnectionString()))
                 {
                     List<BaseIngredient> ingredientList = new List<BaseIngredient>();
@@ -291,13 +292,15 @@ namespace PanaderiaIkigai.Data
                     }
                     return ingredientList;
                 }
-            } catch(SQLiteException sqlEx)
+            }
+            catch (SQLiteException sqlEx)
             {
 
                 Console.WriteLine(sqlEx.Message);
                 Console.WriteLine(sqlEx.ErrorCode);
                 throw sqlEx;
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
 
                 Console.WriteLine(ex.Message);
@@ -433,7 +436,7 @@ namespace PanaderiaIkigai.Data
         {
             try
             {
-                using(var conn = new SQLiteConnection(GetConnectionString()))
+                using (var conn = new SQLiteConnection(GetConnectionString()))
                 {
                     List<BaseIngredient> ingredientList = new List<BaseIngredient>();
 
@@ -478,7 +481,7 @@ namespace PanaderiaIkigai.Data
         {
             try
             {
-                using(var conn = new SQLiteConnection(GetConnectionString()))
+                using (var conn = new SQLiteConnection(GetConnectionString()))
                 {
                     List<DetailedIngredient> detailedIngredientsList = new List<DetailedIngredient>();
                     var getDetailedIngredientsCommand = new SQLiteCommand("SELECT A.DETAILED_INGREDIENT_ID, A.INGREDIENT_CODE, B.NAME, A.BRAND, A.INGREDIENT_SOURCE, " +
@@ -500,14 +503,16 @@ namespace PanaderiaIkigai.Data
 
                     return detailedIngredientsList;
                 }
-            } catch(SQLiteException sqlEx)
+            }
+            catch (SQLiteException sqlEx)
             {
 
                 Console.WriteLine(sqlEx.Message);
                 Console.WriteLine(sqlEx.ErrorCode);
                 throw sqlEx;
 
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
 
                 Console.WriteLine(ex.Message);
@@ -523,7 +528,7 @@ namespace PanaderiaIkigai.Data
         {
             try
             {
-                using(var conn = new SQLiteConnection(GetConnectionString()))
+                using (var conn = new SQLiteConnection(GetConnectionString()))
                 {
                     List<DetailedIngredient> ingredientsList = new List<DetailedIngredient>();
                     var getDetailedIngredientsCommand = new SQLiteCommand("SELECT A.DETAILED_INGREDIENT_ID, A.INGREDIENT_CODE, B.NAME, A.BRAND, " +
@@ -562,7 +567,8 @@ namespace PanaderiaIkigai.Data
 
         public IEnumerable<DetailedIngredient> GetDetailedIngredientsByDetailedCode(string pDetailedCode)
         {
-            try { 
+            try
+            {
                 using (var conn = new SQLiteConnection(GetConnectionString()))
                 {
                     List<DetailedIngredient> ingredientsList = new List<DetailedIngredient>();
@@ -599,8 +605,8 @@ namespace PanaderiaIkigai.Data
                 throw ex;
             }
         }
-            
-        
+
+
         /// <summary>
         /// Accesses the database and retrieves every detailed ingredient regardless of base ingredient.
         /// </summary>
@@ -691,7 +697,8 @@ namespace PanaderiaIkigai.Data
         /// <returns>Amount of rows updated</returns>
         public int UpdateDetailedIngredient(DetailedIngredient pDetailedIngredient, string pOriginalCode)
         {
-            try { 
+            try
+            {
                 using (var conn = new SQLiteConnection(GetConnectionString()))
                 {
                     DetailedIngredient detailedIngredient = null;
@@ -711,7 +718,7 @@ namespace PanaderiaIkigai.Data
                     updateDetailedIngredientCommand.Parameters.AddWithValue("pUnitsAvailable", pDetailedIngredient.TotalUnitsAvailable);
                     conn.Open();
                     return updateDetailedIngredientCommand.ExecuteNonQuery();
-                    
+
                 }
             }
             catch (SQLiteException sqlEx)
@@ -728,7 +735,7 @@ namespace PanaderiaIkigai.Data
                 throw ex;
             }
         }
-            
+
         /// <summary>
         /// Saves a measuring unit to be used within the app.
         /// </summary>
@@ -737,10 +744,10 @@ namespace PanaderiaIkigai.Data
         {
             try
             {
-                using(var conn = new SQLiteConnection(GetConnectionString()))
+                using (var conn = new SQLiteConnection(GetConnectionString()))
                 {
                     var saveUnitCommand = new SQLiteCommand("INSERT INTO MEASUREMENT_UNIT (NAME) VALUES ($pUnit)", conn);
-                    saveUnitCommand.Parameters.AddWithValue("pUnit",pUnit.ToUpper());
+                    saveUnitCommand.Parameters.AddWithValue("pUnit", pUnit.ToUpper());
                     conn.Open();
                     saveUnitCommand.ExecuteNonQuery();
                 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PanaderiaIkigai.Models.BI
+﻿namespace PanaderiaIkigai.Models.BI
 {
     public class ClientSpending
     {
@@ -21,5 +15,5 @@ namespace PanaderiaIkigai.Models.BI
         }
     }
 
-    
+
 }

@@ -1,13 +1,7 @@
 ﻿using PanaderiaIkigai.BusinessLogic;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Data.SQLite;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PanaderiaIkigai.UI.Controls.Ingredients
@@ -30,7 +24,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
 
         private void EditDetailedIngredientPanel_Load(object sender, EventArgs e)
         {
-            for(int i = 1; i <= 10; i++)
+            for (int i = 1; i <= 10; i++)
             {
                 comboBoxQuality.Items.Add(i);
             }
@@ -96,7 +90,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
                                 {
                                     var selectedMultiCode = row.Cells[0].Value.ToString();
                                     ingredientContext.DeleteDetailedIngredient(selectedMultiCode);
-                                    
+
                                 }
                                 MessageBox.Show("Registros borrados."
                                     , "Operación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -138,9 +132,9 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
             else
             {
                 staticDetailedCode = txtSearchIngredientCode.Text.ToUpper();
-                
+
                 var ingredientFound = ingredientContext.GetDetailedIngredient(staticDetailedCode);
-                if(ingredientFound != null)
+                if (ingredientFound != null)
                     staticBaseCode = ingredientFound.BaseIngredientCode;
                 else if (ingredientFound == null)
                 {
@@ -325,7 +319,7 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
                             unitsAvailableValid = false;
                             txtSearchIngredientCode.Focus();
                             errorProviderBrand.Clear();
-                            
+
                         }
                         else
                             MessageBox.Show("No se ha actualizado el ingrediente", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Information);

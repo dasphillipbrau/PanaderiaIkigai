@@ -5,9 +5,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PanaderiaIkigai.Data
 {
@@ -26,7 +23,7 @@ namespace PanaderiaIkigai.Data
         {
             try
             {
-                using(var conn = new SQLiteConnection(GetConnectionString()))
+                using (var conn = new SQLiteConnection(GetConnectionString()))
                 {
                     var command = new SQLiteCommand(conn);
                     command.CommandText = "INSERT INTO PRODUCT_CATEGORY (NAME) VALUES ($pName)";
@@ -35,11 +32,11 @@ namespace PanaderiaIkigai.Data
                     return command.ExecuteNonQuery();
                 }
             }
-            catch(SQLiteException sqlEx)
+            catch (SQLiteException sqlEx)
             {
                 throw sqlEx;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -449,7 +446,7 @@ namespace PanaderiaIkigai.Data
         {
             try
             {
-                using(var conn = new SQLiteConnection(GetConnectionString()))
+                using (var conn = new SQLiteConnection(GetConnectionString()))
                 {
                     var stepsList = new List<RecipeStep>();
                     var command = new SQLiteCommand(conn);

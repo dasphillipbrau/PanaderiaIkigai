@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace PanaderiaIkigai.Models
 {
@@ -16,7 +11,7 @@ namespace PanaderiaIkigai.Models
         [DisplayName("Nombre de Categoría")]
         public string CategoryName { get; set; }
         [DisplayName("Autor")]
-       
+
         public string Author { get; set; }
         [DisplayName("Precio de Fabricación")]
 

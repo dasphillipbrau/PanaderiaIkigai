@@ -4,9 +4,6 @@ using PanaderiaIkigai.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PanaderiaIkigai.BusinessLogic
@@ -25,7 +22,8 @@ namespace PanaderiaIkigai.BusinessLogic
         /// <returns>True if validation succeeded and record was inserted. False if validation did not succeed</returns>
         public bool RegisterIngredient(TextBox pNameBox, ComboBox pUnitBox, Label pNameError, Label pUnitError)
         {
-            try { 
+            try
+            {
                 IngredientInformationCapturer ingredientInformation = new IngredientInformationCapturer();
                 var ingredientToRegister = ingredientInformation.CaptureBaseIngredient(pNameBox, pUnitBox, pNameError, pUnitError);
                 if (ingredientToRegister == null)
@@ -33,14 +31,16 @@ namespace PanaderiaIkigai.BusinessLogic
                 else
                     dataAccess.SaveBaseIngredient(ingredientToRegister);
                 return true;
-            } catch (SQLiteException sqlEx)
+            }
+            catch (SQLiteException sqlEx)
             {
-                if(sqlEx.ErrorCode == 19)
+                if (sqlEx.ErrorCode == 19)
                 {
                     pNameError.Text = "El nombre de este ingrediente\nya existe en la base de datos.";
                 }
                 throw sqlEx;
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -90,10 +90,12 @@ namespace PanaderiaIkigai.BusinessLogic
                 var results = dataAccess.GetBaseIngredients(pSearchBoxText.Trim().ToUpper());
                 return results as List<BaseIngredient>;
 
-            } catch (SQLiteException sqlEx)
+            }
+            catch (SQLiteException sqlEx)
             {
                 throw sqlEx;
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -161,7 +163,7 @@ namespace PanaderiaIkigai.BusinessLogic
             }
             catch (SQLiteException sqlEx)
             {
-                if(sqlEx.ErrorCode == 19)
+                if (sqlEx.ErrorCode == 19)
                 {
                     pUnitError.Text = "El nombre de esta medida \nya existe en la base de datos.";
                 }
@@ -188,10 +190,12 @@ namespace PanaderiaIkigai.BusinessLogic
                 else
                     dataAccess.UpdateMeasuringUnits(txtUnitName.Text, oldUnitName);
                 return true;
-            } catch (SQLiteException sqlEx)
+            }
+            catch (SQLiteException sqlEx)
             {
                 throw sqlEx;
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -274,7 +278,8 @@ namespace PanaderiaIkigai.BusinessLogic
 
         public bool RegisterDetailedIngredient(int pBaseCode, TextBox pBrandBox, TextBox pOriginBox, TextBox pAmountInUnitBox, TextBox pUnitPriceBox, ComboBox pQualityBox, TextBox pUnitsAvailableBox)
         {
-            try { 
+            try
+            {
                 DetailedIngredient ingredientToRegister = informationCapturer.CaptureDetailedIngredient(pBaseCode, pBrandBox, pOriginBox, pAmountInUnitBox, pUnitPriceBox, pQualityBox, pUnitsAvailableBox);
                 if (dataAccess.SaveDetailedIngredient(ingredientToRegister) == 1)
                     return true;
@@ -326,7 +331,7 @@ namespace PanaderiaIkigai.BusinessLogic
             {
                 throw ex;
             }
-            
+
         }
     }
 }

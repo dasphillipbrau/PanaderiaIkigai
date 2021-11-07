@@ -1,13 +1,6 @@
 ﻿using PanaderiaIkigai.BusinessLogic;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.SQLite;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PanaderiaIkigai.Controls
@@ -22,8 +15,9 @@ namespace PanaderiaIkigai.Controls
 
         private void btnRegisterBaseIngredient_Click(object sender, EventArgs e)
         {
-            try { 
-                
+            try
+            {
+
                 if (ingredientContext.RegisterIngredient(txtName, comboBoxUnits, lblBaseIngredientNameValidation, lblBaseIngredientUnitValidation))
                 {
                     MessageBox.Show("Ingrediente Registrado"
@@ -36,19 +30,22 @@ namespace PanaderiaIkigai.Controls
                     MessageBox.Show("No se ha registrado el ingrediente.\nRevise el mensaje en los campos."
                             , "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            } catch (SQLiteException sqlEx)
+            }
+            catch (SQLiteException sqlEx)
             {
                 if (sqlEx.ErrorCode == 19)
                 {
                     MessageBox.Show("Ya existe un ingrediente con este nombre.\nTodos los nombres de ingredientes deben de ser únicos."
                         , "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtName.Text = "";
-                } else
+                }
+                else
                 {
                     MessageBox.Show(sqlEx.Message
                         , "SQLite Error code " + sqlEx.ErrorCode.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -64,7 +61,8 @@ namespace PanaderiaIkigai.Controls
                 comboBoxUnits.SelectedIndex = 0;
 
             }
-            else { 
+            else
+            {
                 comboBoxUnits.DataSource = unitsList;
             }
 
@@ -73,7 +71,8 @@ namespace PanaderiaIkigai.Controls
 
         private void btnRegisterUnit_Click(object sender, EventArgs e)
         {
-            try { 
+            try
+            {
                 IngredientContext ingredientContext = new IngredientContext();
                 if (ingredientContext.RegisterUnit(txtUnitName, lblUnitRegisterValidation))
                 {
@@ -82,7 +81,8 @@ namespace PanaderiaIkigai.Controls
                     txtUnitName.Text = "";
                     comboBoxUnits.DataSource = ingredientContext.GetUnits();
                     comboBoxUnits.SelectedIndex = 0;
-                } else
+                }
+                else
                 {
                     MessageBox.Show("No se ha registrado la unidad\nRevise los mensajes de error."
                                 , "Ha ocurrido un error.", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -109,6 +109,6 @@ namespace PanaderiaIkigai.Controls
             }
         }
 
-        
+
     }
 }

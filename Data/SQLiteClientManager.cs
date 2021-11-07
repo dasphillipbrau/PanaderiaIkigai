@@ -3,9 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static PanaderiaIkigai.Models.Clients.ClientOrderHistory;
 
 namespace PanaderiaIkigai.Data
@@ -115,7 +112,7 @@ namespace PanaderiaIkigai.Data
                     }
 
                     command.CommandText = commandText;
-                    if(filter == ClientFilter.Code)
+                    if (filter == ClientFilter.Code)
                         command.Parameters.AddWithValue("pFilter", int.Parse(pFilterValue));
                     else
                         command.Parameters.AddWithValue("pFilter", pFilterValue);
@@ -295,5 +292,5 @@ namespace PanaderiaIkigai.Data
     }
 }
 
-    
+
 

@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace PanaderiaIkigai.Models
 {
     public class BaseIngredient
     {
-        
+
         [DisplayName("Código")]
         public int Code { get; set; }
         [DisplayName("Nombre")]
         public string Name { get; set; }
         [DisplayName("Unidad de Medida")]
-        public string MeasuringUnit { get ; set; }
+        public string MeasuringUnit { get; set; }
         [DisplayName("Precio Promedio")]
         public decimal AveragePrice { get; set; }
         [DisplayName("Precio Promedio por Unidad de Medida")]
