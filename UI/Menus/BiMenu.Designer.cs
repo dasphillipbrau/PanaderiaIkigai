@@ -35,6 +35,8 @@ namespace PanaderiaIkigai.UI.Menus
             this.btnGoToProductBi = new System.Windows.Forms.Button();
             this.btnGoToClientBI = new System.Windows.Forms.Button();
             this.panelHolder = new System.Windows.Forms.Panel();
+            this.btnGoToIngredientBi = new System.Windows.Forms.Button();
+            this.btnGoToOrdersBi = new System.Windows.Forms.Button();
             this.panelNavigation.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,6 +54,8 @@ namespace PanaderiaIkigai.UI.Menus
             // panelNavigation
             // 
             this.panelNavigation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(108)))), ((int)(((byte)(147)))));
+            this.panelNavigation.Controls.Add(this.btnGoToOrdersBi);
+            this.panelNavigation.Controls.Add(this.btnGoToIngredientBi);
             this.panelNavigation.Controls.Add(this.btnGoToMainMenu);
             this.panelNavigation.Controls.Add(this.btnGoToProductBi);
             this.panelNavigation.Controls.Add(this.btnGoToClientBI);
@@ -64,7 +68,7 @@ namespace PanaderiaIkigai.UI.Menus
             // 
             this.btnGoToMainMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
             this.btnGoToMainMenu.ForeColor = System.Drawing.Color.Beige;
-            this.btnGoToMainMenu.Location = new System.Drawing.Point(3, 312);
+            this.btnGoToMainMenu.Location = new System.Drawing.Point(3, 384);
             this.btnGoToMainMenu.Name = "btnGoToMainMenu";
             this.btnGoToMainMenu.Size = new System.Drawing.Size(194, 68);
             this.btnGoToMainMenu.TabIndex = 4;
@@ -80,7 +84,7 @@ namespace PanaderiaIkigai.UI.Menus
             this.btnGoToProductBi.Name = "btnGoToProductBi";
             this.btnGoToProductBi.Size = new System.Drawing.Size(194, 68);
             this.btnGoToProductBi.TabIndex = 2;
-            this.btnGoToProductBi.Text = "Datos de Receta";
+            this.btnGoToProductBi.Text = "Datos de Recetas";
             this.btnGoToProductBi.UseVisualStyleBackColor = false;
             this.btnGoToProductBi.Click += new System.EventHandler(this.btnGoToProductBi_Click);
             // 
@@ -102,6 +106,30 @@ namespace PanaderiaIkigai.UI.Menus
             this.panelHolder.Name = "panelHolder";
             this.panelHolder.Size = new System.Drawing.Size(1123, 682);
             this.panelHolder.TabIndex = 6;
+            // 
+            // btnGoToIngredientBi
+            // 
+            this.btnGoToIngredientBi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.btnGoToIngredientBi.ForeColor = System.Drawing.Color.Beige;
+            this.btnGoToIngredientBi.Location = new System.Drawing.Point(3, 217);
+            this.btnGoToIngredientBi.Name = "btnGoToIngredientBi";
+            this.btnGoToIngredientBi.Size = new System.Drawing.Size(194, 68);
+            this.btnGoToIngredientBi.TabIndex = 5;
+            this.btnGoToIngredientBi.Text = "Datos de Ingredientes";
+            this.btnGoToIngredientBi.UseVisualStyleBackColor = false;
+            this.btnGoToIngredientBi.Click += new System.EventHandler(this.btnGoToIngredientBi_Click);
+            // 
+            // btnGoToOrdersBi
+            // 
+            this.btnGoToOrdersBi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.btnGoToOrdersBi.ForeColor = System.Drawing.Color.Beige;
+            this.btnGoToOrdersBi.Location = new System.Drawing.Point(3, 301);
+            this.btnGoToOrdersBi.Name = "btnGoToOrdersBi";
+            this.btnGoToOrdersBi.Size = new System.Drawing.Size(194, 68);
+            this.btnGoToOrdersBi.TabIndex = 6;
+            this.btnGoToOrdersBi.Text = "Datos de Pedidos";
+            this.btnGoToOrdersBi.UseVisualStyleBackColor = false;
+            this.btnGoToOrdersBi.Click += new System.EventHandler(this.btnGoToOrdersBi_Click);
             // 
             // BiMenu
             // 
@@ -128,5 +156,7 @@ namespace PanaderiaIkigai.UI.Menus
         private System.Windows.Forms.Button btnGoToProductBi;
         private System.Windows.Forms.Button btnGoToClientBI;
         private System.Windows.Forms.Panel panelHolder;
+        private System.Windows.Forms.Button btnGoToIngredientBi;
+        private System.Windows.Forms.Button btnGoToOrdersBi;
     }
 }

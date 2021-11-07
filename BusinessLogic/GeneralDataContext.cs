@@ -50,6 +50,7 @@ namespace PanaderiaIkigai.BusinessLogic
                     sw.WriteLine("FECHA " + timestamp.ToString() + " CORRESPONDE A " + Path.GetFileName(destinationFileAbsolute));
                 }
                 MessageBox.Show("Ubicación del Respaldo: " + destinationFileAbsolute, "Respaldo Creado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                UpdateDateOfLatestDataAction(1);
                 UpdateManualBackupLocation(destinationFileAbsolute);
                 return destinationFileAbsolute;
             }
@@ -284,6 +285,7 @@ namespace PanaderiaIkigai.BusinessLogic
             DateTime dateOfLastBackup = DateTime.ParseExact(ShowDateOfLatestDataAction(0), "dd-MM-yyyy", CultureInfo.InvariantCulture).Date;
             DateTime currentDate = DateTime.Now.Date;
 
+            if (CheckAutoBackupStatus()) { 
             if ((currentDate - dateOfLastBackup).TotalDays >= 30)
             {
                 MessageBox.Show("Han pasado más de 30 días desde el último respaldo en linea.\nSe iniciará un nuevo respaldo", "Respaldo en Progreso", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -296,6 +298,48 @@ namespace PanaderiaIkigai.BusinessLogic
                     MessageBox.Show("Respaldo automático ha fallado. Asegurese de tener su sesión de Google Drive abierta", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            }
+        }
+
+        public bool CheckAutoBackupStatus()
+        {
+            XmlDocument doc = new XmlDocument();
+
+            doc.Load("./DatesAndLocations.xml");
+
+            foreach (XmlElement elem in doc.DocumentElement)
+            {
+                if (elem.Name == "autoBackupOn")
+                {
+                    if (elem.InnerText.Equals("FALSE"))
+                        return false;
+                    else
+                        break;
+                }
+            }
+            return true;
+            
+        }
+
+        public void ChangeAutoBackupStatus(bool pSwitch)
+        {
+            XmlDocument doc = new XmlDocument();
+
+            doc.Load("./DatesAndLocations.xml");
+
+            foreach (XmlElement elem in doc.DocumentElement)
+            {
+                if (elem.Name == "autoBackupOn")
+                {
+                    if (pSwitch)
+                        elem.InnerText = "TRUE";
+                    else
+                        elem.InnerText = "FALSE";
+
+                }
+            }
+            doc.Save("./DatesAndLocations.xml");
+
         }
     }
 

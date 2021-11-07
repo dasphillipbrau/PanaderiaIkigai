@@ -8,4 +8,5 @@
 	<backupLocations>
 		<backup location="No se ha creado ningún respaldo"/>
 	</backupLocations>
+	<autoBackupOn>FALSE</autoBackupOn>
 </configs>
