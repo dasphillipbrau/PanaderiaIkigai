@@ -27,7 +27,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>11</ApplicationRevision>
+    <ApplicationRevision>12</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -71,8 +71,26 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Apis, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.1.55.0\lib\net45\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.Auth.1.55.0\lib\net461\Google.Apis.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.Auth.1.55.0\lib\net461\Google.Apis.Auth.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.Core.1.55.0\lib\net45\Google.Apis.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Drive.v3, Version=1.55.0.2481, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.Drive.v3.1.55.0.2481\lib\net45\Google.Apis.Drive.v3.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.1.55.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+    </Reference>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
-      <HintPath>packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+      <HintPath>packages\LiveCharts.Core.0.9.8\lib\net40\LiveCharts.dll</HintPath>
     </Reference>
     <Reference Include="LiveCharts.WinForms, Version=0.9.7.1, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>packages\LiveCharts.WinForms.0.9.7.1\lib\net45\LiveCharts.WinForms.dll</HintPath>
@@ -80,8 +98,26 @@
     <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK, Version=3.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>packages\OpenTK.3.1.0\lib\net20\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK.GLControl, Version=3.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>packages\OpenTK.GLControl.3.1.0\lib\net20\OpenTK.GLControl.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="SkiaSharp, Version=2.80.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>packages\SkiaSharp.2.80.3\lib\net462\SkiaSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Views.Desktop.Common, Version=2.80.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>packages\SkiaSharp.Views.Desktop.Common.2.80.3\lib\net462\SkiaSharp.Views.Desktop.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Views.WindowsForms, Version=2.80.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>packages\SkiaSharp.Views.WindowsForms.2.80.3\lib\net462\SkiaSharp.Views.WindowsForms.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
@@ -92,6 +128,11 @@
     <Reference Include="System.Data.SQLite, Version=1.0.115.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.0\lib\net46\System.Data.SQLite.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing.Common, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Drawing.Common.4.5.1\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
     </Reference>
@@ -102,6 +143,7 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -116,12 +158,79 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLogic\BIContext.cs" />
+    <Compile Include="BusinessLogic\ClientContext.cs" />
+    <Compile Include="BusinessLogic\GeneralDataContext.cs" />
+    <Compile Include="BusinessLogic\InformationCapture\ClientInformationCapturer.cs" />
+    <Compile Include="BusinessLogic\InformationCapture\OrderInformationCapture.cs" />
     <Compile Include="BusinessLogic\InformationCapture\RecipeCapturer.cs" />
     <Compile Include="BusinessLogic\IngredientContext.cs" />
+    <Compile Include="BusinessLogic\OrderContext.cs" />
     <Compile Include="BusinessLogic\RecipeContext.cs" />
+    <Compile Include="Data\SQLiteBusinessIntelligenceManager.cs" />
+    <Compile Include="Data\SQLiteClientManager.cs" />
+    <Compile Include="Data\SQLiteGeneralDataManagement.cs" />
     <Compile Include="Data\SQLiteRecipeManager.cs" />
+    <Compile Include="Data\SQL\SQLiteOrderManager.cs" />
+    <Compile Include="GoogleDrive\DriveApi.cs" />
+    <Compile Include="Models\BI\ClientSpending.cs" />
+    <Compile Include="Models\BI\IngredientPopularity.cs" />
+    <Compile Include="Models\BI\OrderBi.cs" />
+    <Compile Include="Models\BI\ProductPopularity.cs" />
+    <Compile Include="Models\Clients\Client.cs" />
+    <Compile Include="Models\Clients\ClientOrderHistory.cs" />
+    <Compile Include="Models\Orders\Order.cs" />
+    <Compile Include="Models\Orders\OrderItem.cs" />
     <Compile Include="Models\Recipes\Recipe.cs" />
     <Compile Include="Models\Recipes\RecipeStep.cs" />
+    <Compile Include="UI\Controls\BI\ClientsBiPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\BI\ClientsBiPanel.Designer.cs">
+      <DependentUpon>ClientsBiPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\BI\IngredientsBiPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\BI\IngredientsBiPanel.Designer.cs">
+      <DependentUpon>IngredientsBiPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\BI\OrdersBiPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\BI\OrdersBiPanel.Designer.cs">
+      <DependentUpon>OrdersBiPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\BI\ProductsBiPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\BI\ProductsBiPanel.Designer.cs">
+      <DependentUpon>ProductsBiPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Clients\EditClientPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Clients\EditClientPanel.Designer.cs">
+      <DependentUpon>EditClientPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Clients\RegisterClientPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Clients\RegisterClientPanel.Designer.cs">
+      <DependentUpon>RegisterClientPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Clients\ViewClientOrderHistory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Clients\ViewClientOrderHistory.Designer.cs">
+      <DependentUpon>ViewClientOrderHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Clients\ViewClientsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Clients\ViewClientsPanel.Designer.cs">
+      <DependentUpon>ViewClientsPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\Ingredients\EditDetailedIngredientPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -140,13 +249,25 @@
     <Compile Include="UI\Controls\Ingredients\EditBaseIngredientPanel.Designer.cs">
       <DependentUpon>EditBaseIngredientPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Data\SqliteIngredientManager.cs" />
+    <Compile Include="Data\SQLiteIngredientManager.cs" />
     <Compile Include="BusinessLogic\InformationCapture\IngredientInformationCapturer.cs" />
     <Compile Include="UI\Controls\Ingredients\RegisterDetailedIngredientsPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\Controls\Ingredients\RegisterDetailedIngredientsPanel.Designer.cs">
       <DependentUpon>RegisterDetailedIngredientsPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Orders\RegisterOrderItemPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Orders\RegisterOrderItemPanel.Designer.cs">
+      <DependentUpon>RegisterOrderItemPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Orders\RegisterOrderPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Orders\RegisterOrderPanel.Designer.cs">
+      <DependentUpon>RegisterOrderPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\Recipes\EditRecipePanel.cs">
       <SubType>UserControl</SubType>
@@ -166,6 +287,24 @@
     <Compile Include="UI\Controls\Recipes\RegisterRecipeStepPanel.Designer.cs">
       <DependentUpon>RegisterRecipeStepPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Menus\BiMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Menus\BiMenu.Designer.cs">
+      <DependentUpon>BiMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Menus\ClientsMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Menus\ClientsMenu.Designer.cs">
+      <DependentUpon>ClientsMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Menus\DataMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Menus\DataMenu.Designer.cs">
+      <DependentUpon>DataMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Menus\IngredientMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,20 +321,57 @@
     <Compile Include="Models\Ingredients\BaseIngredient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\Menus\OrdersMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Menus\OrdersMenu.Designer.cs">
+      <DependentUpon>OrdersMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Menus\RecipeMenu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Menus\RecipeMenu.Designer.cs">
       <DependentUpon>RecipeMenu.cs</DependentUpon>
     </Compile>
-    <Content Include="Data\SQL\DDL\tables.sql" />
-    <Content Include="Data\SQL\DDL\triggers.sql" />
+    <Content Include="DatesAndLocations.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Data\SQL\DDL\tables.sql" />
+    <None Include="Data\SQL\DDL\triggers.sql" />
+    <Content Include="Backups\backup-history-drive.txt" />
+    <Content Include="Backups\backup-history-local.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="x86\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="UI\Controls\BI\ClientsBiPanel.resx">
+      <DependentUpon>ClientsBiPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\BI\IngredientsBiPanel.resx">
+      <DependentUpon>IngredientsBiPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\BI\OrdersBiPanel.resx">
+      <DependentUpon>OrdersBiPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\BI\ProductsBiPanel.resx">
+      <DependentUpon>ProductsBiPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Clients\EditClientPanel.resx">
+      <DependentUpon>EditClientPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Clients\RegisterClientPanel.resx">
+      <DependentUpon>RegisterClientPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Clients\ViewClientOrderHistory.resx">
+      <DependentUpon>ViewClientOrderHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Clients\ViewClientsPanel.resx">
+      <DependentUpon>ViewClientsPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Ingredients\EditDetailedIngredientPanel.resx">
       <DependentUpon>EditDetailedIngredientPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -208,6 +384,12 @@
     <EmbeddedResource Include="UI\Controls\Ingredients\RegisterDetailedIngredientsPanel.resx">
       <DependentUpon>RegisterDetailedIngredientsPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Orders\RegisterOrderItemPanel.resx">
+      <DependentUpon>RegisterOrderItemPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Orders\RegisterOrderPanel.resx">
+      <DependentUpon>RegisterOrderPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Recipes\EditRecipePanel.resx">
       <DependentUpon>EditRecipePanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -216,6 +398,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Recipes\RegisterRecipeStepPanel.resx">
       <DependentUpon>RegisterRecipeStepPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Menus\BiMenu.resx">
+      <DependentUpon>BiMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Menus\ClientsMenu.resx">
+      <DependentUpon>ClientsMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Menus\DataMenu.resx">
+      <DependentUpon>DataMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Menus\IngredientMenu.resx">
       <DependentUpon>IngredientMenu.cs</DependentUpon>
@@ -235,9 +426,16 @@
     <Content Include="Data\Ikigai.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="UI\Menus\OrdersMenu.resx">
+      <DependentUpon>OrdersMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Menus\RecipeMenu.resx">
       <DependentUpon>RecipeMenu.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="GoogleDrive\credentials.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
     <None Include="PanaderiaIkigai_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
@@ -287,7 +485,9 @@
     <Error Condition="!Exists('packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
     <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('packages\SkiaSharp.2.80.3\build\net462\SkiaSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\SkiaSharp.2.80.3\build\net462\SkiaSharp.targets'))" />
   </Target>
   <Import Project="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
   <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="packages\SkiaSharp.2.80.3\build\net462\SkiaSharp.targets" Condition="Exists('packages\SkiaSharp.2.80.3\build\net462\SkiaSharp.targets')" />
 </Project>

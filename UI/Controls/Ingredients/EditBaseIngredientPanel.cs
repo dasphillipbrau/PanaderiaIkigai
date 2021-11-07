@@ -253,6 +253,11 @@ namespace PanaderiaIkigai.Controls.Ingredients
             }
             catch (SQLiteException sqlEx)
             {
+                if(sqlEx.ErrorCode == 19)
+                {
+                    MessageBox.Show("El ingrediente que quiere borrar es referneciado por otro registro en la aplicación.\nPrimero debe borrar cualquier registro que referencie a este ingrediente", "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
                 MessageBox.Show(sqlEx.Message
                             , "ERROR " + sqlEx.ErrorCode.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

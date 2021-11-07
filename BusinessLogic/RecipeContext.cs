@@ -15,7 +15,6 @@ namespace PanaderiaIkigai.BusinessLogic
     public class RecipeContext
     {
         static SQLiteRecipeManager recipeDataAccess = new SQLiteRecipeManager();
-        static SqliteIngredientManager ingredientDataAccess = new SqliteIngredientManager();
         static RecipeCapturer recipeCapturer = new RecipeCapturer();
         public bool RegisterCategory(TextBox txtCategoryName, Label lblCategoryValidation)
         {
@@ -250,6 +249,11 @@ namespace PanaderiaIkigai.BusinessLogic
             }
         }
 
+        public List<RecipeStep> GetSteps()
+        {
+            return recipeDataAccess.GetRecipeSteps() as List<RecipeStep>;
+        }
+
         public bool DeleteStep(string pCode)
         {
             try
@@ -306,5 +310,49 @@ namespace PanaderiaIkigai.BusinessLogic
             }
         }
 
+        public bool SubstractRecipeUnits(Recipe pRecipe, int pUnitsToSubtract)
+        {
+            try
+            {
+                if (recipeDataAccess.SubtractRecipeUnits(pRecipe, pUnitsToSubtract) == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (SQLiteException sqlEx)
+            {
+                MessageBox.Show("Error " + sqlEx.ErrorCode + " :" + sqlEx.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool AddRecipeUnits(Recipe pRecipe, int pUnitsToAdd)
+        {
+            try
+            {
+                if (recipeDataAccess.AddRecipeUnits(pRecipe, pUnitsToAdd) == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (SQLiteException sqlEx)
+            {
+                MessageBox.Show("Error " + sqlEx.ErrorCode + " :" + sqlEx.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<Recipe> GetAvailableOrders()
+        {
+            return recipeDataAccess.GetRecipesWithUnitsAvailable() as List<Recipe>;
+        }
     }
 }

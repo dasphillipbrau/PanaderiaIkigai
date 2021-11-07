@@ -86,9 +86,11 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
             recipeNameValid = true;
             txtIngredientPercentage.ReadOnly = false;
             txtPrepNotes.Text = selectedRecipe.PreparationNotes;
-            dgvSteps.DataSource = recipeContext.GetSteps(selectedRecipe.Code);
-            dgvSteps.AutoResizeColumns();
-            dgvSteps.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvSteps.DataSource = recipeContext.GetSteps(selectedRecipe.Code).Count > 0 ? recipeContext.GetSteps(selectedRecipe.Code) : null;
+            if(dgvSteps.DataSource != null) { 
+                dgvSteps.AutoResizeColumns();
+                dgvSteps.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
 
         }
 
