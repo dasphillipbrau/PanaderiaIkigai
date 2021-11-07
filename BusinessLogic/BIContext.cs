@@ -5,6 +5,7 @@ using PanaderiaIkigai.Data;
 using PanaderiaIkigai.Models.BI;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,7 +45,7 @@ namespace PanaderiaIkigai.BusinessLogic
             pChart.AxisY.Add(new Axis
             {
                 Title = "Monto Invertido en CRC",
-                LabelFormatter = value => value.ToString(),
+                LabelFormatter = value => value.ToString("C"),
                 Separator = new Separator(),
                 Foreground = Brushes.White
             });
@@ -61,7 +62,7 @@ namespace PanaderiaIkigai.BusinessLogic
                 Title = "Invertido: ",
                 DataLabels = true,
                 Values = new ChartValues<decimal>(),
-                LabelPoint = point => point.Y.ToString()
+                LabelPoint = point => point.Y.ToString("C")
             };
             Axis ax = new Axis() {Foreground = Brushes.White, LabelsRotation = 21, Title = "Clientes", Separator = new Separator() { Step = 1, IsEnabled = false } };
             ax.Labels = new List<string>();
@@ -75,7 +76,7 @@ namespace PanaderiaIkigai.BusinessLogic
             pChart.AxisY.Add(new Axis
             {
                 Title = "Monto Invertido en CRC",
-                LabelFormatter = value => value.ToString(),
+                LabelFormatter = value => value.ToString("C"),
                 Separator = new Separator(),
                 Foreground = Brushes.White
             });
@@ -92,7 +93,7 @@ namespace PanaderiaIkigai.BusinessLogic
                 Title = "Invertido: ",
                 DataLabels = true,
                 Values = new ChartValues<decimal>(),
-                LabelPoint = point => point.Y.ToString()
+                LabelPoint = point => point.Y.ToString("C")
             };
             Axis ax = new Axis() {Foreground = Brushes.White, LabelsRotation = 21, Title = "Clientes", Separator = new Separator() { Step = 1, IsEnabled = false } };
             ax.Labels = new List<string>();
@@ -109,7 +110,7 @@ namespace PanaderiaIkigai.BusinessLogic
             pChart.AxisY.Add(new Axis
             {
                 Title = "Monto Invertido en CRC",
-                LabelFormatter = value => value.ToString(),
+                LabelFormatter = value => value.ToString("C"),
                 Separator = new Separator(),
                 Foreground = Brushes.White
             });
@@ -127,7 +128,7 @@ namespace PanaderiaIkigai.BusinessLogic
                 Title = "Invertido: ",
                 DataLabels = true,
                 Values = new ChartValues<decimal>(),
-                LabelPoint = point => point.Y.ToString()
+                LabelPoint = point => point.Y.ToString("C")
             };
             Axis ax = new Axis() {Foreground = Brushes.White, LabelsRotation = 21, Title = "Clientes", Separator = new Separator() { Step = 1, IsEnabled = false } };
             ax.Labels = new List<string>();
@@ -144,7 +145,7 @@ namespace PanaderiaIkigai.BusinessLogic
             pChart.AxisY.Add(new Axis
             {
                 Title = "Monto Invertido en CRC",
-                LabelFormatter = value => value.ToString(),
+                LabelFormatter = value => value.ToString("C"),
                 Separator = new Separator(),
                 Foreground = Brushes.White
             });
@@ -289,7 +290,7 @@ namespace PanaderiaIkigai.BusinessLogic
 
         }
 
-        public void PlotProductPie(LiveCharts.WinForms.PieChart pie, DateTime pStart, DateTime pEnd, string pMode, string pCriteria)
+        public void PlotPopularityPie(LiveCharts.WinForms.PieChart pie, DateTime pStart, DateTime pEnd, string pMode, string pCriteria)
         {
             var dataList = dataAccess.GetProductPopularity(pMode, pCriteria, pStart.Date, pEnd.Date);
             if (pie.Series.Count > 0)
@@ -298,7 +299,24 @@ namespace PanaderiaIkigai.BusinessLogic
 
             SeriesCollection series = new SeriesCollection();
             foreach(var product in dataList){
-                series.Add(new PieSeries() { Foreground = Brushes.White, Title = product.RecipeName, Values = new ChartValues<decimal> { product.Popularity }, DataLabels = true, LabelPoint = labelPoint });
+                series.Add(new PieSeries() { Foreground = Brushes.White, Title = product.Name, Values = new ChartValues<decimal> { product.Popularity }, DataLabels = true, LabelPoint = labelPoint });
+            }
+            pie.Series = series;
+            pie.LegendLocation = LegendLocation.Right;
+            pie.BackColorTransparent = true;
+        }
+
+        public void PlotPopularityPie(LiveCharts.WinForms.PieChart pie, string pSortMode)
+        {
+            var dataList = dataAccess.GetMostPopularIngredients(pSortMode);
+            if (pie.Series.Count > 0)
+                pie.Series.Clear();
+            Func<ChartPoint, string> labelPoint = chartPoint => string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
+
+            SeriesCollection series = new SeriesCollection();
+            foreach (var product in dataList)
+            {
+                series.Add(new PieSeries() { Foreground = Brushes.White, Title = product.Name, Values = new ChartValues<decimal> { product.Popularity }, DataLabels = true, LabelPoint = labelPoint });
             }
             pie.Series = series;
             pie.LegendLocation = LegendLocation.Right;
@@ -359,12 +377,13 @@ namespace PanaderiaIkigai.BusinessLogic
             });
             chart.AxisY.Add(new Axis
             {
+                MinValue = 0,
                 Title = "Cantidad Vendida",
                 LabelFormatter = value => value.ToString()
             });
             SeriesCollection series = new SeriesCollection();
             var products = (from product in dataList
-                            select new { product.RecipeName }).Distinct();
+                            select new { product.Name }).Distinct();
             foreach(var product in products)
             {
                 List<decimal> values = new List<decimal>();
@@ -372,7 +391,7 @@ namespace PanaderiaIkigai.BusinessLogic
                 {
                     decimal value = 0;
                     var data = from o in dataList
-                               where o.RecipeName.Equals(product.RecipeName) && o.OrderDate.Month.Equals(month)
+                               where o.Name.Equals(product.Name) && o.OrderDate.Month.Equals(month)
                                group o by o.OrderDate.Month into g
                                select new { 
                                    Date = g.Key,
@@ -382,7 +401,7 @@ namespace PanaderiaIkigai.BusinessLogic
                         value = data.SingleOrDefault().SumOfUnits;
                     values.Add(value);
                 }
-                series.Add(new LineSeries() { Title = product.RecipeName, Values = new ChartValues<decimal>(values) });
+                series.Add(new LineSeries() { Title = product.Name, Values = new ChartValues<decimal>(values) });
             }
             chart.Series = series;
         }
@@ -399,7 +418,7 @@ namespace PanaderiaIkigai.BusinessLogic
             {
                 series.Add(new PieSeries() { 
                     Foreground = Brushes.White, 
-                    Title = product.RecipeName, 
+                    Title = product.Name, 
                     Values = new ChartValues<decimal> { 
                         product.Popularity 
                     }, 
@@ -411,6 +430,151 @@ namespace PanaderiaIkigai.BusinessLogic
             pie.BackColorTransparent = true;
         }
     
+        public void PlotIngredientInvestment(LiveCharts.WinForms.CartesianChart chart)
+        {
+            chart.BackColorTransparent = true;
+            var dataList = dataAccess.GetIngredientInvestment();
+            if(chart.Series.Count > 0)
+            {
+                chart.Series.Clear();
+                chart.AxisX.Clear();
+                chart.AxisY.Clear();
+            }
+            ColumnSeries col = new ColumnSeries()
+            {
+                Foreground = Brushes.White,
+                Fill = Brushes.Orange,
+                Title = "Invertido: ",
+                DataLabels = true,
+                Values = new ChartValues<decimal>(),
+                LabelPoint = point => point.Y.ToString("C")
+            };
+            Axis ax = new Axis() { Foreground = Brushes.White, LabelsRotation = 21, Title = "Ingrediente", Separator = new Separator() { Step = 1, IsEnabled = false } };
+            ax.Labels = new List<string>();
+            foreach (var ingredient in dataList)
+            {
+                col.Values.Add(ingredient.AmountInvested);
+                ax.Labels.Add(ingredient.Name);
+            }
+            chart.Series.Add(col);
+            chart.AxisX.Add(ax);
+            chart.AxisY.Add(new Axis
+            {
+                Title = "Monto Invertido en CRC",
+                LabelFormatter = value => value.ToString(),
+                Separator = new Separator(),
+                Foreground = Brushes.White
+            });
+        }
 
+        public void PlotOrderStatusPie(LiveCharts.WinForms.PieChart pie, DateTime pStart, DateTime pEnd)
+        {
+            pie.BackColorTransparent = true;
+            var dataList = dataAccess.GetOrderStatusDistribution(pStart.Date, pEnd.Date);
+            if (pie.Series.Count > 0)
+                pie.Series.Clear();
+            Func<ChartPoint, string> labelPoint = chartPoint => string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
+
+            SeriesCollection series = new SeriesCollection();
+            foreach (var order in dataList)
+            {
+                series.Add(new PieSeries() { Foreground = Brushes.White, Title = order.OrderStatus, Values = new ChartValues<decimal> { order.AmountOfOrders }, DataLabels = true, LabelPoint = labelPoint });
+            }
+            pie.Series = series;
+            pie.LegendLocation = LegendLocation.Right;
+            pie.BackColorTransparent = true;
+        }
+
+        public void PlotOrderRevenueByStatus(LiveCharts.WinForms.CartesianChart chart, DateTime pStart, DateTime pEnd)
+        {
+            chart.Series.Clear();
+            chart.AxisX.Clear();
+            chart.AxisY.Clear();
+            chart.BackColorTransparent = true;
+            var dataList = dataAccess.GetRevenueByStatus(pStart, pEnd);
+            ColumnSeries col = new ColumnSeries()
+            {
+                Foreground = Brushes.White,
+                Fill = Brushes.Orange,
+                Title = "Facturado: ",
+                DataLabels = true,
+                Values = new ChartValues<decimal>(),
+                LabelPoint = point => point.Y.ToString("C")
+            };
+            Axis ax = new Axis() { MinValue = 0, Foreground = Brushes.White, LabelsRotation = 21, LabelFormatter = value => value.ToString("C"), 
+                Title = "Estado", Separator = new Separator() { Step = 1, IsEnabled = false } };
+            ax.Labels = new List<string>();
+            foreach (var order in dataList)
+            {
+                col.Values.Add(order.Revenue);
+                ax.Labels.Add(order.OrderStatus);
+            }
+            chart.Series.Add(col);
+            chart.AxisX.Add(ax);
+            chart.AxisY.Add(new Axis
+            {
+                Title = "Monto Facturado en CRC",
+                LabelFormatter = value => value.ToString("C"),
+                Separator = new Separator(),
+                Foreground = Brushes.White
+            });
+        }
+
+        public void PlotOrdersByMonth(LiveCharts.WinForms.CartesianChart chart, DateTime pStart)
+        {
+            DateTimeFormatInfo format = new DateTimeFormatInfo();
+            chart.BackColorTransparent = true;
+            chart.Series.Clear();
+            chart.AxisX.Clear();
+            chart.AxisY.Clear();
+            var dataList = dataAccess.GetOrdersByMonth(pStart.Date);
+            var monthNumToDate = from o in dataList
+                                 select new
+                                 {
+                                     Date = format.GetAbbreviatedMonthName(o.OrderDate.Month),
+                                     AmountOfOrders = o.AmountOfOrders
+                                 };
+            var groupedList = from o in monthNumToDate
+                              group o by o.Date into g
+                              select new
+                              {
+                                  Date = g.Key,
+                                  AmountOfUnits = g.Sum(val => val.AmountOfOrders)
+                              };
+            ColumnSeries col = new ColumnSeries()
+            {
+                Foreground = Brushes.White,
+                Fill = Brushes.Orange,
+                Title = "Cantidad de Ordenes: ",
+                DataLabels = true,
+                Values = new ChartValues<int>(),
+                LabelPoint = point => point.Y.ToString()
+            };
+            Axis ax = new Axis()
+            {
+                Foreground = Brushes.White,
+                LabelsRotation = 21,
+                LabelFormatter = value => value.ToString(),
+                Title = "Mes",
+                Separator = new Separator() { Step = 1, IsEnabled = false }
+            };
+            ax.Labels = new List<string>();
+            foreach (var order in groupedList)
+            {
+                col.Values.Add(order.AmountOfUnits);
+                ax.Labels.Add(order.Date);
+            }
+            chart.Series.Add(col);
+            chart.AxisX.Add(ax);
+            chart.AxisY.Add(new Axis
+            {
+                Title = "Cantidad de Ordenes",
+                LabelFormatter = value => value.ToString(),
+                Separator = new Separator() { Step = 1 },
+                Foreground = Brushes.White
+            });
+
+
+        }
     }
 }

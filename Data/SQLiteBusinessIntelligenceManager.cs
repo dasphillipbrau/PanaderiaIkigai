@@ -225,17 +225,136 @@ namespace PanaderiaIkigai.Data
                 {
                     var command = new SQLiteCommand(conn);
                     string sortMode = pSortOrder.Equals("HIGHEST") ? "DESC LIMIT 10" : "ASC LIMIT 10";
-                    var commandText = "SELECT A.NAME, COUNT(C.INGREDIENT_NAME) POPULARITY " +
-                        "FROM INGREDIENT A" +
+                    var commandText = "SELECT A.NAME, COUNT(B.INGREDIENT_NAME) " +
+                        "POPULARITY FROM INGREDIENT A " +
                         "INNER JOIN RECIPE_STEP B ON A.NAME = B.INGREDIENT_NAME " +
-                        "GROUP BY A.NAME " +
+                        "GROUP BY A.NAME HAVING COUNT(B.INGREDIENT_NAME) > 0 " +
                         "ORDER BY POPULARITY " + sortMode;
                     command.CommandText = commandText;
                     conn.Open();
                     var reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        list.Add(new IngredientPopularity { IngredientName = reader.GetString(0), Popularity = reader.GetInt32(1) });
+                        list.Add(new IngredientPopularity { Name = reader.GetString(0), Popularity = reader.GetInt32(1) });
+                    }
+                    return list;
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+        }
+
+        public List<IngredientPopularity> GetIngredientInvestment()
+        {
+            try
+            {
+                var list = new List<IngredientPopularity>();
+
+                using (var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    var command = new SQLiteCommand(conn);
+
+                    var commandText = "SELECT A.NAME, (TOTAL_UNITS_AVAILABLE * AVERAGE_PRICE) as INVESTMENT " +
+                        " FROM INGREDIENT A " +
+                        "GROUP BY A.NAME " +
+                        "ORDER BY INVESTMENT DESC LIMIT 10 ";
+                    command.CommandText = commandText;
+                    conn.Open();
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        list.Add(new IngredientPopularity { Name = reader.GetString(0), AmountInvested = reader.GetDecimal(1) });
+                    }
+                    return list;
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+        }
+
+        public List<OrderBi> GetOrderStatusDistribution(DateTime pStart, DateTime pEnd)
+        {
+            try
+            {
+                var list = new List<OrderBi>();
+
+                using (var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    var command = new SQLiteCommand(conn);
+
+                    var commandText = "SELECT ORDER_STATUS, COUNT(*) FROM ORDER_BASE WHERE ORDER_DATE BETWEEN $pStart AND $pEnd GROUP BY ORDER_STATUS";
+                    command.Parameters.AddWithValue("pStart", pStart);
+                    command.Parameters.AddWithValue("pEnd", pEnd);
+                    command.CommandText = commandText;
+                    conn.Open();
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        list.Add(new OrderBi { OrderStatus = reader.GetString(0), AmountOfOrders = reader.GetInt32(1) });
+                    }
+                    return list;
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+        }
+
+        public List<OrderBi> GetRevenueByStatus(DateTime pStart, DateTime pEnd)
+        {
+            try
+            {
+                var list = new List<OrderBi>();
+
+                using (var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    var command = new SQLiteCommand(conn);
+
+                    var commandText = "SELECT ORDER_STATUS, TOTAL(FINAL_PRICE) FROM ORDER_BASE WHERE ORDER_DATE BETWEEN $pStart AND $pEnd GROUP BY ORDER_STATUS";
+                    command.Parameters.AddWithValue("pStart", pStart.Date);
+                    command.Parameters.AddWithValue("pEnd", pEnd.Date);
+                    command.CommandText = commandText;
+                    conn.Open();
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        list.Add(new OrderBi { OrderStatus = reader.GetString(0), Revenue = reader.GetDecimal(1) });
+                    }
+                    return list;
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+        }
+
+        public List<OrderBi> GetOrdersByMonth(DateTime pStart)
+        {
+            try
+            {
+                var list = new List<OrderBi>();
+                DateTime startDate = new DateTime(pStart.Year, 1, 1).Date;
+                DateTime endDate = new DateTime(pStart.Year, 12, 31).Date;
+
+                using (var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    var command = new SQLiteCommand(conn);
+
+                    var commandText = "SELECT ORDER_DATE, COUNT(*) FROM ORDER_BASE WHERE ORDER_DATE BETWEEN $pStart AND $pEnd GROUP BY ORDER_DATE";
+                    command.Parameters.AddWithValue("pStart", startDate);
+                    command.Parameters.AddWithValue("pEnd", endDate);
+                    command.CommandText = commandText;
+                    conn.Open();
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        list.Add(new OrderBi { OrderDate = reader.GetDateTime(0), AmountOfOrders = reader.GetInt32(1) });
                     }
                     return list;
                 }

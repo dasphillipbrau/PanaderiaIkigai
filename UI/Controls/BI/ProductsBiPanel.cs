@@ -23,8 +23,8 @@ namespace PanaderiaIkigai.UI.Controls.BI
         {
             dtpStart.Value = DateTime.Today.AddMonths(-4);
             dtpEnd.Value = DateTime.Today.AddMonths(+4);
-            bIContext.PlotProductPie(pieTopProducts, dtpStart.Value, dtpEnd.Value, "HIGHEST", "REVENUE");
-            bIContext.PlotProductPie(pieLowestProducts, dtpStart.Value, dtpEnd.Value, "LOWEST", "REVENUE");
+            bIContext.PlotPopularityPie(pieTopProducts, dtpStart.Value, dtpEnd.Value, "HIGHEST", "REVENUE");
+            bIContext.PlotPopularityPie(pieLowestProducts, dtpStart.Value, dtpEnd.Value, "LOWEST", "REVENUE");
             bIContext.PlotProductEvolution(productEvolution, dtpStart.Value, dtpEnd.Value);
             bIContext.CategoryPie(pieChartCategories);
         }
@@ -32,8 +32,8 @@ namespace PanaderiaIkigai.UI.Controls.BI
         private void btnRecalculatePlots_Click(object sender, EventArgs e)
         {
             bIContext.PlotProductEvolution(productEvolution, dtpStart.Value.Date, dtpEnd.Value.Date);
-            bIContext.PlotProductPie(pieTopProducts, dtpStart.Value, dtpEnd.Value, "HIGHEST", "REVENUE");
-            bIContext.PlotProductPie(pieLowestProducts, dtpStart.Value, dtpEnd.Value, "LOWEST", "REVENUE");
+            bIContext.PlotPopularityPie(pieTopProducts, dtpStart.Value, dtpEnd.Value, "HIGHEST", "REVENUE");
+            bIContext.PlotPopularityPie(pieLowestProducts, dtpStart.Value, dtpEnd.Value, "LOWEST", "REVENUE");
         }
     }
 }

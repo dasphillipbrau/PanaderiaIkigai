@@ -8,7 +8,7 @@ namespace PanaderiaIkigai.Models.BI
 {
     public class ProductPopularity
     {
-        public string RecipeName { get; set; }
+        public string Name { get; set; }
         public decimal Popularity { get; set; }
         public DateTime OrderDate { get; set; }
 
@@ -16,13 +16,13 @@ namespace PanaderiaIkigai.Models.BI
 
         public ProductPopularity(string pName, decimal pPopularity) 
         {
-            RecipeName = pName;
+            Name = pName;
             Popularity = pPopularity;
 
         }
         public ProductPopularity(string pName, decimal pPopularity, DateTime pOrderDate)
         {
-            RecipeName = pName;
+            Name = pName;
             Popularity = pPopularity;
             OrderDate = pOrderDate.Date;
         }

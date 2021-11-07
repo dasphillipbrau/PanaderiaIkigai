@@ -175,6 +175,7 @@
     <Compile Include="GoogleDrive\DriveApi.cs" />
     <Compile Include="Models\BI\ClientSpending.cs" />
     <Compile Include="Models\BI\IngredientPopularity.cs" />
+    <Compile Include="Models\BI\OrderBi.cs" />
     <Compile Include="Models\BI\ProductPopularity.cs" />
     <Compile Include="Models\Clients\Client.cs" />
     <Compile Include="Models\Clients\ClientOrderHistory.cs" />
@@ -193,6 +194,12 @@
     </Compile>
     <Compile Include="UI\Controls\BI\IngredientsBiPanel.Designer.cs">
       <DependentUpon>IngredientsBiPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\BI\OrdersBiPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\BI\OrdersBiPanel.Designer.cs">
+      <DependentUpon>OrdersBiPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\BI\ProductsBiPanel.cs">
       <SubType>UserControl</SubType>
@@ -346,6 +353,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\BI\IngredientsBiPanel.resx">
       <DependentUpon>IngredientsBiPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\BI\OrdersBiPanel.resx">
+      <DependentUpon>OrdersBiPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\BI\ProductsBiPanel.resx">
       <DependentUpon>ProductsBiPanel.cs</DependentUpon>
