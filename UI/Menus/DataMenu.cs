@@ -19,6 +19,8 @@ namespace PanaderiaIkigai.UI.Menus
                 "\nAsegurese de crear un respaldo antes de esta operación\n\n¿PROCEDER?", "Confirme Operación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 dataContext.WipeDatabase();
+                dataContext.UpdateDateOfLatestDataAction(2);
+                dataContext.ShowDateOfLatestDataAction(2);
                 MessageBox.Show("La base de datos ha sido limpiada", "Operación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
