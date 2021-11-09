@@ -72,7 +72,15 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
 
         private void txtFilterIngredient_TextChanged(object sender, EventArgs e)
         {
-            dgvIngredients.DataSource = ingredientContext.GetBaseIngredientsWithPrice(txtFilterIngredient.Text.ToUpper());
+            var ingredientList = ingredientContext.GetBaseIngredientsWithPrice(txtFilterIngredient.Text.ToUpper());
+
+            dgvIngredients.DataSource = dgvIngredients.DataSource = ingredientList.Select(o => new
+            { Column1 = o.Code, Column2 = o.Name, Column3 = o.AverageMinimumPrice }).ToList();
+            dgvIngredients.Columns[0].HeaderCell.Value = "Código";
+            dgvIngredients.Columns[1].HeaderCell.Value = "Nombre";
+            dgvIngredients.Columns[2].HeaderCell.Value = "Precio por Peso Mínimo";
+            dgvIngredients.AutoResizeColumns();
+            dgvIngredients.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void dgvRecipes_CellClick(object sender, DataGridViewCellEventArgs e)
