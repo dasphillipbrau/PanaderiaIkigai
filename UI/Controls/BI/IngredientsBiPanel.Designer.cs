@@ -91,7 +91,7 @@ namespace PanaderiaIkigai.UI.Controls.BI
             // 
             this.chartCurrentInvestment.Location = new System.Drawing.Point(7, 333);
             this.chartCurrentInvestment.Name = "chartCurrentInvestment";
-            this.chartCurrentInvestment.Size = new System.Drawing.Size(523, 240);
+            this.chartCurrentInvestment.Size = new System.Drawing.Size(824, 240);
             this.chartCurrentInvestment.TabIndex = 15;
             this.chartCurrentInvestment.Text = "cartesianChart1";
             // 

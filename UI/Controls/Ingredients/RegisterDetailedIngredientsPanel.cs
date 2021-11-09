@@ -103,6 +103,9 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
                             unitsAvailableValid = false;
                             txtSearchIngredientCode.Focus();
                             errorProviderBrand.Clear();
+                            dgvViewBaseIngredients.AutoResizeColumns();
+                            dgvViewBaseIngredients.DataSource = ingredientContext.GetBaseIngredients();
+                            dgvViewBaseIngredients.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                         }
                         else
                             MessageBox.Show("No se ha registrado el ingrediente", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
