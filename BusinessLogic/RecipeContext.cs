@@ -161,9 +161,9 @@ namespace PanaderiaIkigai.BusinessLogic
             }
         }
 
-        public List<Recipe> GetRecipes()
+        public List<Recipe> GetRecipes(bool pPositiveRecipes = false)
         {
-            return recipeDataAccess.GetRecipes() as List<Recipe>;
+            return recipeDataAccess.GetRecipes(pPositiveRecipes) as List<Recipe>;
         }
 
         public List<Recipe> GetRecipes(string pFilterValue, string pAttributeToFilterBy)

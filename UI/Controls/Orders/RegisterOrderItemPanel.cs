@@ -53,7 +53,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
                 dgvOrders.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
 
-            dgvRecipes.DataSource = recipeContext.GetRecipes();
+            dgvRecipes.DataSource = recipeContext.GetRecipes(true);
             dgvRecipes.AutoResizeColumns();
             dgvRecipes.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
@@ -123,6 +123,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
                     if (orderContext.RegisterItem(selectedOrder, selectedRecipe, Convert.ToInt32(Math.Round(numUnitAmount.Value, 0))))
                     {
                         MessageBox.Show("Item Registrado", "Operación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        dgvRecipes.DataSource = recipeContext.GetRecipes(true);
                         ClearFields();
                     }
                     else

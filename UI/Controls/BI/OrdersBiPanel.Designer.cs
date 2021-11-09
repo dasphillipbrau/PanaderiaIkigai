@@ -58,7 +58,7 @@ namespace PanaderiaIkigai.UI.Controls.BI
             // 
             this.chartOrdersByMonth.Location = new System.Drawing.Point(7, 56);
             this.chartOrdersByMonth.Name = "chartOrdersByMonth";
-            this.chartOrdersByMonth.Size = new System.Drawing.Size(587, 244);
+            this.chartOrdersByMonth.Size = new System.Drawing.Size(1089, 244);
             this.chartOrdersByMonth.TabIndex = 12;
             this.chartOrdersByMonth.Text = "chartOrdersByMonth";
             // 
@@ -108,9 +108,9 @@ namespace PanaderiaIkigai.UI.Controls.BI
             // 
             // pieStatus
             // 
-            this.pieStatus.Location = new System.Drawing.Point(600, 56);
+            this.pieStatus.Location = new System.Drawing.Point(584, 387);
             this.pieStatus.Name = "pieStatus";
-            this.pieStatus.Size = new System.Drawing.Size(328, 185);
+            this.pieStatus.Size = new System.Drawing.Size(512, 280);
             this.pieStatus.TabIndex = 26;
             this.pieStatus.Text = "pieChart1";
             // 
@@ -130,7 +130,7 @@ namespace PanaderiaIkigai.UI.Controls.BI
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(597, 37);
+            this.label1.Location = new System.Drawing.Point(581, 368);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(257, 16);
             this.label1.TabIndex = 28;

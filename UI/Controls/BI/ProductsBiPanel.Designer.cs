@@ -58,9 +58,9 @@ namespace PanaderiaIkigai.UI.Controls.BI
             // 
             // pieTopProducts
             // 
-            this.pieTopProducts.Location = new System.Drawing.Point(17, 94);
+            this.pieTopProducts.Location = new System.Drawing.Point(17, 50);
             this.pieTopProducts.Name = "pieTopProducts";
-            this.pieTopProducts.Size = new System.Drawing.Size(366, 185);
+            this.pieTopProducts.Size = new System.Drawing.Size(526, 262);
             this.pieTopProducts.TabIndex = 10;
             this.pieTopProducts.Text = "pieChart1";
             // 
@@ -69,7 +69,7 @@ namespace PanaderiaIkigai.UI.Controls.BI
             this.lblTopTitle.AutoSize = true;
             this.lblTopTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTopTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTopTitle.Location = new System.Drawing.Point(14, 64);
+            this.lblTopTitle.Location = new System.Drawing.Point(14, 31);
             this.lblTopTitle.Name = "lblTopTitle";
             this.lblTopTitle.Size = new System.Drawing.Size(226, 16);
             this.lblTopTitle.TabIndex = 11;
@@ -121,9 +121,9 @@ namespace PanaderiaIkigai.UI.Controls.BI
             // 
             // pieLowestProducts
             // 
-            this.pieLowestProducts.Location = new System.Drawing.Point(575, 94);
+            this.pieLowestProducts.Location = new System.Drawing.Point(577, 64);
             this.pieLowestProducts.Name = "pieLowestProducts";
-            this.pieLowestProducts.Size = new System.Drawing.Size(366, 185);
+            this.pieLowestProducts.Size = new System.Drawing.Size(507, 248);
             this.pieLowestProducts.TabIndex = 22;
             this.pieLowestProducts.Text = "pieChart1";
             // 
@@ -132,7 +132,7 @@ namespace PanaderiaIkigai.UI.Controls.BI
             this.lblLowest.AutoSize = true;
             this.lblLowest.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLowest.ForeColor = System.Drawing.Color.White;
-            this.lblLowest.Location = new System.Drawing.Point(621, 64);
+            this.lblLowest.Location = new System.Drawing.Point(574, 30);
             this.lblLowest.Name = "lblLowest";
             this.lblLowest.Size = new System.Drawing.Size(243, 16);
             this.lblLowest.TabIndex = 23;
@@ -161,7 +161,7 @@ namespace PanaderiaIkigai.UI.Controls.BI
             // 
             this.pieChartCategories.Location = new System.Drawing.Point(20, 375);
             this.pieChartCategories.Name = "pieChartCategories";
-            this.pieChartCategories.Size = new System.Drawing.Size(363, 223);
+            this.pieChartCategories.Size = new System.Drawing.Size(520, 223);
             this.pieChartCategories.TabIndex = 26;
             this.pieChartCategories.Text = "pieChart1";
             // 

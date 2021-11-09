@@ -210,7 +210,7 @@ namespace PanaderiaIkigai.Data
             }
         }
 
-        public IEnumerable<Recipe> GetRecipes()
+        public IEnumerable<Recipe> GetRecipes(bool pPositiveRecipes = false)
         {
             try
             {
@@ -218,8 +218,11 @@ namespace PanaderiaIkigai.Data
                 {
                     var command = new SQLiteCommand(conn);
                     var recipeList = new List<Recipe>();
-
-                    command.CommandText = "SELECT CODE, NAME, CATEGORY_NAME, AUTHOR, TOTAL_PRICE, UNITS_PREPARED, MAIN_INGREDIENT_QUANTITY, PREPARATION_NOTES, IMAGE " +
+                    if(pPositiveRecipes)
+                        command.CommandText = "SELECT CODE, NAME, CATEGORY_NAME, AUTHOR, TOTAL_PRICE, UNITS_PREPARED, MAIN_INGREDIENT_QUANTITY, PREPARATION_NOTES, IMAGE " +
+                        "FROM RECIPE WHERE UNITS_PREPARED > 0 ORDER BY NAME ASC";
+                    else
+                        command.CommandText = "SELECT CODE, NAME, CATEGORY_NAME, AUTHOR, TOTAL_PRICE, UNITS_PREPARED, MAIN_INGREDIENT_QUANTITY, PREPARATION_NOTES, IMAGE " +
                         "FROM RECIPE ORDER BY NAME ASC";
 
                     conn.Open();
