@@ -210,6 +210,7 @@ namespace PanaderiaIkigai.UI.Controls.Recipes
             authorValid = false;
             unitsValid = false;
             ingredientAmountValid = false;
+            lblImgFound.Text = "";
         }
     }
 }

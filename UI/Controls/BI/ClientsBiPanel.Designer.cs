@@ -40,8 +40,8 @@ namespace PanaderiaIkigai.UI.Controls.BI
             this.label5 = new System.Windows.Forms.Label();
             this.btnRecalculatePlots = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rBtnAmountInvested = new System.Windows.Forms.RadioButton();
             this.rBtnProductsPurchased = new System.Windows.Forms.RadioButton();
+            this.rBtnAmountInvested = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,7 +50,7 @@ namespace PanaderiaIkigai.UI.Controls.BI
             this.lblLowestTitle.AutoSize = true;
             this.lblLowestTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLowestTitle.ForeColor = System.Drawing.Color.White;
-            this.lblLowestTitle.Location = new System.Drawing.Point(524, 45);
+            this.lblLowestTitle.Location = new System.Drawing.Point(12, 356);
             this.lblLowestTitle.Name = "lblLowestTitle";
             this.lblLowestTitle.Size = new System.Drawing.Size(328, 16);
             this.lblLowestTitle.TabIndex = 7;
@@ -72,7 +72,7 @@ namespace PanaderiaIkigai.UI.Controls.BI
             this.chartTopClientExpenses.ForeColor = System.Drawing.Color.White;
             this.chartTopClientExpenses.Location = new System.Drawing.Point(16, 68);
             this.chartTopClientExpenses.Name = "chartTopClientExpenses";
-            this.chartTopClientExpenses.Size = new System.Drawing.Size(444, 244);
+            this.chartTopClientExpenses.Size = new System.Drawing.Size(1081, 209);
             this.chartTopClientExpenses.TabIndex = 5;
             this.chartTopClientExpenses.Text = "cartesianChartClientSpending";
             // 
@@ -89,9 +89,9 @@ namespace PanaderiaIkigai.UI.Controls.BI
             // 
             // chartLowestExpenses
             // 
-            this.chartLowestExpenses.Location = new System.Drawing.Point(527, 68);
+            this.chartLowestExpenses.Location = new System.Drawing.Point(3, 375);
             this.chartLowestExpenses.Name = "chartLowestExpenses";
-            this.chartLowestExpenses.Size = new System.Drawing.Size(444, 244);
+            this.chartLowestExpenses.Size = new System.Drawing.Size(1094, 210);
             this.chartLowestExpenses.TabIndex = 9;
             this.chartLowestExpenses.Text = "chartLowestClientExpenses";
             // 
@@ -144,12 +144,23 @@ namespace PanaderiaIkigai.UI.Controls.BI
             this.groupBox1.Controls.Add(this.rBtnProductsPurchased);
             this.groupBox1.Controls.Add(this.rBtnAmountInvested);
             this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(466, 561);
+            this.groupBox1.Location = new System.Drawing.Point(466, 591);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(146, 100);
+            this.groupBox1.Size = new System.Drawing.Size(146, 70);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterio";
+            // 
+            // rBtnProductsPurchased
+            // 
+            this.rBtnProductsPurchased.AutoSize = true;
+            this.rBtnProductsPurchased.Location = new System.Drawing.Point(7, 51);
+            this.rBtnProductsPurchased.Name = "rBtnProductsPurchased";
+            this.rBtnProductsPurchased.Size = new System.Drawing.Size(129, 17);
+            this.rBtnProductsPurchased.TabIndex = 1;
+            this.rBtnProductsPurchased.Text = "Productos Comprados";
+            this.rBtnProductsPurchased.UseVisualStyleBackColor = true;
+            this.rBtnProductsPurchased.CheckedChanged += new System.EventHandler(this.rBtnProductsPurchased_CheckedChanged);
             // 
             // rBtnAmountInvested
             // 
@@ -162,17 +173,6 @@ namespace PanaderiaIkigai.UI.Controls.BI
             this.rBtnAmountInvested.TabStop = true;
             this.rBtnAmountInvested.Text = "Monto Invertido";
             this.rBtnAmountInvested.UseVisualStyleBackColor = true;
-            // 
-            // rBtnProductsPurchased
-            // 
-            this.rBtnProductsPurchased.AutoSize = true;
-            this.rBtnProductsPurchased.Location = new System.Drawing.Point(7, 61);
-            this.rBtnProductsPurchased.Name = "rBtnProductsPurchased";
-            this.rBtnProductsPurchased.Size = new System.Drawing.Size(129, 17);
-            this.rBtnProductsPurchased.TabIndex = 1;
-            this.rBtnProductsPurchased.Text = "Productos Comprados";
-            this.rBtnProductsPurchased.UseVisualStyleBackColor = true;
-            this.rBtnProductsPurchased.CheckedChanged += new System.EventHandler(this.rBtnProductsPurchased_CheckedChanged);
             // 
             // ClientsBiPanel
             // 

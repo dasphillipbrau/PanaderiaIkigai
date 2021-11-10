@@ -165,7 +165,7 @@ namespace PanaderiaIkigai.BusinessLogic
                     return false;
                 }
                 else
-                    throw new FileNotFoundException("El archivo seleccionado no existe");
+                    throw new FileNotFoundException("No seleccionó ningún archivo válido");
             }
             catch (FileNotFoundException fileEx)
             {

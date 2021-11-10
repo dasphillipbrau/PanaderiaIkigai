@@ -53,7 +53,7 @@ namespace PanaderiaIkigai.UI.Controls.BI
             // 
             this.pieChartTopIngredient.Location = new System.Drawing.Point(7, 68);
             this.pieChartTopIngredient.Name = "pieChartTopIngredient";
-            this.pieChartTopIngredient.Size = new System.Drawing.Size(368, 190);
+            this.pieChartTopIngredient.Size = new System.Drawing.Size(512, 190);
             this.pieChartTopIngredient.TabIndex = 11;
             this.pieChartTopIngredient.Text = "pieChart1";
             // 
@@ -83,15 +83,15 @@ namespace PanaderiaIkigai.UI.Controls.BI
             // 
             this.pieChartLowestIngredient.Location = new System.Drawing.Point(558, 68);
             this.pieChartLowestIngredient.Name = "pieChartLowestIngredient";
-            this.pieChartLowestIngredient.Size = new System.Drawing.Size(368, 190);
+            this.pieChartLowestIngredient.Size = new System.Drawing.Size(548, 190);
             this.pieChartLowestIngredient.TabIndex = 13;
             this.pieChartLowestIngredient.Text = "pieChart1";
             // 
             // chartCurrentInvestment
             // 
-            this.chartCurrentInvestment.Location = new System.Drawing.Point(7, 333);
+            this.chartCurrentInvestment.Location = new System.Drawing.Point(7, 395);
             this.chartCurrentInvestment.Name = "chartCurrentInvestment";
-            this.chartCurrentInvestment.Size = new System.Drawing.Size(824, 240);
+            this.chartCurrentInvestment.Size = new System.Drawing.Size(939, 240);
             this.chartCurrentInvestment.TabIndex = 15;
             this.chartCurrentInvestment.Text = "cartesianChart1";
             // 
@@ -100,7 +100,7 @@ namespace PanaderiaIkigai.UI.Controls.BI
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(4, 314);
+            this.label3.Location = new System.Drawing.Point(3, 366);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(467, 16);
             this.label3.TabIndex = 16;

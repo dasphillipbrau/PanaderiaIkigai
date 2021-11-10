@@ -105,6 +105,7 @@ namespace PanaderiaIkigai.Controls.Ingredients
             this.txtFilterIngredientByName.Name = "txtFilterIngredientByName";
             this.txtFilterIngredientByName.Size = new System.Drawing.Size(155, 20);
             this.txtFilterIngredientByName.TabIndex = 8;
+            this.txtFilterIngredientByName.TextChanged += new System.EventHandler(this.txtFilterIngredientByName_TextChanged_1);
             // 
             // txtSearchIngredientCode
             // 

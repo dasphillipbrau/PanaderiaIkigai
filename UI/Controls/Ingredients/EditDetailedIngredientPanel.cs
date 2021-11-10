@@ -134,8 +134,19 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
                 staticDetailedCode = txtSearchIngredientCode.Text.ToUpper();
 
                 var ingredientFound = ingredientContext.GetDetailedIngredient(staticDetailedCode);
-                if (ingredientFound != null)
+                if (ingredientFound != null) { 
                     staticBaseCode = ingredientFound.BaseIngredientCode;
+                    btnSaveChanges.Enabled = true;
+
+                    lblingredientFound.Text = "Ingrediente encontrado: " + ingredientFound.BaseIngredientName + " " + ingredientFound.Brand;
+                    txtBrand.Text = ingredientFound.Brand;
+                    txtOrigin.Text = ingredientFound.IngredientSource;
+                    txtAmountInUnit.Text = ingredientFound.AmountInUnit.ToString();
+                    txtUnitPrice.Text = ingredientFound.UnitPrice.ToString();
+                    comboBoxQuality.SelectedItem = ingredientFound.Quality;
+                    txtUnitsAvailable.Text = ingredientFound.TotalUnitsAvailable.ToString();
+
+                }
                 else if (ingredientFound == null)
                 {
                     MessageBox.Show("No se encuentra ningún ingrediente con ese código"
@@ -151,18 +162,6 @@ namespace PanaderiaIkigai.UI.Controls.Ingredients
                     txtUnitPrice.Text = "";
                     comboBoxQuality.SelectedIndex = 0;
                     txtUnitsAvailable.Text = "";
-                }
-                else
-                {
-                    btnSaveChanges.Enabled = true;
-
-                    lblingredientFound.Text = "Ingrediente encontrado: " + ingredientFound.BaseIngredientName + " " + ingredientFound.Brand;
-                    txtBrand.Text = ingredientFound.Brand;
-                    txtOrigin.Text = ingredientFound.IngredientSource;
-                    txtAmountInUnit.Text = ingredientFound.AmountInUnit.ToString();
-                    txtUnitPrice.Text = ingredientFound.UnitPrice.ToString();
-                    comboBoxQuality.SelectedItem = ingredientFound.Quality;
-                    txtUnitsAvailable.Text = ingredientFound.TotalUnitsAvailable.ToString();
                 }
             }
         }

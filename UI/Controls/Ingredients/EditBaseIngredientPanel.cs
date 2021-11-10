@@ -273,5 +273,10 @@ namespace PanaderiaIkigai.Controls.Ingredients
 
             deleteToolTip.SetToolTip(btnDeleteBaseIngredient, "Haga click en una fila de la tabla \npara seleccionar un ingrediente para eliminar.\nShift + Click para seleccionar multiples filas.");
         }
+
+        private void txtFilterIngredientByName_TextChanged_1(object sender, EventArgs e)
+        {
+            ingredientContext.GetBaseIngredients(txtFilterIngredientByName.Text.ToUpper());
+        }
     }
 }

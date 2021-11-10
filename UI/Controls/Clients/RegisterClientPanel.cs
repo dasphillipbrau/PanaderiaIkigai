@@ -15,7 +15,8 @@ namespace PanaderiaIkigai.UI.Controls.Clients
         static bool addressValid = false;
 
         static Regex phoneRegex = new Regex("^\\d+$");
-        static Regex emailRegex = new Regex("[\\w\\d]+.*@[\\w\\d]+\\.[\\w]+$");
+        static Regex emailRegex = new Regex("[\\w\\d]+.*@[\\w\\d]+\\.[A-Z]+$");
+        static Regex nameRegex = new Regex("^[\\w\\d]+");
 
         static string successMessage = "Operación Exitosa";
         static string errorMessage = "Ha ocurrido un Error";
@@ -36,7 +37,7 @@ namespace PanaderiaIkigai.UI.Controls.Clients
                 nameValid = false;
                 errorProviderName.SetError(txtName, "Nombre no puede exceder los 50 caracteres");
             }
-            else
+            else if(!nameRegex.IsMatch(txtName.Text.ToUpper()))
             {
                 nameValid = true;
                 errorProviderName.Clear();
@@ -80,7 +81,7 @@ namespace PanaderiaIkigai.UI.Controls.Clients
                 emailValid = false;
                 errorProviderEmail.SetError(txtEmail, "Correo electrónico no puede exceder 50 caracteres");
             }
-            else if (txtEmail.Text.Trim().Length <= 20 && !emailRegex.IsMatch(txtEmail.Text.Trim()))
+            else if (txtEmail.Text.Trim().Length <= 20 && !emailRegex.IsMatch(txtEmail.Text.ToUpper().Trim()))
             {
                 emailValid = false;
                 errorProviderEmail.SetError(txtEmail, "La dirección indicada no corresponde a un correo válido");
