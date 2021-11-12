@@ -237,6 +237,7 @@ namespace PanaderiaIkigai.Data.SQL
         {
             try
             {
+                DeleteOrderItemsFromOrder(pOrder.Code);
                 using (var conn = new SQLiteConnection(GetConnectionString()))
                 {
                     var command = new SQLiteCommand(conn);
@@ -249,6 +250,34 @@ namespace PanaderiaIkigai.Data.SQL
                     conn.Open();
                     return command.ExecuteNonQuery();
 
+
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private void DeleteOrderItemsFromOrder(int pCode)
+        {
+            try
+            {
+                using (var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    var command = new SQLiteCommand(conn);
+
+                    command.CommandText = "DELETE FROM ORDER_ITEM WHERE ORDER_CODE = $pCode";
+
+                    command.Parameters.AddWithValue("pCode", pCode);
+
+
+                    conn.Open();
+                    command.ExecuteNonQuery();
                 }
             }
             catch (SQLiteException sqlEx)
