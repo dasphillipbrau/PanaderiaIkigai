@@ -42,6 +42,11 @@ namespace PanaderiaIkigai.BusinessLogic
             return orderDataAccess.GetOrders() as List<Order>;
         }
 
+        public Order GetOrder(int pCode)
+        {
+            return orderDataAccess.GetOrders(pCode);
+        }
+
         public List<Order> GetOrders(string pFilterValue, string pFilterMode)
         {
             var orderList = new List<Order>();

@@ -118,7 +118,7 @@ namespace PanaderiaIkigai
             this.btnGoToOrdersMenu.Name = "btnGoToOrdersMenu";
             this.btnGoToOrdersMenu.Size = new System.Drawing.Size(193, 54);
             this.btnGoToOrdersMenu.TabIndex = 3;
-            this.btnGoToOrdersMenu.Text = "Menú de Ordenes";
+            this.btnGoToOrdersMenu.Text = "Menú de Pedidos";
             this.btnGoToOrdersMenu.UseVisualStyleBackColor = false;
             this.btnGoToOrdersMenu.Click += new System.EventHandler(this.btnGoToOrdersMenu_Click);
             // 

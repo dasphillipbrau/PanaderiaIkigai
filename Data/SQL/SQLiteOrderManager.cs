@@ -87,6 +87,46 @@ namespace PanaderiaIkigai.Data.SQL
             }
         }
 
+        public Order GetOrders(int pCode)
+        {
+            try
+            {
+                using (var conn = new SQLiteConnection(GetConnectionString()))
+                {
+                    var order = new Order();
+                    var command = new SQLiteCommand(conn);
+
+                    command.CommandText = "SELECT A.CODE, A.CLIENT_CODE, B.NAME, A.ORDER_STATUS, A.ORDER_NOTES, A.ORDER_DATE, A.DELIVERY_DATE, " +
+                        "A.ITEMS_IN_ORDER, A.TAX_PERCENTAGE, A.TAX_TOTAL, A.PREPARATION_COST, A.ITEMS_TOTAL_PRICE, A.FINAL_PRICE " +
+                        "FROM ORDER_BASE A " +
+                        "INNER JOIN CLIENT B " +
+                        "ON A.CLIENT_CODE = B.CODE WHERE A.CODE = $pCode";
+                    command.Parameters.AddWithValue("pCode", pCode);
+
+
+                    conn.Open();
+
+                    var reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        order = new Order(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetDateTime(5),
+                            reader.GetDateTime(6), reader.GetInt32(7), reader.GetDecimal(8), reader.GetDecimal(9), reader.GetDecimal(10), reader.GetDecimal(11), reader.GetDecimal(12));
+                    }
+                    return order;
+
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public IEnumerable<Order> GetOrders(string pFilterValue, OrderFilter pFilterMode)
         {
             try

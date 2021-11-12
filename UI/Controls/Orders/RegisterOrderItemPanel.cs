@@ -139,17 +139,23 @@ namespace PanaderiaIkigai.UI.Controls.Orders
             }
             else
             {
-                if (selectedItem.UnitsInItem - Convert.ToInt32(numUnitAmount.Value) < 0)
+                if (selectedRecipe.UnitsAvailable - Convert.ToInt32(numUnitAmount.Value) < 0)
                 {
                     MessageBox.Show("No hay suficientes unidades disponibles de la receta para agregar la cantidad que indica", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    if (orderContext.UpdateItem(selectedOrder, selectedRecipe, Convert.ToInt32(Math.Round(numUnitAmount.Value, 0)), selectedItem.Code))
+                    if (selectedItem.RecipeCode != selectedOrder.Code)
+                    {
+                        MessageBox.Show("El código de orden en el ítem no corresponde a la orden seleccionada.\nVuelva a seleccionar una orden y luego seleccione un ítem correspondiente.", "Ha ocurrido un eror", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else if (orderContext.UpdateItem(selectedOrder, selectedRecipe, Convert.ToInt32(Math.Round(numUnitAmount.Value, 0)), selectedItem.Code))
                     {
                         MessageBox.Show("Item Actualizado", "Operación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         dgvItems.DataSource = orderContext.GetItems(selectedOrder);
+                        dgvOrders.DataSource = orderContext.GetOrders();
                         lblItemToEditName.Visible = false;
+                    
                     }
                     else
                     {
@@ -175,6 +181,7 @@ namespace PanaderiaIkigai.UI.Controls.Orders
                             rBtnItemEditMode.Enabled = true;
                             rBtnItemRegisterMode.Enabled = true;
                         }
+                        selectedOrder = orderContext.GetOrder(selectedItem.OrderCode);
                         lblItemToEditName.Text = "Editando Item " + selectedItem.Code;
                         lblItemToEditName.Visible = true;
                     }

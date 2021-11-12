@@ -150,11 +150,10 @@ AFTER DELETE ON ORDER_ITEM
         UPDATE ORDER_BASE
             SET 
                 ITEMS_TOTAL_PRICE = (
-                    SELECT
-			TOTAL(A.TOTAL_ITEM_PRICE)
+                    SELECT TOTAL(A.TOTAL_ITEM_PRICE)
                     FROM ORDER_ITEM AS A
 		    WHERE A.ORDER_CODE = OLD.ORDER_CODE
-                ),
+            ),
 		ITEMS_IN_ORDER = (
 			SELECT 
 			    coalesce(COUNT(*), 0)
@@ -177,11 +176,12 @@ AFTER INSERT ON ORDER_ITEM
         UPDATE ORDER_BASE
             SET 
                 ITEMS_TOTAL_PRICE = (
-                    SELECT
-			TOTAL(A.TOTAL_ITEM_PRICE)
+                    SELECT coalesce(total_price, 0) from( select
+			a.order_code, TOTAL(A.TOTAL_ITEM_PRICE) as total_price
                     FROM ORDER_ITEM AS A
 		    WHERE A.ORDER_CODE = NEW.ORDER_CODE
-                ),
+            group by a.order_code
+                ) subquery),
 		ITEMS_IN_ORDER = (
 			SELECT 
 			    coalesce(COUNT(*), 0)
@@ -204,23 +204,22 @@ AFTER UPDATE ON ORDER_ITEM
         UPDATE ORDER_BASE
             SET 
                 ITEMS_TOTAL_PRICE = (
-                    SELECT
-			        TOTAL(A.TOTAL_ITEM_PRICE)
+                    SELECT TOTAL(A.TOTAL_ITEM_PRICE)
                     FROM ORDER_ITEM AS A
-		            WHERE A.ORDER_CODE = NEW.ORDER_CODE
-                ),
-		        ITEMS_IN_ORDER = (
-			        SELECT 
-			        coalesce(COUNT(*), 0)
-                    FROM ORDER_ITEM AS A
-			        WHERE A.ORDER_CODE = NEW.ORDER_CODE
-		        ),
-		        TAX_TOTAL= (
-			    SELECT 
+		    WHERE A.ORDER_CODE = NEW.ORDER_CODE
+            ),
+		ITEMS_IN_ORDER = (
+			SELECT 
+			    coalesce(COUNT(*), 0)
+                    	FROM ORDER_ITEM AS A
+			WHERE A.ORDER_CODE = NEW.ORDER_CODE
+		),
+		TAX_TOTAL= (
+			SELECT 
 			    COALESCE((B.TAX_PERCENTAGE * (B.PREPARATION_COST + TOTAL(A.TOTAL_ITEM_PRICE)) / 100),0)
-                FROM ORDER_ITEM AS A
-                INNER JOIN ORDER_BASE B ON A.ORDER_CODE = B.CODE
-			    WHERE A.ORDER_CODE = NEW.ORDER_CODE
+            FROM ORDER_ITEM AS A
+            INNER JOIN ORDER_BASE B ON A.ORDER_CODE = B.CODE
+			WHERE A.ORDER_CODE = NEW.ORDER_CODE
 		)
 		WHERE CODE = NEW.ORDER_CODE;
     END;
@@ -230,7 +229,7 @@ AFTER UPDATE ON ORDER_BASE
     BEGIN
         UPDATE ORDER_BASE
             SET 
-                FINAL_PRICE = (TAX_TOTAL + PREPARATION_COST + ITEMS_TOTAL_PRICE)
+                FINAL_PRICE = coalesce((TAX_TOTAL + PREPARATION_COST + ITEMS_TOTAL_PRICE), 0)
 			WHERE
 				CODE = new.CODE;
 	END
