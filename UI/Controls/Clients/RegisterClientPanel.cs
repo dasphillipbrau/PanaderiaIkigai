@@ -39,6 +39,11 @@ namespace PanaderiaIkigai.UI.Controls.Clients
             }
             else if(!nameRegex.IsMatch(txtName.Text.ToUpper()))
             {
+                nameValid = false;
+                errorProviderName.SetError(txtName, "Debe haber un nombre");
+            }
+            else
+            {
                 nameValid = true;
                 errorProviderName.Clear();
             }
