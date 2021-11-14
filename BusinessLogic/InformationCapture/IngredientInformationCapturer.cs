@@ -18,20 +18,12 @@ namespace PanaderiaIkigai.InformationCapture
                 pNameError.Visible = true;
                 problemDetected = true;
             }
-            else
-            {
-                pNameError.Visible = false;
-            }
 
             if (pNameBox.Text.Trim().Length > 50)
             {
                 pNameError.Text = "El nombre del ingrediente\n no puede pasar \nde 50 caracteres";
                 pNameError.Visible = true;
                 problemDetected = true;
-            }
-            else
-            {
-                pNameError.Text = "";
             }
 
             if (pUnitBox.SelectedItem.ToString().ToUpper().Equals("NINGUNA UNIDAD DETECTADA"))
@@ -40,20 +32,12 @@ namespace PanaderiaIkigai.InformationCapture
                 pUnitError.Visible = true;
                 problemDetected = true;
             }
-            else
-            {
-                pUnitError.Text = "";
-            }
 
             if (pUnitBox.SelectedItem.ToString().Trim().Length == 0)
             {
                 pUnitError.Text = "El nombre\n de la unidad\n de medida no puede\n estar vacío";
                 pUnitError.Visible = true;
                 problemDetected = true;
-            }
-            else
-            {
-                pUnitError.Text = "";
             }
 
             if (pUnitBox.SelectedItem.ToString().Trim().Length > 20)
@@ -62,15 +46,13 @@ namespace PanaderiaIkigai.InformationCapture
                 pUnitError.Visible = true;
                 problemDetected = true;
             }
-            else
-            {
-                pUnitError.Text = "";
-            }
 
             if (!problemDetected)
             {
                 ingredientToInsert.Name = pNameBox.Text.Trim().ToUpper();
                 ingredientToInsert.MeasuringUnit = pUnitBox.SelectedItem.ToString().Trim().ToUpper();
+                pUnitError.Text = "";
+                pNameError.Text = "";
                 return ingredientToInsert;
             }
             else

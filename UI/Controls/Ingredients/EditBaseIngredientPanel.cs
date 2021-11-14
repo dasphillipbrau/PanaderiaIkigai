@@ -99,9 +99,14 @@ namespace PanaderiaIkigai.Controls.Ingredients
                         "Confirme Operación", MessageBoxButtons.YesNo);
                     if (confirmationPositive == DialogResult.Yes)
                     {
-                        if (ingredientContext.DeleteUnit(comboBoxSelectUnitToEdit.SelectedItem.ToString()))
+                        if (ingredientContext.DeleteUnit(comboBoxSelectUnitToEdit.SelectedItem.ToString())) { 
                             MessageBox.Show("Se ha borrado la unidad"
                                     , "Operación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            var unitsList = ingredientContext.GetUnits();
+                            comboBoxSelectUnitToEdit.DataSource = unitsList;
+                            comboBoxSelectUnitForIngredientEdit.DataSource = unitsList;
+                        }
+
                         else
                             MessageBox.Show("No se ha borrado la unidad"
                                     , "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -276,7 +281,7 @@ namespace PanaderiaIkigai.Controls.Ingredients
 
         private void txtFilterIngredientByName_TextChanged_1(object sender, EventArgs e)
         {
-            ingredientContext.GetBaseIngredients(txtFilterIngredientByName.Text.ToUpper());
+            dgvViewBaseIngredients.DataSource = ingredientContext.GetBaseIngredients(txtFilterIngredientByName.Text.ToUpper());
         }
     }
 }
