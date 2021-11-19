@@ -84,7 +84,7 @@ AFTER UPDATE ON Measurement_Unit
             SET 
                 UNIT_OF_MEASURE = (
                     SELECT
-						NAME
+						new.NAME
                     FROM Measurement_UNIT
                 ) WHERE UNIT_OF_MEASURE = old.name;
     END;
@@ -139,10 +139,10 @@ AFTER UPDATE ON Product_Category
             SET 
                 CATEGORY_NAME = (
                     SELECT
-						NAME
-                    FROM Product_Category
+						new.NAME
+                    FROM Product_Category 
                 ) WHERE CATEGORY_NAME = old.name;
-    END;
+    END
 
 CREATE TRIGGER UpdateOrderAmounts_DELETE
 AFTER DELETE ON ORDER_ITEM

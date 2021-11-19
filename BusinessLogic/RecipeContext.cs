@@ -183,8 +183,8 @@ namespace PanaderiaIkigai.BusinessLogic
             catch (SQLiteException sqlEx)
             {
                 if (sqlEx.ErrorCode == 19)
-                    MessageBox.Show("No se puede borrar el ingrediente, pues es referenciado por otro registro." +
-                        "\nDebe borrar primero cualquier registro que referencie el ingrediente.", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("No se puede borrar la reeta, pues es referenciada por otro registro." +
+                        "\nDebe borrar primero cualquier registro que referencie a la receta.", "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                     MessageBox.Show("Error " + sqlEx.ErrorCode + " :" + sqlEx.Message, "Ha ocurrido un Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;

@@ -60,6 +60,7 @@ namespace PanaderiaIkigai.Controls.Ingredients
                         var unitsList = ingredientContext.GetUnits();
                         comboBoxSelectUnitToEdit.DataSource = unitsList;
                         comboBoxSelectUnitForIngredientEdit.DataSource = unitsList;
+                        dgvViewBaseIngredients.DataSource = ingredientContext.GetBaseIngredients();
                     }
                     else
                     {
