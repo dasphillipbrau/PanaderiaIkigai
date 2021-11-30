@@ -31,12 +31,9 @@ namespace PanaderiaIkigai.UI.Controls.Orders
         private void RegisterOrderPanel_Load(object sender, EventArgs e)
         {
             PopulateDataGridViews();
-            dateDelivery.MinDate = DateTime.Now.AddYears(-1);
-            dateDelivery.MaxDate = DateTime.Now.AddYears(1);
+
             dateDelivery.Value = DateTime.Now;
 
-            dateOrder.MinDate = DateTime.Now.AddYears(-1);
-            dateOrder.MaxDate = DateTime.Now.AddYears(1);
             dateOrder.Value = DateTime.Now;
 
             comboBoxFilterClients.SelectedIndex = 0;
